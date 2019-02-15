@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "name": "empowered",
+  "version": "0.0.1",
+  "description": "A flexible, extendible, character-driven RPG system.",
   "engines": {
     "node": "10.x"
   },

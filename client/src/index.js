@@ -4,7 +4,7 @@ import './styles/index.scss';
 import './styles/global.scss';
 import Character from './components/pages/Character'
 import Monster from './components/pages/Monster'
-import Rules from './components/pages/Rules'
+import Rules from './components/pages/Rules/Rules'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class App extends Component {

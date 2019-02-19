@@ -37,7 +37,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Empowered RPG
+            Chris's cool website is working!
           </p>
           <a
             className="App-link"

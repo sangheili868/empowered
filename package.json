@@ -1,30 +1,16 @@
 {
-  "name": "empowered",
-  "version": "0.0.1",
-  "description": "A flexible, extendible, character-driven RPG system.",
-  "engines": {
-    "node": "10.x"
-  },
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
-  "dependencies": {
-    "express": "^4.15.2"
-  },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sangheili868/empowered"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
-}
+    "name": "empowered",
+    "version": "1.0.0",
+    "scripts": {
+      "client": "cd client && yarn start",
+      "server": "nodemon server.js",
+      "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    },
+    "dependencies": {
+      "body-parser": "^1.18.3",
+      "express": "^4.16.4"
+    },
+    "devDependencies": {
+      "concurrently": "^4.0.1"
+    }
+  }

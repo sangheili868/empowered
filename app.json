@@ -1,8 +1,0 @@
-{
-  "name": "Empowered RPG System",
-  "description": "A flexible, extendible, character-driven RPG system.",
-  "repository": "https://github.com/sangheili868/empowered",
-  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
-  "keywords": ["node", "express", "heroku"],
-  "image": "heroku/nodejs"
-}

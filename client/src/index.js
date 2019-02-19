@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import './index.css';
+import './styles/index.scss';
+import './styles/global.scss';
 import Character from './components/pages/Character'
 import Monster from './components/pages/Monster'
 import Rules from './components/pages/Rules'
@@ -10,10 +11,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="navbar">
-          <div><Link to="/rules">How to Play</Link></div>
-          <div><Link to="/character">Characters</Link></div>
-          <div><Link to="/monster">Monsters</Link></div>
+        <div className="title">Empowered RPG System</div>
+        <div className="nav-bar">
+          <div className="nav-link"><Link to="/rules">How to Play</Link></div>
+          <div className="nav-link"><Link to="/character">Characters</Link></div>
+          <div className="nav-link"><Link to="/monster">Monsters</Link></div>
         </div>
         <div>
           <Route path="/rules" component={Rules}/>

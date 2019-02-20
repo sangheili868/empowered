@@ -19,5 +19,8 @@
   "devDependencies": {
     "concurrently": "^4.0.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": "10.15.1"
+  }
 }

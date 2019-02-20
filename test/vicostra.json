@@ -1,0 +1,245 @@
+{
+  "name": "Vicostra Vramiir",
+  "portrait": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/e99a57e7-879f-4c9f-9e6b-e668ea7cf839/db84b4a-30403627-9237-4c07-8fbe-8e46dff568ed.png/v1/fill/w_833,h_960,q_70,strp/drow_bard____tg__shit_post_generator__by_bog_roll_db84b4a-pre.jpg",
+  "bio": {
+    "highConcept": "Illusionist Spy who Cannot Stand Dissatisfaction",
+    "flaw": "Pathological Liar",
+    "ancestry": "Void Elf",
+    "homeland": "Ushal",
+    "age": "174",
+    "description": "Dark grey skin, long, beautiful white hair, piercing grey eyes, ornate armor with hi-low dress",
+    "personalityTrait1": "I collect and spread rumors and gossip wherever I go.",
+    "personalityTrait2": "I need to be surrounded by the rich and beautiful.",
+    "ideal": "Illusory Joy. I’ll do whatever it takes to make people think that everything is as they want.",
+    "alignment": "Neutral Social. I find meaning in my interactions with others, and I have little concern for order or freedom, as long as everyone is happy.",
+    "goal": "Rebuild my reputation as a wealthy, benevolent aristocrat.",
+    "fear": "My lies get me into a place full of suffering, such as prison or war, where I have to constantly see people upset.",
+    "friend": "A drug dealer who grew up on the streets with me.",
+    "enemy": "A former lover who killed my mentor",
+    "otherCharacter": "Mother still works as a servant",
+    "organization": "House Perla is my next shot at success.",
+    "goodMemory": "An upper-class woman adopted me and taught me how to navigate the complex social society of the wealthiest people in Ushal",
+    "badMemory": "A former lover killed my mentor and wants me to suffer after I lied to him.",
+    "profession": "Ushallin Prince cons, then sponsorship by wealthy woman",
+    "hobbies": "Crafting and executing elaborate cons.",
+    "socialStyle": "I try to figure out what people want to hear, then tell them exactly that. I’ll use illusion and enchantment magic to back up my claims if necessary. My deceptions often go very deep, but I make sure to be far away when they get figured out.",
+    "combatStyle": "I use my magic to distract and confuse enemies, and try to convince them that I am not worth fighting. But if that doesn’t work, I am quite skilled with the rapier and hand crossbow. I also utilize a variety of potions.",
+    "equipment": "Fake drow armor, rapier, violin, poison vials, fake letters from a fake drow house, a necklace from my dead mentor"
+  },
+  "stats": {
+    "hitPoints": 7,
+    "tempHP": 0,
+    "wounds": 0,
+    "armor": {
+      "rating": 1,
+      "type": "lightArmor"
+    },
+    "shield": {
+      "rating": 0,
+      "type": "none"
+    },
+    "speed": {
+      "rating": 20,
+      "type": "walking"
+    },
+    "abilityScores": {
+      "strong": -2,
+      "aware": 0,
+      "smart": 1,
+      "quick": 1,
+      "determined": -1,
+      "social": -2
+    },
+    "powerDice": {
+      "d4s": {
+        "current": 2,
+        "max": 2
+      },
+      "d6s": {
+        "current": 1,
+        "max": 1
+      },
+      "d8s": {
+        "current": 0,
+        "max": 0
+      },
+      "d10s": {
+        "current": 0,
+        "max": 0
+      },
+      "d12s": {
+        "current": 0,
+        "max": 0
+      }
+    },
+    "weapons": [
+      {
+        "name": "Rapier",
+        "category": "finesseWeapon"
+      },
+      {
+        "name": "Violin",
+        "category": "unityWeapon"
+      },
+      {
+        "name": "Crystal",
+        "category": "arcaneWeapon"
+      }
+    ],
+    "equipment": {
+      "gold": 100,
+      "heavy": [],
+      "medium": [
+        "Light Armor",
+        "Rapier",
+        "Violin",
+        "Crystal",
+        "Spy's Tools",
+        "Chemist's Tools"
+      ],
+      "light": [
+        {
+          "name": "Mentor's Necklace",
+          "quantity": 1
+        },
+        {
+          "name": "Poison Vial",
+          "quantity": 3
+        },
+        {
+          "name": "Rations",
+          "quantity": 10
+        },
+        {
+          "name": "Perfume",
+          "quantity": 1
+        },
+        {
+          "name": "Letters from fake royal house",
+          "quantity": 1
+        },
+        {
+          "name": "Old, poor, man's hat",
+          "quantity": 1
+        },
+        {
+          "name": "Orc's Loincloth",
+          "quantity": 1
+        },
+        {
+          "name": "Young girl's ribbon",
+          "quantity": 1
+        }
+      ]
+    },
+    "languages": [
+      "Volic",
+      "Ethactic"
+    ],
+    "proficiencies": [
+      "lightArmor",
+      "finesseWeapon",
+      "arcaneWeapon",
+      "unityWeapon",
+      "spyTool",
+      "chemistTool"
+    ],
+    "features": [
+      {
+        "name": "Forked Tongue",
+        "requirements": {
+          "skill": {
+            "name": "persuasion",
+            "level": 1
+          }
+        },
+        "type": [
+          "empowered",
+          "skill"
+        ],
+        "description": "You can empower persuasion rolls that include a lie.",
+        "playerMade": true,
+        "metadata": {
+          "empSkill": {
+            "skill": "persuasion",
+            "condition": "Lie"
+          }
+        }
+      },
+      {
+        "name": "Minor Illusion",
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": 1
+          },
+          "weapon": "arcaneWeapon",
+          "item": "",
+          "other": ""
+        },
+        "type": [
+          "empowered",
+          "action"
+        ],
+        "description": "As an action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
+        "playerMade": true
+      },
+      {
+        "name": "Magic Disguise",
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon",
+          "item": "A piece of clothing that has been worn by someone else",
+          "other": ""
+        },
+        "type": [
+          "cardinal",
+          "empowered",
+          "action"
+        ],
+        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use an action to end the illusion, or an action to create it again. It must be the same creature for each casting of the spell."
+      },
+      {
+        "name": "Memory Theft",
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unity"
+        },
+        "type": [
+          "boosted",
+          "empowered",
+          "reaction"
+        ],
+        "description": "As an empowered reaction when a creature dies within the range of your focus, you can capture some of its memories. You ask the DM one question, and if the creature knew the answer to that question, the DM reveals it to you.",
+        "boosted": "You may ask up to three questions."
+      },
+      {
+        "name": "Pathological Liar",
+        "type": [
+          "passive",
+          "flaw"
+        ],
+        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you take 1d4 mental damage unless you convince them otherwise."
+      }
+    ]
+  },
+  "shop": {
+    "advancements": 0,
+    "totalEarned": 35,
+    "features": [
+      {
+        "name": "WIP",
+        "type": [
+          "passive"
+        ],
+        "description": "Shop features not added yet"
+      }
+    ]
+  }
+}

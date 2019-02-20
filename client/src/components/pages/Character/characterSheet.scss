@@ -1,0 +1,12 @@
+.sheet-header {
+  display: flex;
+  justify-content: space-around;
+
+  .character-name {
+    font-size: 50px;
+  }
+
+  .portrait {
+    max-height: 200px;
+  }
+}

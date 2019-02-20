@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import "./character.scss"
 import EmpJsonImporter from '../../EmpJsonImporter'
 import CharacterSheet from './CharacterSheet'
+
 class Character extends Component {
   state = {
     character: null

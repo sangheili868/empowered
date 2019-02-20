@@ -6,7 +6,7 @@ class EmpJsonImporter extends Component {
     const file = event.target.files[0] 
     fileReader = new FileReader()
     fileReader.onloadend = () => {
-      this.props.handleFileContent(JSON.parse(fileReader.result))
+      this.props.onFileOpen(JSON.parse(fileReader.result))
     }
     fileReader.readAsText(file)
   }

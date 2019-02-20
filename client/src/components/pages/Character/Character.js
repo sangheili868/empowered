@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import "./character.scss"
+import "./character.scss";
+import EmpJsonImporter from '../../EmpJsonImporter';
 
 let fileReader
 class Character extends Component {
@@ -24,6 +25,7 @@ class Character extends Component {
       <div>
         <p>Character</p>
         <div>Import Character Sheet</div>
+        <EmpJsonImporter/>
         <input type="file" name="" id="" accept='.json' onChange={this.handleNewFile}/>
         {this.state.fileContent &&  
           <div className="sheet">

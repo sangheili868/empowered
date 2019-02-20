@@ -5,7 +5,6 @@ import './styles/global.scss';
 import Character from './components/pages/Character/Character'
 import Monster from './components/pages/Monster'
 import Rules from './components/pages/Rules/Rules'
-import Getter from './components/Getter'
 import 'whatwg-fetch'
 import 'promise-polyfill/src/polyfill';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'

@@ -12,7 +12,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "react-router-dom": "^4.3.1"
+    "promise-polyfill": "^8.1.0",
+    "react-router-dom": "^4.3.1",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"

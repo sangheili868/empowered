@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./characterSheetStats.scss"
 import CharacterSheetStatsResource from "./CharacterSheetStatsResource"
 import CharacterSheetStatsWeapons from "./CharacterSheetStatsWeapons"
+import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import hitPointsIcon from "../../../icons/heart.png"
 import armorIcon from "../../../icons/soldier.png"
 import shieldIcon from "../../../icons/shield.png"
@@ -57,6 +58,10 @@ class CharacterSheetStats extends Component {
             subtext={this.props.stats.speed.type}
           />
         </div>
+        <CharacterSheetStatsSkills
+          abilityScores={this.props.stats.abilityScores}
+          skills={this.props.stats.skills}
+        />
         <CharacterSheetStatsWeapons weapons={this.props.stats.weapons}/>
       </div>
     )

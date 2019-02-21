@@ -17,32 +17,32 @@ class CharacterSheetStatsWeapons extends Component {
         <div className={weaponsTable}>
           <div className={weaponColumn}>
             <div>Name</div>
-            {this.props.weapons.map(weapon =>
-              <div className={weaponData}>{weapon.name}</div>
+            {this.props.weapons.map((weapon, index) =>
+              <div key={index} className={weaponData}>{weapon.name}</div>
             )}
           </div>
           <div className={weaponColumn}>
             <div>Hit Bonus</div>
-            {this.props.weapons.map(weapon =>
-              <div className={weaponData}>{weapon.bonus}</div>
+            {this.props.weapons.map((weapon, index) =>
+              <div key={index} className={weaponData}>{weapon.bonus}</div>
             )}
           </div>
           <div className={weaponColumn}>
             <div>Damage</div>
-            {this.props.weapons.map(weapon =>
-              <div className={weaponData}>{weapon.damage}</div>
+            {this.props.weapons.map((weapon, index) =>
+              <div key={index} className={weaponData}>{weapon.damage}</div>
             )}
           </div>
           <div className={weaponColumn}>
             <div>Range</div>
-            {this.props.weapons.map(weapon =>
-              <div className={weaponData}>{weapon.range}ft.</div>
+            {this.props.weapons.map((weapon, index) =>
+              <div key={index} className={weaponData}>{weapon.range}ft.</div>
             )}
           </div>
           <div className={weaponColumn}>
             <div>Notes</div>
-            {this.props.weapons.map(weapon =>
-              <div className={weaponData}>
+            {this.props.weapons.map((weapon, index) =>
+              <div key={index} className={weaponData}>
               {weapon.tags.map(tag =>
                 upperFirst(tag)
               ).join(', ')}

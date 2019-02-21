@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsWeapons from "./CharacterSheetStatsWeapons"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
+import CharacterSheetStatsEquipment from "./CharacterSheetStatsEquipment"
 
 class CharacterSheetStats extends Component {
   render () {
@@ -13,6 +14,7 @@ class CharacterSheetStats extends Component {
           skills={this.props.stats.skills}
         />
         <CharacterSheetStatsWeapons weapons={this.props.stats.weapons}/>
+        <CharacterSheetStatsEquipment equipment={this.props.stats.equipment}/>
       </div>
     )
   }

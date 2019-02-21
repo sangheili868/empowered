@@ -23,13 +23,16 @@ class Character {
       maxTempHP: skills.fortitude + 10,
       maxWounds: 5, 
       skills,
-      encumberance: {
-        current: (equipment.heavy.length +
-          (equipment.medium.length / 2) +
-          (equipment.light.reduce((acc, { quantity }) => quantity + acc, 0) / 20) +
-          (equipment.gold / 2000)
-        ),
-        limit: skills.brawn + 10
+      equipment: {
+        ...this.baseStats.equipment,
+        encumberance: {
+          current: (equipment.heavy.length +
+            (equipment.medium.length / 2) +
+            (equipment.light.reduce((acc, { quantity }) => quantity + acc, 0) / 20) +
+            (equipment.gold / 2000)
+          ),
+          limit: skills.brawn + 10
+        }
       },
       weapons: this.baseStats.weapons.map(weapon => {
         const weaponStats = weaponData[weapon.category]
@@ -48,6 +51,8 @@ class Character {
         }
       })
     }
+   } else {
+     return {}
    }
   }
 }

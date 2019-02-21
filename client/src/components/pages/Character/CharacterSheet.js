@@ -15,7 +15,7 @@ class CharacterSheet extends Component {
               {this.props.character.bio.ancestry} from {this.props.character.bio.homeland}
             </div>
           </div>
-          <img src={this.props.character.portrait} className="portrait"/>
+          <img alt="Character Portrait" src={this.props.character.portrait} className="portrait"/>
         </div>
         <CharacterSheetStats stats={this.props.character.stats}/>
       </div>

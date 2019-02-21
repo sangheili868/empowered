@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import EmpJsonImporter from '../../EmpJsonImporter'
 import CharacterSheet from './CharacterSheet'
+import Character from '../../../classes/Character'
 
-class Character extends Component {
+class CharacterPage extends Component {
   state = {
     character: null
   };
   handleFileContent = fileContent => {
-    this.setState({character: fileContent})
+    this.setState({character: new Character(fileContent)})
   }
   render() {
     return (
@@ -23,4 +24,4 @@ class Character extends Component {
   }
 }
 
-export default Character;
+export default CharacterPage;

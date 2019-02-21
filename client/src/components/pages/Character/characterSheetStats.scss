@@ -1,6 +1,7 @@
 .stats {
   display: flex;
-
+  justify-content: space-around;
+  
   .stat {
     margin: 20px;
   }

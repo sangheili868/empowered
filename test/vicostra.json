@@ -48,7 +48,7 @@
       "smart": 1,
       "quick": 1,
       "determined": -1,
-      "social": -2
+      "social": 2
     },
     "powerDice": {
       "d4s": {
@@ -79,15 +79,15 @@
       },
       {
         "name": "Violin",
-        "category": "unityWeapon"
+        "category": "twoHandedUnityWeapon"
       },
       {
         "name": "Crystal",
-        "category": "arcaneWeapon"
+        "category": "oneHandedArcaneWeapon"
       }
     ],
     "equipment": {
-      "gold": 100,
+      "gold": 150,
       "heavy": [],
       "medium": [
         "Light Armor",

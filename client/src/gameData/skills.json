@@ -1,0 +1,17 @@
+{
+  "athletics": [ "strong", "quick" ],
+  "fortitude": [ "strong", "determined" ],
+  "intimidation": [ "strong", "social" ],
+  "brawn": [ "strong", "strong" ],
+  "stealth": [ "aware", "quick" ],
+  "investigation": [ "aware", "determined" ],
+  "insight": [ "aware", "social" ],
+  "perception": [ "aware", "aware" ],
+  "handiwork": [ "smart", "quick" ],
+  "wisdom": [ "smart", "determined" ],
+  "synergy": [ "smart", "social" ],
+  "knowledge": [ "smart", "smart" ],
+  "agility": [ "quick", "quick" ],
+  "willpower": [ "determined", "determined" ],
+  "persuasion": [ "social", "social" ]
+}

@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import './styles/index.scss';
 import './styles/global.scss';
-import Character from './components/pages/Character/Character'
+import CharacterPage from './components/pages/Character/CharacterPage'
 import Monster from './components/pages/Monster'
 import Rules from './components/pages/Rules/Rules'
 import 'whatwg-fetch'
@@ -21,7 +21,7 @@ class App extends Component {
         </div>
         <div>
           <Route path="/rules" component={Rules}/>
-          <Route path="/character" component={Character}/>
+          <Route path="/character" component={CharacterPage}/>
           <Route path="/monster" component={Monster}/>
         </div>
       </div>

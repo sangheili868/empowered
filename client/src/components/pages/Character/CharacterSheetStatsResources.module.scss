@@ -1,0 +1,28 @@
+.stats {
+  display: flex;
+  justify-content: space-around;
+  
+  .stat {
+    margin: 20px;
+  }
+  
+  .info {
+    position: relative;
+  
+    .icon {
+      position: absolute;
+      left: calc(50% - 25px);
+      opacity: 0.2;
+    }
+  
+    .value {
+      padding-top: 10px;
+      font-size: 24px;
+    }
+  
+    .subtext {
+      font-size: 14px;
+    }
+  }
+}
+

@@ -1,0 +1,272 @@
+{
+ "lightArmor": {
+   "name": "Light Armor",
+   "requirement": [
+     {
+       "skill": "athletics",
+       "level": -1
+     }
+   ]
+ },
+ "mediumArmor": {
+   "name": "Medium Armor",
+   "requirement": [
+     {
+       "skill": "athletics",
+       "level": 2
+     }
+   ]
+ },
+ "heavyArmor": {
+   "name": "Heavy Armor",
+   "requirement": [
+     {
+       "skill": "brawn",
+       "level": 2
+     }
+   ]
+ },
+ "lightShield": {
+   "name": "Light Shields",
+   "requirement": [
+     {
+       "skill": "athletics",
+       "level": -1
+     }
+   ]
+ },
+ "mediumShield": {
+   "name": "Medium Shields",
+   "requirement": [
+     {
+       "skill": "brawn",
+       "level": 2
+     }
+   ]
+ },
+ "heavyShield": {
+   "name": "Heavy Shields",
+   "requirement": [
+     {
+       "skill": "brawn",
+       "level": 4
+     }
+   ]
+ },
+ "unarmedWeapon": {
+   "name": "Unarmed Fighting",
+   "requirement": [
+     {
+       "skill": "athletics",
+       "level": 1
+     }
+   ]
+ },
+ "lightMeleeWeapon": {
+   "name": "Light Melee Weapons",
+   "requirements": [
+     {
+       "skill": "athletics",
+       "level": -1
+     }
+   ]
+ },
+ "finesseMeleeWeapon": {
+   "name": "Finesse Melee Weapons",
+   "requirements": [
+     {
+       "skill": "athletics",
+       "level": 1
+     }
+   ]
+ },
+ 
+ "oneHandedMeleeWeapon": {
+   "name": "One-handed Melee Weapons",
+   "requirements": [
+     {
+       "skill": "brawn",
+       "level": -2
+     }
+   ]
+ },
+ "twoHandedMeleeWeapon": {
+   "name": "Two-handed Melee Weapons",
+   "requirements": [
+     {
+       "skill": "brawn",
+       "level": 2
+     }
+   ]
+ },
+ "lightThrownWeapon": {
+   "name": "Light Thrown Weapons",
+   "requirements": [
+     {
+       "skill": "athletics",
+       "level": -1
+     }
+   ]
+ },
+ "heavyThrownWeapon": {
+   "name": "Heavy Thrown Weapons",
+   "requirements": [
+     {
+       "skill": "athletics",
+       "level": 1
+     }
+   ]
+ },
+ "oneHandedRangedWeapon": {
+   "name": "One-handed Ranged Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": -2
+     }
+   ]
+ },
+ "twoHandedRangedWeapon": {
+   "name": "Two-handed Ranged Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": -2
+     }
+   ]
+ },
+ "heavyRangedWeapon": {
+   "name": "Heavy Ranged Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": 2
+     },
+     {
+       "skill": "brawn",
+       "level": 2
+     }
+   ]
+ },
+ "lightLoadingWeapon": {
+   "name": "Light Loading Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": -2
+     }
+   ]
+ },
+ "twoHandedLoadingWeapon": {
+   "name": "Two-handed Loading Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": -2
+     }
+   ]
+ },
+ "heavyLoadingWeapon": {
+   "name": "Heavy Loading Weapons",
+   "requirements": [
+     {
+       "skill": "perception",
+       "level": 2
+     },
+     {
+       "skill": "brawn",
+       "level": 2
+     }
+   ]
+ },
+ "arcaneWeapon": {
+   "name": "Arcane Focuses",
+   "requirements": [
+     {
+       "skill": "knowledge",
+       "level": 2
+     }
+   ]
+ },
+ "divineWeapon": {
+   "name": "Divine Focuses",
+   "requirements": [
+     {
+       "skill": "wisdom",
+       "level": 1
+     }
+   ]
+ },
+ "unityWeapon": {
+   "name": "Unity Focuses",
+   "requirements": [
+     {
+       "skill": "synergy",
+       "level": 1
+     }
+   ]
+ },
+ "arcanistTool": {
+   "name": "Arcanist's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "artisanTool": {
+   "name": "Artisan's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "chemistTool": {
+   "name": "Chemist's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "explorerTool": {
+   "name": "Explorer's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "smithTool": {
+   "name": "Smith's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "spyTool": {
+   "name": "Spy's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "thiefTool": {
+   "name": "Thief's Tools",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ }
+}

@@ -1,6 +1,9 @@
-import _ from 'lodash'
+import { mapValues } from 'lodash'
 import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
+import proficiencyData from '../gameData/proficiencies.json'
+import actions from '../gameData/actions.json'
+import { filter } from 'lodash'
 
 class Character {
   constructor(baseCharacterData) {
@@ -13,7 +16,7 @@ class Character {
 
   get stats () {
    if (this.baseStats) {
-    const skills = _.mapValues(skillData, skill => 
+    const skills = mapValues(skillData, skill => 
       skill.reduce((acc, ability) =>  acc + this.baseStats.abilityScores[ability], 0)
     )
     const equipment = this.baseStats.equipment
@@ -49,7 +52,35 @@ class Character {
             damage: weaponStats.damageDie + (bonus > 0 ? " + " : " - ") + Math.abs(bonus)
           }
         }
-      })
+      }),
+      proficiencies: this.baseStats.proficiencies.map(proficiency => {
+        const proficiencyStats = proficiencyData[proficiency]
+        if (!proficiencyStats) {
+          console.error('Proficiency Not Found', proficiency)
+          return proficiency
+        } else {
+          return proficiencyStats
+        }
+      }),
+      actions: {
+        ...actions.actions,
+        ...filter(this.baseStats.features, ({ type }) => type.includes('action'))
+          .map(feature => ({
+            ...feature,
+            feature: true,
+            cardinal: feature.type.includes('cardinal')
+          })) 
+      },
+      maneuvers: {
+        ...actions.maneuvers,
+        ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
+          .map(feature => ({ ...feature, feature: true })) 
+      },
+      reactions: {
+        ...actions.reactions,
+        ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
+          .map(feature => ({ ...feature, feature: true })) 
+      }
     }
    } else {
      return {}

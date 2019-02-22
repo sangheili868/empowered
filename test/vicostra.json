@@ -75,7 +75,7 @@
     "weapons": [
       {
         "name": "Rapier",
-        "category": "finesseWeapon"
+        "category": "finesseMeleeWeapon"
       },
       {
         "name": "Violin",
@@ -138,7 +138,7 @@
     ],
     "proficiencies": [
       "lightArmor",
-      "finesseWeapon",
+      "finesseMeleeWeapon",
       "arcaneWeapon",
       "unityWeapon",
       "spyTool",
@@ -209,7 +209,7 @@
             "name": "synergy",
             "level": 1
           },
-          "weapon": "unity"
+          "weapon": "unityWeapon"
         },
         "type": [
           "boosted",

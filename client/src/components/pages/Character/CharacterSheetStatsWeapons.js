@@ -5,7 +5,7 @@ import {
   title,
   table,
   column,
-  data
+  columnHeader
 } from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsWeapons extends Component {
@@ -16,34 +16,34 @@ class CharacterSheetStatsWeapons extends Component {
         <br/>
         <div className={table}>
           <div className={column}>
-            <div>Name</div>
+            <div className={columnHeader}>Name</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={data}>{weapon.name}</div>
+              <div key={index}>{weapon.name}</div>
             )}
           </div>
           <div className={column}>
-            <div>Hit Bonus</div>
+            <div className={columnHeader}>Hit Bonus</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={data}>{weapon.bonus}</div>
+              <div key={index}>{weapon.bonus}</div>
             )}
           </div>
           <div className={column}>
-            <div>Damage</div>
+            <div className={columnHeader}>Damage</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={data}>{weapon.damage}</div>
+              <div key={index}>{weapon.damage}</div>
             )}
           </div>
           <div className={column}>
-            <div>Range</div>
+            <div className={columnHeader}>Range</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={data}>{weapon.range}ft.</div>
+              <div key={index}>{weapon.range}ft.</div>
             )}
           </div>
           <div className={column}>
-            <div>Notes</div>
+            <div className={columnHeader}>Notes</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={data}>
-              {weapon.tags.map(tag =>
+              <div key={index}>
+              {weapon.tags && weapon.tags.map(tag =>
                 upperFirst(tag)
               ).join(', ')}
               </div>

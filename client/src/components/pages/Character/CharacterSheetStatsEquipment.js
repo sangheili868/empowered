@@ -5,7 +5,7 @@ import {
   subtitle,
   table,
   column,
-  data
+  columnHeader
 } from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsEquipment extends Component {
@@ -22,21 +22,21 @@ class CharacterSheetStatsEquipment extends Component {
         </div>
         <div className={table}>
           <div className={column}>
-            <div>Heavy</div>
+            <div className={columnHeader}>Heavy</div>
             {this.props.equipment.heavy.map((equipment, index) =>
-              <div key={index} className={data}>{equipment}</div>
+              <div key={index}>{equipment}</div>
             )}
           </div>
           <div className={column}>
-            <div>Medium</div>
+            <div className={columnHeader}>Medium</div>
             {this.props.equipment.medium.map((equipment, index) =>
-              <div key={index} className={data}>{equipment}</div>
+              <div key={index}>{equipment}</div>
             )}
           </div>
           <div className={column}>
-            <div>Light</div>
+            <div className={columnHeader}>Light</div>
             {this.props.equipment.light.map((equipment, index) =>
-              <div key={index} className={data}>{equipment.name} ({equipment.quantity})</div>
+              <div key={index}>{equipment.name} ({equipment.quantity})</div>
             )}
           </div>
         </div>

@@ -13,7 +13,6 @@ class CharacterPage extends Component {
   render() {
     return (
       <div>
-        <p>Character</p>
         <div>Import Character Sheet</div>
         <EmpJsonImporter onFileOpen={this.handleFileContent}/>
         {this.state.character &&

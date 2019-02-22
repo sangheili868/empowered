@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import {
-  equipment,
+  section,
   title,
   subtitle,
   table,
   column,
   data
-} from "./CharacterSheetStatsEquipment.module.scss"
+} from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsEquipment extends Component {
   render () {
     return (
-      <div className={equipment}>
+      <div className={section}>
         <div className={title}>Equipment</div>
         <div className={subtitle}>
           <div>Gold: {this.props.equipment.gold}</div>

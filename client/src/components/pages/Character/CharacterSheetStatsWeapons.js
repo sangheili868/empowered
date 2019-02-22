@@ -1,48 +1,48 @@
 import React, { Component } from 'react'
 import { upperFirst } from 'lodash'
 import {
-  weaponsList,
-  weaponsTitle,
-  weaponsTable,
-  weaponColumn,
-  weaponData
-} from "./CharacterSheetStatsWeapons.module.scss"
+  section,
+  title,
+  table,
+  column,
+  data
+} from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsWeapons extends Component {
   render () {
     return (
-      <div className={weaponsList}>
-        <div className={weaponsTitle}>Weapons</div>
+      <div className={section}>
+        <div className={title}>Weapons</div>
         <br/>
-        <div className={weaponsTable}>
-          <div className={weaponColumn}>
+        <div className={table}>
+          <div className={column}>
             <div>Name</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={weaponData}>{weapon.name}</div>
+              <div key={index} className={data}>{weapon.name}</div>
             )}
           </div>
-          <div className={weaponColumn}>
+          <div className={column}>
             <div>Hit Bonus</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={weaponData}>{weapon.bonus}</div>
+              <div key={index} className={data}>{weapon.bonus}</div>
             )}
           </div>
-          <div className={weaponColumn}>
+          <div className={column}>
             <div>Damage</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={weaponData}>{weapon.damage}</div>
+              <div key={index} className={data}>{weapon.damage}</div>
             )}
           </div>
-          <div className={weaponColumn}>
+          <div className={column}>
             <div>Range</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={weaponData}>{weapon.range}ft.</div>
+              <div key={index} className={data}>{weapon.range}ft.</div>
             )}
           </div>
-          <div className={weaponColumn}>
+          <div className={column}>
             <div>Notes</div>
             {this.props.weapons.map((weapon, index) =>
-              <div key={index} className={weaponData}>
+              <div key={index} className={data}>
               {weapon.tags.map(tag =>
                 upperFirst(tag)
               ).join(', ')}

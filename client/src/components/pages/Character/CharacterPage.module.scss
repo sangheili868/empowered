@@ -1,0 +1,84 @@
+@import "src/styles/colors.scss";
+
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+
+  .name {
+    font-size: 50px;
+  }
+
+  .portrait {
+    max-height: 200px;
+  }
+}
+
+.resources {
+  display: flex;
+  justify-content: space-around;
+
+  .resource {
+    margin: 20px;
+  }
+  
+  .info {
+    position: relative;
+  
+    .icon {
+      position: absolute;
+      left: calc(50% - 25px);
+      opacity: 0.2;
+    }
+  
+    .value {
+      padding-top: 10px;
+      font-size: 24px;
+    }
+  
+    .subtext {
+      font-size: 14px;
+    }
+  }
+}
+
+.section {
+  display: inline-block;
+  border: 1px solid $black;
+  border-radius: 10px;
+  margin: 5px;
+
+  .title {
+    display: inline-block;
+  }
+
+  .subtitle {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12px;
+  }
+
+  .table {
+    display: inline-flex;
+    margin: 0 3px 3px;
+
+    .column {
+      padding: 0 10px 5px;
+
+      .data {
+        font-size: 12px;
+      }
+
+      .spacer {
+        padding: 5px 0;
+        line-height: 2;
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

@@ -1,66 +1,66 @@
 import React, { Component } from 'react'
-import { skillsList, title, table, spacer } from "./CharacterSheetStatsSkills.module.scss"
+import { section, title, table, column, data, spacer } from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsSkills extends Component {
   render () {
     return (
-      <div className={skillsList}>
+      <div className={section}>
         <div className={title}>Skills</div>
         <br/>
         <div className={table}>
-          <div>
+          <div className={column}>
             <div className={spacer}> </div>
-            <div>Quick</div>
-            <div>{this.props.abilityScores.quick}</div>
-            <div>Determined</div>
-            <div>{this.props.abilityScores.determined}</div>
-            <div>Social</div>
-            <div>{this.props.abilityScores.social}</div>
+            <div className={data}>Quick</div>
+            <div className={data}>{this.props.abilityScores.quick}</div>
+            <div className={data}>Determined</div>
+            <div className={data}>{this.props.abilityScores.determined}</div>
+            <div className={data}>Social</div>
+            <div className={data}>{this.props.abilityScores.social}</div>
           </div>
-          <div>
-            <div>Strong</div>
-            <div>{this.props.abilityScores.strong}</div>
-            <div>Athletics</div>
-            <div>{this.props.skills.athletics}</div>
-            <div>Fortitude</div>
-            <div>{this.props.skills.fortitude}</div>
-            <div>Intimidation</div>
-            <div>{this.props.skills.intimidation}</div>
-            <div>Brawn</div>
-            <div>{this.props.skills.brawn}</div>
+          <div className={column}>
+            <div className={data}>Strong</div>
+            <div className={data}>{this.props.abilityScores.strong}</div>
+            <div className={data}>Athletics</div>
+            <div className={data}>{this.props.skills.athletics}</div>
+            <div className={data}>Fortitude</div>
+            <div className={data}>{this.props.skills.fortitude}</div>
+            <div className={data}>Intimidation</div>
+            <div className={data}>{this.props.skills.intimidation}</div>
+            <div className={data}>Brawn</div>
+            <div className={data}>{this.props.skills.brawn}</div>
           </div>
-          <div>
-            <div>Aware</div>
-            <div>{this.props.abilityScores.aware}</div>
-            <div>Stealth</div>
-            <div>{this.props.skills.stealth}</div>
-            <div>Investigation</div>
-            <div>{this.props.skills.investigation}</div>
-            <div>Insight</div>
-            <div>{this.props.skills.insight}</div>
-            <div>Perception</div>
-            <div>{this.props.skills.perception}</div>
+          <div className={column}>
+            <div className={data}>Aware</div>
+            <div className={data}>{this.props.abilityScores.aware}</div>
+            <div className={data}>Stealth</div>
+            <div className={data}>{this.props.skills.stealth}</div>
+            <div className={data}>Investigation</div>
+            <div className={data}>{this.props.skills.investigation}</div>
+            <div className={data}>Insight</div>
+            <div className={data}>{this.props.skills.insight}</div>
+            <div className={data}>Perception</div>
+            <div className={data}>{this.props.skills.perception}</div>
           </div>
-          <div>
-            <div>Smart</div>
-            <div>{this.props.abilityScores.smart}</div>
-            <div>Handiwork</div>
-            <div>{this.props.skills.handiwork}</div>
-            <div>Wisdom</div>
-            <div>{this.props.skills.wisdom}</div>
-            <div>Synergy</div>
-            <div>{this.props.skills.synergy}</div>
-            <div>Knowledge</div>
-            <div>{this.props.skills.knowledge}</div>
+          <div className={column}>
+            <div className={data}>Smart</div>
+            <div className={data}>{this.props.abilityScores.smart}</div>
+            <div className={data}>Handiwork</div>
+            <div className={data}>{this.props.skills.handiwork}</div>
+            <div className={data}>Wisdom</div>
+            <div className={data}>{this.props.skills.wisdom}</div>
+            <div className={data}>Synergy</div>
+            <div className={data}>{this.props.skills.synergy}</div>
+            <div className={data}>Knowledge</div>
+            <div className={data}>{this.props.skills.knowledge}</div>
           </div>
-          <div>
+          <div className={column}>
             <div className={spacer}> </div>
-            <div>Agility</div>
-            <div>{this.props.skills.agility}</div>
-            <div>Willpower</div>
-            <div>{this.props.skills.willpower}</div>
-            <div>Persuasion</div>
-            <div>{this.props.skills.persuasion}</div>
+            <div className={data}>Agility</div>
+            <div className={data}>{this.props.skills.agility}</div>
+            <div className={data}>Willpower</div>
+            <div className={data}>{this.props.skills.willpower}</div>
+            <div className={data}>Persuasion</div>
+            <div className={data}>{this.props.skills.persuasion}</div>
           </div>
         </div>
       </div>

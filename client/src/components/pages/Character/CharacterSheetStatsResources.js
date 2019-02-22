@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import {
-  stats,
-  stat,
+  resources,
+  resource,
   title,
   info,
   icon,
   value,
   subtext
-} from "./CharacterSheetStatsResources.module.scss"
+} from "./CharacterPage.module.scss"
 import { startCase } from 'lodash'
 import hitPointsIcon from "../../../icons/heart.png"
 import armorIcon from "../../../icons/soldier.png"
@@ -19,8 +19,8 @@ import speedIcon from "../../../icons/boot.png"
 class CharacterSheetStatsResource extends Component {
   render () {
     return (
-      <div className={stats}>
-        <div className={stat}>
+      <div className={resources}>
+        <div className={resource}>
           <div className={title}>Hit Points</div>
           <div className={info}>
             <img className={icon} alt="Hit Points Icon" src={hitPointsIcon}/>
@@ -28,7 +28,7 @@ class CharacterSheetStatsResource extends Component {
             <div className={subtext}>Max: {this.props.stats.maxHP}</div>
           </div>
         </div>
-        <div className={stat}>
+        <div className={resource}>
           <div className={title}>Temp. HP</div>
           <div className={info}>
             <img className={icon} alt="Temp. HP Icon" src={tempHPIcon}/>
@@ -36,7 +36,7 @@ class CharacterSheetStatsResource extends Component {
             <div className={subtext}>Max: {this.props.stats.maxTempHP}</div>
           </div>
         </div>
-        <div className={stat}>
+        <div className={resource}>
           <div className={title}>Wounds</div>
           <div className={info}>
             <img className={icon} alt="Wound Icon" src={woundIcon}/>
@@ -44,7 +44,7 @@ class CharacterSheetStatsResource extends Component {
             <div className={subtext}>Limit: {this.props.stats.maxWounds}</div>
           </div>
         </div>
-        <div className={stat}>
+        <div className={resource}>
           <div className={title}>Armor</div>
           <div className={info}>
             <img className={icon} alt="Armor Icon" src={armorIcon}/>
@@ -52,7 +52,7 @@ class CharacterSheetStatsResource extends Component {
             <div className={subtext}>{startCase(this.props.stats.armor.type)}</div>
           </div>
         </div>
-        <div className={stat}>
+        <div className={resource}>
           <div className={title}>Shield Bonus</div>
           <div className={info}>
             <img className={icon} alt="Shield Icon" src={shieldIcon}/>
@@ -60,7 +60,7 @@ class CharacterSheetStatsResource extends Component {
             <div className={subtext}>{startCase(this.props.stats.shield.type)}</div>
           </div>
         </div>
-        <div className={stat}>
+        <div className={resource}>
           <div className={title}>Speed</div>
           <div className={info}>
             <img className={icon} alt="Speed Icon" src={speedIcon}/>

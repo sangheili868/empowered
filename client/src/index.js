@@ -6,25 +6,29 @@ import CharacterPage from './components/pages/Character/CharacterPage'
 import Monster from './components/pages/Monster'
 import Rules from './components/pages/Rules/Rules'
 import 'whatwg-fetch'
-import 'promise-polyfill/src/polyfill';
+import 'promise-polyfill/src/polyfill'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import store from './store'
+import { Provider } from 'react-redux'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="title">Empowered RPG System</div>
-        <div className="nav-bar">
-          <Link to="/rules"><div className="nav-link">How to Play</div></Link>
-          <Link to="/character"><div className="nav-link">Characters</div></Link>
-          <Link to="/monster"><div className="nav-link">Monsters</div></Link>
+      <Provider store={store}>
+        <div className="App">
+          <div className="title">Empowered RPG System</div>
+          <div className="nav-bar">
+            <Link to="/rules"><div className="nav-link">How to Play</div></Link>
+            <Link to="/character"><div className="nav-link">Characters</div></Link>
+            <Link to="/monster"><div className="nav-link">Monsters</div></Link>
+          </div>
+          <div>
+            <Route path="/rules" component={Rules}/>
+            <Route path="/character" component={CharacterPage}/>
+            <Route path="/monster" component={Monster}/>
+          </div>
         </div>
-        <div>
-          <Route path="/rules" component={Rules}/>
-          <Route path="/character" component={CharacterPage}/>
-          <Route path="/monster" component={Monster}/>
-        </div>
-      </div>
+      </Provider>
     );
   }
 }

@@ -29,19 +29,19 @@ class CharacterSheetStatsResource extends Component {
           </div>
         </div>
         <div className={resource}>
-          <div className={title}>Temp. HP</div>
-          <div className={info}>
-            <img className={icon} alt="Temp. HP Icon" src={tempHPIcon}/>
-            <div className={value}>{this.props.stats.tempHP}</div>
-            <div className={subtext}>Max: {this.props.stats.maxTempHP}</div>
-          </div>
-        </div>
-        <div className={resource}>
           <div className={title}>Wounds</div>
           <div className={info}>
             <img className={icon} alt="Wound Icon" src={woundIcon}/>
             <div className={value}>{this.props.stats.wounds}</div>
             <div className={subtext}>Limit: {this.props.stats.maxWounds}</div>
+          </div>
+        </div>
+        <div className={resource}>
+          <div className={title}>Temp. HP</div>
+          <div className={info}>
+            <img className={icon} alt="Temp. HP Icon" src={tempHPIcon}/>
+            <div className={value}>{this.props.stats.tempHP}</div>
+            <div className={subtext}>Max: {this.props.stats.maxTempHP}</div>
           </div>
         </div>
         <div className={resource}>

@@ -12,9 +12,10 @@ class CharacterSheet extends Component {
             <div>{this.props.character.bio.highConcept}</div>
             <div>{this.props.character.bio.flaw}</div>
             <div>
-              {this.props.character.bio.ancestry}
-              from
-              {this.props.character.bio.homeland}
+              {
+                this.props.character.bio.ancestry + " from " +
+                this.props.character.bio.homeland
+              }
             </div>
           </div>
           <img

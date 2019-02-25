@@ -16,8 +16,10 @@ class CharacterSheetStatsEquipment extends Component {
         <div className={subtitle}>
           <div>Gold: {this.props.equipment.gold}</div>
           <div>
-            Carried Weight: {this.props.equipment.encumberance.current.toFixed(2)}
-            / {this.props.equipment.encumberance.limit.toFixed(2)}
+            {
+              "Carried Weight: " + this.props.equipment.encumberance.current.toFixed(2) +
+              " / " + this.props.equipment.encumberance.limit.toFixed(2)
+            }
           </div>
         </div>
         <div className={table}>

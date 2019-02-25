@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . /app
 
-CMD node server.js
+CMD yarn prod
 
 EXPOSE 5000
 

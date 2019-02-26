@@ -19,39 +19,40 @@
   }
 }
 
+.resources {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+  flex-wrap: wrap;
+
+  .resource {
+    margin: 20px;
+  }
+  
+  .info {
+    position: relative;
+  
+    .icon {
+      position: absolute;
+      left: calc(50% - 25px);
+      opacity: 0.2;
+    }
+  
+    .value {
+      padding-top: 10px;
+      font-size: 24px;
+    }
+  
+    .subtext {
+      font-size: 14px;
+    }
+  }
+}
+
 .stats {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-  .resources {
-    display: flex;
-    justify-content: space-around;
-    flex: 1;
-
-    .resource {
-      margin: 20px;
-    }
-    
-    .info {
-      position: relative;
-    
-      .icon {
-        position: absolute;
-        left: calc(50% - 25px);
-        opacity: 0.2;
-      }
-    
-      .value {
-        padding-top: 10px;
-        font-size: 24px;
-      }
-    
-      .subtext {
-        font-size: 14px;
-      }
-    }
-  }
 
   .section {
     display: inline-block;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {blockTitle, ruleBlock} from "./rules.module.scss"
 
-class Rules extends Component {
+class RulesPage extends Component {
   render() {
     return (
       <div>
-        <p><a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/drive/folders/1NSLfgle6cozbaGc-UWQiO6iCd1t7JVw6?usp=sharing">Rules</a></p>
+        <p>Rules</p>
         <div className={blockTitle}>
           Ability Scores
         </div>
@@ -20,9 +20,10 @@ class Rules extends Component {
           Athletics describes your ability to precisely control your body when performing feats of strength. This includes wrestling, climbing, swimming, jumping across a gap, balancing on a tightrope, grabbing a handhold while falling, or running across ice. Athletics should only be used if precision or speed as well as brute strength. When only one of these qualities is present, the roll should be agility or brawn instead. Some melee weapons and all thrown weapons use athletics rolls when attacking and deal more damage with higher athletics. The Wrestle action in combat relies on athletics.
         </div>
         ... and so on
+        <p><a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/document/d/14lMgq-oLpJMmaoysU1t4untUXtfH-WmPnukFE9E0GVI/edit?usp=sharing">Click here for full rules</a></p>
       </div>
     );
   }
 }
 
-export default Rules;
+export default RulesPage;

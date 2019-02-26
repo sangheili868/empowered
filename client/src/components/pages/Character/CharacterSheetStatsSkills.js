@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { section, title, table, columnHeader } from "./CharacterPage.module.scss"
+import { section, title, table, borderless, columnHeader } from "./CharacterPage.module.scss"
 import { startCase, invert } from 'lodash'
 import skills from '../../../gameData/skills.json'
 
@@ -11,43 +11,45 @@ class CharacterSheetStatsSkills extends Component {
     return (
       <div className={section}>
         <div className={title}>Skills</div>
-        <table className={table}>
-          <tr>
-            <td></td>
-            {this.topScores.map(topScore =>
-              <td>
-                <div className={columnHeader}>{startCase(topScore)}</div>
-                <div>{this.props.abilityScores[topScore]}</div>
-              </td>
-            )}
-          </tr>
-          {this.leftScores.map(leftScore =>
+        <table className={[table, borderless].join(' ')}>
+          <tbody>
             <tr>
-            <td>
-              <div className={columnHeader}>{startCase(leftScore)}</div>
-              <div>{this.props.abilityScores[leftScore]}</div>
-            </td>
+              <td></td>
               {this.topScores.map(topScore =>
-                <td>
-                  <div>{startCase(invert(skills)[[topScore, leftScore]])}</div>
-                  <div>{this.props.skills[invert(skills)[[topScore, leftScore]]]}</div>
+                <td key={topScore}>
+                  <div className={columnHeader}>{startCase(topScore)}</div>
+                  <div>{this.props.abilityScores[topScore]}</div>
                 </td>
               )}
-              <td>
-                <div>{startCase(invert(skills)[[leftScore, leftScore]])}</div>
-                <div>{this.props.skills[invert(skills)[[leftScore, leftScore]]]}</div>
-              </td>
             </tr>
-          )}
-          <tr>
-            <td></td>
-            {this.topScores.map(topScore =>
-              <td>
-                <div>{startCase(invert(skills)[[topScore, topScore]])}</div>
-                <div>{this.props.skills[invert(skills)[[topScore, topScore]]]}</div>
-              </td>
+            {this.leftScores.map(leftScore =>
+              <tr key={leftScore}>
+                <td>
+                  <div className={columnHeader}>{startCase(leftScore)}</div>
+                  <div>{this.props.abilityScores[leftScore]}</div>
+                </td>
+                {this.topScores.map(topScore =>
+                  <td key={topScore}>
+                    <div>{startCase(invert(skills)[[topScore, leftScore]])}</div>
+                    <div>{this.props.skills[invert(skills)[[topScore, leftScore]]]}</div>
+                  </td>
+                )}
+                <td>
+                  <div>{startCase(invert(skills)[[leftScore, leftScore]])}</div>
+                  <div>{this.props.skills[invert(skills)[[leftScore, leftScore]]]}</div>
+                </td>
+              </tr>
             )}
-          </tr>
+            <tr>
+              <td></td>
+              {this.topScores.map(topScore =>
+                <td key={topScore}>
+                  <div>{startCase(invert(skills)[[topScore, topScore]])}</div>
+                  <div>{this.props.skills[invert(skills)[[topScore, topScore]]]}</div>
+                </td>
+              )}
+            </tr>
+          </tbody>
         </table>
       </div>
     )

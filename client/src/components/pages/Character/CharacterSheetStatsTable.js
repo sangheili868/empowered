@@ -7,16 +7,19 @@ class CharacterSheetStatsTable extends Component {
       <div>
         <div className={section}>
           <table className={table}>
-            <tr>
-              <td className={title} colSpan={Object.keys(this.props.columnNames).length}>
-                {this.props.title}
-              </td>
-            </tr>
+            <thead>
+              <tr>
+                <td className={title} colSpan={Object.keys(this.props.columnNames).length}>
+                  {this.props.title}
+                </td>
+              </tr>
               <tr>
                 {map(this.props.columnNames, (value, key) =>
                   <th key={key} className={[columnHeader, cell].join(' ')}>{value}</th>
                 )}
               </tr>
+            </thead>
+            <tbody>
               {this.props.items.map((item, index) => 
                 <tr key={index}>
                   {map(this.props.columnNames, (value, key) =>
@@ -24,6 +27,7 @@ class CharacterSheetStatsTable extends Component {
                   )}
                 </tr>
               )}
+            </tbody>
           </table>
         </div>
       </div>

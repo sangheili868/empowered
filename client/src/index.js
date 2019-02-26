@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import './styles/index.scss';
 import './styles/global.scss';
 import CharacterPage from './components/pages/Character/CharacterPage'
-import Monster from './components/pages/Monster'
-import Rules from './components/pages/Rules/Rules'
+import IndexPage from './components/pages/Index/IndexPage'
+import RulesPage from './components/pages/Rules/RulesPage'
 import 'whatwg-fetch'
 import 'promise-polyfill/src/polyfill';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
@@ -17,12 +17,11 @@ class App extends Component {
         <div className="nav-bar">
           <Link to="/rules"><div className="nav-link">How to Play</div></Link>
           <Link to="/character"><div className="nav-link">Characters</div></Link>
-          <Link to="/monster"><div className="nav-link">Monsters</div></Link>
         </div>
         <div>
-          <Route path="/rules" component={Rules}/>
+          <Route path="/rules" component={RulesPage}/>
           <Route path="/character" component={CharacterPage}/>
-          <Route path="/monster" component={Monster}/>
+          <Route exact path="/" component={IndexPage}/>
         </div>
       </div>
     );

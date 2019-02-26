@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import CharacterSheetStats from "./CharacterSheetStats"
+import CharacterSheetBio from './CharacterSheetBio'
+import CharacterSheetShop from './CharacterSheetShop'
 import { header, name, portrait } from './CharacterPage.module.scss'
+import EmpNavigator from '../../../components/EmpNavigator/EmpNavigator'
 
 class CharacterSheet extends Component {
   render () {
@@ -24,7 +27,32 @@ class CharacterSheet extends Component {
             className={portrait}
           />
         </div>
-        <CharacterSheetStats stats={this.props.character.stats}/>
+        <EmpNavigator routes={[
+          {
+            label: 'Bio',
+            route: '/character/bio',
+            component: CharacterSheetBio,
+            props: {
+              bio: this.props.character.bio
+            }
+          },
+          {
+            label: 'Stats',
+            route: '/character/stats',
+            component: CharacterSheetStats,
+            props: {
+              stats: this.props.character.stats
+            }
+          },
+          {
+            label: 'Shop',
+            route: '/character/shop',
+            component: CharacterSheetShop,
+            props: {
+              shop: this.props.character.shop
+            }
+          }
+        ]}/>
       </div>
     )
   }

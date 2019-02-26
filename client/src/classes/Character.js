@@ -87,6 +87,10 @@ class Character {
      return {}
    }
   }
+
+  get shop() {
+    return this.baseShop
+  }
 }
 
 export default Character

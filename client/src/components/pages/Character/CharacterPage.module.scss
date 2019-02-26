@@ -19,6 +19,34 @@
   }
 }
 
+.bio {
+  border: 1px solid $black;
+  border-radius: 10px;
+
+  .bioTable {
+    border-collapse: collapse;
+
+    .row {
+      border-top: 1px solid $black;
+
+      &:first-of-type {
+        border-top: none;
+      }
+
+      .cell {
+        font-size: 14px;
+        padding: 5px;
+
+        &.description {
+          padding-left: 10px;
+          text-align: left;
+          border-left: 1px solid $black;
+        }
+      }
+    }
+  }
+}
+
 .resources {
   display: flex;
   justify-content: space-around;

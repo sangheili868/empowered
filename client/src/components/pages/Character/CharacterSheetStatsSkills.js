@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { section, title, table, column, spacer } from "./CharacterPage.module.scss"
+import { section, title, list, column, spacer } from "./CharacterPage.module.scss"
 
 class CharacterSheetStatsSkills extends Component {
   render () {
@@ -7,7 +7,7 @@ class CharacterSheetStatsSkills extends Component {
       <div className={section}>
         <div className={title}>Skills</div>
         <br/>
-        <div className={table}>
+        <div className={list}>
           <div className={column}>
             <div className={spacer}> </div>
             <div>Quick</div>

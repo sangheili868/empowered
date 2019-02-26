@@ -3,7 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import proficiencyData from '../gameData/proficiencies.json'
 import actions from '../gameData/actions.json'
-import { filter } from 'lodash'
+import { filter, upperFirst } from 'lodash'
 
 class Character {
   constructor(baseCharacterData) {
@@ -48,6 +48,7 @@ class Character {
             range: 5,
             ...weapon,
             ...weaponStats,
+            notes: weaponStats.tags && weaponStats.tags.map(upperFirst).join(', '),
             bonus,
             damage: weaponStats.damageDie + (bonus > 0 ? " + " : " - ") + Math.abs(bonus)
           }

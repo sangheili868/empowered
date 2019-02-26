@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
-import { chain, upperFirst } from 'lodash'
+import CharacterSheetStatsTable from './CharacterSheetStatsTable'
+import { chain } from 'lodash'
 
 class CharacterSheetStats extends Component {
   render () {
@@ -13,23 +14,16 @@ class CharacterSheetStats extends Component {
           abilityScores={this.props.stats.abilityScores}
           skills={this.props.stats.skills}
         />
-        <CharacterSheetStatsList
+        <CharacterSheetStatsTable
           title="Weapons"
-          items={
-            chain(this.props.stats.weapons)
-            .reduce(
-              (result, weapon) => {
-                result.name.push(weapon.name)
-                result['Hit Bonus'].push(weapon.bonus)
-                result.damage.push(weapon.damage)
-                result.range.push(weapon.range + 'ft')
-                result.notes.push(weapon.tags && weapon.tags.map(upperFirst).join(', '))
-                return result
-              },
-              { name: [], 'Hit Bonus': [], damage: [], range: [], notes: [] }
-            )
-            .value()
-          }
+          items={this.props.stats.weapons}
+          columnNames={{
+            name: 'Name',
+            bonus: 'Hit Bonus',
+            damage: 'Damage',
+            range: 'Range',
+            notes: 'Notes'
+          }}
         />
         <CharacterSheetStatsList
           title="Equipment"
@@ -56,41 +50,41 @@ class CharacterSheetStats extends Component {
             .value()
           }
         />
-        <CharacterSheetStatsList title="Languages" items={this.props.stats.languages}/>
         <CharacterSheetStatsList
           title="Proficiencies"
-          items={this.props.stats.proficiencies.map(({ name }) => name)}
+          items={{
+            languages: this.props.stats.languages,
+            items: this.props.stats.proficiencies.map(({ name }) => name)
+          }}
         />
         <CharacterSheetStatsList
-          title="Actions"
-          items={
-            chain(this.props.stats.actions)
+          title="Combat"
+          items={{
+            Actions: chain(this.props.stats.actions)
               .values()
               .orderBy(['feature', 'cardinal'], ['desc', 'desc'])
               .orderBy('feature', 'desc')
               .map(({ name, cardinal }) => name + (cardinal ? ' (C)' : ''))
-              .value()
-          }
-        />
-        <CharacterSheetStatsList
-          title="Wrestling Maneuvers"
-          items={
-            chain(this.props.stats.maneuvers)
+              .value(),
+            'Wrestling Maneuvers': chain(this.props.stats.maneuvers)
+              .values()
+              .orderBy('feature', 'desc')
+              .map('name')
+              .value(),
+            Reactions: chain(this.props.stats.reactions)
               .values()
               .orderBy('feature', 'desc')
               .map('name')
               .value()
-          }
+          }}
         />
-        <CharacterSheetStatsList
-          title="Reactions"
-          items={
-            chain(this.props.stats.reactions)
-              .values()
-              .orderBy('feature', 'desc')
-              .map('name')
-              .value()
-          }
+        <CharacterSheetStatsTable
+          title="Features"
+          items={this.props.stats.features}
+          columnNames={{
+            name: 'Name',
+            description: 'Description'
+          }}
         />
       </div>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { section, title, subtitle, table, column, columnHeader } from './CharacterPage.module.scss'
+import { section, title, subtitle, list, column, columnHeader } from './CharacterPage.module.scss'
 import { startCase } from 'lodash'
 class CharacterSheetStatsList extends Component {
   render () {
@@ -9,7 +9,7 @@ class CharacterSheetStatsList extends Component {
         <div className={subtitle}>
           {this.props.subtitles}
         </div>
-        <div className={table}>
+        <div className={list}>
           {Array.isArray(this.props.items) ? (
             <div className={column}>
               {this.props.items.map((item, index) =>

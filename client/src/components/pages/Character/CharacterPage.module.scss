@@ -63,6 +63,10 @@
     font-size: 12px;
   }
 
+  .columnHeader {
+    font-size: 16px;
+  }
+
   .list {
     display: inline-flex;
     margin: 0 3px 3px;
@@ -70,16 +74,6 @@
 
     .column {
       padding: 0 10px 5px;
-
-      .columnHeader {
-        font-size: 16px;
-      }
-
-      .spacer {
-        padding: 5px 0;
-        line-height: 2;
-        white-space: pre-wrap;
-      }
     }
   }
 
@@ -99,11 +93,6 @@
       &:first-child {
         border-left: none;
       }
-
-      &.columnHeader {
-        font-size: 16px;
-      }
     }
-
   }
 }

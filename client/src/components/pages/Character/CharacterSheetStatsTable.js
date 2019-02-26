@@ -4,26 +4,28 @@ import { map } from 'lodash'
 class CharacterSheetStatsTable extends Component {
   render () {
     return (
-      <div className={section}>
-        <table className={table}>
-          <tr>
-            <td className={title} colSpan={Object.keys(this.props.columnNames).length}>
-              {this.props.title}
-            </td>
-          </tr>
+      <div>
+        <div className={section}>
+          <table className={table}>
             <tr>
-              {map(this.props.columnNames, (value, key) =>
-                <th key={key} className={[columnHeader, cell].join(' ')}>{value}</th>
-              )}
+              <td className={title} colSpan={Object.keys(this.props.columnNames).length}>
+                {this.props.title}
+              </td>
             </tr>
-            {this.props.items.map((item, index) => 
-              <tr key={index}>
+              <tr>
                 {map(this.props.columnNames, (value, key) =>
-                  <td key={key} className={cell}>{item[key]}</td> 
+                  <th key={key} className={[columnHeader, cell].join(' ')}>{value}</th>
                 )}
               </tr>
-            )}
-        </table>
+              {this.props.items.map((item, index) => 
+                <tr key={index}>
+                  {map(this.props.columnNames, (value, key) =>
+                    <td key={key} className={cell}>{item[key]}</td> 
+                  )}
+                </tr>
+              )}
+          </table>
+        </div>
       </div>
     )
   }

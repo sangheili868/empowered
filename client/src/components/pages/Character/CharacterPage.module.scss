@@ -19,79 +19,86 @@
   }
 }
 
-.resources {
+.stats {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
 
-  .resource {
-    margin: 20px;
-  }
-  
-  .info {
-    position: relative;
-  
-    .icon {
-      position: absolute;
-      left: calc(50% - 25px);
-      opacity: 0.2;
-    }
-  
-    .value {
-      padding-top: 10px;
-      font-size: 24px;
-    }
-  
-    .subtext {
-      font-size: 14px;
-    }
-  }
-}
-
-.section {
-  display: inline-block;
-  border: 1px solid $black;
-  border-radius: 10px;
-  margin: 5px;
-
-  .title {
-    display: inline-block;
-  }
-
-  .subtitle {
+  .resources {
     display: flex;
     justify-content: space-around;
-    font-size: 12px;
-  }
+    flex: 1;
 
-  .columnHeader {
-    font-size: 16px;
-  }
-
-  .list {
-    display: inline-flex;
-    margin: 0 3px 3px;
-    font-size: 12px;
-
-    .column {
-      padding: 0 10px 5px;
-    }
-  }
-
-  .table {
-    font-size: 12px;
-    border-collapse: collapse;
-
-    .title {
-      display: table-cell;
+    .resource {
+      margin: 20px;
     }
     
-    .cell {
-      border-left: solid $black 1px;
-      border-top: solid $black 1px;
-      padding: 0 10px;
-  
-      &:first-child {
-        border-left: none;
+    .info {
+      position: relative;
+    
+      .icon {
+        position: absolute;
+        left: calc(50% - 25px);
+        opacity: 0.2;
+      }
+    
+      .value {
+        padding-top: 10px;
+        font-size: 24px;
+      }
+    
+      .subtext {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .section {
+    display: inline-block;
+    border: 1px solid $black;
+    border-radius: 10px;
+    margin: 5px;
+
+    .title {
+      display: inline-block;
+    }
+
+    .subtitle {
+      display: flex;
+      justify-content: space-around;
+      font-size: 12px;
+    }
+
+    .columnHeader {
+      font-size: 16px;
+    }
+
+    .list {
+      display: inline-flex;
+      margin: 0 3px 3px;
+      font-size: 12px;
+
+      .column {
+        padding: 0 10px 5px;
+      }
+    }
+
+    .table {
+      font-size: 12px;
+      border-collapse: collapse;
+
+      .title {
+        display: table-cell;
+      }
+      
+      .cell {
+        border-left: solid $black 1px;
+        border-top: solid $black 1px;
+        padding: 0 10px;
+    
+        &:first-child {
+          border-left: none;
+        }
       }
     }
   }

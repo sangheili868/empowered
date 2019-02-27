@@ -4,7 +4,7 @@ class CharacterSheetShop extends Component {
   render () {
     return (
       <div>
-        {JSON.stringify(this.props.shop)}
+        Advancements: {this.props.shop.advancements}
       </div>
     )
   }

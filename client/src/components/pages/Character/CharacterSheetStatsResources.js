@@ -15,6 +15,7 @@ import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
 import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
+import EmpEditor from '../../EmpEditor/EmpEditor'
 
 class CharacterSheetStatsResource extends Component {
   render () {
@@ -23,24 +24,36 @@ class CharacterSheetStatsResource extends Component {
         <div className={resource}>
           <div className={title}>Hit Points</div>
           <div className={info}>
+            <EmpEditor
+              className={value}
+              value={this.props.stats.hitPoints}
+              onUpdate={(value) => this.props.onUpdate({stats: { hitPoints: value}})}
+            />
             <img className={icon} alt="Hit Points Icon" src={hitPointsIcon}/>
-            <div className={value}>{this.props.stats.hitPoints}</div>
             <div className={subtext}>Max: {this.props.stats.maxHP}</div>
           </div>
         </div>
         <div className={resource}>
           <div className={title}>Wounds</div>
           <div className={info}>
+            <EmpEditor
+              className={value}
+              value={this.props.stats.wounds}
+              onUpdate={(value) => this.props.onUpdate({stats: { wounds: value}})}
+            />
             <img className={icon} alt="Wound Icon" src={woundIcon}/>
-            <div className={value}>{this.props.stats.wounds}</div>
             <div className={subtext}>Limit: {this.props.stats.maxWounds}</div>
           </div>
         </div>
         <div className={resource}>
           <div className={title}>Temp. HP</div>
           <div className={info}>
+            <EmpEditor
+              className={value}
+              value={this.props.stats.tempHP}
+              onUpdate={(value) => this.props.onUpdate({stats: { tempHP: value}})}
+            />
             <img className={icon} alt="Temp. HP Icon" src={tempHPIcon}/>
-            <div className={value}>{this.props.stats.tempHP}</div>
             <div className={subtext}>Max: {this.props.stats.maxTempHP}</div>
           </div>
         </div>

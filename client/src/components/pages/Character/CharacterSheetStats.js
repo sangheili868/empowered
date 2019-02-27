@@ -10,7 +10,7 @@ class CharacterSheetStats extends Component {
   render () {
     return (
       <div>
-        <CharacterSheetStatsResources stats={this.props.stats}/>
+        <CharacterSheetStatsResources stats={this.props.stats} onUpdate={this.props.onUpdate}/>
         <div className={stats}>
           <CharacterSheetStatsSkills
             abilityScores={this.props.stats.abilityScores}

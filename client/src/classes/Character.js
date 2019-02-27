@@ -3,7 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import proficiencyData from '../gameData/proficiencies.json'
 import actions from '../gameData/actions.json'
-import { filter, upperFirst } from 'lodash'
+import { pick, filter, upperFirst } from 'lodash'
 
 class Character {
   constructor(baseCharacterData) {
@@ -88,8 +88,16 @@ class Character {
    }
   }
 
-  get shop() {
+  get shop () {
     return this.baseShop
+  }
+
+  get exportData () {
+    return {
+      ...pick(this, ['name', 'portrait', 'bio']),
+      stats: this.baseStats,
+      shop: this.baseShop
+    }
   }
 }
 

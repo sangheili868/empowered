@@ -1,0 +1,14 @@
+@import "src/styles/colors.scss";
+
+.button {
+  padding: 5px;
+  background-color: $orange;
+  border-radius: 10px;
+  border: 1px solid $black;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 1px $grey;
+
+  &:active {
+    box-shadow: inset 1px 1px 5px 1px $grey;
+  }
+}

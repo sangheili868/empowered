@@ -7,6 +7,7 @@
     "ancestry": "",
     "homeland": "",
     "age": "",
+    "faith": "",
     "description": "",
     "personalityTrait1": "",
     "personalityTrait2": "",
@@ -72,76 +73,20 @@
         "max": 0
       }
     },
-    "weapons": [
-      {
-        "name": "",
-        "category": ""
-      }
-    ],
+    "weapons": [],
     "equipment": {
       "gold": 100,
       "heavy": [],
       "medium": [],
-      "light": [
-        {
-          "name": "",
-          "quantity": 0
-        }
-      ]
+      "light": []
     },
-    "languages": [
-      "",
-      ""
-    ],
+    "languages": [],
     "proficiencies": [],
-    "features": [
-      {
-        "name": "",
-        "requirements": {
-          "skill": {
-            "name": "",
-            "level": -3
-          },
-          "weapon": "",
-          "item": "",
-          "other": ""
-        },
-        "type": [
-          "boosted",
-          "empowered",
-          "action"
-        ],
-        "description": "",
-        "boosted": "",
-        "playerMade": false,
-        "metadata": {
-
-        }
-      }
-    ]
+    "features": []
   },
   "shop": {
     "advancements": 0,
     "totalEarned": 0,
-    "features": [
-      {
-        "name": "",
-        "requirements": {
-          "skill": {
-            "name": "",
-            "level": -3
-          },
-          "weapon": "",
-          "item": "",
-          "other": ""
-        },
-        "type": "",
-        "description": "",
-        "playerMade": false,
-        "metadata": {
-
-        }
-      }
-    ]
+    "features": []
   }
 }

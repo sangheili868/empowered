@@ -71,17 +71,45 @@
   
   .info {
     position: relative;
+    user-select: none;
+
+    .valueRow {
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+
+      .counter {
+        background-color: $black;
+        padding: 0 1px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px 1px $black;
+        cursor: pointer;
+
+        &:active {
+          box-shadow: none;
+        }
+
+        &.minus {
+          color: $failure;
+        }
+
+        &.plus {
+          color: $success;
+        }
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+    }
   
     .icon {
       top: 0;
       position: absolute;
       left: calc(50% - 25px);
       opacity: 0.2;
-    }
-  
-    .value {
-      padding-top: 10px;
-      font-size: 24px;
     }
   
     .subtext {

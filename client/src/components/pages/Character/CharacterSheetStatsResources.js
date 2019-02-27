@@ -15,48 +15,36 @@ import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
 import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
-import EmpEditor from '../../EmpEditor/EmpEditor'
+import CharacterSheetStatsResource from './CharacterSheetStatResource'
 
-class CharacterSheetStatsResource extends Component {
+class CharacterSheetStatsResources extends Component {
   render () {
     return (
       <div className={resources}>
-        <div className={resource}>
-          <div className={title}>Hit Points</div>
-          <div className={info}>
-            <EmpEditor
-              className={value}
-              value={this.props.stats.hitPoints}
-              onUpdate={(value) => this.props.onUpdate({stats: { hitPoints: value}})}
-            />
-            <img className={icon} alt="Hit Points Icon" src={hitPointsIcon}/>
-            <div className={subtext}>Max: {this.props.stats.maxHP}</div>
-          </div>
-        </div>
-        <div className={resource}>
-          <div className={title}>Wounds</div>
-          <div className={info}>
-            <EmpEditor
-              className={value}
-              value={this.props.stats.wounds}
-              onUpdate={(value) => this.props.onUpdate({stats: { wounds: value}})}
-            />
-            <img className={icon} alt="Wound Icon" src={woundIcon}/>
-            <div className={subtext}>Limit: {this.props.stats.maxWounds}</div>
-          </div>
-        </div>
-        <div className={resource}>
-          <div className={title}>Temp. HP</div>
-          <div className={info}>
-            <EmpEditor
-              className={value}
-              value={this.props.stats.tempHP}
-              onUpdate={(value) => this.props.onUpdate({stats: { tempHP: value}})}
-            />
-            <img className={icon} alt="Temp. HP Icon" src={tempHPIcon}/>
-            <div className={subtext}>Max: {this.props.stats.maxTempHP}</div>
-          </div>
-        </div>
+        <CharacterSheetStatsResource
+          title="Hit Points"
+          value={this.props.stats.hitPoints}
+          onUpdate={(value) => this.props.onUpdate({stats: { hitPoints: value}})}
+          alt="Hit Points Icon"
+          icon={hitPointsIcon}
+          max={this.props.stats.maxHP}
+        />
+        <CharacterSheetStatsResource
+          title="Wounds"
+          value={this.props.stats.wounds}
+          onUpdate={(value) => this.props.onUpdate({stats: { wounds: value}})}
+          alt="Wound Icon"
+          icon={woundIcon}
+          max={this.props.stats.maxWounds}
+        />
+        <CharacterSheetStatsResource
+          title="Temp. HP"
+          value={this.props.stats.tempHP}
+          onUpdate={(value) => this.props.onUpdate({stats: { tempHP: value}})}
+          alt="Temp. HP Icon"
+          icon={tempHPIcon}
+          max={this.props.stats.maxTempHP}
+        />
         <div className={resource}>
           <div className={title}>Armor</div>
           <div className={info}>
@@ -86,4 +74,4 @@ class CharacterSheetStatsResource extends Component {
   }
 }
 
-export default CharacterSheetStatsResource
+export default CharacterSheetStatsResources

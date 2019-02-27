@@ -9,6 +9,10 @@ import 'whatwg-fetch'
 import 'promise-polyfill/src/polyfill';
 import { BrowserRouter as Router } from 'react-router-dom'
 import EmpNavigator from './components/EmpNavigator/EmpNavigator'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import fontAwesomeIcons from './icons/fontAwesomeIcons'
+
+library.add(fontAwesomeIcons)
 
 class App extends Component {
   render() {

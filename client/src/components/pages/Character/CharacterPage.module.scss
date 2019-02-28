@@ -48,6 +48,14 @@
 
       &:first-of-type {
         border-top: none;
+
+        .cell.field {
+          border-radius: 10px 0 0 0;  
+        }
+      }
+
+      &:last-of-type .cell.field {
+        border-radius: 0 0 0 10px;  
       }
 
       .cell {
@@ -57,6 +65,8 @@
         &.field {
           background-color: $orange;
           color: $white;
+          width: 100px;
+
         }
         
         &.description {

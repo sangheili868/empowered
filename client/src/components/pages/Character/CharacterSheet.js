@@ -6,8 +6,6 @@ import { header, name, portrait } from './CharacterPage.module.scss'
 import EmpNavigator from '../../EmpNavigator/EmpNavigator'
 import EmpEditor from '../../EmpEditor/EmpEditor'
 class CharacterSheet extends Component {
-  ancestry = this.props.character.bio.ancestry
-  homeland = this.props.character.bio.homeland
   render () {
     return (
       <div>
@@ -22,9 +20,10 @@ class CharacterSheet extends Component {
             <div>{this.props.character.bio.flaw}</div>
             <div>
               {
-                this.ancestry +
-                (this.ancestry && this.homeland ? ' from ' : '') +
-                this.homeland
+                this.props.character.bio.ancestry +
+                (this.props.character.bio.ancestry &&
+                  this.props.character.bio.homeland ? ' from ' : '') +
+                this.props.character.bio.homeland
               }
             </div>
           </div>

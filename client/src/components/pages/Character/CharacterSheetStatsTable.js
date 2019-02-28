@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { section, title, table, cell, columnHeader } from './CharacterPage.module.scss'
+import { section, title, table, titleRow, cell, columnHeader } from './CharacterPage.module.scss'
 import { map } from 'lodash'
 class CharacterSheetStatsTable extends Component {
   render () {
@@ -8,10 +8,10 @@ class CharacterSheetStatsTable extends Component {
         <div className={section}>
           <table className={table}>
             <thead>
-              <tr>
-                <td className={title} colSpan={Object.keys(this.props.columnNames).length}>
+              <tr className={titleRow}>
+                <th className={title} colSpan={Object.keys(this.props.columnNames).length}>
                   {this.props.title}
-                </td>
+                </th>
               </tr>
               <tr>
                 {map(this.props.columnNames, (value, key) =>

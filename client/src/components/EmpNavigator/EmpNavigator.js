@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route, NavLink } from 'react-router-dom'
 import { navBar, navLink, current } from './EmpNavigator.module.scss'
-import EmpButton from '../EmpButton/EmpButton'
 
 class EmpNavigator extends Component {
   isNotHome (match) {
@@ -18,7 +17,7 @@ class EmpNavigator extends Component {
               activeClassName={current}
               isActive={this.isNotHome}
             >
-              <EmpButton className={navLink}>{label}</EmpButton>
+              <div className={navLink}>{label}</div>
             </NavLink>
           )}
         </div>

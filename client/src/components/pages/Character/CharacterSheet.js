@@ -11,11 +11,7 @@ class CharacterSheet extends Component {
       <div>
         <div className={header}>
           <div>
-            <EmpEditor
-              className={name}
-              value={this.props.character.name}
-              onUpdate={name => this.props.onUpdate({name})}
-            />
+            <div className={name}>{this.props.character.name}</div>
             <div>{this.props.character.bio.highConcept}</div>
             <div>{this.props.character.bio.flaw}</div>
             <div>
@@ -40,6 +36,7 @@ class CharacterSheet extends Component {
             component: CharacterSheetBio,
             props: {
               bio: this.props.character.bio,
+              name: this.props.character.name,
               onUpdate: this.props.onUpdate
             }
           },

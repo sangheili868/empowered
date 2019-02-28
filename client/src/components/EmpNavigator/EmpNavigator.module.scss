@@ -5,15 +5,16 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-around;
-  border-radius: 10px;
-  margin: 10px;
+  background-color: $orange;
 
   .navLink {
     width: 110px;
     margin: 10px;
+    color: $pale;
   }
 
   .current .navLink{
-    background-color: $yellow;
+    font-weight: bold;
+    color: $white;
   }
 }

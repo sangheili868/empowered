@@ -15,10 +15,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class CharacterSheetStatResource extends Component {
   handleIncrement = () => {
-    this.props.onUpdate(this.props.value + 1)
+    this.props.onUpdate(parseInt(this.props.value) + 1)
   }
   handleDecrement = () => {
-    this.props.onUpdate(this.props.value - 1)
+    this.props.onUpdate(parseInt(this.props.value) - 1)
   }
   counterClasses = (type, isShowing) => {
     return [

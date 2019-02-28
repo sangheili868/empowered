@@ -12,9 +12,13 @@
 }
 
 .title {
-  font-size: 20px;
+  width: 100%;
+  color: $white;
+  border-radius: 10px;
+  min-width: 100px;
+  font-size: 16px;
   font-weight: bold;
-  margin: 5px;
+  background-color: $orange;
 }
 
 .header {
@@ -31,15 +35,16 @@
 }
 
 .bio {
-  border: 1px solid $black;
+  border: 1px solid $dark;
   border-radius: 10px;
+  margin: 5px;
 
   .bioTable {
     border-collapse: collapse;
     width: 100%;
 
     .row {
-      border-top: 1px solid $black;
+      border-top: 1px solid $dark;
 
       &:first-of-type {
         border-top: none;
@@ -47,12 +52,16 @@
 
       .cell {
         font-size: 14px;
-        padding: 5px;
+        padding: 10px;
 
+        &.field {
+          background-color: $orange;
+          color: $white;
+        }
+        
         &.description {
-          padding-left: 10px;
           text-align: left;
-          border-left: 1px solid $black;
+          border-left: 1px solid $dark;
         }
       }
     }
@@ -72,19 +81,20 @@
   .info {
     position: relative;
     user-select: none;
+    font-weight: bold;
+    font-size: 24px;
 
     .valueRow {
-      font-size: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding-top: 10px;
 
       .counter {
-        background-color: $black;
+        background-color: $dark;
         padding: 0 1px;
         border-radius: 3px;
-        box-shadow: 1px 1px 5px 1px $black;
+        box-shadow: 1px 1px 5px 1px $dark;
         cursor: pointer;
 
         &:active {
@@ -125,7 +135,7 @@
 
   .section {
     display: inline-block;
-    border: 1px solid $black;
+    border: 1px solid $dark;
     border-radius: 10px;
     margin: 5px;
 
@@ -140,7 +150,7 @@
     }
 
     .columnHeader {
-      font-size: 16px;
+      font-weight: bold;
     }
 
     .list {
@@ -166,9 +176,13 @@
       }
       
       .cell {
-        border-left: solid $black 1px;
-        border-top: solid $black 1px;
+        border-left: solid $dark 1px;
+        border-top: solid $dark 1px;
         padding: 5px 10px;
+
+        &.columnHeader {
+          border-top: none;
+        }
     
         &:first-child {
           border-left: none;

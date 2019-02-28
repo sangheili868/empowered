@@ -56,7 +56,7 @@ class CharacterSheetStatsResources extends Component {
             </div>
           </div>
           <div className={resource}>
-            <div className={title}>Shield Bonus</div>
+            <div className={title}>Shield</div>
             <div className={info}>
               <img className={icon} alt="Shield Icon" src={shieldIcon}/>
               <div className={value}>{this.props.stats.shield.rating}</div>

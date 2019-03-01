@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { section, title, subtitle, list, column, columnHeader } from './CharacterPage.module.scss'
+import { section, title, subtitles, subtitle, list, column, columnHeader } from './CharacterPage.module.scss'
 import { startCase } from 'lodash'
 class CharacterSheetStatsList extends Component {
   render () {
     return (
       <div className={section}>
         <div className={title}>{this.props.title}</div>
-        <div className={subtitle}>
-          {this.props.subtitles}
+        <div className={subtitles}>
+          {this.props.subtitles && this.props.subtitles.map(subtitleText =>
+            <div className={subtitle}>{subtitleText}</div>
+          )}
         </div>
         <div className={list}>
           {Array.isArray(this.props.items) ? (
@@ -23,6 +25,7 @@ class CharacterSheetStatsList extends Component {
               {this.props.items[itemKey].map((item, index) =>
                 <div key={index}>{item}</div>
               )}
+              {this.props.addToList && this.props.addToList(itemKey)}
             </div>
             )
           )}

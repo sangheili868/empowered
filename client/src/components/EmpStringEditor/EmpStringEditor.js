@@ -1,23 +1,24 @@
 import React, { Component } from 'react'
-import { editor, editing, input, doneButton } from './EmpEditor.module.scss'
+import { editor, editing, input, doneButton } from './EmpStringEditor.module.scss'
 import EmpButton from '../EmpButton/EmpButton'
+import EmpTextInput from '../EmpTextInput/EmpTextInput'
 
-class EmpEditor extends Component {
+class EmpStringEditor extends Component {
   state = {
     isEditing: false,
-    currentValue: null
+    workingValue: null
   }
   toggleEditing = () => {
     this.setState({
-      currentValue: this.props.value,
+      workingValue: this.props.value,
       isEditing: !this.state.isEditing
     })
   }
   handleChange = ({target}) => {
-    this.setState({currentValue: target.value})
+    this.setState({workingValue: target.value})
   }
   handleDone = () => {
-    this.props.onUpdate(this.state.currentValue)
+    this.props.onUpdate(this.state.workingValue)
     this.toggleEditing()
   }
   handleKeyPress = e => {
@@ -26,11 +27,11 @@ class EmpEditor extends Component {
   render () {
     return this.state.isEditing ? (
       <div className={editing}>
-        <input
+        <EmpTextInput
           autoFocus
           type="text"
           className={input}
-          value={this.state.currentValue}
+          value={this.state.workingValue}
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
@@ -45,4 +46,4 @@ class EmpEditor extends Component {
   }
 }
 
-export default EmpEditor
+export default EmpStringEditor

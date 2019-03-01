@@ -1,0 +1,31 @@
+@import "src/styles/colors.scss";
+
+
+
+.button {
+  background-color: $dark;
+  padding: 0 1px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 1px $dark;
+  cursor: pointer;
+  font-size: 24px;
+
+  &.plus {
+    color: $success;
+  }
+
+  &.pen {
+    color: $yellow;
+  }
+}
+
+.field {
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  
+  .input {
+    width: 70%;
+  }
+}

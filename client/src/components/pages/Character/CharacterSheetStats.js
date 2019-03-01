@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { stats } from './CharacterPage.module.scss'
+import { stats, tableAdd } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetStatsTable from './CharacterSheetStatsTable'
 import { chain } from 'lodash'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetStats extends Component {
   render () {
@@ -26,7 +27,23 @@ class CharacterSheetStats extends Component {
               range: 'Range',
               notes: 'Notes'
             }}
-          />
+          >
+            <div className={tableAdd}>
+              Add weapon
+              <EmpItemEditor
+                title="Add a weapon"
+                fields={{ name: '', category: '' }}
+                onUpdate={values => this.props.onUpdate({
+                  stats: {
+                    weapons: [
+                      ...this.props.stats.weapons,
+                      values
+                    ]
+                  }
+                })}
+              />
+            </div>
+          </CharacterSheetStatsTable>
           <CharacterSheetStatsList
             title="Equipment"
             subtitles={[
@@ -51,6 +68,18 @@ class CharacterSheetStats extends Component {
               }))
               .value()
             }
+            addToList={columnName =>
+              <EmpItemEditor
+                title={'Add a ' + columnName + ' Item'}
+                fields={(columnName === 'light') ? { name: '', quantity: 1 } : { name: '' }}
+                onUpdate={(values) =>
+                  this.props.onUpdate({ stats: { equipment: { [columnName]: [
+                    ...this.props.stats.equipment[columnName],
+                    (columnName === 'light') ? values : values.name
+                  ]}}})
+                }
+              />
+            }
           />
           <CharacterSheetStatsList
             title="Proficiencies"
@@ -58,6 +87,23 @@ class CharacterSheetStats extends Component {
               languages: this.props.stats.languages,
               items: this.props.stats.proficiencies.map(({ name }) => name)
             }}
+            addToList={columnName =>
+              <EmpItemEditor
+                title={'Add ' + columnName}
+                fields={{ name: ''}}
+                onUpdate={({ name }) => {
+                  const key = (columnName === 'languages') ? 'languages' : 'proficiencies'
+                  this.props.onUpdate({
+                    stats: {
+                      [key]: [
+                        ...this.props.stats[key],
+                        name
+                      ]
+                    }
+                  })
+                }}
+              />
+            }
           />
           <CharacterSheetStatsList
             title="Combat"
@@ -87,7 +133,26 @@ class CharacterSheetStats extends Component {
               name: 'Name',
               description: 'Description'
             }}
-          />
+          >
+            <div className={tableAdd}>
+              Add Feature
+              <EmpItemEditor
+                title="Add a feature"
+                fields={{ name: '', description: '', type: '' }}
+                onUpdate={values => this.props.onUpdate({
+                  stats: {
+                    features: [
+                      ...this.props.stats.features,
+                      {
+                        ...values,
+                        type: values.type.split(' ')
+                      }
+                    ]
+                  }
+                })}
+              />
+            </div>
+          </CharacterSheetStatsTable>
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { map, startCase } from 'lodash'
 import { bio, bioTable, row, cell, field, description } from './CharacterPage.module.scss'
-import EmpEditor from '../../EmpEditor/EmpEditor'
+import EmpStringEditor from '../../EmpStringEditor/EmpStringEditor'
 
 class CharacterSheetBio extends Component {
   render () {
@@ -12,7 +12,7 @@ class CharacterSheetBio extends Component {
             <tr className={row}>
               <td className={[cell, field].join(' ')}>Name</td>
                 <td className={[cell, description].join(' ')}>
-                  <EmpEditor value={this.props.name} onUpdate={value =>
+                  <EmpStringEditor value={this.props.name} onUpdate={value =>
                     this.props.onUpdate({ name: value })
                   }/>
                 </td>
@@ -21,7 +21,7 @@ class CharacterSheetBio extends Component {
               <tr className={row} key={characteristic}>
                 <td className={[cell, field].join(' ')}>{startCase(characteristic)}</td>
                 <td className={[cell, description].join(' ')}>
-                  <EmpEditor value={value} onUpdate={value => this.props.onUpdate({
+                  <EmpStringEditor value={value} onUpdate={value => this.props.onUpdate({
                     bio: { [characteristic]: value }
                   })}/>
                 </td>

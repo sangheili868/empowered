@@ -32,6 +32,7 @@
 
   .portrait {
     max-height: 200px;
+    border-radius: 10px;
   }
 }
 
@@ -124,6 +125,10 @@
           visibility: hidden;
         }
       }
+
+      .spacer {
+        width: 31px;
+      }
     }
   
     .icon {
@@ -131,6 +136,10 @@
       position: absolute;
       left: calc(50% - 25px);
       opacity: 0.2;
+    }
+    
+    .value {
+      display: flex;
     }
   
     .subtext {
@@ -154,10 +163,14 @@
       display: inline-block;
     }
 
-    .subtitle {
+    .subtitles {
       display: flex;
       justify-content: space-around;
       font-size: 12px;
+
+      .subtitle {
+        margin: 5px;
+      }
     }
 
     .columnHeader {
@@ -187,8 +200,8 @@
       }
       
       .cell {
-        border-left: solid $dark 1px;
-        border-top: solid $dark 1px;
+        border: solid $dark 1px;
+        border-right: none;
         padding: 5px 10px;
 
         &.columnHeader {
@@ -199,6 +212,13 @@
           border-left: none;
         }
       }
+    }
+
+    .tableAdd {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
     }
   }
 }

@@ -4,7 +4,8 @@ import CharacterSheetBio from './CharacterSheetBio'
 import CharacterSheetShop from './CharacterSheetShop'
 import { header, name, portrait } from './CharacterPage.module.scss'
 import EmpNavigator from '../../EmpNavigator/EmpNavigator'
-import EmpEditor from '../../EmpEditor/EmpEditor'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+
 class CharacterSheet extends Component {
   render () {
     return (
@@ -23,11 +24,23 @@ class CharacterSheet extends Component {
               }
             </div>
           </div>
-          <img
-            alt="Character Portrait"
-            src={this.props.character.portrait}
-            className={portrait}
-          />
+          <div>
+            {this.props.character.portrait ? ( 
+              <img
+                alt='Failed to load character portrait'
+                src={this.props.character.portrait}
+                className={portrait}
+              />
+            ) : (
+              <div>Add a portrait</div>
+            )}
+            <EmpItemEditor
+              title="Enter the URL of an image."
+              isEdit={this.props.character.portrait}
+              fields={{ portrait: this.props.character.portrait }}
+              onUpdate={values => this.props.onUpdate({portrait: values.portrait})}
+            />
+          </div>
         </div>
         <EmpNavigator routes={[
           {

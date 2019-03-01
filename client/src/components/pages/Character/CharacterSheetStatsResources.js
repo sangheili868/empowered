@@ -5,7 +5,8 @@ import {
   title,
   info,
   icon,
-  value,
+  valueRow,
+  spacer,
   subtext
 } from "./CharacterPage.module.scss"
 import { startCase } from 'lodash'
@@ -17,6 +18,7 @@ import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
 import CharacterSheetStatsResource from './CharacterSheetStatResource'
 import { chain } from 'lodash'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetStatsResources extends Component {
   render () {
@@ -51,7 +53,23 @@ class CharacterSheetStatsResources extends Component {
             <div className={title}>Armor</div>
             <div className={info}>
               <img className={icon} alt="Armor Icon" src={armorIcon}/>
-              <div className={value}>{this.props.stats.armor.rating}</div>
+              <div className={valueRow}>
+                <div className={spacer}></div>
+                <div>{this.props.stats.armor.rating}</div>
+                <EmpItemEditor
+                  title="Armor"
+                  isEdit
+                  fields={{
+                    rating: this.props.stats.armor.rating,
+                    type: this.props.stats.armor.type
+                  }}
+                  onUpdate={values => this.props.onUpdate({
+                    stats: {
+                      armor: values
+                    }
+                  })}
+                />
+              </div>
               <div className={subtext}>{startCase(this.props.stats.armor.type)}</div>
             </div>
           </div>
@@ -59,7 +77,23 @@ class CharacterSheetStatsResources extends Component {
             <div className={title}>Shield</div>
             <div className={info}>
               <img className={icon} alt="Shield Icon" src={shieldIcon}/>
-              <div className={value}>{this.props.stats.shield.rating}</div>
+              <div className={valueRow}>
+                <div className={spacer}></div>
+                <div>{this.props.stats.shield.rating}</div>
+                <EmpItemEditor
+                  title="Shield"
+                  isEdit
+                  fields={{
+                    rating: this.props.stats.shield.rating,
+                    type: this.props.stats.shield.type
+                  }}
+                  onUpdate={values => this.props.onUpdate({
+                    stats: {
+                      shield: values
+                    }
+                  })}
+                />
+              </div>
               <div className={subtext}>{startCase(this.props.stats.shield.type)}</div>
             </div>
           </div>
@@ -67,7 +101,23 @@ class CharacterSheetStatsResources extends Component {
             <div className={title}>Speed</div>
             <div className={info}>
               <img className={icon} alt="Speed Icon" src={speedIcon}/>
-              <div className={value}>{this.props.stats.speed.rating}ft.</div>
+              <div className={valueRow}>
+                <div className={spacer}></div>
+                <div>{this.props.stats.speed.rating}ft.</div>
+                <EmpItemEditor
+                  title="Speed"
+                  isEdit
+                  fields={{
+                    rating: this.props.stats.speed.rating,
+                    type: this.props.stats.speed.type
+                  }}
+                  onUpdate={values => this.props.onUpdate({
+                    stats: {
+                      speed: values
+                    }
+                  })}
+                />
+              </div>
               <div className={subtext}>{this.props.stats.speed.type}</div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { section, title, table, titleRow, cell, columnHeader } from './CharacterPage.module.scss'
 import { map } from 'lodash'
+
 class CharacterSheetStatsTable extends Component {
   render () {
     return (
@@ -13,11 +14,13 @@ class CharacterSheetStatsTable extends Component {
                   {this.props.title}
                 </th>
               </tr>
-              <tr>
-                {map(this.props.columnNames, (value, key) =>
-                  <th key={key} className={[columnHeader, cell].join(' ')}>{value}</th>
-                )}
-              </tr>
+              { this.props.items.length > 0 &&
+                <tr>
+                  {map(this.props.columnNames, (value, key) =>
+                    <th key={key} className={[columnHeader, cell].join(' ')}>{value}</th>
+                  )}
+                </tr>
+              }
             </thead>
             <tbody>
               {this.props.items.map((item, index) => 
@@ -28,6 +31,13 @@ class CharacterSheetStatsTable extends Component {
                 </tr>
               )}
             </tbody>
+            <tfoot>
+              <tr className={titleRow}>
+                <td colSpan={Object.keys(this.props.columnNames).length}>
+                  {this.props.children}
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

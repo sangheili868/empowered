@@ -1,9 +1,11 @@
 import {
   faPlusSquare,
-  faMinusSquare
+  faMinusSquare,
+  faPenSquare
 } from '@fortawesome/free-solid-svg-icons'
 
 export default [
   faPlusSquare,
-  faMinusSquare
+  faMinusSquare,
+  faPenSquare
 ]

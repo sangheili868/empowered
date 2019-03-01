@@ -55,9 +55,11 @@ class CharacterPage extends Component {
   render() {
     return (
       <div>
-        <Alert show={this.state.isDirty} variant="danger">
-          <div>Warning: Your character has unsaved changes!</div>
-        </Alert>
+        {this.state.isDirty &&
+          <Alert variant="danger">
+            <div>Warning: Your character has unsaved changes!</div>
+          </Alert>
+        }
         <Modal show={this.state.warningState !== ''} onHide={this.handleCloseWarning}>
           <Modal.Header closeButton>
             <Modal.Title>Create New Character</Modal.Title>

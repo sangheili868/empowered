@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { input, button, plus, pen, field, fieldLabel } from './EmpItemEditor.module.scss'
+import {
+  input,
+  button,
+  plus,
+  pen,
+  inline,
+  field,
+  fieldLabel
+} from './EmpItemEditor.module.scss'
 import { Modal } from 'react-bootstrap'
 import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
@@ -30,6 +38,10 @@ class EmpItemEditor extends Component {
     this.props.onUpdate(this.state.workingValues)
     this.toggleEditing()
   }
+  handleDelete = () => {
+    this.toggleEditing()
+    this.props.onDelete()
+  }
   handleKeyPress = e => {
     if (e.key === 'Enter') this.handleDone()
   }
@@ -56,14 +68,23 @@ class EmpItemEditor extends Component {
           </Modal.Body>
           <Modal.Footer>
             <EmpButton onClick={this.toggleEditing}>Cancel</EmpButton>
+            {this.props.isDeletable && 
+              <EmpButton onClick={this.handleDelete}>Delete</EmpButton>
+            }
             <EmpButton onClick={this.handleDone}>Done</EmpButton>
           </Modal.Footer>
         </Modal>
-        <FontAwesomeIcon
-          className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
-          icon={this.props.isEdit ? 'pen-square' : 'plus-square'}
-          onClick={this.toggleEditing}
-        />
+        {this.props.isInline ? (
+          <div className={inline} onClick={this.toggleEditing}>
+            {this.props.children}
+          </div>
+        ) : (
+          <FontAwesomeIcon
+            className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
+            icon={this.props.isEdit ? 'pen-square' : 'plus-square'}
+            onClick={this.toggleEditing}
+          />
+        )}
       </span>
     )
   }

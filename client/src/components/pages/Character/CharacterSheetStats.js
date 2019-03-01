@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { stats, tableAdd } from './CharacterPage.module.scss'
+import { stats } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetStatsTable from './CharacterSheetStatsTable'
-import { chain } from 'lodash'
+import { chain, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetStats extends Component {
@@ -18,8 +18,9 @@ class CharacterSheetStats extends Component {
             skills={this.props.stats.skills}
           />
           <CharacterSheetStatsTable
-            title="Weapons"
+            title="weapon"
             items={this.props.stats.weapons}
+            isEditable
             columnNames={{
               name: 'Name',
               bonus: 'Hit Bonus',
@@ -27,27 +28,28 @@ class CharacterSheetStats extends Component {
               range: 'Range',
               notes: 'Notes'
             }}
-          >
-            <div className={tableAdd}>
-              Add weapon
-              <EmpItemEditor
-                title="Add a weapon"
-                fields={{ name: '', category: '' }}
-                onUpdate={values => this.props.onUpdate({
-                  stats: {
-                    weapons: [
-                      ...this.props.stats.weapons,
-                      values
-                    ]
-                  }
-                })}
-              />
-            </div>
-          </CharacterSheetStatsTable>
+            fields={{ name: '', category: '' }}
+            onEdit={(index, values) => {
+              let newWeapons = cloneDeep(this.props.stats.weapons)
+              newWeapons[index] = values
+              this.props.onUpdate({ stats: { weapons: newWeapons } })
+            }}
+            onAdd={values => this.props.onUpdate({ stats: { weapons: [
+                  ...this.props.stats.weapons,
+                  values
+            ]}})}
+          />
           <CharacterSheetStatsList
             title="Equipment"
             subtitles={[
-              <div key="gold">Gold: {this.props.stats.equipment.gold}</div>,
+              <EmpItemEditor
+                isInline
+                title="Edit Gold"
+                fields={{gold: this.props.stats.equipment.gold}}
+                onUpdate={({gold}) => this.props.onUpdate({ stats: { equipment: { gold }}})}
+              >
+                <div key="gold">Gold: {this.props.stats.equipment.gold}</div>
+              </EmpItemEditor>,
               <div key="carryWeight">
                 {
                   "Carried Weight: " +
@@ -56,6 +58,7 @@ class CharacterSheetStats extends Component {
                 }
               </div>
             ]}
+            isEditable
             items={
               chain(this.props.stats.equipment)
               .pick(['heavy', 'medium', 'light'])
@@ -68,14 +71,47 @@ class CharacterSheetStats extends Component {
               }))
               .value()
             }
+            editItem={(columnName, item, index) => 
+              <EmpItemEditor
+                key={index}
+                isInline
+                isEditable
+                isDeletable
+                title={'Edit a ' + columnName + ' Item'}
+                fields={(columnName === 'light') ? (
+                  this.props.stats.equipment[columnName][index]
+                ) : (
+                  { name: item }
+                )}
+                onUpdate={values => {
+                  let newItems = cloneDeep(this.props.stats.equipment[columnName])
+                  newItems[index] = (columnName === 'light') ? {
+                    name: values.name,
+                    quantity: parseInt(values.quantity)
+                  } : values.name
+                  this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
+                }}
+                onDelete={() => {
+                  let newItems = cloneDeep(this.props.stats.equipment[columnName])
+                  // Change heavy and medium items to objects to make this work
+                  newItems[index].deleted = true
+                  this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
+                }}
+              >
+                {item}
+              </EmpItemEditor>
+            }
             addToList={columnName =>
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}
                 fields={(columnName === 'light') ? { name: '', quantity: 1 } : { name: '' }}
-                onUpdate={(values) =>
+                onUpdate={values =>
                   this.props.onUpdate({ stats: { equipment: { [columnName]: [
                     ...this.props.stats.equipment[columnName],
-                    (columnName === 'light') ? values : values.name
+                    (columnName === 'light') ? {
+                      name: values.name,
+                      quantity: parseInt(values.quantity)
+                    } : values.name
                   ]}}})
                 }
               />
@@ -127,32 +163,31 @@ class CharacterSheetStats extends Component {
             }}
           />
           <CharacterSheetStatsTable
-            title="Features"
+            title="feature"
             items={this.props.stats.features}
+            isEditable
             columnNames={{
               name: 'Name',
               description: 'Description'
             }}
-          >
-            <div className={tableAdd}>
-              Add Feature
-              <EmpItemEditor
-                title="Add a feature"
-                fields={{ name: '', description: '', type: '' }}
-                onUpdate={values => this.props.onUpdate({
-                  stats: {
-                    features: [
-                      ...this.props.stats.features,
-                      {
-                        ...values,
-                        type: values.type.split(' ')
-                      }
-                    ]
+            fields={{ name: '', description: '', type: '' }}
+            onEdit={(index, values) => {
+              let newFeatures = cloneDeep(this.props.stats.features)
+              newFeatures[index] = values
+              this.props.onUpdate({ stats: { features: newFeatures } })
+            }}
+            onAdd={values => this.props.onUpdate({
+              stats: {
+                features: [
+                  ...this.props.stats.features,
+                  {
+                    ...values,
+                    type: values.type.split(' ')
                   }
-                })}
-              />
-            </div>
-          </CharacterSheetStatsTable>
+                ]
+              }
+            })}
+          />
         </div>
       </div>
     )

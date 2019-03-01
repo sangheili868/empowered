@@ -1,7 +1,5 @@
 @import "src/styles/colors.scss";
 
-
-
 .button {
   background-color: $dark;
   padding: 0 1px;
@@ -27,5 +25,16 @@
   
   .input {
     width: 70%;
+  }
+}
+
+.inline {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $pale;
   }
 }

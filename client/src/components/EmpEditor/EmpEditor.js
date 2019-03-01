@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { editor, inputBox, doneButton } from './EmpEditor.module.scss'
+import { editor, editing, input, doneButton } from './EmpEditor.module.scss'
 import EmpButton from '../EmpButton/EmpButton'
 
 class EmpEditor extends Component {
@@ -20,14 +20,19 @@ class EmpEditor extends Component {
     this.props.onUpdate(this.state.currentValue)
     this.toggleEditing()
   }
+  handleKeyPress = e => {
+    if (e.key === 'Enter') this.handleDone()
+  }
   render () {
     return this.state.isEditing ? (
-      <div>
+      <div className={editing}>
         <input
+          autoFocus
           type="text"
-          className={inputBox}
+          className={input}
           value={this.state.currentValue}
           onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
         />
         <EmpButton className={doneButton} onClick={this.handleDone}>Done</EmpButton>
         <EmpButton className={doneButton} onClick={this.toggleEditing}>Cancel</EmpButton>

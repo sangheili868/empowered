@@ -91,12 +91,30 @@
       "gold": 150,
       "heavy": [],
       "medium": [
-        "Light Armor",
-        "Rapier",
-        "Violin",
-        "Crystal",
-        "Spy's Tools",
-        "Chemist's Tools"
+        {
+          "name": "Light Armor",
+          "quantity": 1
+        },
+        {
+          "name": "Rapier",
+          "quantity": 1
+        },
+        {
+          "name": "Violin",
+          "quantity": 1
+        },
+        {
+          "name": "Crystal",
+          "quantity": 1
+        },
+        {
+          "name": "Spy's Tools",
+          "quantity": 1
+        },
+        {
+          "name": "Chemist's Tools",
+          "quantity": 1
+        }
       ],
       "light": [
         {
@@ -133,18 +151,36 @@
         }
       ]
     },
-    "languages": [
-      "Volic",
-      "Ethactic"
-    ],
-    "proficiencies": [
-      "lightArmor",
-      "finesseMeleeWeapon",
-      "arcaneWeapon",
-      "unityWeapon",
-      "spyTool",
-      "chemistTool"
-    ],
+    "proficiencies": {
+      "languages": [
+        {
+          "name": "Volic"
+        },
+        {
+          "name": "Ethactic"
+        }
+      ],
+      "equipment": [
+        {
+          "category": "lightArmor"
+        },
+        {
+          "category": "finesseMeleeWeapon"
+        },
+        {
+          "category": "arcaneWeapon"
+        },
+        {
+          "category": "unityWeapon"
+        },
+        {
+          "category": "spyTool"
+        },
+        {
+          "category": "chemistTool"
+        }
+      ]
+    },
     "features": [
       {
         "name": "Forked Tongue",

@@ -12,7 +12,8 @@ import {
 import { Modal } from 'react-bootstrap'
 import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
-import { cloneDeep, startCase, map } from 'lodash'
+import EmpDropdown from '../EmpDropdown/EmpDropdown'
+import { cloneDeep, startCase, map, merge, mapValues, isObject } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -25,17 +26,17 @@ class EmpItemEditor extends Component {
       isShowingModal: !this.state.isShowingModal
     })
   }
+  chooseTitle = (value) => {
+    return (value.value) ? value.default.find(item => item.value === value.value).text : 'Choose one'
+  }
   handleChange = (key, {target}) => {
-    this.setState(prevState => ({
-      ...prevState,
-      workingValues: {
-        ...prevState.workingValues,
-        [key]: target.value
-      }
+    const newValue = isObject(this.state.workingValues[key].default) ? { value: target.value } : target.value
+    this.setState(prevState => merge(prevState, {
+      workingValues: { [key]: newValue }
     }))
   }
   handleDone = () => {
-    this.props.onUpdate(this.state.workingValues)
+    this.props.onUpdate(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
     this.toggleEditing()
   }
   handleDelete = () => {
@@ -56,13 +57,21 @@ class EmpItemEditor extends Component {
             {map(this.state.workingValues, (value, key) => 
               <div className={field} key={key}>
                 <div className={fieldLabel}>{startCase(key)}</div>
-                <EmpTextInput
-                  type="text"
-                  className={input}
-                  value={value}
-                  onChange={this.handleChange.bind(this, key)}
-                  onKeyPress={this.handleKeyPress}
-                />
+                {Array.isArray(value.default) ? (
+                  <EmpDropdown
+                    title={this.chooseTitle(value)}
+                    items={value.default}
+                    onSelect={newValue => this.handleChange(key, {target: { value: newValue}})}
+                  />
+                ) : (
+                  <EmpTextInput
+                    type="text"
+                    className={input}
+                    value={isObject(value) ? value.value : value}
+                    onChange={this.handleChange.bind(this, key)}
+                    onKeyPress={this.handleKeyPress}
+                  />
+                )}
               </div>
             )}
           </Modal.Body>

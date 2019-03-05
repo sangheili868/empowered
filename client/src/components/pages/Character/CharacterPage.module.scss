@@ -1,5 +1,15 @@
 @import "src/styles/colors.scss";
 
+.alert {
+  position: sticky;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
 .manageCharacter {
   display: flex;
   flex-wrap: wrap;
@@ -68,7 +78,6 @@
           background-color: $orange;
           color: $white;
           width: 100px;
-
         }
         
         &.description {

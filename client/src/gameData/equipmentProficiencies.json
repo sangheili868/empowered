@@ -1,6 +1,7 @@
 {
  "lightArmor": {
    "name": "Light Armor",
+   "category": "lightArmor",
    "requirement": [
      {
        "skill": "athletics",
@@ -10,6 +11,7 @@
  },
  "mediumArmor": {
    "name": "Medium Armor",
+   "category": "mediumArmor",
    "requirement": [
      {
        "skill": "athletics",
@@ -19,6 +21,7 @@
  },
  "heavyArmor": {
    "name": "Heavy Armor",
+   "category": "heavyArmor",
    "requirement": [
      {
        "skill": "brawn",
@@ -28,6 +31,7 @@
  },
  "lightShield": {
    "name": "Light Shields",
+   "category": "lightShield",
    "requirement": [
      {
        "skill": "athletics",
@@ -37,6 +41,7 @@
  },
  "mediumShield": {
    "name": "Medium Shields",
+   "category": "mediumShield",
    "requirement": [
      {
        "skill": "brawn",
@@ -46,6 +51,7 @@
  },
  "heavyShield": {
    "name": "Heavy Shields",
+   "category": "heavyShield",
    "requirement": [
      {
        "skill": "brawn",
@@ -55,6 +61,7 @@
  },
  "unarmedWeapon": {
    "name": "Unarmed Fighting",
+   "category": "unarmedWeapon",
    "requirement": [
      {
        "skill": "athletics",
@@ -64,6 +71,7 @@
  },
  "lightMeleeWeapon": {
    "name": "Light Melee Weapons",
+   "category": "lightMeleeWeapon",
    "requirements": [
      {
        "skill": "athletics",
@@ -73,6 +81,7 @@
  },
  "finesseMeleeWeapon": {
    "name": "Finesse Melee Weapons",
+   "category": "finesseMeleeWeapon",
    "requirements": [
      {
        "skill": "athletics",
@@ -83,6 +92,7 @@
  
  "oneHandedMeleeWeapon": {
    "name": "One-handed Melee Weapons",
+   "category": "oneHandedMeleeWeapon",
    "requirements": [
      {
        "skill": "brawn",
@@ -92,6 +102,7 @@
  },
  "twoHandedMeleeWeapon": {
    "name": "Two-handed Melee Weapons",
+   "category": "twoHandedMeleeWeapon",
    "requirements": [
      {
        "skill": "brawn",
@@ -101,6 +112,7 @@
  },
  "lightThrownWeapon": {
    "name": "Light Thrown Weapons",
+   "category": "lightThrownWeapon",
    "requirements": [
      {
        "skill": "athletics",
@@ -110,6 +122,7 @@
  },
  "heavyThrownWeapon": {
    "name": "Heavy Thrown Weapons",
+   "category": "heavyThrownWeapon",
    "requirements": [
      {
        "skill": "athletics",
@@ -119,6 +132,7 @@
  },
  "oneHandedRangedWeapon": {
    "name": "One-handed Ranged Weapons",
+   "category": "oneHandedRangedWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -128,6 +142,7 @@
  },
  "twoHandedRangedWeapon": {
    "name": "Two-handed Ranged Weapons",
+   "category": "twoHandedRangedWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -137,6 +152,7 @@
  },
  "heavyRangedWeapon": {
    "name": "Heavy Ranged Weapons",
+   "category": "heavyRangedWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -150,6 +166,7 @@
  },
  "lightLoadingWeapon": {
    "name": "Light Loading Weapons",
+   "category": "lightLoadingWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -159,6 +176,7 @@
  },
  "twoHandedLoadingWeapon": {
    "name": "Two-handed Loading Weapons",
+   "category": "twoHandedLoadingWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -168,6 +186,7 @@
  },
  "heavyLoadingWeapon": {
    "name": "Heavy Loading Weapons",
+   "category": "heavyLoadingWeapon",
    "requirements": [
      {
        "skill": "perception",
@@ -181,6 +200,7 @@
  },
  "arcaneWeapon": {
    "name": "Arcane Focuses",
+   "category": "arcaneWeapon",
    "requirements": [
      {
        "skill": "knowledge",
@@ -190,6 +210,7 @@
  },
  "divineWeapon": {
    "name": "Divine Focuses",
+   "category": "divineWeapon",
    "requirements": [
      {
        "skill": "wisdom",
@@ -199,6 +220,7 @@
  },
  "unityWeapon": {
    "name": "Unity Focuses",
+   "category": "unityWeapon",
    "requirements": [
      {
        "skill": "synergy",
@@ -208,6 +230,7 @@
  },
  "arcanistTool": {
    "name": "Arcanist's Tools",
+   "category": "arcanistTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -217,6 +240,7 @@
  },
  "artisanTool": {
    "name": "Artisan's Tools",
+   "category": "artisanTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -226,6 +250,7 @@
  },
  "chemistTool": {
    "name": "Chemist's Tools",
+   "category": "chemistTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -235,6 +260,7 @@
  },
  "explorerTool": {
    "name": "Explorer's Tools",
+   "category": "explorerTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -244,6 +270,7 @@
  },
  "smithTool": {
    "name": "Smith's Tools",
+   "category": "smithTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -253,6 +280,7 @@
  },
  "spyTool": {
    "name": "Spy's Tools",
+   "category": "spyTool",
    "requirements": [
      {
        "skill": "handiwork",
@@ -262,6 +290,7 @@
  },
  "thiefTool": {
    "name": "Thief's Tools",
+   "category": "thiefTool",
    "requirements": [
      {
        "skill": "handiwork",

@@ -9,8 +9,13 @@ a {
     text-decoration: inherit;
   }
 }
+
 body {
   color: $dark;
   font-size: 16px;
 }
 
+$theme-colors: (
+  "primary": $orange
+);
+@import "node_modules/bootstrap/scss/bootstrap";

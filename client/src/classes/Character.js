@@ -1,7 +1,7 @@
 import { mapValues } from 'lodash'
 import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
-import proficiencyData from '../gameData/proficiencies.json'
+import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
 import { pick, filter, upperFirst, reject } from 'lodash'
 
@@ -29,8 +29,9 @@ class Character {
       equipment: {
         ...this.baseStats.equipment,
         encumberance: {
-          current: (equipment.heavy.length +
-            (equipment.medium.length / 2) +
+          current: (
+            (equipment.heavy.reduce((acc, { quantity }) => quantity + acc, 0)) +
+            (equipment.medium.reduce((acc, { quantity }) => quantity + acc, 0) / 2) +
             (equipment.light.reduce((acc, { quantity }) => quantity + acc, 0) / 20) +
             (equipment.gold / 2000)
           ),
@@ -50,19 +51,25 @@ class Character {
             ...weaponStats,
             notes: weaponStats.tags && weaponStats.tags.map(upperFirst).join(', '),
             bonus,
-            damage: weaponStats.damageDie + (bonus > 0 ? " + " : " - ") + Math.abs(bonus)
+            damage: weaponStats.damageDie + (bonus >= 0 ? " + " : " - ") + Math.abs(bonus)
           }
         }
       }),
-      proficiencies: this.baseStats.proficiencies.map(proficiency => {
-        const proficiencyStats = proficiencyData[proficiency]
-        if (!proficiencyStats) {
-          console.error('Proficiency Not Found', proficiency)
-          return proficiency
-        } else {
-          return proficiencyStats
-        }
-      }),
+      proficiencies: {
+        languages: this.baseStats.proficiencies.languages,
+        equipment: this.baseStats.proficiencies.equipment.map(proficiency => {
+          const equipmentProficiencyStats = equipmentProficiencyData[proficiency.category]
+          if (!equipmentProficiencyStats) {
+            console.error('Equipment Proficiency Not Found', proficiency)
+            return proficiency
+          } else {
+            return {
+              ...proficiency,
+              ...equipmentProficiencyStats
+            }
+          }
+        }),
+      },
       actions: {
         ...actions.actions,
         ...filter(this.baseStats.features, ({ type }) => type.includes('action'))
@@ -98,7 +105,18 @@ class Character {
       stats: {
         ...this.baseStats,
         weapons: reject(this.baseStats.weapons, 'deleted'),
-        features: reject(this.baseStats.features, 'deleted')
+        features: reject(this.baseStats.features, 'deleted'),
+        equipment: {
+          ...this.baseStats.equipment,
+          heavy: reject(this.baseStats.equipment.heavy, 'deleted'),
+          medium: reject(this.baseStats.equipment.heavy, 'deleted'),
+          light: reject(this.baseStats.equipment.heavy, 'deleted')
+        },
+        proficiencies: {
+          ...this.baseStats.proficiencies,
+          languages: reject(this.baseStats.proficiencies.languages, 'deleted'),
+          equipment: reject(this.baseStats.proficiencies.equipment, 'deleted')
+        }
       },
       shop: this.baseShop
     }

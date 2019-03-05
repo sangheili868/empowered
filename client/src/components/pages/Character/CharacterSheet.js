@@ -36,9 +36,11 @@ class CharacterSheet extends Component {
             )}
             <EmpItemEditor
               title="Enter the URL of an image."
+              isDeletable
               isEdit={this.props.character.portrait}
               fields={{ portrait: this.props.character.portrait }}
               onUpdate={values => this.props.onUpdate({portrait: values.portrait})}
+              onDelete={this.props.onUpdate.bind(this, {portrait: ''})}
             />
           </div>
         </div>

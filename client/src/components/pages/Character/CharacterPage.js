@@ -7,7 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { merge, cloneDeep } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
-import { manageCharacter, manageCharacterButton } from './CharacterPage.module.scss'
+import { alert, manageCharacter, manageCharacterButton } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
@@ -56,8 +56,16 @@ class CharacterPage extends Component {
     return (
       <div>
         {this.state.isDirty &&
-          <Alert variant="danger">
+          <Alert className={alert} variant="danger">
             <div>Warning: Your character has unsaved changes!</div>
+            <EmpJsonExporter
+              className={manageCharacterButton} 
+              content={this.state.character.exportData}
+              fileName={this.state.fileName}
+              onSave={this.handleSave}
+            >
+              Save Character
+            </EmpJsonExporter>
           </Alert>
         }
         <Modal show={this.state.warningState !== ''} onHide={this.handleCloseWarning}>
@@ -81,7 +89,7 @@ class CharacterPage extends Component {
             isWarning={this.state.isDirty}
             onFileOpen={this.loadCharacter}
           />
-          {this.state.character &&
+          {this.state.character && !this.state.isDirty &&
             <EmpJsonExporter
               className={manageCharacterButton} 
               content={this.state.character.exportData}

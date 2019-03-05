@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/global.scss'
 import './styles/index.scss';
 import CharacterPage from './components/pages/Character/CharacterPage'

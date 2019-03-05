@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { section, title, table, tableAdd, titleRow, cell, columnHeader } from './CharacterPage.module.scss'
-import { map, pick, startCase } from 'lodash'
+import { map, chain, startCase, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import pluralize from 'pluralize'
 
@@ -11,8 +11,7 @@ class CharacterSheetStatsTable extends Component {
   ] : Object.values(this.props.columnNames)
   render () {
     return (
-      <div>
-        <div className={section}>
+      <div className={section}>
           <table className={table}>
             <thead>
               <tr className={titleRow}>
@@ -41,7 +40,11 @@ class CharacterSheetStatsTable extends Component {
                         isEdit
                         isDeletable
                         title={'Edit ' + item.name}
-                        fields={pick(item, Object.keys(this.props.fields))}
+                        fields={chain(item)
+                          .pick(Object.keys(this.props.fields))
+                          .mapValues((value, key) => ({ value, default: this.props.fields[key]}))
+                          .value()
+                        }
                         onUpdate={this.props.onEdit.bind(this, index)}
                         onDelete={this.props.onEdit.bind(this, index, {deleted: true})}
                       />
@@ -57,7 +60,7 @@ class CharacterSheetStatsTable extends Component {
                     Add {this.props.title}
                     <EmpItemEditor
                       title={'Add a ' + this.props.title}
-                      fields={this.props.fields}
+                      fields={mapValues(this.props.fields, value => ({ value, default: value }))}
                       onUpdate={this.props.onAdd}
                     />
                   </div>
@@ -66,7 +69,6 @@ class CharacterSheetStatsTable extends Component {
             </tfoot>
           </table>
         </div>
-      </div>
     )
   }
 }

@@ -80,8 +80,10 @@
       "medium": [],
       "light": []
     },
-    "languages": [],
-    "proficiencies": [],
+    "proficiencies": {
+      "languages": [],
+      "equipment": []
+    },
     "features": []
   },
   "shop": {

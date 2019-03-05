@@ -4,8 +4,11 @@ import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetStatsTable from './CharacterSheetStatsTable'
-import { chain, cloneDeep } from 'lodash'
+import { chain, pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import weaponData from '../../../gameData/weapons.json'
+import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
+import { startCase } from 'lodash'
 
 class CharacterSheetStats extends Component {
   render () {
@@ -28,7 +31,10 @@ class CharacterSheetStats extends Component {
               range: 'Range',
               notes: 'Notes'
             }}
-            fields={{ name: '', category: '' }}
+            fields={{name: '', category: Object.keys(weaponData).map(weapon => ({
+              text: startCase(weapon),
+              value: weapon
+            })) }}
             onEdit={(index, values) => {
               let newWeapons = cloneDeep(this.props.stats.weapons)
               newWeapons[index] = values
@@ -59,18 +65,7 @@ class CharacterSheetStats extends Component {
               </div>
             ]}
             isEditable
-            items={
-              chain(this.props.stats.equipment)
-              .pick(['heavy', 'medium', 'light'])
-              .mapValues(equipmentList => equipmentList.map(equipment => {
-                if (equipment.name && equipment.quantity) {
-                  return `${equipment.name} (${equipment.quantity})`
-                } else {
-                  return equipment
-                }
-              }))
-              .value()
-            }
+            items={pick(this.props.stats.equipment, ['heavy', 'medium', 'light'])}
             editItem={(columnName, item, index) => 
               <EmpItemEditor
                 key={index}
@@ -78,40 +73,35 @@ class CharacterSheetStats extends Component {
                 isEditable
                 isDeletable
                 title={'Edit a ' + columnName + ' Item'}
-                fields={(columnName === 'light') ? (
-                  this.props.stats.equipment[columnName][index]
-                ) : (
-                  { name: item }
-                )}
+                fields={this.props.stats.equipment[columnName][index]}
                 onUpdate={values => {
                   let newItems = cloneDeep(this.props.stats.equipment[columnName])
-                  newItems[index] = (columnName === 'light') ? {
+                  newItems[index] = {
                     name: values.name,
                     quantity: parseInt(values.quantity)
-                  } : values.name
+                  }
                   this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
                 }}
                 onDelete={() => {
                   let newItems = cloneDeep(this.props.stats.equipment[columnName])
-                  // Change heavy and medium items to objects to make this work
                   newItems[index].deleted = true
                   this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
                 }}
               >
-                {item}
+                {item.quantity > 1 ? `${item.name} (${item.quantity})` : item.name}
               </EmpItemEditor>
             }
             addToList={columnName =>
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}
-                fields={(columnName === 'light') ? { name: '', quantity: 1 } : { name: '' }}
+                fields={{ name: '', quantity: 1 }}
                 onUpdate={values =>
                   this.props.onUpdate({ stats: { equipment: { [columnName]: [
                     ...this.props.stats.equipment[columnName],
-                    (columnName === 'light') ? {
+                    {
                       name: values.name,
                       quantity: parseInt(values.quantity)
-                    } : values.name
+                    }
                   ]}}})
                 }
               />
@@ -119,24 +109,56 @@ class CharacterSheetStats extends Component {
           />
           <CharacterSheetStatsList
             title="Proficiencies"
-            items={{
-              languages: this.props.stats.languages,
-              items: this.props.stats.proficiencies.map(({ name }) => name)
-            }}
+            items={this.props.stats.proficiencies}
+            editItem={(columnName, item, index) => 
+              <EmpItemEditor
+                key={index}
+                isInline
+                isEditable
+                isDeletable
+                title={'Edit a ' + columnName + ' Proficiency'}
+                fields={columnName === 'languages' ? ({
+                  name: this.props.stats.proficiencies[columnName][index].name
+                }) : ({
+                  category: {
+                    value: this.props.stats.proficiencies[columnName][index].category,
+                    default: Object.keys(equipmentProficiencyData).map(equipment => ({
+                      text: startCase(equipment),
+                      value: equipment
+                    }))
+                  }
+                })}
+                onUpdate={values => {
+                  let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
+                  newItems[index] = values
+                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
+                }}
+                onDelete={() => {
+                  let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
+                  newItems[index].deleted = true
+                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
+                }}
+              >
+                {item.name}
+              </EmpItemEditor>
+            }
             addToList={columnName =>
               <EmpItemEditor
-                title={'Add ' + columnName}
-                fields={{ name: ''}}
-                onUpdate={({ name }) => {
-                  const key = (columnName === 'languages') ? 'languages' : 'proficiencies'
-                  this.props.onUpdate({
-                    stats: {
-                      [key]: [
-                        ...this.props.stats[key],
-                        name
-                      ]
-                    }
-                  })
+                title={'Add a ' + columnName}
+                fields={columnName === 'languages' ? ({  name: '' }) : ({
+                  category: {
+                    value: '',
+                    default: Object.keys(equipmentProficiencyData).map(equipment => ({
+                      text: startCase(equipment),
+                      value: equipment
+                    }))
+                  }
+                })}
+                onUpdate={values => {
+                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: [
+                    ...this.props.stats.proficiencies[columnName],
+                    values
+                  ]}}})
                 }}
               />
             }
@@ -148,17 +170,15 @@ class CharacterSheetStats extends Component {
                 .values()
                 .orderBy(['feature', 'cardinal'], ['desc', 'desc'])
                 .orderBy('feature', 'desc')
-                .map(({ name, cardinal }) => name + (cardinal ? ' (C)' : ''))
+                .map(({ name, cardinal }) => ({name: name + (cardinal ? ' (C)' : '')}))
                 .value(),
               'Wrestling Maneuvers': chain(this.props.stats.maneuvers)
                 .values()
                 .orderBy('feature', 'desc')
-                .map('name')
                 .value(),
               Reactions: chain(this.props.stats.reactions)
                 .values()
                 .orderBy('feature', 'desc')
-                .map('name')
                 .value()
             }}
           />

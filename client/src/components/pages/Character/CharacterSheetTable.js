@@ -15,7 +15,7 @@ import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 class CharacterSheetTable extends Component {
   columnTitles = [
     ...Object.values(this.props.columnNames),
-    ...this.props.isEditable ? ['Edit'] : [],
+    ...this.props.onEdit ? ['Edit'] : [],
     ...this.props.buyButton ? ['Buy'] : [],
     ...this.props.sellButton ? ['Sell'] : []
   ]
@@ -45,7 +45,7 @@ class CharacterSheetTable extends Component {
                   {map(this.props.columnNames, (value, key) =>
                     <td key={key} className={cell}>{item[key]}</td> 
                   )}
-                  {this.props.isEditable && 
+                  {this.props.onEdit && 
                     <td className={cell}>
                       <EmpItemEditor
                         isEdit
@@ -74,7 +74,7 @@ class CharacterSheetTable extends Component {
                 </tr>
               )}
             </tbody>
-            {this.props.isEditable && 
+            {this.props.onAdd && 
               <tfoot>
                 <tr className={titleRow}>
                   <td className={cell} colSpan={this.columnTitles.length}>

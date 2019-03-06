@@ -3,10 +3,23 @@ import CharacterSheetTable from './CharacterSheetTable'
 import { stats, resources, tableBuy, plus, minus } from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import advancementsIcon from "../../../icons/chevron.png"
-import { lowerCase, cloneDeep } from 'lodash'
+import { chain, some, lowerCase, cloneDeep, map, startCase, isEmpty } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton'
+import equipmentProficiencies from '../../../gameData/equipmentProficiencies.json'
 
 class CharacterSheetShop extends Component {
+  equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
+    .pickBy((value, key) => !some(this.props.stats.proficiencies.equipment, ({ category }) => (category === key)))
+    .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
+    .value()
+  organizedProficiencies = () => ({
+    armor: this.equipmentIncludesAny(['armor', 'shield']),
+    meleeWeapon: this.equipmentIncludesAny(['unarmedWeapon', 'meleeWeapon']),
+    rangedWeapon: this.equipmentIncludesAny(['rangedWeapon', 'loadingWeapon']),
+    otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'magicWeapon']),
+    tool: this.equipmentIncludesAny(['tool']),
+    vehicle: this.equipmentIncludesAny(['vehicle'])
+  })
   render () {
     return (
       <>
@@ -24,7 +37,6 @@ class CharacterSheetShop extends Component {
         <div className={stats}>
           <CharacterSheetTable
             title="Ability Scores"
-            isShop
             items={this.props.shop.abilityScores}
             columnNames={{
               name: 'Name',
@@ -67,7 +79,6 @@ class CharacterSheetShop extends Component {
           />
           <CharacterSheetTable
             title="Power Dice"
-            isShop
             items={this.props.shop.powerDice}
             columnNames={{
               name: 'Name',
@@ -134,8 +145,6 @@ class CharacterSheetShop extends Component {
             title="Features"
             addText="Add a feature to your shop"
             items={this.props.shop.features}
-            isEditable
-            isShop
             columnNames={{
               name: 'Name',
               description: 'Description'
@@ -182,6 +191,40 @@ class CharacterSheetShop extends Component {
               }
             }}
           />
+          {map(this.organizedProficiencies(), (proficiencies, grouping) =>
+            !isEmpty(proficiencies) &&
+              <CharacterSheetTable
+                key={grouping}
+                title={startCase(grouping) + ' Proficiencies'}
+                items={proficiencies}
+                columnNames={{
+                  name: 'Name'
+                }}
+                buyButton={index => {
+                  const proficiency = proficiencies[index]
+                  if (1 > this.props.shop.advancements) {
+                    return `Costs ${1} adv.`
+                  } else {
+                    return (
+                      <EmpButton
+                        className={[tableBuy, plus].join(' ')}
+                        onClick={() => {
+                          this.props.onUpdate({
+                            shop: { advancements: this.props.shop.advancements - 1 },
+                            stats: { proficiencies: { equipment: [
+                              ...this.props.stats.proficiencies.equipment,
+                              proficiency
+                            ]}}
+                          })
+                        }}
+                        >
+                          -1 Adv.
+                        </EmpButton>
+                    )
+                  }
+                }}
+              />
+          )}
         </div>
       </>
     )

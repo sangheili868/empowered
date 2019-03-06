@@ -59,7 +59,7 @@
      }
    ]
  },
- "unarmedWeapon": {
+ "unarmedMeleeWeapon": {
    "name": "Unarmed Fighting",
    "category": "unarmedWeapon",
    "requirement": [
@@ -89,7 +89,6 @@
      }
    ]
  },
- 
  "oneHandedMeleeWeapon": {
    "name": "One-handed Melee Weapons",
    "category": "oneHandedMeleeWeapon",
@@ -198,9 +197,9 @@
      }
    ]
  },
- "arcaneWeapon": {
+ "arcaneMagicWeapon": {
    "name": "Arcane Focuses",
-   "category": "arcaneWeapon",
+   "category": "arcaneMagicWeapon",
    "requirements": [
      {
        "skill": "knowledge",
@@ -208,9 +207,9 @@
      }
    ]
  },
- "divineWeapon": {
+ "divineMagicWeapon": {
    "name": "Divine Focuses",
-   "category": "divineWeapon",
+   "category": "divineMagicWeapon",
    "requirements": [
      {
        "skill": "wisdom",
@@ -218,9 +217,9 @@
      }
    ]
  },
- "unityWeapon": {
+ "unityMagicWeapon": {
    "name": "Unity Focuses",
-   "category": "unityWeapon",
+   "category": "unityMagicWeapon",
    "requirements": [
      {
        "skill": "synergy",
@@ -295,6 +294,36 @@
      {
        "skill": "handiwork",
        "level": -1
+     }
+   ]
+ },
+ "ridingVehicle": {
+   "name": "Mounts",
+   "category": "ridingVehicle",
+   "requirements": [
+     {
+       "skill": "athletics",
+       "level": -1
+     }
+   ]
+ },
+ "seaVehicle": {
+   "name": "Sea Vehicles",
+   "category": "seaVehicle",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": -1
+     }
+   ]
+ },
+ "airVehicle": {
+   "name": "Air Vehicles",
+   "category": "airVehicle",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": 1
      }
    ]
  }

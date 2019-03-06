@@ -168,10 +168,10 @@
           "category": "finesseMeleeWeapon"
         },
         {
-          "category": "arcaneWeapon"
+          "category": "arcaneMagicWeapon"
         },
         {
-          "category": "unityWeapon"
+          "category": "unityMagicWeapon"
         },
         {
           "category": "spyTool"

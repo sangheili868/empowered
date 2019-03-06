@@ -24,7 +24,6 @@ class CharacterSheetStats extends Component {
             title="Weapons"
             addText="Add a weapon"
             items={this.props.stats.weapons}
-            isEditable
             columnNames={{
               name: 'Name',
               bonus: 'Hit Bonus',
@@ -143,26 +142,6 @@ class CharacterSheetStats extends Component {
                 {item.name}
               </EmpItemEditor>
             }
-            addToList={columnName =>
-              <EmpItemEditor
-                title={'Add a ' + columnName}
-                fields={columnName === 'languages' ? ({  name: '' }) : ({
-                  category: {
-                    value: '',
-                    default: Object.keys(equipmentProficiencyData).map(equipment => ({
-                      text: startCase(equipment),
-                      value: equipment
-                    }))
-                  }
-                })}
-                onUpdate={values => {
-                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: [
-                    ...this.props.stats.proficiencies[columnName],
-                    values
-                  ]}}})
-                }}
-              />
-            }
           />
           <CharacterSheetStatsList
             title="Combat"
@@ -185,9 +164,7 @@ class CharacterSheetStats extends Component {
           />
           <CharacterSheetTable
             title="Features"
-            addText="Add a feature"
             items={this.props.stats.features}
-            isEditable
             columnNames={{
               name: 'Name',
               description: 'Description'
@@ -198,17 +175,6 @@ class CharacterSheetStats extends Component {
               newFeatures[index] = values
               this.props.onUpdate({ stats: { features: newFeatures } })
             }}
-            onAdd={values => this.props.onUpdate({
-              stats: {
-                features: [
-                  ...this.props.stats.features,
-                  {
-                    ...values,
-                    type: values.type.split(' ')
-                  }
-                ]
-              }
-            })}
           />
         </div>
       </div>

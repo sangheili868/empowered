@@ -87,8 +87,8 @@ class EmpItemEditor extends Component {
             <EmpButton onClick={this.handleDone}>Done</EmpButton>
           </Modal.Footer>
         </Modal>
-        {this.props.isInline ? (
-          <div className={inline} onClick={this.toggleEditing}>
+        {this.props.isInline || this.props.isCustomInline ? (
+          <div className={this.props.isInline ? inline : ''} onClick={this.toggleEditing}>
             {this.props.children}
           </div>
         ) : (

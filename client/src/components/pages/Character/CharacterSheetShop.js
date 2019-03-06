@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
 import CharacterSheetTable from './CharacterSheetTable'
-import { stats, resources, tableBuy, plus, minus } from './CharacterPage.module.scss'
+import {
+  stats,
+  resources,
+  tableBuy,
+  plus,
+  minus,
+  section,
+  title,
+  languages,
+  newLanguage
+} from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import advancementsIcon from "../../../icons/chevron.png"
-import { chain, some, lowerCase, cloneDeep, map, startCase, isEmpty } from 'lodash'
+import { chain, some, lowerCase, cloneDeep, map, startCase } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton'
 import equipmentProficiencies from '../../../gameData/equipmentProficiencies.json'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetShop extends Component {
   equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
@@ -192,7 +203,6 @@ class CharacterSheetShop extends Component {
             }}
           />
           {map(this.organizedProficiencies(), (proficiencies, grouping) =>
-            !isEmpty(proficiencies) &&
               <CharacterSheetTable
                 key={grouping}
                 title={startCase(grouping) + ' Proficiencies'}
@@ -217,14 +227,45 @@ class CharacterSheetShop extends Component {
                             ]}}
                           })
                         }}
-                        >
-                          -1 Adv.
-                        </EmpButton>
+                      >
+                        -1 Adv.
+                      </EmpButton>
                     )
                   }
                 }}
               />
           )}
+          <div>
+            <div className={section}>
+              <div className={title}>Languages</div>
+              {this.props.stats.proficiencies.languages.length < this.props.stats.skills.synergy ? (
+                <div className={languages}>
+                  <div>Learn a new language:</div>
+                  <EmpItemEditor
+                    title="Add a Language"
+                    fields={{ name: '' }}
+                    onUpdate={language => {
+                      this.props.onUpdate({
+                        shop: { advancements: this.props.shop.advancements - 1 },
+                        stats: { proficiencies: { languages: [
+                          ...this.props.stats.proficiencies.languages,
+                          language
+                        ]}}
+                      })
+                    }}
+                    isCustomInline
+                  >
+                    <EmpButton className={newLanguage}>-1 Adv.</EmpButton>
+                  </EmpItemEditor>
+                </div>
+              ) : (
+                <div className={languages}>
+                  You know {this.props.stats.proficiencies.languages.length} languages already.
+                  Increase your synergy to learn more.
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </>
     )

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { section, title, subtitles, subtitle, list, column, columnHeader } from './CharacterPage.module.scss'
-import { startCase } from 'lodash'
+import { startCase, some } from 'lodash'
 
 class CharacterSheetStatsList extends Component {
   render () {
-    return (
+    return (some(this.props.items, item => item.length) || this.props.addToList) ? (
       <div className={section}>
         <div className={title}>{this.props.title}</div>
         <div className={subtitles}>
@@ -34,7 +34,7 @@ class CharacterSheetStatsList extends Component {
           )}
         </div>
       </div>
-    )
+    ) : null
   }
 }
 

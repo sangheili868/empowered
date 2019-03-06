@@ -249,5 +249,16 @@
       align-items: center;
       margin: 5px;
     }
+
+    .languages {
+      padding: 10px;
+      font-size: 12px;
+      max-width: 200px;
+
+      .newLanguage {
+        background-color: $success;
+        margin-top: 10px;
+      }
+    }
   }
 }

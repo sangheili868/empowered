@@ -9,7 +9,7 @@ import {
   buy,
   columnHeader
 } from './CharacterPage.module.scss'
-import { map, chain, mapValues } from 'lodash'
+import { map, chain, mapValues, isEmpty } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetTable extends Component {
@@ -20,7 +20,7 @@ class CharacterSheetTable extends Component {
     ...this.props.sellButton ? ['Sell'] : []
   ]
   render () {
-    return (
+    return (!isEmpty(this.props.items) || this.props.onAdd) ? (
       <div>
         <div className={section}>
           <table className={table}>
@@ -93,7 +93,7 @@ class CharacterSheetTable extends Component {
           </table>
         </div>
       </div>
-    )
+    ) : null
   }
 }
 

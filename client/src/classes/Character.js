@@ -3,7 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
-import { pick, filter, upperFirst, reject } from 'lodash'
+import { pick, filter, upperFirst, reject, map, startCase } from 'lodash'
 
 class Character {
   constructor(baseCharacterData) {
@@ -96,7 +96,24 @@ class Character {
   }
 
   get shop () {
-    return this.baseShop
+    if (this.baseShop) {
+      return {
+        ...this.baseShop,
+        abilityScores: map(this.baseStats.abilityScores, (current, name) => ({
+          name: startCase(name),
+          current,
+          cost: Math.max(1, current + 1),
+          new: current + 1
+        })),
+        powerDice: map(this.baseStats.powerDice, ({ max }, dieName) => ({
+          die: dieName,
+          current: max,
+          cost: dieName === 'd4s' ? Math.max(1, Object.values(this.baseStats.powerDice)
+            .reduce(((acc, {max}) => acc + max), 0)) : 1,
+          new: max + 1
+        }))
+      }
+    }
   }
 
   get exportData () {

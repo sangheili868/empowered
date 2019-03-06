@@ -53,20 +53,22 @@ class CharacterSheetStatsTable extends Component {
                 </tr>
               )}
             </tbody>
-            <tfoot>
-              <tr className={titleRow}>
-                <td colSpan={this.columnTitles.length}>
-                  <div className={tableAdd}>
-                    Add {this.props.title}
-                    <EmpItemEditor
-                      title={'Add a ' + this.props.title}
-                      fields={mapValues(this.props.fields, value => ({ value, default: value }))}
-                      onUpdate={this.props.onAdd}
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tfoot>
+            {this.props.isEditable && 
+              <tfoot>
+                <tr className={titleRow}>
+                  <td colSpan={this.columnTitles.length}>
+                    <div className={tableAdd}>
+                      Add {this.props.title}
+                      <EmpItemEditor
+                        title={'Add a ' + this.props.title}
+                        fields={mapValues(this.props.fields, value => ({ value, default: value }))}
+                        onUpdate={this.props.onAdd}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+            }
           </table>
         </div>
     )

@@ -1,22 +1,33 @@
 import React, { Component } from 'react'
-import { section, title, table, tableAdd, titleRow, cell, columnHeader } from './CharacterPage.module.scss'
-import { map, chain, startCase, mapValues } from 'lodash'
+import {
+  section,
+  title,
+  table,
+  tableAdd,
+  titleRow,
+  cell,
+  buy,
+  columnHeader
+} from './CharacterPage.module.scss'
+import { map, chain, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import pluralize from 'pluralize'
 
-class CharacterSheetStatsTable extends Component {
-  columnTitles = this.props.isEditable ? [
+class CharacterSheetTable extends Component {
+  columnTitles = [
     ...Object.values(this.props.columnNames),
-    'Edit'
-  ] : Object.values(this.props.columnNames)
+    ...this.props.isEditable ? ['Edit'] : [],
+    ...this.props.buyButton ? ['Buy'] : [],
+    ...this.props.sellButton ? ['Sell'] : []
+  ]
   render () {
     return (
-      <div className={section}>
+      <div>
+        <div className={section}>
           <table className={table}>
             <thead>
               <tr className={titleRow}>
                 <th className={title} colSpan={this.columnTitles.length}>
-                  {startCase(pluralize(this.props.title))}
+                  {this.props.title}
                 </th>
               </tr>
               { this.props.items.length > 0 &&
@@ -50,17 +61,27 @@ class CharacterSheetStatsTable extends Component {
                       />
                     </td>
                   }
+                  {this.props.buyButton && 
+                    <td className={[cell, buy].join(' ')}>
+                      {this.props.buyButton(index)}
+                    </td>
+                  }
+                  {this.props.sellButton &&
+                    <td className={[cell, buy].join(' ')}>
+                      {this.props.sellButton(index)}
+                    </td>
+                  }
                 </tr>
               )}
             </tbody>
             {this.props.isEditable && 
               <tfoot>
                 <tr className={titleRow}>
-                  <td colSpan={this.columnTitles.length}>
+                  <td className={cell} colSpan={this.columnTitles.length}>
                     <div className={tableAdd}>
-                      Add {this.props.title}
+                      {this.props.addText}
                       <EmpItemEditor
-                        title={'Add a ' + this.props.title}
+                        title={this.props.addText}
                         fields={mapValues(this.props.fields, value => ({ value, default: value }))}
                         onUpdate={this.props.onAdd}
                       />
@@ -71,8 +92,9 @@ class CharacterSheetStatsTable extends Component {
             }
           </table>
         </div>
+      </div>
     )
   }
 }
 
-export default CharacterSheetStatsTable
+export default CharacterSheetTable

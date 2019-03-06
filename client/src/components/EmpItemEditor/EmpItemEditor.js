@@ -27,7 +27,11 @@ class EmpItemEditor extends Component {
     })
   }
   chooseTitle = (value) => {
-    return (value.value) ? value.default.find(item => item.value === value.value).text : 'Choose one'
+    if (value.value && !Array.isArray(value.value)) {
+      return value.default.find(item => item.value === value.value).text
+    } else {
+      return 'Choose one'
+    }
   }
   handleChange = (key, {target}) => {
     const newValue = isObject(this.state.workingValues[key].default) ? { value: target.value } : target.value

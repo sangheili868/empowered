@@ -16,7 +16,7 @@ import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
 import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
-import CharacterSheetStatsResource from './CharacterSheetStatResource'
+import CharacterSheetResource from './CharacterSheetResource'
 import { chain } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
@@ -25,7 +25,7 @@ class CharacterSheetStatsResources extends Component {
     return (
       <div>
         <div className={resources}>
-          <CharacterSheetStatsResource
+          <CharacterSheetResource
             title="Hit Points"
             value={this.props.stats.hitPoints}
             onUpdate={(value) => this.props.onUpdate({stats: { hitPoints: value}})}
@@ -33,7 +33,7 @@ class CharacterSheetStatsResources extends Component {
             icon={hitPointsIcon}
             max={this.props.stats.maxHP}
           />
-          <CharacterSheetStatsResource
+          <CharacterSheetResource
             title="Wounds"
             value={this.props.stats.wounds}
             onUpdate={(value) => this.props.onUpdate({stats: { wounds: value}})}
@@ -41,7 +41,7 @@ class CharacterSheetStatsResources extends Component {
             icon={woundIcon}
             max={this.props.stats.maxWounds}
           />
-          <CharacterSheetStatsResource
+          <CharacterSheetResource
             title="Temp. HP"
             value={this.props.stats.tempHP}
             onUpdate={(value) => this.props.onUpdate({stats: { tempHP: value}})}
@@ -126,7 +126,7 @@ class CharacterSheetStatsResources extends Component {
           {chain(this.props.stats.powerDice)
             .pickBy('max')
             .map(({current, max}, dieSize) => 
-              <CharacterSheetStatsResource
+              <CharacterSheetResource
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}

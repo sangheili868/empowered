@@ -69,7 +69,9 @@ class CharacterSheet extends Component {
             route: '/character/shop',
             component: CharacterSheetShop,
             props: {
-              shop: this.props.character.shop
+              shop: this.props.character.shop,
+              stats: this.props.character.stats,
+              onUpdate: this.props.onUpdate
             }
           }
         ]}/>

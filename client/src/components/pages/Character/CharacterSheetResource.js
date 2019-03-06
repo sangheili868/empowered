@@ -13,7 +13,7 @@ import {
 } from "./CharacterPage.module.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-class CharacterSheetStatResource extends Component {
+class CharacterSheetResource extends Component {
   handleIncrement = () => {
     this.props.onUpdate(parseInt(this.props.value) + 1)
   }
@@ -40,17 +40,19 @@ class CharacterSheetStatResource extends Component {
             />
             <div>{this.props.value}</div>
             <FontAwesomeIcon
-              className={this.counterClasses(plus, this.props.value < this.props.max)}
+              className={this.counterClasses(plus, !this.props.max || (this.props.value < this.props.max))}
               onClick={this.handleIncrement}
               icon="plus-square"
             />
           </div>
           <img className={icon} alt={this.props.alt} src={this.props.icon}/>
-          <div className={subtext}>Max: {this.props.max}</div>
+          {this.props.max &&
+            <div className={subtext}>Max: {this.props.max}</div>
+          }
         </div>
       </div>
     )
   }
 }
 
-export default CharacterSheetStatResource
+export default CharacterSheetResource

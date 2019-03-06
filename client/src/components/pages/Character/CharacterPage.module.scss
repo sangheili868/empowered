@@ -29,6 +29,7 @@
   font-size: 16px;
   font-weight: bold;
   background-color: $orange;
+  padding: 0 10px;
 }
 
 .header {
@@ -212,6 +213,7 @@
       .cell {
         border: solid $dark 1px;
         border-right: none;
+        border-bottom: none;
         padding: 5px 10px;
 
         &.columnHeader {
@@ -220,6 +222,23 @@
     
         &:first-child {
           border-left: none;
+        }
+
+        &.buy {
+          min-width: 100px;
+          height: 40px;
+        }
+
+        .tableBuy {
+          min-width: 0;
+          
+          &.plus {
+            background-color: $success;
+          }
+
+          &.minus {
+            background-color: $failure;
+          }
         }
       }
     }

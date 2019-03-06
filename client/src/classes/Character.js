@@ -97,22 +97,36 @@ class Character {
 
   get shop () {
     if (this.baseShop) {
+      const smallerDie = {
+        d6s: 'd4s',
+        d8s: 'd6s',
+        d10s: 'd8s',
+        d12s: 'd10s'
+      }
       return {
         ...this.baseShop,
         abilityScores: map(this.baseStats.abilityScores, (current, name) => ({
           name: startCase(name),
           current,
           cost: Math.max(1, current + 1),
-          new: current + 1
+          worth: Math.max(1, current)
         })),
         powerDice: map(this.baseStats.powerDice, ({ max }, dieName) => ({
-          die: dieName,
+          name: dieName.slice(0,-1),
           current: max,
-          cost: dieName === 'd4s' ? Math.max(1, Object.values(this.baseStats.powerDice)
-            .reduce(((acc, {max}) => acc + max), 0)) : 1,
-          new: max + 1
+          ...(dieName === 'd4s') ? {
+            cost: Math.max(1, Object.values(this.baseStats.powerDice).reduce(((acc, {max}) => acc + max), 0)),
+            worth: Math.max(1, Object.values(this.baseStats.powerDice).reduce(((acc, {max}) => acc + max), 0) - 1),
+          } : {
+            cost: 1,
+            worth: 1,
+            smallerDie: smallerDie[dieName],
+            smallerDieCount: this.baseStats.powerDice[smallerDie[dieName]].max
+          }
         }))
       }
+    } else {
+      return {}
     }
   }
 
@@ -135,7 +149,10 @@ class Character {
           equipment: reject(this.baseStats.proficiencies.equipment, 'deleted')
         }
       },
-      shop: this.baseShop
+      shop: {
+        ...this.baseShop,
+        features: reject(this.baseShop.features, 'deleted')
+      }
     }
   }
 }

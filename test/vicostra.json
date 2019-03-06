@@ -267,15 +267,56 @@
     ]
   },
   "shop": {
-    "advancements": 0,
-    "totalEarned": 35,
+    "advancements": 5,
+    "totalEarned": 40,
     "features": [
       {
-        "name": "WIP",
+        "name": "Suggestion",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
         "type": [
-          "passive"
+          "cardinal",
+          "empowered",
+          "action"
         ],
-        "description": "Shop features not added yet"
+        "description": "As a cardinal action, you make an empowered synergy roll against the willpower of a creature within the range of your focus. If you succeed, the target pursues a course of action of your choice to the best of its ability. The target will not cause harm to itself, physically or otherwise, and the spell ends after 8 hours, when the target completes the action, or when you or any of your companions harms the target. If you fail the roll, the target realizes it was affected by magic."
+      },
+      {
+        "name": "Message",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "action"
+        ],
+        "description": "As an action, choose a creature within 120 ft. You must see it or know its approximate location. The target mentally receives a message from you and can mentally transmit a message back to you."
+      },
+      {
+        "name": "Terrifying Whispers",
+        "cost": 2,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 2
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "empowered",
+          "attack"
+        ],
+        "description": "You can empower an attack with a passion focus. If you hit with that attack, the creature is frightened for 1 minute of you or another creature of your choice that both you and the target can see."
       }
     ]
   }

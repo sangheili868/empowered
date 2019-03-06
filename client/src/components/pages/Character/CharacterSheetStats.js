@@ -3,7 +3,7 @@ import { stats } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
-import CharacterSheetStatsTable from './CharacterSheetStatsTable'
+import CharacterSheetTable from './CharacterSheetTable'
 import { chain, pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
@@ -20,8 +20,9 @@ class CharacterSheetStats extends Component {
             abilityScores={this.props.stats.abilityScores}
             skills={this.props.stats.skills}
           />
-          <CharacterSheetStatsTable
-            title="weapon"
+          <CharacterSheetTable
+            title="Weapons"
+            addText="Add a weapon"
             items={this.props.stats.weapons}
             isEditable
             columnNames={{
@@ -182,8 +183,9 @@ class CharacterSheetStats extends Component {
                 .value()
             }}
           />
-          <CharacterSheetStatsTable
-            title="feature"
+          <CharacterSheetTable
+            title="Features"
+            addText="Add a feature"
             items={this.props.stats.features}
             isEditable
             columnNames={{

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { section, title, table, borderless, columnHeader } from "./CharacterPage.module.scss"
+import { table, borderless, columnHeader } from "./CharacterPage.module.scss"
 import { startCase, invert } from 'lodash'
+import EmpCard from '../../EmpCard/EmpCard'
 import skills from '../../../gameData/skills.json'
 
 class CharacterSheetStatsSkills extends Component {
@@ -9,8 +10,7 @@ class CharacterSheetStatsSkills extends Component {
   leftScores = this.scoreNames.slice(this.scoreNames.length/2, this.scoreNames.length)
   render () {
     return (
-      <div className={section}>
-        <div className={title}>Skills</div>
+      <EmpCard isStartingOpen title="Skills">
         <table className={[table, borderless].join(' ')}>
           <tbody>
             <tr>
@@ -51,7 +51,7 @@ class CharacterSheetStatsSkills extends Component {
             </tr>
           </tbody>
         </table>
-      </div>
+      </EmpCard>
     )
   }
 }

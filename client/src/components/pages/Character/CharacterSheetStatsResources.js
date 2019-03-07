@@ -16,9 +16,12 @@ import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
 import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
+import restIcon from "../../../icons/campfire.png"
+import downtimeIcon from "../../../icons/inn.png"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain } from 'lodash'
+import { chain, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 
 class CharacterSheetStatsResources extends Component {
   render () {
@@ -120,6 +123,48 @@ class CharacterSheetStatsResources extends Component {
               </div>
               <div className={subtext}>{this.props.stats.speed.type}</div>
             </div>
+          </div>
+          <div className={resource}>
+            <div className={title}>Recovery</div>
+            <CharacterSheetStatsRecovery
+              title="Rest"
+              icon={restIcon}
+              duration="8 hours"
+              effects={[
+                'Recover all hitpoints.',
+                'Recover all power dice.',
+                'Lose all temporary hit points.'
+              ]}
+              onConfirm={() => {
+                this.props.onUpdate({ stats: {
+                  hitPoints: this.props.stats.maxHP,
+                  tempHP: 0,
+                  powerDice: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max }))
+                }})
+              }}
+            />
+            <CharacterSheetStatsRecovery
+              title="Downtime"
+              icon={downtimeIcon}
+              duration="5 days"
+              effects={[
+                'Recover all hitpoints.',
+                'Recover all power dice.',
+                'Lose all temporary hit points.',
+                'Heal all wounds.',
+                'Spend advancements.',
+                'Reject features from the shop.',
+                'Perform a downtime activity.',
+              ]}
+              onConfirm={() => {
+                this.props.onUpdate({ stats: {
+                  hitPoints: this.props.stats.maxHP,
+                  tempHP: 0,
+                  wounds: 0,
+                  powerDice: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max }))
+                }})
+              }}
+            />
           </div>
         </div>
         <div className={resources}>

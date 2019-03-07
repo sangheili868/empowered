@@ -22,8 +22,20 @@ import CharacterSheetResource from './CharacterSheetResource'
 import { chain, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
+import d4Icon from "../../../icons/d4.png"
+import d6Icon from "../../../icons/d6.png"
+import d8Icon from "../../../icons/d8.png"
+import d10Icon from "../../../icons/d10.png"
+import d12Icon from "../../../icons/d12.png"
 
 class CharacterSheetStatsResources extends Component {
+  diceIcons = {
+    'd4s': d4Icon,
+    'd6s': d6Icon,
+    'd8s': d8Icon,
+    'd10s': d10Icon,
+    'd12s': d12Icon,
+  }
   render () {
     return (
       <div>
@@ -179,7 +191,7 @@ class CharacterSheetStatsResources extends Component {
                   current: value
                 }}}})}
                 alt={dieSize}
-                icon={hitPointsIcon}
+                icon={this.diceIcons[dieSize]}
                 max={max}
               />
             )

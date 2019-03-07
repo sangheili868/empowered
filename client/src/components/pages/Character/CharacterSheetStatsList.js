@@ -28,9 +28,8 @@ class CharacterSheetStatsList extends Component {
                 {this.props.items[itemKey].map((item, index) => !item.deleted && ( 
                   this.props.editItem ? this.props.editItem(itemKey, item, index) : (
                     <div key={index}>{item.name}</div>
-                    )
-                    ))}
-                {this.props.addToList && this.props.addToList(itemKey)}
+                  )
+                ))}
               </div>
             )
             )}

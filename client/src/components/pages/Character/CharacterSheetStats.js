@@ -140,22 +140,7 @@ class CharacterSheetStats extends Component {
           />
           <CharacterSheetStatsList
             title="Combat"
-            items={{
-              Actions: chain(this.props.stats.actions)
-                .values()
-                .orderBy(['feature', 'cardinal'], ['desc', 'desc'])
-                .orderBy('feature', 'desc')
-                .map(({ name, cardinal }) => ({name: name + (cardinal ? ' (C)' : '')}))
-                .value(),
-              'Wrestling Maneuvers': chain(this.props.stats.maneuvers)
-                .values()
-                .orderBy('feature', 'desc')
-                .value(),
-              Reactions: chain(this.props.stats.reactions)
-                .values()
-                .orderBy('feature', 'desc')
-                .value()
-            }}
+            items={this.props.stats.actions}
           />
           <CharacterSheetTable
             title="Features"

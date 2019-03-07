@@ -3,7 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
-import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase } from 'lodash'
+import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase, filter, intersection } from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 class Character {
@@ -72,23 +72,31 @@ class Character {
         }),
       },
       actions: {
-        ...actions.actions,
-        // ...filter(this.baseStats.features, ({ type }) => type.includes('action'))
-        //   .map(feature => ({
-        //     ...feature,
-        //     feature: true,
-        //     cardinal: feature.type.includes('cardinal')
-        //   })) 
-      },
-      maneuvers: {
-        ...actions.maneuvers,
-        // ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
-        //   .map(feature => ({ ...feature, feature: true })) 
-      },
-      reactions: {
-        ...actions.reactions,
-        // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
-        //   .map(feature => ({ ...feature, feature: true })) 
+        cardinalActions: [
+          ...actions.actions.filter(({ tags=[] }) => tags.includes('cardinal')),
+          // ...filter(this.baseStats.features, ({ tags }) => tags.includes('action'))
+          //   .map(feature => ({
+          //     ...feature,
+          //     feature: true,
+          //     cardinal: feature.type.includes('cardinal')
+          //   })) 
+        ],
+        skillActions: [
+          ...actions.actions.filter(({ tags=[] }) => tags.includes('skill'))
+        ],
+        basicActions: [
+          ...actions.actions.filter(({ tags=[] }) => !tags.includes('skill') && !tags.includes('cardinal'))
+        ],
+        maneuvers: [
+          ...actions.maneuvers,
+          // ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
+          //   .map(feature => ({ ...feature, feature: true })) 
+        ],
+        reactions: [
+          ...actions.reactions,
+          // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
+          //   .map(feature => ({ ...feature, feature: true })) 
+        ]
       }
     }
    } else {

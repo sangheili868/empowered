@@ -4,8 +4,8 @@ import { input } from './EmpTextInput.module.scss'
 class EmpTextInput extends Component {
   render () {
     return (
-      <input
-        type="text"
+      <textarea
+        rows="1"
         {...this.props}
         className={[this.props.className, input].join(' ')}
       />

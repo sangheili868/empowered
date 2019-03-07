@@ -61,6 +61,7 @@ class CharacterSheet extends Component {
             component: CharacterSheetStats,
             props: {
               stats: this.props.character.stats,
+              shop: this.props.character.shop,
               onUpdate: this.props.onUpdate
             }
           },

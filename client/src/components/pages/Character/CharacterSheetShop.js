@@ -13,24 +13,11 @@ import {
 } from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import advancementsIcon from "../../../icons/chevron.png"
-import { chain, some, lowerCase, cloneDeep, map, startCase } from 'lodash'
+import { lowerCase, cloneDeep, map, startCase } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton'
-import equipmentProficiencies from '../../../gameData/equipmentProficiencies.json'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetShop extends Component {
-  equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
-    .pickBy((value, key) => !some(this.props.stats.proficiencies.equipment, ({ category }) => (category === key)))
-    .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
-    .value()
-  organizedProficiencies = () => ({
-    armor: this.equipmentIncludesAny(['armor', 'shield']),
-    meleeWeapon: this.equipmentIncludesAny(['unarmedWeapon', 'meleeWeapon']),
-    rangedWeapon: this.equipmentIncludesAny(['rangedWeapon', 'loadingWeapon']),
-    otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'magicWeapon']),
-    tool: this.equipmentIncludesAny(['tool']),
-    vehicle: this.equipmentIncludesAny(['vehicle'])
-  })
   render () {
     return (
       <>
@@ -55,6 +42,7 @@ class CharacterSheetShop extends Component {
             }}
             buyButton={index => {
               const score = this.props.shop.abilityScores[index]
+              const isIncreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
               if (score.current > 4) {
                 return 'At Maximum'
               } else if (score.cost > this.props.shop.advancements) {
@@ -65,7 +53,10 @@ class CharacterSheetShop extends Component {
                     className={[tableBuy, plus].join(' ')}
                     onClick={this.props.onUpdate.bind(this, {
                       shop: {advancements: this.props.shop.advancements - score.cost},
-                      stats: {abilityScores: { [lowerCase(score.name)]: score.current + 1 }}
+                      stats: {
+                        abilityScores: { [lowerCase(score.name)]: score.current + 1 },
+                        hitPoints: this.props.stats.hitPoints + (isIncreasingHP ? 1 : 0)
+                      }
                     })}
                   >
                     -{score.cost} Adv.
@@ -160,17 +151,20 @@ class CharacterSheetShop extends Component {
               name: 'Name',
               description: 'Description'
             }}
-            fields={{ name: '', description: '', type: '', cost: 1 }}
+            fields={{ name: '', description: '', cost: 1 }}
             onEdit={(index, values) => {
               let newFeatures = cloneDeep(this.props.shop.features)
-              newFeatures[index] = values
+              newFeatures[index] = {
+                ...values,
+                // type: values.type.split(',')
+              }
               this.props.onUpdate({ shop: { features: newFeatures } })
             }}
             onAdd={values => this.props.onUpdate({ shop: { features: [
               ...this.props.shop.features,
               {
                 ...values,
-                type: values.type.split(' ')
+                // type: values.type.split(',')
               }
             ]}})}
             buyButton={index => {
@@ -202,7 +196,7 @@ class CharacterSheetShop extends Component {
               }
             }}
           />
-          {map(this.organizedProficiencies(), (proficiencies, grouping) =>
+          {map(this.props.shop.proficiencies, (proficiencies, grouping) =>
               <CharacterSheetTable
                 key={grouping}
                 title={startCase(grouping) + ' Proficiencies'}
@@ -238,7 +232,10 @@ class CharacterSheetShop extends Component {
           <div>
             <div className={section}>
               <div className={title}>Languages</div>
-              {this.props.stats.proficiencies.languages.length < this.props.stats.skills.synergy ? (
+              {(
+                this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
+                Math.max(2, this.props.stats.skills.synergy)
+              ) ? (
                 <div className={languages}>
                   <div>Learn a new language:</div>
                   <EmpItemEditor
@@ -246,7 +243,6 @@ class CharacterSheetShop extends Component {
                     fields={{ name: '' }}
                     onUpdate={language => {
                       this.props.onUpdate({
-                        shop: { advancements: this.props.shop.advancements - 1 },
                         stats: { proficiencies: { languages: [
                           ...this.props.stats.proficiencies.languages,
                           language
@@ -255,12 +251,14 @@ class CharacterSheetShop extends Component {
                     }}
                     isCustomInline
                   >
-                    <EmpButton className={newLanguage}>-1 Adv.</EmpButton>
+                    <EmpButton className={newLanguage}>Free</EmpButton>
                   </EmpItemEditor>
                 </div>
               ) : (
                 <div className={languages}>
-                  You know {this.props.stats.proficiencies.languages.length} languages already.
+                  You know {
+                    this.props.stats.proficiencies.languages.filter(language => !language.deleted).length
+                  } languages already.
                   Increase your synergy to learn more.
                 </div>
               )}

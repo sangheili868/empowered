@@ -53,7 +53,7 @@ class EmpItemEditor extends Component {
   render () {
     return (
       <span>
-        <Modal show={this.state.isShowingModal} onHide={this.toggleEditing}>
+        <Modal show={this.state.isShowingModal} backdrop="static" onHide={this.toggleEditing}>
           <Modal.Header closeButton>
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>

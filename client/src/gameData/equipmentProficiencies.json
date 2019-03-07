@@ -61,7 +61,7 @@
  },
  "unarmedMeleeWeapon": {
    "name": "Unarmed Fighting",
-   "category": "unarmedWeapon",
+   "category": "unarmedMeleeWeapon",
    "requirement": [
      {
        "skill": "athletics",

@@ -3,7 +3,8 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
-import { pick, filter, upperFirst, reject, map, startCase } from 'lodash'
+import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase } from 'lodash'
+import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 class Character {
   constructor(baseCharacterData) {
@@ -72,28 +73,33 @@ class Character {
       },
       actions: {
         ...actions.actions,
-        ...filter(this.baseStats.features, ({ type }) => type.includes('action'))
-          .map(feature => ({
-            ...feature,
-            feature: true,
-            cardinal: feature.type.includes('cardinal')
-          })) 
+        // ...filter(this.baseStats.features, ({ type }) => type.includes('action'))
+        //   .map(feature => ({
+        //     ...feature,
+        //     feature: true,
+        //     cardinal: feature.type.includes('cardinal')
+        //   })) 
       },
       maneuvers: {
         ...actions.maneuvers,
-        ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
-          .map(feature => ({ ...feature, feature: true })) 
+        // ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
+        //   .map(feature => ({ ...feature, feature: true })) 
       },
       reactions: {
         ...actions.reactions,
-        ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
-          .map(feature => ({ ...feature, feature: true })) 
+        // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
+        //   .map(feature => ({ ...feature, feature: true })) 
       }
     }
    } else {
      return {}
    }
   }
+
+  equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
+    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category }) => (category === key)))
+    .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
+    .value()
 
   get shop () {
     if (this.baseShop) {
@@ -123,7 +129,15 @@ class Character {
             smallerDie: smallerDie[dieName],
             smallerDieCount: this.baseStats.powerDice[smallerDie[dieName]].max
           }
-        }))
+        })),
+        proficiencies: {
+          armor: this.equipmentIncludesAny(['armor', 'shield']),
+          meleeWeapon: this.equipmentIncludesAny(['unarmedMeleeWeapon', 'meleeWeapon']),
+          rangedWeapon: this.equipmentIncludesAny(['rangedWeapon', 'loadingWeapon']),
+          otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'magicWeapon']),
+          tool: this.equipmentIncludesAny(['tool']),
+          vehicle: this.equipmentIncludesAny(['vehicle'])
+        }
       }
     } else {
       return {}

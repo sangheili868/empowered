@@ -34,6 +34,7 @@ class EmpStringEditor extends Component {
           value={this.state.workingValue}
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
+          onBlur={this.handleDone}
         />
         <EmpButton className={doneButton} onClick={this.handleDone}>Done</EmpButton>
         <EmpButton className={doneButton} onClick={this.toggleEditing}>Cancel</EmpButton>

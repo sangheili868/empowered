@@ -9,7 +9,7 @@ import {
   buy,
   columnHeader
 } from './CharacterPage.module.scss'
-import { map, chain, mapValues, isEmpty } from 'lodash'
+import { map, chain, mapValues, isEmpty, some } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetTable extends Component {
@@ -20,7 +20,8 @@ class CharacterSheetTable extends Component {
     ...this.props.sellButton ? ['Sell'] : []
   ]
   render () {
-    return (!isEmpty(this.props.items) || this.props.onAdd) ? (
+    const hasItems = !isEmpty(this.props.items) && some(this.props.items, item => !item.deleted)
+    return (hasItems || this.props.onAdd) ? (
       <div>
         <div className={section}>
           <table className={table}>
@@ -30,7 +31,7 @@ class CharacterSheetTable extends Component {
                   {this.props.title}
                 </th>
               </tr>
-              { this.props.items.length > 0 &&
+              { hasItems &&
                 <tr>
                   {this.columnTitles.map(title =>
                     <th key={title} className={[columnHeader, cell].join(' ')}>{title}</th>
@@ -57,7 +58,11 @@ class CharacterSheetTable extends Component {
                           .value()
                         }
                         onUpdate={this.props.onEdit.bind(this, index)}
-                        onDelete={this.props.onEdit.bind(this, index, {deleted: true})}
+                        onDelete={this.props.onDelete ? (
+                          this.props.onDelete.bind(this, index)
+                        ) : (
+                          this.props.onEdit.bind(this, index, {deleted: true})
+                        )}
                       />
                     </td>
                   }
@@ -77,7 +82,7 @@ class CharacterSheetTable extends Component {
             {this.props.onAdd && 
               <tfoot>
                 <tr className={titleRow}>
-                  <td className={cell} colSpan={this.columnTitles.length}>
+                  <td className={hasItems ? cell : ''} colSpan={this.columnTitles.length}>
                     <div className={tableAdd}>
                       {this.props.addText}
                       <EmpItemEditor

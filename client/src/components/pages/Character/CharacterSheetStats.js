@@ -137,6 +137,9 @@ class CharacterSheetStats extends Component {
                   let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
                   newItems[index].deleted = true
                   this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
+                  if (columnName !== 'languages') {
+                    this.props.onUpdate({ shop: { advancements: parseInt(this.props.shop.advancements) + 1 } })
+                  }
                 }}
               >
                 {item.name}
@@ -169,11 +172,26 @@ class CharacterSheetStats extends Component {
               name: 'Name',
               description: 'Description'
             }}
-            fields={{ name: '', description: '', type: '' }}
+            fields={{ name: '', description: '' }}
             onEdit={(index, values) => {
               let newFeatures = cloneDeep(this.props.stats.features)
-              newFeatures[index] = values
+              newFeatures[index] = {
+                ...values,
+                // type: values.type.split(',')
+              }
               this.props.onUpdate({ stats: { features: newFeatures } })
+            }}
+            onDelete={index => {
+              let newFeatures = cloneDeep(this.props.stats.features)
+              newFeatures[index] = { deleted: true }
+              this.props.onUpdate({ stats: { features: newFeatures } })
+              this.props.onUpdate({ shop: {
+                advancements: parseInt(this.props.shop.advancements) + (newFeatures[index].cost || 0),
+                features: [
+                  ...this.props.shop.features,
+                  cloneDeep(newFeatures[index])
+                ]
+              }})
             }}
           />
         </div>

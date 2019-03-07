@@ -4,7 +4,8 @@ import { startCase, some } from 'lodash'
 
 class CharacterSheetStatsList extends Component {
   render () {
-    return (some(this.props.items, item => item.length) || this.props.addToList) ? (
+    const hasSomeUndeletedItem = some(this.props.items, column => column.length && some(column, item => !item.deleted))
+    return (hasSomeUndeletedItem || this.props.addToList) ? (
       <div className={section}>
         <div className={title}>{this.props.title}</div>
         <div className={subtitles}>
@@ -20,16 +21,17 @@ class CharacterSheetStatsList extends Component {
               )}
             </div>
           ) : (typeof this.props.items === 'object' &&
-            Object.keys(this.props.items).map(itemKey => 
-            <div key={itemKey} className={column}>
-              <div className={columnHeader}>{startCase(itemKey)}</div>
-              {this.props.items[itemKey].map((item, index) => !item.deleted && ( 
-                this.props.editItem ? this.props.editItem(itemKey, item, index) : (
-                  <div key={index}>{item.name}</div>
-                )
-              ))}
-              {this.props.addToList && this.props.addToList(itemKey)}
-            </div>
+            Object.keys(this.props.items).map(itemKey =>
+              (some(this.props.items[itemKey], item => !item.deleted) || this.props.addToList) &&
+              <div key={itemKey} className={column}>
+                <div className={columnHeader}>{startCase(itemKey)}</div>
+                {this.props.items[itemKey].map((item, index) => !item.deleted && ( 
+                  this.props.editItem ? this.props.editItem(itemKey, item, index) : (
+                    <div key={index}>{item.name}</div>
+                  )
+                ))}
+                {this.props.addToList && this.props.addToList(itemKey)}
+              </div>
             )
           )}
         </div>

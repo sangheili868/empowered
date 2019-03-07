@@ -28,7 +28,7 @@
     "equipment": ""
   },
   "stats": {
-    "hitPoints": 0,
+    "hitPoints": 4,
     "tempHP": 0,
     "wounds": 0,
     "armor": {
@@ -81,7 +81,14 @@
       "light": []
     },
     "proficiencies": {
-      "languages": [],
+      "languages": [
+        {
+          "name": "Common"
+        },
+        {
+          "name": "Native"
+        }
+      ],
       "equipment": []
     },
     "features": []

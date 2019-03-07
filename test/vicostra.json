@@ -195,6 +195,7 @@
           "skill"
         ],
         "description": "You can empower persuasion rolls that include a lie.",
+        "cost": 1,
         "playerMade": true,
         "metadata": {
           "empSkill": {
@@ -219,6 +220,7 @@
           "action"
         ],
         "description": "As an action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
+        "cost": 1,
         "playerMade": true
       },
       {
@@ -237,7 +239,8 @@
           "empowered",
           "action"
         ],
-        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use an action to end the illusion, or an action to create it again. It must be the same creature for each casting of the spell."
+        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use an action to end the illusion, or an action to create it again. It must be the same creature for each casting of the spell.",
+        "cost": 1
       },
       {
         "name": "Memory Theft",
@@ -254,6 +257,7 @@
           "reaction"
         ],
         "description": "As an empowered reaction when a creature dies within the range of your focus, you can capture some of its memories. You ask the DM one question, and if the creature knew the answer to that question, the DM reveals it to you.",
+        "cost": 1,
         "boosted": "You may ask up to three questions."
       },
       {
@@ -262,7 +266,8 @@
           "passive",
           "flaw"
         ],
-        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you take 1d4 mental damage unless you convince them otherwise."
+        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you take 1d4 mental damage unless you convince them otherwise.",
+        "cost": 1
       }
     ]
   },

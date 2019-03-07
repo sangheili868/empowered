@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { stats } from './CharacterPage.module.scss'
+import { stats, gold } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
@@ -7,8 +7,8 @@ import CharacterSheetTable from './CharacterSheetTable'
 import { chain, pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
-import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import { startCase } from 'lodash'
+import pluralize from 'pluralize'
 
 class CharacterSheetStats extends Component {
   render () {
@@ -64,14 +64,11 @@ class CharacterSheetStats extends Component {
                 }
               </div>
             ]}
-            isEditable
             items={pick(this.props.stats.equipment, ['heavy', 'medium', 'light'])}
             editItem={(columnName, item, index) => 
               <EmpItemEditor
                 key={index}
                 isInline
-                isEditable
-                isDeletable
                 title={'Edit a ' + columnName + ' Item'}
                 fields={this.props.stats.equipment[columnName][index]}
                 onUpdate={values => {
@@ -114,20 +111,15 @@ class CharacterSheetStats extends Component {
               <EmpItemEditor
                 key={index}
                 isInline
-                isEditable
-                isDeletable
-                title={'Edit a ' + columnName + ' Proficiency'}
+                title="Edit a Proficiency"
+                deletingText={columnName !== 'languages' ? `
+                  Are you sure you want to remove your ${
+                    this.props.stats.proficiencies[columnName][index].name
+                  } Proficiency? You will regain 1 advancement.
+                ` : ''}
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
-                }) : ({
-                  category: {
-                    value: this.props.stats.proficiencies[columnName][index].category,
-                    default: Object.keys(equipmentProficiencyData).map(equipment => ({
-                      text: startCase(equipment),
-                      value: equipment
-                    }))
-                  }
-                })}
+                }) : {}}
                 onUpdate={values => {
                   let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
                   newItems[index] = values
@@ -173,6 +165,13 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={{ name: '', description: '' }}
+            deletingText={index => `
+              If you delete this feature, you will regain ${
+                this.props.stats.features[index].cost
+              } ${
+                pluralize('advancement', this.props.stats.features[index].cost)
+              }.
+            `}
             onEdit={(index, values) => {
               let newFeatures = cloneDeep(this.props.stats.features)
               newFeatures[index] = {

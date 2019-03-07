@@ -305,7 +305,7 @@
         "type": [
           "action"
         ],
-        "description": "As an action, choose a creature within 120 ft. You must see it or know its approximate location. The target mentally receives a message from you and can mentally transmit a message back to you."
+        "description": "As an action, choose a creature within 120 ft. You must see it or know its approximate location. The target mentally receives a simple message from you and can mentally transmit a simple message back to you."
       },
       {
         "name": "Terrifying Whispers",
@@ -322,6 +322,111 @@
           "attack"
         ],
         "description": "You can empower an attack with a passion focus. If you hit with that attack, the creature is frightened for 1 minute of you or another creature of your choice that both you and the target can see."
+      },
+      {
+        "name": "Mage Hand",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "cardinal",
+          "action"
+        ],
+        "description": "As an empowered action, you create a spectral hand within 30 feet of you. It has one action on each of your turns, and it can use the Interact with Item, Move, or Wrestle actions. It has a speed of 10 feet and uses your synergy modifier for all of its rolls. Boosted: The hand can make the attack and help action, and is proficient with all weapons. It can also make a distract action against a creature within 5 feet of it."
+      },
+      {
+        "name": "Darkness",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": 2
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "type": [
+          "cardinal",
+          "action",
+          "empowered",
+          "boosted"
+        ],
+        "description": "As an empowered action, you create a 20 ft radius shadowy cloud within 120 ft of you for 1 minute. Creatures cannot see other creatures within the cloud, and creatures within the cloud cannot see. Boosted: You can see anything inside the cloud."
+      },
+      {
+        "name": "Invisibility",
+        "cost": 2,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": 4
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "type": [
+          "cardinal",
+          "empowered",
+          "action",
+          "boosted"
+        ],
+        "description": "As an empowered action, you cannot be seen for 1 hour. If you perform any action that interacts with a creature or object other than yourself or an object you are holding, the spell ends. Boosted: The first time the spell would end because of an action you take, it does not end."
+      },
+      {
+        "name": "Jack of All Trades",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": -1
+          }
+        },
+        "type": [
+          "empowered"
+        ],
+        "description": "When you roll a skill that you have a negative modifier in, you can expend a power die to treat your modifier as +0. Boosted: Treat the modifier as +1 instead."
+      },
+      {
+        "name": "Deceptive Reasoning",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          }
+        },
+        "type": [
+          "passive",
+          "persuasion"
+        ],
+        "description": "If a creature sees an illusion you create and does not realize that it is an illusion, you gain advantage on Persuasion rolls against that creature."
+      },
+      {
+        "name": "Fey Lineage",
+        "cost": 1,
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "type": [
+          "passive",
+          "willpower"
+        ],
+        "description": "You can empower willpower rolls to avoid being charmed or put to sleep."
+      },
+      {
+        "name": "Wasteland Survival",
+        "cost": 1,
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "type": [
+          "passive",
+          "investigation"
+        ],
+        "description": "You can empower Investigation checks to find food in arctic, desert, and underground environments."
       }
     ]
   }

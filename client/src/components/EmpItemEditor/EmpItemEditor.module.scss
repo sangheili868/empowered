@@ -38,3 +38,11 @@
     color: $pale;
   }
 }
+
+.footer {
+  flex-wrap: wrap;
+
+  .close {
+    margin: 5px;
+  }
+}

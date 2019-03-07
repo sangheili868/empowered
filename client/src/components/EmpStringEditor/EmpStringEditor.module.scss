@@ -13,12 +13,14 @@
 
 .editing {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .input {
     flex: 1;
   }
-  
+
   .doneButton {
-    margin-left: 10px;
+    margin: 5px;
   }
 }

@@ -50,8 +50,8 @@ class CharacterSheetTable extends Component {
                     <td className={cell}>
                       <EmpItemEditor
                         isEdit
-                        isDeletable
                         title={'Edit ' + item.name}
+                        deletingText={this.props.deletingText && this.props.deletingText(index)}
                         fields={chain(item)
                           .pick(Object.keys(this.props.fields))
                           .mapValues((value, key) => ({ value, default: this.props.fields[key]}))

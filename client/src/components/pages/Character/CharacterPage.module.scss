@@ -8,6 +8,10 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
+
+  .saveButton {
+    margin: 10px;
+  }
 }
 
 .manageCharacter {
@@ -15,10 +19,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 20px;
-
-  .manageCharacterButton {
-    margin: 20px;
-  }
 }
 
 .title {
@@ -34,6 +34,7 @@
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 20px;
 
@@ -43,6 +44,7 @@
 
   .portrait {
     max-height: 200px;
+    max-width: 200px;
     border-radius: 10px;
   }
 }

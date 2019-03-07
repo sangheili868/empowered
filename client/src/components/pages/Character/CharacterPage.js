@@ -7,7 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { merge, cloneDeep } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
-import { alert, manageCharacter, manageCharacterButton } from './CharacterPage.module.scss'
+import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
@@ -59,12 +59,12 @@ class CharacterPage extends Component {
           <Alert className={alert} variant="danger">
             <div>Warning: Your character has unsaved changes!</div>
             <EmpJsonExporter
-              className={manageCharacterButton} 
+              className={saveButton} 
               content={this.state.character.exportData}
               fileName={this.state.fileName}
               onSave={this.handleSave}
             >
-              Save Character
+              Save
             </EmpJsonExporter>
           </Alert>
         }
@@ -81,22 +81,17 @@ class CharacterPage extends Component {
           </Modal.Footer>
         </Modal>
         <div className={manageCharacter}>
-          <EmpButton className={manageCharacterButton} onClick={this.handleOpenWarning}>
-            New Character
+          <EmpButton onClick={this.handleOpenWarning}>
+            New
           </EmpButton>
-          <EmpJsonImporter
-            className={manageCharacterButton} 
-            isWarning={this.state.isDirty}
-            onFileOpen={this.loadCharacter}
-          />
+          <EmpJsonImporter isWarning={this.state.isDirty} onFileOpen={this.loadCharacter}/>
           {this.state.character && !this.state.isDirty &&
             <EmpJsonExporter
-              className={manageCharacterButton} 
               content={this.state.character.exportData}
               fileName={this.state.fileName}
               onSave={this.handleSave}
             >
-              Save Character
+              Export
             </EmpJsonExporter>
           }
         </div>

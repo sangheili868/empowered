@@ -97,7 +97,7 @@ class Character {
   }
 
   equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
-    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category }) => (category === key)))
+    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category, deleted }) => ((category === key) && !deleted)))
     .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
     .value()
 

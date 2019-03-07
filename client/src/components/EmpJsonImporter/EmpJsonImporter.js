@@ -31,7 +31,7 @@ class EmpJsonImporter extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <EmpButton onClick={this.handleOpenWarning}>Load Character</EmpButton>
+        <EmpButton onClick={this.handleOpenWarning}>Load</EmpButton>
         <Modal show={this.state.isShowingWarning} onHide={this.handleCloseWarning}>
           <Modal.Header closeButton>
             <Modal.Title>Loading Character From File</Modal.Title>

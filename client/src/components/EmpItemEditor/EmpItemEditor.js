@@ -7,13 +7,15 @@ import {
   pen,
   inline,
   field,
-  fieldLabel
+  fieldLabel,
+  footer,
+  close
 } from './EmpItemEditor.module.scss'
 import { Modal } from 'react-bootstrap'
 import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
-import { cloneDeep, startCase, map, merge, mapValues, isObject } from 'lodash'
+import { cloneDeep, startCase, map, merge, mapValues, isObject, isEmpty } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -78,13 +80,18 @@ class EmpItemEditor extends Component {
                 )}
               </div>
             )}
-          </Modal.Body>
-          <Modal.Footer>
-            <EmpButton onClick={this.toggleEditing}>Cancel</EmpButton>
-            {this.props.isDeletable && 
-              <EmpButton onClick={this.handleDelete}>Delete</EmpButton>
+            {this.props.deletingText &&
+              <div>{this.props.deletingText}</div>
             }
-            <EmpButton onClick={this.handleDone}>Done</EmpButton>
+          </Modal.Body>
+          <Modal.Footer className={footer}>
+            <EmpButton className={close} onClick={this.toggleEditing}>Cancel</EmpButton>
+            {this.props.onDelete && 
+              <EmpButton className={close} onClick={this.handleDelete}>Delete</EmpButton>
+            }
+            {!isEmpty(this.state.workingValues) && 
+              <EmpButton className={close} onClick={this.handleDone}>Save</EmpButton>
+            }
           </Modal.Footer>
         </Modal>
         {this.props.isInline || this.props.isCustomInline ? (

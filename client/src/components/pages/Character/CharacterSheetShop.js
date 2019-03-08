@@ -6,8 +6,6 @@ import {
   tableBuy,
   plus,
   minus,
-  section,
-  title,
   languages,
   newLanguage
 } from './CharacterPage.module.scss'
@@ -16,6 +14,7 @@ import advancementsIcon from "../../../icons/chevron.png"
 import { lowerCase, cloneDeep, map, startCase } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import EmpCard from '../../EmpCard/EmpCard'
 
 class CharacterSheetShop extends Component {
   render () {
@@ -229,41 +228,38 @@ class CharacterSheetShop extends Component {
                 }}
               />
           )}
-          <div>
-            <div className={section}>
-              <div className={title}>Languages</div>
-              {(
-                this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
-                Math.max(2, this.props.stats.skills.synergy)
-              ) ? (
-                <div className={languages}>
-                  <div>Learn a new language:</div>
-                  <EmpItemEditor
-                    title="Add a Language"
-                    fields={{ name: '' }}
-                    onUpdate={language => {
-                      this.props.onUpdate({
-                        stats: { proficiencies: { languages: [
-                          ...this.props.stats.proficiencies.languages,
-                          language
-                        ]}}
-                      })
-                    }}
-                    isCustomInline
-                  >
-                    <EmpButton className={newLanguage}>Free</EmpButton>
-                  </EmpItemEditor>
-                </div>
-              ) : (
-                <div className={languages}>
-                  You know {
-                    this.props.stats.proficiencies.languages.filter(language => !language.deleted).length
-                  } languages already.
-                  Increase your synergy to learn more.
-                </div>
-              )}
-            </div>
-          </div>
+          <EmpCard isStartingOpen title="Languages">
+            {(
+              this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
+              Math.max(2, this.props.stats.skills.synergy)
+            ) ? (
+              <div className={languages}>
+                <div>Learn a new language:</div>
+                <EmpItemEditor
+                  title="Add a Language"
+                  fields={{ name: '' }}
+                  onUpdate={language => {
+                    this.props.onUpdate({
+                      stats: { proficiencies: { languages: [
+                        ...this.props.stats.proficiencies.languages,
+                        language
+                      ]}}
+                    })
+                  }}
+                  isCustomInline
+                >
+                  <EmpButton className={newLanguage}>Free</EmpButton>
+                </EmpItemEditor>
+              </div>
+            ) : (
+              <div className={languages}>
+                You know {
+                  this.props.stats.proficiencies.languages.filter(language => !language.deleted).length
+                } languages already.
+                Increase your smart or social to learn more.
+              </div>
+            )}
+          </EmpCard>
         </div>
       </>
     )

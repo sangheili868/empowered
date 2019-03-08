@@ -142,7 +142,7 @@ class Character {
           armor: this.equipmentIncludesAny(['armor', 'shield']),
           meleeWeapon: this.equipmentIncludesAny(['unarmedMeleeWeapon', 'meleeWeapon']),
           rangedWeapon: this.equipmentIncludesAny(['rangedWeapon', 'loadingWeapon']),
-          otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'magicWeapon']),
+          otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'craftedWeapon', 'magicWeapon']),
           tool: this.equipmentIncludesAny(['tool']),
           vehicle: this.equipmentIncludesAny(['vehicle'])
         }

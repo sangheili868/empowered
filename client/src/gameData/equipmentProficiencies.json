@@ -197,6 +197,16 @@
      }
    ]
  },
+ "craftedWeapon": {
+   "name": "Crafted Weapons",
+   "category": "craftedWeapon",
+   "requirements": [
+     {
+       "skill": "handiwork",
+       "level": 2
+     }
+   ]
+ },
  "arcaneMagicWeapon": {
    "name": "Arcane Focuses",
    "category": "arcaneMagicWeapon",

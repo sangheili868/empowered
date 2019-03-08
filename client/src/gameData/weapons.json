@@ -91,6 +91,18 @@
     "range": 160,
     "tags": [ "two-handed", "ranged", "loading", "heavy" ]
   },
+  "oneHandedCraftedWeapon": {
+    "skill": "handiwork",
+    "damageDie": "d8",
+    "range": 40,
+    "tags": [ "ranged" ]
+  },
+  "twoHandedCraftedWeapon": {
+    "skill": "handiwork",
+    "damageDie": "d12",
+    "range": 40,
+    "tags": [ "two-handed", "ranged" ]
+  },
   "oneHandedArcaneWeapon": {
     "skill": "knowledge",
     "damageDie": "d6",

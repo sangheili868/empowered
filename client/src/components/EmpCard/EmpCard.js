@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { card, title, spacer, caret } from './EmpCard.module.scss'
+import { card, title, spacer, caret, hidden } from './EmpCard.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpButton from '../EmpButton/EmpButton'
 
@@ -21,7 +21,9 @@ class EmpCard extends Component {
           {this.props.title}
           <FontAwesomeIcon className={caret} icon={this.state.isOpen ? 'caret-down' : 'caret-up'}/>
         </EmpButton>
-        {this.state.isOpen && this.props.children}
+        <div className={[this.props.contentClassName, ...(this.state.isOpen ? [] : [hidden])].join(' ')}>
+          {this.props.children}
+        </div>
       </div>
     )
   }

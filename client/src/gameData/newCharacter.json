@@ -95,8 +95,9 @@
     "features": []
   },
   "shop": {
-    "advancements": 35,
-    "totalEarned": 35,
+    "advancements": 20,
+    "totalEarned": 20,
+    "unlocked": false,
     "features": []
   }
 }

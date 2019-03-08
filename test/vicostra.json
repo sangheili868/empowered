@@ -282,6 +282,7 @@
   "shop": {
     "advancements": 5,
     "totalEarned": 40,
+    "unlocked": true,
     "features": [
       {
         "name": "Suggestion",

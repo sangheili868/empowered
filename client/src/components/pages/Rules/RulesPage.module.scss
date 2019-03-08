@@ -1,4 +1,4 @@
-@import "src/styles/colors.scss"; 
+@import "src/styles/colors.scss";
 
 .rules {
   display: flex;
@@ -12,7 +12,9 @@
 
   .table {
     margin: 5px auto;
-    
+    text-align: center;
+    user-select: none;
+
     .columnHeader {
       font-weight: bold;
     }
@@ -21,5 +23,16 @@
   .nestingCard {
     display: flex;
     flex-direction: column;
+  }
+}
+
+.skill {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $white;
   }
 }

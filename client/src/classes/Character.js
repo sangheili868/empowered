@@ -17,7 +17,7 @@ class Character {
 
   get stats () {
    if (this.baseStats) {
-    const skills = mapValues(skillData, skill => 
+    const skills = mapValues(skillData, skill =>
       skill.reduce((acc, ability) =>  acc + this.baseStats.abilityScores[ability], 0)
     )
     const equipment = this.baseStats.equipment
@@ -25,7 +25,7 @@ class Character {
       ...this.baseStats,
       maxHP: skills.fortitude + 10,
       maxTempHP: skills.fortitude + 10,
-      maxWounds: 5, 
+      maxWounds: 5,
       skills,
       equipment: {
         ...this.baseStats.equipment,
@@ -79,7 +79,7 @@ class Character {
           //     ...feature,
           //     feature: true,
           //     cardinal: feature.type.includes('cardinal')
-          //   })) 
+          //   }))
         ],
         skillActions: [
           ...actions.actions.filter(({ tags=[] }) => tags.includes('skill'))
@@ -90,12 +90,12 @@ class Character {
         maneuvers: [
           ...actions.maneuvers,
           // ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
-          //   .map(feature => ({ ...feature, feature: true })) 
+          //   .map(feature => ({ ...feature, feature: true }))
         ],
         reactions: [
           ...actions.reactions,
           // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
-          //   .map(feature => ({ ...feature, feature: true })) 
+          //   .map(feature => ({ ...feature, feature: true }))
         ]
       }
     }

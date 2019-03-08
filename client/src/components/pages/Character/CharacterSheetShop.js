@@ -7,7 +7,8 @@ import {
   plus,
   minus,
   languages,
-  newLanguage
+  newLanguage,
+  unlockText
 } from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import advancementsIcon from "../../../icons/chevron.png"
@@ -78,189 +79,205 @@ class CharacterSheetShop extends Component {
               )
             }}
           />
-          <CharacterSheetTable
-            title="Power Dice"
-            items={this.props.shop.powerDice}
-            columnNames={{
-              name: 'Name',
-              current: 'Current'
-            }}
-            buyButton={index => {
-              const die = this.props.shop.powerDice[index]
-              if (die.smallerDieCount < 1) {
-                return `No ${die.smallerDie}`
-              } else if (die.cost > this.props.shop.advancements) {
-                return `Costs ${die.cost} adv.`
-              } else {
-                return (
-                  <EmpButton
-                    className={[tableBuy, plus].join(' ')}
-                    onClick={this.props.onUpdate.bind(this, {
-                      shop: {advancements: this.props.shop.advancements - die.cost},
-                      stats: {powerDice: {
-                        [die.name + 's']: {
-                          current: die.current + 1,
-                          max: die.current + 1
-                        },
-                        ...(die.name === 'd4') ? {} : {
-                          [die.smallerDie]: {
-                            current: die.smallerDieCount -1,
-                            max: die.smallerDieCount - 1
-                          }
-                        }
-                      }}
-                    })}
-                  >
-                    -{die.cost} Adv.
-                  </EmpButton>
-                )
-              }
-            }}
-            sellButton={index => {
-              const die = this.props.shop.powerDice[index]
-              return (die.current === 0) ? 'At Minimum' : (
-                <EmpButton
-                  className={[tableBuy, minus].join(' ')}
-                  onClick={this.props.onUpdate.bind(this, {
-                    shop: {advancements: this.props.shop.advancements + die.worth},
-                    stats: {powerDice: {
-                      [die.name + 's']: {
-                        current: die.current - 1,
-                        max: die.current - 1
-                      },
-                      ...(die.name === 'd4') ? {} : {
-                        [die.smallerDie]: {
-                          current: die.smallerDieCount + 1,
-                          max: die.smallerDieCount + 1
-                        }
-                      }
-                    }}
-                  })}
-                >
-                  +{die.worth} Adv.
-                </EmpButton>
-              )
-            }}
-          />
-          <CharacterSheetTable
-            title="Features"
-            addText="Add a feature to your shop"
-            items={this.props.shop.features}
-            columnNames={{
-              name: 'Name',
-              description: 'Description'
-            }}
-            fields={{ name: '', description: '', cost: 1 }}
-            onEdit={(index, values) => {
-              let newFeatures = cloneDeep(this.props.shop.features)
-              newFeatures[index] = {
-                ...values,
-                // type: values.type.split(',')
-              }
-              this.props.onUpdate({ shop: { features: newFeatures } })
-            }}
-            onAdd={values => this.props.onUpdate({ shop: { features: [
-              ...this.props.shop.features,
-              {
-                ...values,
-                // type: values.type.split(',')
-              }
-            ]}})}
-            buyButton={index => {
-              const feature = cloneDeep(this.props.shop.features[index])
-              if (feature.cost > this.props.shop.advancements) {
-                return `Costs ${feature.cost} adv.`
-              } else {
-                return (
-                  <EmpButton
-                    className={[tableBuy, plus].join(' ')}
-                    onClick={() => {
-                      let newFeatures = cloneDeep(this.props.shop.features)
-                      newFeatures[index].deleted = true
-                      this.props.onUpdate({
-                        shop: {
-                          advancements: this.props.shop.advancements - feature.cost,
-                          features: newFeatures
-                        },
-                        stats: { features: [
-                          ...this.props.stats.features,
-                          feature
-                        ]}
-                      })
-                    }}
-                  >
-                    -{feature.cost} Adv.
-                  </EmpButton>
-                )
-              }
-            }}
-          />
-          {map(this.props.shop.proficiencies, (proficiencies, grouping) =>
+          {this.props.shop.unlocked &&
+            <>
               <CharacterSheetTable
-                key={grouping}
-                title={startCase(grouping) + ' Proficiencies'}
-                items={proficiencies}
+                title="Power Dice"
+                items={this.props.shop.powerDice}
                 columnNames={{
-                  name: 'Name'
+                  name: 'Name',
+                  current: 'Current'
                 }}
                 buyButton={index => {
-                  const proficiency = proficiencies[index]
-                  if (1 > this.props.shop.advancements) {
-                    return `Costs ${1} adv.`
+                  const die = this.props.shop.powerDice[index]
+                  if (die.smallerDieCount < 1) {
+                    return `No ${die.smallerDie}`
+                  } else if (die.cost > this.props.shop.advancements) {
+                    return `Costs ${die.cost} adv.`
+                  } else {
+                    return (
+                      <EmpButton
+                        className={[tableBuy, plus].join(' ')}
+                        onClick={this.props.onUpdate.bind(this, {
+                          shop: {advancements: this.props.shop.advancements - die.cost},
+                          stats: {powerDice: {
+                            [die.name + 's']: {
+                              current: die.current + 1,
+                              max: die.current + 1
+                            },
+                            ...(die.name === 'd4') ? {} : {
+                              [die.smallerDie]: {
+                                current: die.smallerDieCount -1,
+                                max: die.smallerDieCount - 1
+                              }
+                            }
+                          }}
+                        })}
+                      >
+                        -{die.cost} Adv.
+                      </EmpButton>
+                    )
+                  }
+                }}
+                sellButton={index => {
+                  const die = this.props.shop.powerDice[index]
+                  return (die.current === 0) ? 'At Minimum' : (
+                    <EmpButton
+                      className={[tableBuy, minus].join(' ')}
+                      onClick={this.props.onUpdate.bind(this, {
+                        shop: {advancements: this.props.shop.advancements + die.worth},
+                        stats: {powerDice: {
+                          [die.name + 's']: {
+                            current: die.current - 1,
+                            max: die.current - 1
+                          },
+                          ...(die.name === 'd4') ? {} : {
+                            [die.smallerDie]: {
+                              current: die.smallerDieCount + 1,
+                              max: die.smallerDieCount + 1
+                            }
+                          }
+                        }}
+                      })}
+                    >
+                      +{die.worth} Adv.
+                    </EmpButton>
+                  )
+                }}
+              />
+              <CharacterSheetTable
+                title="Features"
+                addText="Add a feature to your shop"
+                items={this.props.shop.features}
+                columnNames={{
+                  name: 'Name',
+                  description: 'Description'
+                }}
+                fields={{ name: '', description: '', cost: 1 }}
+                onEdit={(index, values) => {
+                  let newFeatures = cloneDeep(this.props.shop.features)
+                  newFeatures[index] = {
+                    ...values,
+                    // type: values.type.split(',')
+                  }
+                  this.props.onUpdate({ shop: { features: newFeatures } })
+                }}
+                onAdd={values => this.props.onUpdate({ shop: { features: [
+                  ...this.props.shop.features,
+                  {
+                    ...values,
+                    // type: values.type.split(',')
+                  }
+                ]}})}
+                buyButton={index => {
+                  const feature = cloneDeep(this.props.shop.features[index])
+                  if (feature.cost > this.props.shop.advancements) {
+                    return `Costs ${feature.cost} adv.`
                   } else {
                     return (
                       <EmpButton
                         className={[tableBuy, plus].join(' ')}
                         onClick={() => {
+                          let newFeatures = cloneDeep(this.props.shop.features)
+                          newFeatures[index].deleted = true
                           this.props.onUpdate({
-                            shop: { advancements: this.props.shop.advancements - 1 },
-                            stats: { proficiencies: { equipment: [
-                              ...this.props.stats.proficiencies.equipment,
-                              proficiency
-                            ]}}
+                            shop: {
+                              advancements: this.props.shop.advancements - feature.cost,
+                              features: newFeatures
+                            },
+                            stats: { features: [
+                              ...this.props.stats.features,
+                              feature
+                            ]}
                           })
                         }}
                       >
-                        -1 Adv.
+                        -{feature.cost} Adv.
                       </EmpButton>
                     )
                   }
                 }}
               />
-          )}
-          <EmpCard isStartingOpen title="Languages">
-            {(
-              this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
-              Math.max(2, this.props.stats.skills.synergy)
-            ) ? (
-              <div className={languages}>
-                <div>Learn a new language:</div>
-                <EmpItemEditor
-                  title="Add a Language"
-                  fields={{ name: '' }}
-                  onUpdate={language => {
-                    this.props.onUpdate({
-                      stats: { proficiencies: { languages: [
-                        ...this.props.stats.proficiencies.languages,
-                        language
-                      ]}}
-                    })
-                  }}
-                  isCustomInline
-                >
-                  <EmpButton className={newLanguage}>Free</EmpButton>
-                </EmpItemEditor>
-              </div>
-            ) : (
-              <div className={languages}>
-                You know {
-                  this.props.stats.proficiencies.languages.filter(language => !language.deleted).length
-                } languages already.
-                Increase your smart or social to learn more.
-              </div>
-            )}
-          </EmpCard>
+              {map(this.props.shop.proficiencies, (proficiencies, grouping) =>
+                  <CharacterSheetTable
+                    key={grouping}
+                    title={startCase(grouping) + ' Proficiencies'}
+                    items={proficiencies}
+                    columnNames={{
+                      name: 'Name'
+                    }}
+                    buyButton={index => {
+                      const proficiency = proficiencies[index]
+                      if (1 > this.props.shop.advancements) {
+                        return `Costs ${1} adv.`
+                      } else {
+                        return (
+                          <EmpButton
+                            className={[tableBuy, plus].join(' ')}
+                            onClick={() => {
+                              this.props.onUpdate({
+                                shop: { advancements: this.props.shop.advancements - 1 },
+                                stats: { proficiencies: { equipment: [
+                                  ...this.props.stats.proficiencies.equipment,
+                                  proficiency
+                                ]}}
+                              })
+                            }}
+                          >
+                            -1 Adv.
+                          </EmpButton>
+                        )
+                      }
+                    }}
+                  />
+              )}
+              <EmpCard isStartingOpen title="Languages">
+                {(
+                  this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
+                  Math.max(2, this.props.stats.skills.synergy)
+                ) ? (
+                  <div className={languages}>
+                    <div>Learn a new language:</div>
+                    <EmpItemEditor
+                      title="Add a Language"
+                      fields={{ name: '' }}
+                      onUpdate={language => {
+                        this.props.onUpdate({
+                          stats: { proficiencies: { languages: [
+                            ...this.props.stats.proficiencies.languages,
+                            language
+                          ]}}
+                        })
+                      }}
+                      isCustomInline
+                    >
+                      <EmpButton className={newLanguage}>Free</EmpButton>
+                    </EmpItemEditor>
+                  </div>
+                ) : (
+                  <div className={languages}>
+                    You know {
+                      this.props.stats.proficiencies.languages.filter(language => !language.deleted).length
+                    } languages already.
+                    Increase your smart or social to learn more.
+                  </div>
+                )}
+              </EmpCard>
+            </>
+          }
         </div>
+        {!this.props.shop.unlocked &&
+          <div>
+            <div className={unlockText}>
+              Once your DM adds features to your shop, you will be able to purchase power
+              dice, features, proficiencies. Alternatively, click below to unlock the full
+              shop.
+            </div>
+            <EmpButton onClick={this.props.onUpdate.bind(this, { shop: { unlocked: true }})}>
+              Unlock Full Shop
+            </EmpButton>
+          </div>
+        }
       </>
     )
   }

@@ -1,5 +1,5 @@
 {
-  "name": "New Character",
+  "name": "",
   "portrait": "",
   "bio": {
     "highConcept": "",
@@ -17,7 +17,7 @@
     "fear": "",
     "friend": "",
     "enemy": "",
-    "otherCharacter": "",
+    "otherContact": "",
     "organization": "",
     "goodMemory": "",
     "badMemory": "",

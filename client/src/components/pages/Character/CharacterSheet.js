@@ -12,7 +12,7 @@ class CharacterSheet extends Component {
       <div>
         <div className={header}>
           <div>
-            <div className={name}>{this.props.character.name}</div>
+            <div className={name}>{this.props.character.name || 'Unnamed Character'}</div>
             <div>{this.props.character.bio.highConcept}</div>
             <div>{this.props.character.bio.flaw}</div>
             <div>

@@ -113,9 +113,9 @@ class CharacterSheetStats extends Component {
                 isInline
                 title="Edit a Proficiency"
                 deletingText={columnName !== 'languages' ? `
-                  Are you sure you want to remove your ${
+                  If you delete your ${
                     this.props.stats.proficiencies[columnName][index].name
-                  } Proficiency? You will regain 1 advancement.
+                  } proficiency, you will regain 1 advancement.
                 ` : ''}
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
@@ -167,13 +167,14 @@ class CharacterSheetStats extends Component {
             }}
             onDelete={index => {
               let newFeatures = cloneDeep(this.props.stats.features)
+              const newShopFeature = cloneDeep(this.props.stats.features[index])
               newFeatures[index] = { deleted: true }
               this.props.onUpdate({ stats: { features: newFeatures } })
               this.props.onUpdate({ shop: {
-                advancements: parseInt(this.props.shop.advancements) + (newFeatures[index].cost || 0),
+                advancements: parseInt(this.props.shop.advancements) + (newShopFeature.cost || 0),
                 features: [
                   ...this.props.shop.features,
-                  cloneDeep(newFeatures[index])
+                  newShopFeature
                 ]
               }})
             }}

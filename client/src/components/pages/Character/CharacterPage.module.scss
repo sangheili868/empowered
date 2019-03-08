@@ -205,10 +205,12 @@
 
 .table {
   font-size: 12px;
+  width: 100%;
   border-collapse: collapse;
 
   &.borderless {
     margin: 0 10px 10px;
+    width: calc(100% - 20px);
   }
 
   .title {

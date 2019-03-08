@@ -162,8 +162,8 @@ class Character {
         equipment: {
           ...this.baseStats.equipment,
           heavy: reject(this.baseStats.equipment.heavy, 'deleted'),
-          medium: reject(this.baseStats.equipment.heavy, 'deleted'),
-          light: reject(this.baseStats.equipment.heavy, 'deleted')
+          medium: reject(this.baseStats.equipment.medium, 'deleted'),
+          light: reject(this.baseStats.equipment.light, 'deleted')
         },
         proficiencies: {
           ...this.baseStats.proficiencies,

@@ -30,6 +30,7 @@ class CharacterSheetStatsList extends Component {
                     <div key={index}>{item.name}</div>
                   )
                 ))}
+                {this.props.addToList && this.props.addToList(itemKey)}
               </div>
             )
             )}

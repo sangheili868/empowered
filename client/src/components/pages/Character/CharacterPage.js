@@ -12,15 +12,11 @@ import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
   state = { 
-    baseCharacter: null,
-    character: null,
-    isDirty: false,
-    fileName: '',
     warningState: '',
     isOpeningFile: false
   };
   handleOpenWarning = () => {
-    if (this.state.isDirty) this.setState({warningState: 'create'})
+    if (this.props.characterData.isDirty) this.setState({warningState: 'create'})
     else this.createNewCharacter()
   }
   handleCloseWarning = () => {
@@ -32,36 +28,36 @@ class CharacterPage extends Component {
     this.setState({isDirty: true})
   }
   loadCharacter = (baseCharacter, fileName) => {
-    this.setState({
+    this.props.updateCharacter({
       baseCharacter,
       character: new Character(baseCharacter),
       isDirty: false,
-      fileName,
-      isOpeningFile: false
+      fileName
     })
+    this.setState({ isOpeningFile: false })
   }
   updateCharacter = newData => {
-    this.setState({
+    this.props.updateCharacter({
       character: new Character(merge(
-        this.state.baseCharacter,
+        this.props.characterData.baseCharacter,
         newData
       )),
       isDirty: true
     })
   }
   handleSave = () => {
-    this.setState({isDirty: false})
+    this.props.updateCharacter({isDirty: false})
   }
   render() {
     return (
       <div>
-        {this.state.isDirty &&
+        {this.props.characterData.isDirty &&
           <Alert className={alert} variant="danger">
             <div>Warning: Your character has unsaved changes!</div>
             <EmpJsonExporter
               className={saveButton} 
-              content={this.state.character.exportData}
-              fileName={this.state.fileName}
+              content={this.props.characterData.character.exportData}
+              fileName={this.props.characterData.fileName}
               onSave={this.handleSave}
             >
               Save
@@ -84,22 +80,22 @@ class CharacterPage extends Component {
           <EmpButton onClick={this.handleOpenWarning}>
             New
           </EmpButton>
-          <EmpJsonImporter isWarning={this.state.isDirty} onFileOpen={this.loadCharacter}/>
-          {this.state.character && !this.state.isDirty &&
+          <EmpJsonImporter isWarning={this.props.characterData.isDirty} onFileOpen={this.loadCharacter}/>
+          {this.props.characterData.character && !this.props.characterData.isDirty &&
             <EmpJsonExporter
-              content={this.state.character.exportData}
-              fileName={this.state.fileName}
+              content={this.props.characterData.character.exportData}
+              fileName={this.props.characterData.fileName}
               onSave={this.handleSave}
             >
               Export
             </EmpJsonExporter>
           }
         </div>
-        {this.state.character &&
+        {this.props.characterData.character &&
           <div>
             <Route exact path='/character' render={() => <Redirect to='/character/bio'/>}/>
             <CharacterSheet
-              character={this.state.character}
+              character={this.props.characterData.character}
               onUpdate={this.updateCharacter}
             />
           </div>

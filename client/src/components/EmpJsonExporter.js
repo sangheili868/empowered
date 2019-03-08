@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import EmpButton from './EmpButton/EmpButton'
 
 class EmpJsonExporter extends Component {
-  export = () => {
-    let a = document.createElement('a')
-    let file = new Blob([JSON.stringify(this.props.content)], {type: 'application/json'})
-    a.href = URL.createObjectURL(file)
-    a.download = this.props.fileName
-    a.click()
-    this.props.onSave()
-  }
   render() {
+    const file = URL.createObjectURL(new Blob([JSON.stringify(this.props.content)], {type: 'application/json'}))
     return (
-      <EmpButton className={this.props.className} onClick={this.export}>
-        {this.props.children}
-      </EmpButton>
+      <a ref={this.downloadAnchor} href={file} download={this.props.fileName}>
+        <EmpButton className={this.props.className} onClick={this.props.onSave}>
+          {this.props.children}
+        </EmpButton>
+      </a>
     )
   }
 }

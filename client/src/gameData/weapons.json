@@ -23,6 +23,11 @@
     "skill": "athletics",
     "damageDie": "d8"
   },
+  "twoHandedFinesseWeapons": {
+    "skill": "athletics",
+    "damageDie": "d12",
+    "tags": [ "two-handed" ]
+  },
   "oneHandedMeleeWeapon": {
     "skill": "brawn",
     "damageDie": "d8"

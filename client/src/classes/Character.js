@@ -3,7 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
-import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase, filter, intersection } from 'lodash'
+import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase } from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 class Character {

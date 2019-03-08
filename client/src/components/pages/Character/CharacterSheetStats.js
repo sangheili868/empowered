@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { stats, gold } from './CharacterPage.module.scss'
+import { stats } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetTable from './CharacterSheetTable'
-import { chain, pick, cloneDeep } from 'lodash'
+import { pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
 import { startCase } from 'lodash'

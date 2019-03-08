@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {
-  section,
-  title,
   table,
   tableAdd,
   titleRow,

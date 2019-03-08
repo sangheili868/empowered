@@ -16,9 +16,12 @@ class CharacterSheetStatsList extends Component {
         <div className={list}>
           {Array.isArray(this.props.items) ? (
             <div className={column}>
-              {this.props.items.map((item, index) =>
-                <div key={index}>{item}</div>
-                )}
+              {this.props.items.map((item, index) => !item.deleted && ( 
+                this.props.editItem ? this.props.editItem(item, index) : (
+                  <div key={index}>{item.name}</div>
+                )
+              ))}
+              {this.props.addToList && this.props.addToList()}
             </div>
           ) : (typeof this.props.items === 'object' &&
           Object.keys(this.props.items).map(itemKey =>

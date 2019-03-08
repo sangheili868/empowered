@@ -19,7 +19,7 @@ import speedIcon from "../../../icons/boot.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues } from 'lodash'
+import { chain, mapValues, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import d4Icon from "../../../icons/d4.png"
@@ -27,6 +27,7 @@ import d6Icon from "../../../icons/d6.png"
 import d8Icon from "../../../icons/d8.png"
 import d10Icon from "../../../icons/d10.png"
 import d12Icon from "../../../icons/d12.png"
+import CharacterSheetStatsList from './CharacterSheetStatsList'
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -178,6 +179,40 @@ class CharacterSheetStatsResources extends Component {
               }}
             />
           </div>
+          <CharacterSheetStatsList
+            title="Conditions"
+            items={this.props.stats.conditions}
+            editItem={(item, index) => 
+              <EmpItemEditor
+                key={index}
+                isInline
+                title={'Edit a Condition'}
+                fields={item}
+                onUpdate={values => {
+                  let newConditions = cloneDeep(this.props.stats.conditions)
+                  newConditions[index] = { ...item, ...values }
+                  this.props.onUpdate({ stats: { conditions: newConditions }})
+                }}
+                onDelete={() => {
+                  let newConditions = cloneDeep(this.props.stats.conditions)
+                  newConditions[index].deleted = true
+                  this.props.onUpdate({ stats: { conditions: newConditions }})
+                }}
+              >
+                {item.name}
+              </EmpItemEditor>
+            }
+            addToList={() =>
+              <EmpItemEditor
+                title={'Add a Condition'}
+                fields={{ name: '' }}
+                onUpdate={values =>this.props.onUpdate({ stats: { conditions: [
+                  ...this.props.stats.conditions,
+                  values
+                ]}})}
+              />
+            }
+          />
         </div>
         <div className={resources}>
           {chain(this.props.stats.powerDice)

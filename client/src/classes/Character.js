@@ -159,6 +159,7 @@ class Character {
         ...this.baseStats,
         weapons: reject(this.baseStats.weapons, 'deleted'),
         features: reject(this.baseStats.features, 'deleted'),
+        conditions: reject(this.baseStats.conditions, 'deleted'),
         equipment: {
           ...this.baseStats.equipment,
           heavy: reject(this.baseStats.equipment.heavy, 'deleted'),

@@ -73,6 +73,14 @@
         "max": 0
       }
     },
+    "conditions": [
+      {
+        "name": "Frightened"
+      },
+      {
+        "name": "Grappled"
+      }
+    ],
     "weapons": [
       {
         "name": "Rapier",

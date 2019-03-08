@@ -73,6 +73,7 @@
         "max": 0
       }
     },
+    "conditions": [],
     "weapons": [],
     "equipment": {
       "gold": 100,

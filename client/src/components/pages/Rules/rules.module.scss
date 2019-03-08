@@ -1,12 +1,25 @@
 @import "src/styles/colors.scss"; 
 
-.blockTitle {
-  padding: 25px 0 10px;
-}
+.rules {
+  display: flex;
+  flex-direction: column;
 
-.ruleBlock {
-  font-size: 12px;
-  border: 1px solid $dark;
-  border-radius: 10px;
-  padding: 10px;
+  .card {
+    padding: 10px;
+    text-align: justify;
+    text-indent: 30pt;
+  }
+
+  .table {
+    margin: 5px auto;
+    
+    .columnHeader {
+      font-weight: bold;
+    }
+  }
+
+  .nestingCard {
+    display: flex;
+    flex-direction: column;
+  }
 }

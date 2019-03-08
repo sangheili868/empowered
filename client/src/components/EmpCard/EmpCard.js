@@ -15,11 +15,10 @@ class EmpCard extends Component {
   }
   render () {
     return (
-      <div className={card}>
+      <div className={[card, this.props.className].join(' ')}>
         <EmpButton className={title} onClick={this.handleToggle}>
           <div className={spacer}></div>
           {this.props.title}
-
           <FontAwesomeIcon className={caret} icon={this.state.isOpen ? 'caret-down' : 'caret-up'}/>
         </EmpButton>
         {this.state.isOpen && this.props.children}

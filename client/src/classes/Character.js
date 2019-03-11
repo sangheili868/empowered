@@ -3,6 +3,7 @@ import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
+import conditionData from '../gameData/conditions.json'
 import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase } from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
@@ -97,7 +98,8 @@ class Character {
           // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
           //   .map(feature => ({ ...feature, feature: true }))
         ]
-      }
+      },
+      conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
     }
    } else {
      return {}

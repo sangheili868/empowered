@@ -42,7 +42,7 @@ class CharacterSheetStatsList extends Component {
                 {this.props.items[itemKey].map((item, index) => !item.deleted && (
                   this.props.editItem ? this.props.editItem(itemKey, item, index) : (
                     (this.props.tooltips) ? (
-                      <>
+                      <React.Fragment key={index}>
                         <Modal show={this.state.openModal === item.name} onHide={this.toggleModal}>
                           <Modal.Header closeButton><Modal.Title>{item[this.props.tooltips.title]}</Modal.Title></Modal.Header>
                           <Modal.Body>{item[this.props.tooltips.body]}</Modal.Body>
@@ -51,7 +51,7 @@ class CharacterSheetStatsList extends Component {
                         <div className={moreInfo} onClick={this.toggleModal.bind(this, item.name)}>
                           {item.name}
                         </div>
-                      </>
+                      </React.Fragment>
                     ) : (
                       <div key={index}>{item.name}</div>
                     )

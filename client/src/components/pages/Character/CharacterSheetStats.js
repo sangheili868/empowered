@@ -112,7 +112,7 @@ class CharacterSheetStats extends Component {
                 key={index}
                 isInline
                 title={item.name}
-                deletingText={columnName == 'languages' ? '' : (
+                description={columnName === 'languages' ? '' : (
                   <>
                     <p>{item.description}</p>
                     <p>
@@ -159,7 +159,7 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={{ name: '', description: '' }}
-            deletingText={index => `
+            description={index => `
               If you delete this feature, you will regain ${
                 this.props.stats.features[index].cost
               } ${

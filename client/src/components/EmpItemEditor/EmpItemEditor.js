@@ -15,7 +15,7 @@ import { Modal } from 'react-bootstrap'
 import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
-import { cloneDeep, startCase, map, merge, mapValues, isObject, isEmpty } from 'lodash'
+import { cloneDeep, startCase, map, merge, mapValues, isObject, isEmpty, isFunction } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -60,7 +60,7 @@ class EmpItemEditor extends Component {
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {map(this.state.workingValues, (value, key) => 
+            {map(this.state.workingValues, (value, key) =>
               <div className={field} key={key}>
                 <div className={fieldLabel}>{startCase(key)}</div>
                 {Array.isArray(value.default) ? (
@@ -80,16 +80,22 @@ class EmpItemEditor extends Component {
                 )}
               </div>
             )}
-            {this.props.deletingText &&
-              <div>{this.props.deletingText}</div>
+            {this.props.description &&
+              <div>
+                {isFunction(this.props.description) ? (
+                  this.props.description(this.state.workingValues)
+                ) : (
+                  this.props.description
+                )}
+              </div>
             }
           </Modal.Body>
           <Modal.Footer className={footer}>
             <EmpButton className={close} onClick={this.toggleEditing}>Cancel</EmpButton>
-            {this.props.onDelete && 
+            {this.props.onDelete &&
               <EmpButton className={close} onClick={this.handleDelete}>Delete</EmpButton>
             }
-            {!isEmpty(this.state.workingValues) && 
+            {!isEmpty(this.state.workingValues) &&
               <EmpButton className={close} onClick={this.handleDone}>Save</EmpButton>
             }
           </Modal.Footer>

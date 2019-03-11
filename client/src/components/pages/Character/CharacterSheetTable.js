@@ -71,7 +71,7 @@ class CharacterSheetTable extends Component {
                     <EmpItemEditor
                       isEdit
                       title={'Edit ' + item.name}
-                      deletingText={this.props.deletingText && this.props.deletingText(index)}
+                      description={this.props.description && this.props.description(index)}
                       fields={chain(item)
                         .pick(Object.keys(this.props.fields))
                         .mapValues((value, key) => ({ value, default: this.props.fields[key]}))

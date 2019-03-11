@@ -28,6 +28,7 @@ import d8Icon from "../../../icons/d8.png"
 import d10Icon from "../../../icons/d10.png"
 import d12Icon from "../../../icons/d12.png"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
+import conditionData from '../../../gameData/conditions.json'
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -182,15 +183,22 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetStatsList
             title="Conditions"
             items={this.props.stats.conditions}
-            editItem={(item, index) => 
+            editItem={(item, index) =>
               <EmpItemEditor
                 key={index}
                 isInline
                 title={'Edit a Condition'}
-                fields={item}
+                fields={chain(item)
+                  .pick(['name'])
+                  .mapValues((value, key) => ({ value, default: Object.keys(conditionData).map(condition => ({
+                    text: condition,
+                    value: condition
+                  }))}))
+                  .value()
+                }
                 onUpdate={values => {
                   let newConditions = cloneDeep(this.props.stats.conditions)
-                  newConditions[index] = { ...item, ...values }
+                  newConditions[index] = conditionData[values.name]
                   this.props.onUpdate({ stats: { conditions: newConditions }})
                 }}
                 onDelete={() => {
@@ -198,6 +206,7 @@ class CharacterSheetStatsResources extends Component {
                   newConditions[index].deleted = true
                   this.props.onUpdate({ stats: { conditions: newConditions }})
                 }}
+                description={({ name }) => name && conditionData[name.value].description}
               >
                 {item.name}
               </EmpItemEditor>
@@ -217,7 +226,7 @@ class CharacterSheetStatsResources extends Component {
         <div className={resources}>
           {chain(this.props.stats.powerDice)
             .pickBy('max')
-            .map(({current, max}, dieSize) => 
+            .map(({current, max}, dieSize) =>
               <CharacterSheetResource
                 key={dieSize}
                 title={'Power '+ dieSize}

@@ -210,6 +210,12 @@ class CharacterSheetShop extends Component {
                     columnNames={{
                       name: 'Name'
                     }}
+                    tooltips={{
+                      name: {
+                        title: 'name',
+                        body: 'description'
+                      }
+                    }}
                     buyButton={index => {
                       const proficiency = proficiencies[index]
                       if (1 > this.props.shop.advancements) {
@@ -275,9 +281,12 @@ class CharacterSheetShop extends Component {
             <div className={unlockText}>
               Once your DM adds features to your shop, you will be able to purchase power
               dice, features, proficiencies. Alternatively, click below to unlock the full
-              shop.
+              shop. However, you will need to add features yourself.
             </div>
-            <EmpButton onClick={this.props.onUpdate.bind(this, { shop: { unlocked: true }})}>
+            <EmpButton onClick={this.props.onUpdate.bind(this, { shop: {
+              unlocked: true,
+              advancements: this.props.shop.advancements + 15
+            }})}>
               Unlock Full Shop
             </EmpButton>
           </div>

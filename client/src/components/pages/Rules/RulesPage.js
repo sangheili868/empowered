@@ -154,6 +154,19 @@ class RulesPage extends Component {
             <p>
               Some features, especially spells, require reagents, which are special items that you must have in your inventory to use the feature. Sometimes, the feature will consume the reagent, which means you must have a copy of the reagent for each time you wish to cast the feature. The reagent must be on your person, and you cannot use the feature without the reagent.
             </p>
+            <p>
+              Be sure to check with your DM if magic exists in their setting. Even if it is not tragitional magic, there could be psychic powers or technology that acts like magic and uses these same skills.
+            </p>
+          </div>
+        </EmpCard>
+        <EmpCard title="Technology">
+          <div className={card}>
+            <p>
+              Certain weapons, especially those created and designed by a specific person, are often too complex for someone to use well without advanced understanding of how it works. These sorts of weapons are called crafted weapons, and attack using handiwork. This represents your skill in operating them.
+            </p>
+            <p>
+              When attacking with a crafted weapon or other technological weapon such as a gun, a natural 1 results in a malfunction. You must use an action to make a DC 10 handiworks check. If you succeed, the weapon is usable once more. If you fail, the weapon cannot be used until you spend gold and downtime repairing it.
+            </p>
           </div>
         </EmpCard>
       </div>

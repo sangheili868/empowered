@@ -82,6 +82,14 @@
           color: $white;
           width: 100px;
           cursor: pointer;
+
+          &:active {
+            box-shadow: inset 1px 1px 5px 1px $grey;
+          }
+
+          &:hover {
+            background-color: $darkOrange;
+          }
         }
 
         &.description {
@@ -246,6 +254,17 @@
 
       &.minus {
         background-color: $failure;
+      }
+    }
+
+    .moreInfo {
+      padding: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $orange;
+        color: $pale;
       }
     }
   }

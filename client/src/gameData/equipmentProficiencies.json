@@ -1,340 +1,373 @@
 {
- "lightArmor": {
-   "name": "Light Armor",
-   "category": "lightArmor",
-   "requirement": [
-     {
-       "skill": "athletics",
-       "level": -1
-     }
-   ]
- },
- "mediumArmor": {
-   "name": "Medium Armor",
-   "category": "mediumArmor",
-   "requirement": [
-     {
-       "skill": "athletics",
-       "level": 2
-     }
-   ]
- },
- "heavyArmor": {
-   "name": "Heavy Armor",
-   "category": "heavyArmor",
-   "requirement": [
-     {
-       "skill": "brawn",
-       "level": 2
-     }
-   ]
- },
- "lightShield": {
-   "name": "Light Shields",
-   "category": "lightShield",
-   "requirement": [
-     {
-       "skill": "athletics",
-       "level": -1
-     }
-   ]
- },
- "mediumShield": {
-   "name": "Medium Shields",
-   "category": "mediumShield",
-   "requirement": [
-     {
-       "skill": "brawn",
-       "level": 2
-     }
-   ]
- },
- "heavyShield": {
-   "name": "Heavy Shields",
-   "category": "heavyShield",
-   "requirement": [
-     {
-       "skill": "brawn",
-       "level": 4
-     }
-   ]
- },
- "unarmedMeleeWeapon": {
-   "name": "Unarmed Fighting",
-   "category": "unarmedMeleeWeapon",
-   "requirement": [
-     {
-       "skill": "athletics",
-       "level": 1
-     }
-   ]
- },
- "lightMeleeWeapon": {
-   "name": "Light Melee Weapons",
-   "category": "lightMeleeWeapon",
-   "requirements": [
-     {
-       "skill": "athletics",
-       "level": -1
-     }
-   ]
- },
- "finesseMeleeWeapon": {
-   "name": "Finesse Melee Weapons",
-   "category": "finesseMeleeWeapon",
-   "requirements": [
-     {
-       "skill": "athletics",
-       "level": 1
-     }
-   ]
- },
- "oneHandedMeleeWeapon": {
-   "name": "One-handed Melee Weapons",
-   "category": "oneHandedMeleeWeapon",
-   "requirements": [
-     {
-       "skill": "brawn",
-       "level": -2
-     }
-   ]
- },
- "twoHandedMeleeWeapon": {
-   "name": "Two-handed Melee Weapons",
-   "category": "twoHandedMeleeWeapon",
-   "requirements": [
-     {
-       "skill": "brawn",
-       "level": 2
-     }
-   ]
- },
- "lightThrownWeapon": {
-   "name": "Light Thrown Weapons",
-   "category": "lightThrownWeapon",
-   "requirements": [
-     {
-       "skill": "athletics",
-       "level": -1
-     }
-   ]
- },
- "heavyThrownWeapon": {
-   "name": "Heavy Thrown Weapons",
-   "category": "heavyThrownWeapon",
-   "requirements": [
-     {
-       "skill": "athletics",
-       "level": 1
-     }
-   ]
- },
- "oneHandedRangedWeapon": {
-   "name": "One-handed Ranged Weapons",
-   "category": "oneHandedRangedWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": -2
-     }
-   ]
- },
- "twoHandedRangedWeapon": {
-   "name": "Two-handed Ranged Weapons",
-   "category": "twoHandedRangedWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": -2
-     }
-   ]
- },
- "heavyRangedWeapon": {
-   "name": "Heavy Ranged Weapons",
-   "category": "heavyRangedWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": 2
-     },
-     {
-       "skill": "brawn",
-       "level": 2
-     }
-   ]
- },
- "lightLoadingWeapon": {
-   "name": "Light Loading Weapons",
-   "category": "lightLoadingWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": -2
-     }
-   ]
- },
- "twoHandedLoadingWeapon": {
-   "name": "Two-handed Loading Weapons",
-   "category": "twoHandedLoadingWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": -2
-     }
-   ]
- },
- "heavyLoadingWeapon": {
-   "name": "Heavy Loading Weapons",
-   "category": "heavyLoadingWeapon",
-   "requirements": [
-     {
-       "skill": "perception",
-       "level": 2
-     },
-     {
-       "skill": "brawn",
-       "level": 2
-     }
-   ]
- },
- "craftedWeapon": {
-   "name": "Crafted Weapons",
-   "category": "craftedWeapon",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": 2
-     }
-   ]
- },
- "arcaneMagicWeapon": {
-   "name": "Arcane Focuses",
-   "category": "arcaneMagicWeapon",
-   "requirements": [
-     {
-       "skill": "knowledge",
-       "level": 2
-     }
-   ]
- },
- "divineMagicWeapon": {
-   "name": "Divine Focuses",
-   "category": "divineMagicWeapon",
-   "requirements": [
-     {
-       "skill": "wisdom",
-       "level": 1
-     }
-   ]
- },
- "unityMagicWeapon": {
-   "name": "Unity Focuses",
-   "category": "unityMagicWeapon",
-   "requirements": [
-     {
-       "skill": "synergy",
-       "level": 1
-     }
-   ]
- },
- "arcanistTool": {
-   "name": "Arcanist's Tools",
-   "category": "arcanistTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "artisanTool": {
-   "name": "Artisan's Tools",
-   "category": "artisanTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "chemistTool": {
-   "name": "Chemist's Tools",
-   "category": "chemistTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "explorerTool": {
-   "name": "Explorer's Tools",
-   "category": "explorerTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "smithTool": {
-   "name": "Smith's Tools",
-   "category": "smithTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "spyTool": {
-   "name": "Spy's Tools",
-   "category": "spyTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "thiefTool": {
-   "name": "Thief's Tools",
-   "category": "thiefTool",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "ridingVehicle": {
-   "name": "Mounts",
-   "category": "ridingVehicle",
-   "requirements": [
-     {
-       "skill": "athletics",
-       "level": -1
-     }
-   ]
- },
- "seaVehicle": {
-   "name": "Sea Vehicles",
-   "category": "seaVehicle",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": -1
-     }
-   ]
- },
- "airVehicle": {
-   "name": "Air Vehicles",
-   "category": "airVehicle",
-   "requirements": [
-     {
-       "skill": "handiwork",
-       "level": 1
-     }
-   ]
- }
+  "lightArmor": {
+    "name": "Light Armor",
+    "category": "lightArmor",
+    "requirement": [
+      {
+        "skill": "athletics",
+        "level": -1
+      }
+    ],
+    "description": "Light armor provides 1 point of damage reduction and has no stealth penalty."
+  },
+  "mediumArmor": {
+    "name": "Medium Armor",
+    "category": "mediumArmor",
+    "requirement": [
+      {
+        "skill": "athletics",
+        "level": 2
+      }
+    ],
+    "description": "Medium armor provides 3 point of damage reduction and has a -1 stealth penalty."
+  },
+  "heavyArmor": {
+    "name": "Heavy Armor",
+    "category": "heavyArmor",
+    "requirement": [
+      {
+        "skill": "brawn",
+        "level": 2
+      }
+    ],
+    "description": "Heavy armor provides 5 point of damage reduction and has a -3 stealth penalty."
+  },
+  "lightShield": {
+    "name": "Light Shields",
+    "category": "lightShield",
+    "requirement": [
+      {
+        "skill": "athletics",
+        "level": -1
+      }
+    ],
+    "description": "Light shields provide a +1 bonus to agility while raised, and have no speed penalty while equipped."
+  },
+  "mediumShield": {
+    "name": "Medium Shields",
+    "category": "mediumShield",
+    "requirement": [
+      {
+        "skill": "brawn",
+        "level": 2
+      }
+    ],
+    "description": "Medium shields provide a +3 bonus to agility while raised, and have no speed penalty while equipped."
+  },
+  "heavyShield": {
+    "name": "Heavy Shields",
+    "category": "heavyShield",
+    "requirement": [
+      {
+        "skill": "brawn",
+        "level": 4
+      }
+    ],
+    "description": "Heavy shields provide a +5 bonus to agility while raised, and have a -5 speed penalty while equipped."
+  },
+  "unarmedMeleeWeapon": {
+    "name": "Unarmed Fighting",
+    "category": "unarmedMeleeWeapon",
+    "requirement": [
+      {
+        "skill": "athletics",
+        "level": 1
+      }
+    ],
+    "description": "Unarmed melee weapons, including fists, feet, and tails, can attack with a Brawn roll or an Athletics roll and deal d6 + Athletics or Brawn damage on a hit."
+  },
+  "lightMeleeWeapon": {
+    "name": "Light Melee Weapons",
+    "category": "lightMeleeWeapon",
+    "requirements": [
+      {
+        "skill": "athletics",
+        "level": -1
+      }
+    ],
+    "description": "Light melee weapons, including daggers, light axes, and brass knuckles, attack with an Athletics roll and deal d6 + Athletics damage on a hit."
+  },
+  "finesseMeleeWeapon": {
+    "name": "Finesse Melee Weapons",
+    "category": "finesseMeleeWeapon",
+    "requirements": [
+      {
+        "skill": "athletics",
+        "level": 1
+      }
+    ],
+    "description": "Finesse melee weapons, including rapiers, attack with an Athletics roll and deal d8 + Athletics damage on a hit."
+  },
+  "oneHandedMeleeWeapon": {
+    "name": "One-handed Melee Weapons",
+    "category": "oneHandedMeleeWeapon",
+    "requirements": [
+      {
+        "skill": "brawn",
+        "level": -2
+      }
+    ],
+    "description": "One-handed melee weapons, including longswords, maces, and battleaxes, attack with a Brawn roll and deal d8 + Brawn damage on a hit."
+  },
+  "twoHandedMeleeWeapon": {
+    "name": "Two-handed Melee Weapons",
+    "category": "twoHandedMeleeWeapon",
+    "requirements": [
+      {
+        "skill": "brawn",
+        "level": 2
+      }
+    ],
+    "description": "Two-handed melee weapons, including greatswords, mauls, and spears, attack with a Brawn roll and deal d12 + Brawn damage on a hit."
+  },
+  "lightThrownWeapon": {
+    "name": "Light Thrown Weapons",
+    "category": "lightThrownWeapon",
+    "requirements": [
+      {
+        "skill": "athletics",
+        "level": -1
+      }
+    ],
+    "description": "Light thrown weapons, including daggers and throwing axes, attack with an Athletics roll and deal d6 + Athletics damage on a hit. They can attack targets up to 20ft away or up to 40ft away with disadvantage."
+  },
+  "heavyThrownWeapon": {
+    "name": "Heavy Thrown Weapons",
+    "category": "heavyThrownWeapon",
+    "requirements": [
+      {
+        "skill": "athletics",
+        "level": 1
+      }
+    ],
+    "description": "Heavy thrown weapons, including javelins, attack with an Athletics roll and deal d8 + Athletics damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
+  },
+  "oneHandedRangedWeapon": {
+    "name": "One-handed Ranged Weapons",
+    "category": "oneHandedRangedWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": -2
+      }
+    ],
+    "description": "One-handed ranged weapons, including slings and blowguns, attack with a Perception roll and deal d4 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
+  },
+  "twoHandedRangedWeapon": {
+    "name": "Two-handed Ranged Weapons",
+    "category": "twoHandedRangedWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": -2
+      }
+    ],
+    "description": "Two-handed ranged weapons, including shortbows, attack with a Perception roll and deal d6 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
+  },
+  "heavyRangedWeapon": {
+    "name": "Heavy Ranged Weapons",
+    "category": "heavyRangedWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": 2
+      },
+      {
+        "skill": "brawn",
+        "level": 2
+      }
+    ],
+    "description": "Heavy ranged weapons, including longbows, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
+  },
+  "lightLoadingWeapon": {
+    "name": "Light Loading Weapons",
+    "category": "lightLoadingWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": -2
+      }
+    ],
+    "description": "Light loading weapons, including hand crossbows and pistols, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
+  },
+  "twoHandedLoadingWeapon": {
+    "name": "Two-handed Loading Weapons",
+    "category": "twoHandedLoadingWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": -2
+      }
+    ],
+    "description": "Two-handed loading weapons, including light crossbows and rifles, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
+  },
+  "heavyLoadingWeapon": {
+    "name": "Heavy Loading Weapons",
+    "category": "heavyLoadingWeapon",
+    "requirements": [
+      {
+        "skill": "perception",
+        "level": 2
+      },
+      {
+        "skill": "brawn",
+        "level": 2
+      }
+    ],
+    "description": "Heavy Loading weapons, including heavy crossbows and sniper rifles, attack with a Perception roll and deal d12 + Perception damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
+  },
+  "craftedWeapon": {
+    "name": "Crafted Weapons",
+    "category": "craftedWeapon",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": 2
+      }
+    ],
+    "description": "Crafted weapons attack with a Handiworks. One-handed crafted weapons deal d8 + Handiworks damage on a hit, and two-handed crafted weapons deal d12 + Handiworks damage on a hit. They can attack targets up to 40ft away or up to 120ft away with disadvantage."
+  },
+  "arcaneMagicWeapon": {
+    "name": "Arcane Focuses",
+    "category": "arcaneMagicWeapon",
+    "requirements": [
+      {
+        "skill": "knowledge",
+        "level": 2
+      }
+    ],
+    "description": "Arcane weapons attack with a Knowledge. One-handed arcane weapons deal d6 + Knowledge damage on a hit, and two-handed arcane weapons deal d10 + Knowledge damage on a hit. They can attack targets up to 40ft away or up to 120ft away with disadvantage."
+  },
+  "divineMagicWeapon": {
+    "name": "Divine Focuses",
+    "category": "divineMagicWeapon",
+    "requirements": [
+      {
+        "skill": "wisdom",
+        "level": 1
+      }
+    ],
+    "description": "Divine weapons attack with a Wisdom. One-handed divine weapons deal d4 + Wisdom damage on a hit, and two-handed divine weapons deal d8 + Wisdom damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away or up to 120ft away with disadvantage."
+  },
+  "unityMagicWeapon": {
+    "name": "Unity Focuses",
+    "category": "unityMagicWeapon",
+    "requirements": [
+      {
+        "skill": "synergy",
+        "level": 1
+      }
+    ],
+    "description": "Unity weapons attack with a Synergy. One-handed unity weapons deal d4 + Synergy damage on a hit, and two-handed unity weapons deal d8 + Synergy damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away or up to 120ft away with disadvantage."
+  },
+  "arcanistTool": {
+    "name": "Arcanist's Tools",
+    "category": "arcanistTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Arcanist's Tools allow you to enchant objects, create magic weapons, and create static magical effects such as traps and wards."
+  },
+  "artisanTool": {
+    "name": "Artisan's Tools",
+    "category": "artisanTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Artisan's Tools allow you to work with paint, wood, stone, glasss, jewelry, and other materials to create objects or artwork with them."
+  },
+  "chemistTool": {
+    "name": "Chemist's Tools",
+    "category": "chemistTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Chemist's tools allow you to create all sorts of potions and poisons."
+  },
+  "explorerTool": {
+    "name": "Explorer's Tools",
+    "category": "explorerTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Explorer's tools allow you to plot maps, set snares, create and deploy traps, and climb sheer surfaces."
+  },
+  "smithTool": {
+    "name": "Smith's Tools",
+    "category": "smithTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Smith's tools allow you to forge and repair weapons and armor."
+  },
+  "spyTool": {
+    "name": "Spy's Tools",
+    "category": "spyTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Spy's Tools allow you to create disguises, fake documents, and forge signatures and seals."
+  },
+  "thiefTool": {
+    "name": "Thief's Tools",
+    "category": "thiefTool",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "Thief's Tools allow you to pick locks on doors and chests, as well as disable traps."
+  },
+  "ridingVehicle": {
+    "name": "Mounts",
+    "category": "ridingVehicle",
+    "requirements": [
+      {
+        "skill": "athletics",
+        "level": -1
+      }
+    ],
+    "description": "A proficiency in Mounts allows you to gain the speed of a mount while in combat."
+  },
+  "seaVehicle": {
+    "name": "Sea Vehicles",
+    "category": "seaVehicle",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": -1
+      }
+    ],
+    "description": "A proficiency in sea vehicles allows you to perform any task needed in the maintenance and navigation aboard a naval vessel."
+  },
+  "airVehicle": {
+    "name": "Air Vehicles",
+    "category": "airVehicle",
+    "requirements": [
+      {
+        "skill": "handiwork",
+        "level": 1
+      }
+    ],
+    "description": "A proficiency in air vehicles allows you to pilot and control vehicles that fly through the sky, such as airships, balloons, and airplanes."
+  }
 }

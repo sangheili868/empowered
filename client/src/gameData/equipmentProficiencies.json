@@ -96,7 +96,7 @@
         "level": 1
       }
     ],
-    "description": "Finesse melee weapons, including rapiers, attack with an Athletics roll and deal d8 + Athletics damage on a hit."
+    "description": "Finesse melee weapons, including rapiers and curveblades, attack with an Athletics roll. One-handed finesse weapons deal d8+Athletics damage on a hit, and two-handed finesse weapons deal d12+Athletics damage on a hit. "
   },
   "oneHandedMeleeWeapon": {
     "name": "One-handed Melee Weapons",

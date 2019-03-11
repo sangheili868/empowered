@@ -245,6 +245,11 @@
       height: 40px;
     }
 
+
+    .moreInfo {
+      padding: 5px;
+    }
+
     .tableBuy {
       min-width: 0;
 
@@ -256,22 +261,22 @@
         background-color: $failure;
       }
     }
-
-    .moreInfo {
-      padding: 5px;
-      border-radius: 10px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: $orange;
-        color: $pale;
-      }
-    }
   }
 }
 
 .columnHeader {
   font-weight: bold;
+}
+
+.moreInfo {
+  padding: 0 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $pale;
+  }
 }
 
 .tableAdd {

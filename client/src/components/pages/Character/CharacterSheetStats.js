@@ -65,7 +65,7 @@ class CharacterSheetStats extends Component {
               </div>
             ]}
             items={pick(this.props.stats.equipment, ['heavy', 'medium', 'light'])}
-            editItem={(columnName, item, index) => 
+            editItem={(columnName, item, index) =>
               <EmpItemEditor
                 key={index}
                 isInline
@@ -107,16 +107,21 @@ class CharacterSheetStats extends Component {
           <CharacterSheetStatsList
             title="Proficiencies"
             items={this.props.stats.proficiencies}
-            editItem={(columnName, item, index) => 
+            editItem={(columnName, item, index) =>
               <EmpItemEditor
                 key={index}
                 isInline
-                title="Edit a Proficiency"
-                deletingText={columnName !== 'languages' ? `
-                  If you delete your ${
-                    this.props.stats.proficiencies[columnName][index].name
-                  } proficiency, you will regain 1 advancement.
-                ` : ''}
+                title={item.name}
+                deletingText={columnName == 'languages' ? '' : (
+                  <>
+                    <p>{item.description}</p>
+                    <p>
+                      If you delete your {
+                        this.props.stats.proficiencies[columnName][index].name
+                      } proficiency, you will regain 1 advancement.
+                    </p>
+                  </>
+                )}
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
                 }) : {}}
@@ -141,6 +146,10 @@ class CharacterSheetStats extends Component {
           <CharacterSheetStatsList
             title="Combat"
             items={this.props.stats.actions}
+            tooltips={{
+              title: 'name',
+              body: 'description'
+            }}
           />
           <CharacterSheetTable
             title="Features"

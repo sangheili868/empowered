@@ -190,7 +190,7 @@ class CharacterSheetStatsResources extends Component {
                 title={'Edit a Condition'}
                 fields={chain(item)
                   .pick(['name'])
-                  .mapValues((value, key) => ({ value, default: Object.keys(conditionData).map(condition => ({
+                  .mapValues((value) => ({ value, default: Object.keys(conditionData).map(condition => ({
                     text: condition,
                     value: condition
                   }))}))
@@ -206,7 +206,7 @@ class CharacterSheetStatsResources extends Component {
                   newConditions[index].deleted = true
                   this.props.onUpdate({ stats: { conditions: newConditions }})
                 }}
-                description={({ name }) => name && conditionData[name.value].description}
+                description={({ name }) => name && name.value && conditionData[name.value].description}
               >
                 {item.name}
               </EmpItemEditor>
@@ -214,8 +214,15 @@ class CharacterSheetStatsResources extends Component {
             addToList={() =>
               <EmpItemEditor
                 title={'Add a Condition'}
-                fields={{ name: '' }}
-                onUpdate={values =>this.props.onUpdate({ stats: { conditions: [
+                fields={{ name: {
+                  value: '',
+                  default: Object.keys(conditionData).map(condition => ({
+                    text: condition,
+                    value: condition
+                  }))
+                }}}
+                description={({ name }) => name && name.value && conditionData[name.value].description}
+                onUpdate={values => this.props.onUpdate({ stats: { conditions: [
                   ...this.props.stats.conditions,
                   values
                 ]}})}
@@ -231,7 +238,7 @@ class CharacterSheetStatsResources extends Component {
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}
-                onUpdate={(value) =>this.props.onUpdate({stats: { powerDice: { [dieSize]: {
+                onUpdate={(value) => this.props.onUpdate({stats: { powerDice: { [dieSize]: {
                   current: value
                 }}}})}
                 alt={dieSize}

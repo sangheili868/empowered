@@ -1,0 +1,25 @@
+@import "src/styles/colors.scss";
+
+.card {
+  text-align: start;
+  margin: 10px;
+
+  &.concepts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .concept {
+      width: 150px;
+      white-space: nowrap;
+      border: 1px solid $black;
+      padding: 3px 10px;
+    }
+  }
+
+  .link {
+    color: $orange;
+    text-decoration: underline;
+    display: block;
+  }
+}

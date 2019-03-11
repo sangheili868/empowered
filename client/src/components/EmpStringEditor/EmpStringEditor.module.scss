@@ -1,0 +1,26 @@
+@import "src/styles/colors.scss";
+
+.editor {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $pale;
+  }
+}
+
+.editing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .input {
+    flex: 1;
+  }
+
+  .doneButton {
+    margin: 5px;
+  }
+}

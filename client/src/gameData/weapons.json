@@ -23,6 +23,11 @@
     "skill": "athletics",
     "damageDie": "d8"
   },
+  "twoHandedFinesseWeapons": {
+    "skill": "athletics",
+    "damageDie": "d12",
+    "tags": [ "two-handed" ]
+  },
   "oneHandedMeleeWeapon": {
     "skill": "brawn",
     "damageDie": "d8"
@@ -85,6 +90,18 @@
     "damageDie": "d12",
     "range": 160,
     "tags": [ "two-handed", "ranged", "loading", "heavy" ]
+  },
+  "oneHandedCraftedWeapon": {
+    "skill": "handiwork",
+    "damageDie": "d8",
+    "range": 40,
+    "tags": [ "ranged" ]
+  },
+  "twoHandedCraftedWeapon": {
+    "skill": "handiwork",
+    "damageDie": "d12",
+    "range": 40,
+    "tags": [ "two-handed", "ranged" ]
   },
   "oneHandedArcaneWeapon": {
     "skill": "knowledge",

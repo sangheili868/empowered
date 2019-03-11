@@ -1,0 +1,19 @@
+@import "../../styles/colors.scss";
+
+.navBar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  background-color: $orange;
+
+  .navLink {
+    margin: 10px;
+    color: $pale;
+  }
+
+  .current .navLink{
+    font-weight: bold;
+    color: $white;
+  }
+}

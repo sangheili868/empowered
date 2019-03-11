@@ -1,0 +1,21 @@
+@import "src/styles/colors.scss";
+
+.button {
+  color: $white;
+  padding: 5px;
+  background-color: $orange;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 5px 1px $grey;
+  transition: background-color 500ms;
+  min-width: 80px;
+
+  &:active {
+    box-shadow: inset 1px 1px 5px 1px $grey;
+  }
+
+  &:hover {
+    background-color: $darkOrange;
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "New Character",
+  "name": "",
   "portrait": "",
   "bio": {
     "highConcept": "",
@@ -7,6 +7,7 @@
     "ancestry": "",
     "homeland": "",
     "age": "",
+    "faith": "",
     "description": "",
     "personalityTrait1": "",
     "personalityTrait2": "",
@@ -16,7 +17,7 @@
     "fear": "",
     "friend": "",
     "enemy": "",
-    "otherCharacter": "",
+    "otherContact": "",
     "organization": "",
     "goodMemory": "",
     "badMemory": "",
@@ -27,7 +28,7 @@
     "equipment": ""
   },
   "stats": {
-    "hitPoints": 0,
+    "hitPoints": 4,
     "tempHP": 0,
     "wounds": 0,
     "armor": {
@@ -72,76 +73,31 @@
         "max": 0
       }
     },
-    "weapons": [
-      {
-        "name": "",
-        "category": ""
-      }
-    ],
+    "conditions": [],
+    "weapons": [],
     "equipment": {
       "gold": 100,
       "heavy": [],
       "medium": [],
-      "light": [
-        {
-          "name": "",
-          "quantity": 0
-        }
-      ]
+      "light": []
     },
-    "languages": [
-      "",
-      ""
-    ],
-    "proficiencies": [],
-    "features": [
-      {
-        "name": "",
-        "requirements": {
-          "skill": {
-            "name": "",
-            "level": -3
-          },
-          "weapon": "",
-          "item": "",
-          "other": ""
+    "proficiencies": {
+      "languages": [
+        {
+          "name": "Common"
         },
-        "type": [
-          "boosted",
-          "empowered",
-          "action"
-        ],
-        "description": "",
-        "boosted": "",
-        "playerMade": false,
-        "metadata": {
-
+        {
+          "name": "Native"
         }
-      }
-    ]
+      ],
+      "equipment": []
+    },
+    "features": []
   },
   "shop": {
-    "advancements": 0,
-    "totalEarned": 0,
-    "features": [
-      {
-        "name": "",
-        "requirements": {
-          "skill": {
-            "name": "",
-            "level": -3
-          },
-          "weapon": "",
-          "item": "",
-          "other": ""
-        },
-        "type": "",
-        "description": "",
-        "playerMade": false,
-        "metadata": {
-
-        }
-      }
-    ]
+    "advancements": 20,
+    "totalEarned": 20,
+    "unlocked": false,
+    "features": []
   }
 }

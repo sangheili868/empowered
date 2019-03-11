@@ -1,14 +1,42 @@
 @import "src/styles/colors.scss";
 
+.alert {
+  position: sticky;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+
+  .saveButton {
+    margin: 10px;
+  }
+}
+
+.manageCharacter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
 .title {
-  font-size: 20px;
+  width: 100%;
+  color: $white;
+  border-radius: 10px;
+  min-width: 100px;
+  font-size: 16px;
   font-weight: bold;
-  margin: 5px;
+  background-color: $orange;
+  padding: 0 10px;
 }
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  margin-bottom: 20px;
 
   .name {
     font-size: 50px;
@@ -16,70 +44,254 @@
 
   .portrait {
     max-height: 200px;
+    max-width: 200px;
+    border-radius: 10px;
+  }
+}
+
+.bio {
+  border: 1px solid $dark;
+  border-radius: 10px;
+  margin: 5px;
+
+  .bioTable {
+    border-collapse: collapse;
+    width: 100%;
+
+    .row {
+      border-top: 1px solid $dark;
+
+      &:first-of-type {
+        border-top: none;
+
+        .cell.field {
+          border-radius: 10px 0 0 0;
+        }
+      }
+
+      &:last-of-type .cell.field {
+        border-radius: 0 0 0 10px;
+      }
+
+      .cell {
+        font-size: 14px;
+        padding: 10px;
+
+        &.field {
+          background-color: $orange;
+          color: $white;
+          width: 100px;
+          cursor: pointer;
+
+          &:active {
+            box-shadow: inset 1px 1px 5px 1px $grey;
+          }
+
+          &:hover {
+            background-color: $darkOrange;
+          }
+        }
+
+        &.description {
+          text-align: left;
+          border-left: 1px solid $dark;
+        }
+      }
+    }
   }
 }
 
 .resources {
   display: flex;
   justify-content: space-around;
+  flex: 1;
+  flex-wrap: wrap;
 
   .resource {
     margin: 20px;
   }
-  
+
   .info {
     position: relative;
-  
+    user-select: none;
+    font-weight: bold;
+    font-size: 24px;
+
+    .valueRow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+
+      .counter {
+        background-color: $dark;
+        padding: 0 1px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px 1px $dark;
+        cursor: pointer;
+
+        &:active {
+          box-shadow: none;
+        }
+
+        &.minus {
+          color: $failure;
+        }
+
+        &.plus {
+          color: $success;
+        }
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+
+      .spacer {
+        width: 31px;
+      }
+    }
+
     .icon {
+      top: 0;
       position: absolute;
       left: calc(50% - 25px);
       opacity: 0.2;
+      width: 50px;
     }
-  
+
     .value {
-      padding-top: 10px;
-      font-size: 24px;
+      display: flex;
     }
-  
+
     .subtext {
       font-size: 14px;
     }
   }
+
+  .recoveryButton {
+    min-width: 0;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+
+    .recoveryImg {
+      height: 25px;
+    }
+  }
 }
 
-.section {
-  display: inline-block;
-  border: 1px solid $black;
-  border-radius: 10px;
-  margin: 5px;
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
 
-  .title {
-    display: inline-block;
-  }
+.subtitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 12px;
 
   .subtitle {
-    display: flex;
-    justify-content: space-around;
-    font-size: 12px;
+    margin: 5px;
+  }
+}
+
+.list {
+  display: inline-flex;
+  margin: 0 3px 3px;
+  font-size: 12px;
+
+  .column {
+    padding: 0 10px 5px;
+  }
+}
+
+.table {
+  font-size: 12px;
+  width: 100%;
+  border-collapse: collapse;
+
+  &.borderless {
+    margin: 0 10px 10px;
+    width: calc(100% - 20px);
   }
 
-  .table {
-    display: inline-flex;
-    margin: 0 3px 3px;
-    font-size: 12px;
+  .title {
+    display: table-cell;
+  }
 
-    .column {
-      padding: 0 10px 5px;
+  .cell {
+    border: solid $dark 1px;
+    border-right: none;
+    border-bottom: none;
+    padding: 5px 10px;
 
-      .columnHeader {
-        font-size: 16px;
+    &.columnHeader {
+      border-top: none;
+    }
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &.buy {
+      min-width: 100px;
+      height: 40px;
+    }
+
+    .tableBuy {
+      min-width: 0;
+
+      &.plus {
+        background-color: $success;
       }
 
-      .spacer {
-        padding: 5px 0;
-        line-height: 2;
-        white-space: pre-wrap;
+      &.minus {
+        background-color: $failure;
+      }
+    }
+
+    .moreInfo {
+      padding: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $orange;
+        color: $pale;
       }
     }
   }
+}
+
+.columnHeader {
+  font-weight: bold;
+}
+
+.tableAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.languages {
+  padding: 10px;
+  font-size: 12px;
+  max-width: 200px;
+
+  .newLanguage {
+    background-color: $success;
+    margin-top: 10px;
+  }
+}
+
+.unlockText {
+  margin: 20px;
 }

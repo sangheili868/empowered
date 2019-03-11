@@ -1,131 +1,157 @@
 {
-  "actions": {
-    "attack": {
+  "actions": [
+    {
       "name": "Attack",
-      "cardinal": true,
-      "description": "When you make an attack, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss."
+      "description": "When you make an attack, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.",
+      "tags": ["cardinal"]
     },
-    "delay": {
+    {
       "name": "Delay",
-      "cardinal": true,
-      "description": "You gain an additional action on your next turn."
+      "description": "You gain an additional action on your next turn.",
+      "tags": ["cardinal"]
     },
-    "distract": {
+    {
+      "name": "Wrestle",
+      "description": "If you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Brace",
+      "description": "Roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points above 10. For example, if you roll 22, you get two points of armor.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Frighten",
+      "description": "You attempt to scare off an enemy. Roll intimidation against the willpower of a creature within 20 feet. If you succeed, the creature becomes frightened of you until the start of your side's next turn.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Hide",
+      "description": "Roll stealth while behind cover. You are considered unseen to all creatures on the other side of the cover until you reveal yourself, you enter their line of sight, or they take the Search skill action.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Search",
+      "description": "Roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Analyze",
+      "description": "You attempt to predict a creature’s next move by reading its body language. Roll insight against its stealth. If you succeed, that creature must choose now and reveal to you the first action it will take on its next turn.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Disrupt",
+      "description": "Roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your rolled above 10. For example, if you rolled a 22, the creature gains a -2 bonus.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Focus",
+      "description": "Roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points above 5. For example, if you roll 22, you get a +3 bonus.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Help",
+      "description": "When a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll above 10. For example, if you rolled a 22, the creature takes a -2 penalty.",
+      "tags": ["skill"]
+    },
+    {
       "name": "Distract",
-      "cardinal": false,
-      "description": "You attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage."
+      "description": "You attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage.",
+      "tags": ["skill"]
     },
-    "dodge": {
+    {
+      "name": "Use a skill",
+      "description": "You attempt to take some other action that requires a skill roll. The DM decides the skill you use and the DC to meet.",
+      "tags": ["skill"]
+    },
+    {
+      "name": "Off-hand Attack",
+      "description": "You strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn.",
+      "tags": ["skill"]
+    },
+    {
       "name": "Dodge",
-      "cardinal": false,
       "description": "You focus your efforts towards avoiding attacks. You gain +1 to all agility rolls to avoid attacks and features, until the start of your next turn."
     },
-    "draw": {
+    {
       "name": "Draw Items",
-      "cardinal": false,
       "description": "You can stow up to two items from your hands or body into your inventory, and then draw up to two items from your inventory into your hands or onto your body. In addition, you can switch which items are in which hands."
     },
-    "frighten": {
-      "name": "Frighten",
-      "cardinal": false,
-      "description": "You attempt to scare off an enemy. Roll intimidation against the willpower of a creature within 20 feet. If you succeed, the creature becomes frightened of you until the start of your side's next turn."
-    },
-    "help": {
-      "name": "Help",
-      "cardinal": false,
-      "description": "You attempt to assist an ally. When a creature on your side rolls a skill as part of an action, you can take an action at the same time to add your synergy modifier or your modifier of the skill they are rolling to their roll, whichever is lower."
-    },
-    "interact": {
+    {
       "name": "Interect with Object",
-      "cardinal": false,
       "description": "You pick up, kick away, pull, open, move, or interact in some other way with an object that no one is holding or wearing. A skill roll of the DM's choice may be required."
     },
-    "move": {
+    {
       "name": "Move",
-      "cardinal": false,
       "description": "You begin moving a distance up to your speed. You can take other actions at any point of this movement."
     },
-    "offHandAttack": {
-      "name": "Off-hand Attack",
-      "cardinal": false,
-      "description": "You strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn."
+    {
+      "name": "Raise a Shield",
+      "description": "You gain the agility bonus granted by a shield you are holding until the start of your side's next turn."
     },
-    "ready": {
+    {
       "name": "Ready",
-      "cardinal": false,
       "description": "You prepare to take an action outside of your turn. Choose an action and a trigger. If the chosen action is cardinal, so is this action. If the trigger occurs before the start of your side's next turn, you can use your reaction to perform that action. "
     },
-    "reload": {
+    {
       "name": "Reload",
-      "cardinal": false,
       "description": "You reload one weapon that you are holding that has the loading property."
     },
-    "stepAway": {
+    {
       "name": "Step Away",
-      "cardinal": false,
       "description": "You carefully step away from enemies. You move five feet, and enemies cannot take opportunity attacks against you during this movement."
     },
-    "takeCover": {
+    {
       "name": "Take Cover",
-      "cardinal": false,
       "description": "If there is someone or something your size or larger, you can take cover behind it as an action. You have advantage on agility rolls to avoid anything that originates from the other side of the cover."
-    },
-    "skill": {
-      "name": "Use a skill",
-      "cardinal": false,
-      "description": "You attempt to take some other action that requires a skill roll. The DM decides the skill you use and the DC to meet."
-    },
-    "wrestle": {
-      "name": "Wrestle",
-      "cardinal": false,
-      "description": "If you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers. If you roll a natural 1, your target can apply a maneuver to you."
     }
-  },
-  "maneuvers": {
-    "disarm": {
+  ],
+  "maneuvers": [
+    {
       "name": "Disarm",
       "description": "The target drops one item of your choice in their space."
     },
-    "grab": {
+    {
       "name": "Grab",
       "description": "The target becomes grappled by you until they escape."
     },
-    "seize": {
+    {
       "name": "Seize",
       "description": "You forcibly lift the target up into the air. The target becomes grappled by you until they escape. While grappled this way, the target has advantage on attacks against you, ranged weapon attacks have advantage against the target."
     },
-    "shove": {
+    {
       "name": "Shove",
       "description": "You move the target up to 5 feet in a direction of your choice. This movement does not provoke attacks of opportunity."
     },
-    "tackle": {
+    {
       "name": "Tackle",
       "description": "You and the target become prone. The target becomes grappled by you until they escape or you stand up."
     },
-    "throw": {
+    {
       "name": "Throw",
       "description": "You can choose this maneuver only if you are already grappling the target. You throw them and they land prone up to 20 feet away from you."
     },
-    "trip": {
+    {
       "name": "Trip",
       "description": "The target becomes prone until they stand up."
     }
-  },
-  "reactions": {
-    "opportunityAttack": {
+  ],
+  "reactions": [
+    {
       "name": "Attack of Opportunity",
       "trigger": "A creature that you can see moves out of a space within 5 feet of you as part of the move action.",
       "result": "You can take the attack action, targeting the creature that triggered the attack."
     },
-    "ready": {
+    {
       "name": "Ready",
       "trigger": "An event occurs that you choose as a trigger when you took the Ready action.",
       "result": "You perform the action you chose as part of the Ready action."
     },
-    "identify": {
+    {
       "name": "Identify",
       "trigger": "A creature you can see uses a feature or item, or the effect of a passive feature is applied.",
       "result": "You can make a knowledge roll with a DC chosen by the DM. If you succeed, the DM describes the feature or item to you."
     }
-  }
+  ]
 }

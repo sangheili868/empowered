@@ -1,0 +1,38 @@
+@import "src/styles/colors.scss";
+
+.rules {
+  display: flex;
+  flex-direction: column;
+
+  .card {
+    padding: 10px;
+    text-align: justify;
+    text-indent: 30pt;
+  }
+
+  .table {
+    margin: 5px auto;
+    text-align: center;
+    user-select: none;
+
+    .columnHeader {
+      font-weight: bold;
+    }
+  }
+
+  .nestingCard {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.skill {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $white;
+  }
+}

@@ -7,6 +7,7 @@
     "ancestry": "Void Elf",
     "homeland": "Ushal",
     "age": "174",
+    "faith": "Minor devotion to Vuhdea, goddess of Joy and Pleasure",
     "description": "Dark grey skin, long, beautiful white hair, piercing grey eyes, ornate armor with hi-low dress",
     "personalityTrait1": "I collect and spread rumors and gossip wherever I go.",
     "personalityTrait2": "I need to be surrounded by the rich and beautiful.",
@@ -16,7 +17,7 @@
     "fear": "My lies get me into a place full of suffering, such as prison or war, where I have to constantly see people upset.",
     "friend": "A drug dealer who grew up on the streets with me.",
     "enemy": "A former lover who killed my mentor",
-    "otherCharacter": "Mother still works as a servant",
+    "otherContact": "Mother still works as a servant",
     "organization": "House Perla is my next shot at success.",
     "goodMemory": "An upper-class woman adopted me and taught me how to navigate the complex social society of the wealthiest people in Ushal",
     "badMemory": "A former lover killed my mentor and wants me to suffer after I lied to him.",
@@ -72,6 +73,14 @@
         "max": 0
       }
     },
+    "conditions": [
+      {
+        "name": "Frightened"
+      },
+      {
+        "name": "Grappled"
+      }
+    ],
     "weapons": [
       {
         "name": "Rapier",
@@ -90,12 +99,30 @@
       "gold": 150,
       "heavy": [],
       "medium": [
-        "Light Armor",
-        "Rapier",
-        "Violin",
-        "Crystal",
-        "Spy's Tools",
-        "Chemist's Tools"
+        {
+          "name": "Light Armor",
+          "quantity": 1
+        },
+        {
+          "name": "Rapier",
+          "quantity": 1
+        },
+        {
+          "name": "Violin",
+          "quantity": 1
+        },
+        {
+          "name": "Crystal",
+          "quantity": 1
+        },
+        {
+          "name": "Spy's Tools",
+          "quantity": 1
+        },
+        {
+          "name": "Chemist's Tools",
+          "quantity": 1
+        }
       ],
       "light": [
         {
@@ -132,18 +159,36 @@
         }
       ]
     },
-    "languages": [
-      "Volic",
-      "Ethactic"
-    ],
-    "proficiencies": [
-      "lightArmor",
-      "finesseMeleeWeapon",
-      "arcaneWeapon",
-      "unityWeapon",
-      "spyTool",
-      "chemistTool"
-    ],
+    "proficiencies": {
+      "languages": [
+        {
+          "name": "Volic"
+        },
+        {
+          "name": "Ethactic"
+        }
+      ],
+      "equipment": [
+        {
+          "category": "lightArmor"
+        },
+        {
+          "category": "finesseMeleeWeapon"
+        },
+        {
+          "category": "arcaneMagicWeapon"
+        },
+        {
+          "category": "unityMagicWeapon"
+        },
+        {
+          "category": "spyTool"
+        },
+        {
+          "category": "chemistTool"
+        }
+      ]
+    },
     "features": [
       {
         "name": "Forked Tongue",
@@ -158,6 +203,7 @@
           "skill"
         ],
         "description": "You can empower persuasion rolls that include a lie.",
+        "cost": 1,
         "playerMade": true,
         "metadata": {
           "empSkill": {
@@ -182,6 +228,7 @@
           "action"
         ],
         "description": "As an action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
+        "cost": 1,
         "playerMade": true
       },
       {
@@ -200,7 +247,8 @@
           "empowered",
           "action"
         ],
-        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use an action to end the illusion, or an action to create it again. It must be the same creature for each casting of the spell."
+        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use an action to end the illusion, or an action to create it again. It must be the same creature for each casting of the spell.",
+        "cost": 1
       },
       {
         "name": "Memory Theft",
@@ -217,6 +265,7 @@
           "reaction"
         ],
         "description": "As an empowered reaction when a creature dies within the range of your focus, you can capture some of its memories. You ask the DM one question, and if the creature knew the answer to that question, the DM reveals it to you.",
+        "cost": 1,
         "boosted": "You may ask up to three questions."
       },
       {
@@ -225,20 +274,168 @@
           "passive",
           "flaw"
         ],
-        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you take 1d4 mental damage unless you convince them otherwise."
+        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you take 1d4 mental damage unless you convince them otherwise.",
+        "cost": 1
       }
     ]
   },
   "shop": {
-    "advancements": 0,
-    "totalEarned": 35,
+    "advancements": 5,
+    "totalEarned": 40,
+    "unlocked": true,
     "features": [
       {
-        "name": "WIP",
+        "name": "Suggestion",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
         "type": [
-          "passive"
+          "cardinal",
+          "empowered",
+          "action"
         ],
-        "description": "Shop features not added yet"
+        "description": "As a cardinal action, you make an empowered synergy roll against the willpower of a creature within the range of your focus. If you succeed, the target pursues a course of action of your choice to the best of its ability. The target will not cause harm to itself, physically or otherwise, and the spell ends after 8 hours, when the target completes the action, or when you or any of your companions harms the target. If you fail the roll, the target realizes it was affected by magic."
+      },
+      {
+        "name": "Message",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "action"
+        ],
+        "description": "As an action, choose a creature within 120 ft. You must see it or know its approximate location. The target mentally receives a simple message from you and can mentally transmit a simple message back to you."
+      },
+      {
+        "name": "Terrifying Whispers",
+        "cost": 2,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 2
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "empowered",
+          "attack"
+        ],
+        "description": "You can empower an attack with a passion focus. If you hit with that attack, the creature is frightened for 1 minute of you or another creature of your choice that both you and the target can see."
+      },
+      {
+        "name": "Mage Hand",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          },
+          "weapon": "unityWeapon"
+        },
+        "type": [
+          "cardinal",
+          "action"
+        ],
+        "description": "As an empowered action, you create a spectral hand within 30 feet of you. It has one action on each of your turns, and it can use the Interact with Item, Move, or Wrestle actions. It has a speed of 10 feet and uses your synergy modifier for all of its rolls. Boosted: The hand can make the attack and help action, and is proficient with all weapons. It can also make a distract action against a creature within 5 feet of it."
+      },
+      {
+        "name": "Darkness",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": 2
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "type": [
+          "cardinal",
+          "action",
+          "empowered",
+          "boosted"
+        ],
+        "description": "As an empowered action, you create a 20 ft radius shadowy cloud within 120 ft of you for 1 minute. Creatures cannot see other creatures within the cloud, and creatures within the cloud cannot see. Boosted: You can see anything inside the cloud."
+      },
+      {
+        "name": "Invisibility",
+        "cost": 2,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": 4
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "type": [
+          "cardinal",
+          "empowered",
+          "action",
+          "boosted"
+        ],
+        "description": "As an empowered action, you cannot be seen for 1 hour. If you perform any action that interacts with a creature or object other than yourself or an object you are holding, the spell ends. Boosted: The first time the spell would end because of an action you take, it does not end."
+      },
+      {
+        "name": "Jack of All Trades",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": -1
+          }
+        },
+        "type": [
+          "empowered"
+        ],
+        "description": "When you roll a skill that you have a negative modifier in, you can expend a power die to treat your modifier as +0. Boosted: Treat the modifier as +1 instead."
+      },
+      {
+        "name": "Deceptive Reasoning",
+        "cost": 1,
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": 1
+          }
+        },
+        "type": [
+          "passive",
+          "persuasion"
+        ],
+        "description": "If a creature sees an illusion you create and does not realize that it is an illusion, you gain advantage on Persuasion rolls against that creature."
+      },
+      {
+        "name": "Fey Lineage",
+        "cost": 1,
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "type": [
+          "passive",
+          "willpower"
+        ],
+        "description": "You can empower willpower rolls to avoid being charmed or put to sleep."
+      },
+      {
+        "name": "Wasteland Survival",
+        "cost": 1,
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "type": [
+          "passive",
+          "investigation"
+        ],
+        "description": "You can empower Investigation checks to find food in arctic, desert, and underground environments."
       }
     ]
   }

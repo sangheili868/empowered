@@ -2,26 +2,11 @@
 
 .App {
   text-align: center;
+  padding-bottom: 50px;
 
   .title {
     font-size: 30px;
     margin: 10px;
-  }
-
-  .nav-bar {
-    display: flex;
-    width: calc(100%-40px);
-    justify-content: space-around;
-    border-radius: 10px;
-
-    .nav-link {
-      padding: 10px;
-      background-color: $orange;
-      border-radius: 10px;
-      border: 1px solid $black;
-      width: 110px;
-      cursor: pointer;
-    }
   }
 }
 

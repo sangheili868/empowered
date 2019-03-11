@@ -236,7 +236,7 @@
         "level": 2
       }
     ],
-    "description": "Arcane weapons attack with a Knowledge. One-handed arcane weapons deal d6 + Knowledge damage on a hit, and two-handed arcane weapons deal d10 + Knowledge damage on a hit. They can attack targets up to 40ft away or up to 120ft away with disadvantage."
+    "description": "Arcane weapons attack with a Knowledge. One-handed arcane weapons deal d6 + Knowledge damage on a hit, and two-handed arcane weapons deal d10 + Knowledge damage on a hit. They can attack targets up to 40ft away."
   },
   "divineMagicWeapon": {
     "name": "Divine Focuses",
@@ -247,7 +247,7 @@
         "level": 1
       }
     ],
-    "description": "Divine weapons attack with a Wisdom. One-handed divine weapons deal d4 + Wisdom damage on a hit, and two-handed divine weapons deal d8 + Wisdom damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away or up to 120ft away with disadvantage."
+    "description": "Divine weapons attack with a Wisdom. One-handed divine weapons deal d4 + Wisdom damage on a hit, and two-handed divine weapons deal d8 + Wisdom damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away."
   },
   "unityMagicWeapon": {
     "name": "Unity Focuses",
@@ -258,7 +258,7 @@
         "level": 1
       }
     ],
-    "description": "Unity weapons attack with a Synergy. One-handed unity weapons deal d4 + Synergy damage on a hit, and two-handed unity weapons deal d8 + Synergy damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away or up to 120ft away with disadvantage."
+    "description": "Unity weapons attack with a Synergy. One-handed unity weapons deal d4 + Synergy damage on a hit, and two-handed unity weapons deal d8 + Synergy damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away."
   },
   "arcanistTool": {
     "name": "Arcanist's Tools",

@@ -118,7 +118,7 @@
     },
     {
       "name": "Seize",
-      "description": "After successfully wrestling, you forcibly lift the target up into the air. The target becomes grappled by you until they escape. While grappled this way, the target has advantage on attacks against you, ranged weapon attacks have advantage against the target."
+      "description": "After successfully wrestling, you forcibly lift the target up into the air. The target becomes grappled by you until they escape. While grappled this way, the target has advantage on attacks against you, and ranged weapon attacks have advantage against the target."
     },
     {
       "name": "Shove",

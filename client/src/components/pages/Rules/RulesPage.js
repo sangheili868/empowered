@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { rules, card, table, columnHeader, nestingCard } from "./RulesPage.module.scss"
+import { rules, card, table, critical, columnHeader } from "./RulesPage.module.scss"
 import EmpCard from '../../EmpCard/EmpCard'
 import { startCase } from 'lodash'
 import RulesSkill from './RulesSkill'
@@ -37,7 +37,7 @@ class RulesPage extends Component {
             </tbody>
           </table>
         </EmpCard>
-        <EmpCard title="Using Skills" className={nestingCard}>
+        <EmpCard title="Using Skills">
           <div className={card}>
             <p>
               You have six ability scores and fifteen skills. Most skills are tied to two different ability scores. Each of these skills has a modifier equal to the sum of each of these ability scores. For example, the skill Athletics is tied to the abilities Strong and Quick. So if your Strong score is +3 and your Quick score is -1, your Athletics modifier is +2. Some other skills are tied to only one ability. Their modifiers are equal to twice the ability score. For example, a Strong score of +3 gives you a Brawn modifier of +6.
@@ -139,8 +139,48 @@ class RulesPage extends Component {
               If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table below. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table below. If you attack a creature within 5 feet of you, and an enemy of your target is flanking it (on the opposite side of them from you), you gain advantage on the attack. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
             </p>
             <p>
-              Various actions and features can cause conditions. Each condition grants a new action that allows you to attempt to end the condition. Conditions can also end early if the action or feature that caused it gives a way to.
+              Various actions and features can cause conditions, such as frightened and prone. Each condition grants a new action that allows you to attempt to end the condition. Conditions can also end early if the action or feature that caused it gives a way to.
             </p>
+          </div>
+        </EmpCard>
+        <EmpCard title="Critical Tables">
+          <div className={card}>
+            If you critically succeed on an attack roll, roll on the table below.
+            <table className={[table, critical].join(' ')}>
+              <thead>
+                <tr><th>d24</th><th>Result</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1-6</td><td>Nothing extra happens</td></tr>
+                <tr><td>7-9</td><td>The target loses their reaction until the start of their next turn.</td></tr>
+                <tr><td>10-12</td><td>The target falls prone.</td></tr>
+                <tr><td>13-15</td><td>The target loses an action on their next turn.</td></tr>
+                <tr><td>16-17</td><td>The target drops an item of your choice, and it lands 10 feet away.</td></tr>
+                <tr><td>18-19</td><td>Any creature besides you can use their reaction to make a melee attack against the target.</td></tr>
+                <tr><td>20-21</td><td>An item of your choice that the target is holding or wearing breaks.</td></tr>
+                <tr><td>22-23</td><td>The target can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
+                <tr><td>24</td><td>You roll on this table two more times.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div className={card}>
+            If you critically fail on a defense roll, roll on the table below.
+            <table className={[table, critical].join(' ')}>
+              <thead>
+                <tr><th>d24</th><th>Result</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>You roll on this table two more times.</td></tr>
+                <tr><td>2-3</td><td>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
+                <tr><td>4-5</td><td>You fall prone.</td></tr>
+                <tr><td>6-7</td><td>You lose an action on your next turn.</td></tr>
+                <tr><td>8-9</td><td>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
+                <tr><td>10-12</td><td>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
+                <tr><td>13-15</td><td>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
+                <tr><td>16-18</td><td>You lose your reaction until the start of your next turn.</td></tr>
+                <tr><td>19-24</td><td>Nothing extra happens</td></tr>
+              </tbody>
+            </table>
           </div>
         </EmpCard>
         <EmpCard title="Magic">

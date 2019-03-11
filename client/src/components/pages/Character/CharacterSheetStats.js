@@ -28,7 +28,6 @@ class CharacterSheetStats extends Component {
               name: 'Name',
               bonus: 'Hit Bonus',
               damage: 'Damage',
-              range: 'Range',
               notes: 'Notes'
             }}
             fields={{name: '', category: Object.keys(weaponData).map(weapon => ({

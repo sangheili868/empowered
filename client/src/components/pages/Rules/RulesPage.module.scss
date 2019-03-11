@@ -15,14 +15,13 @@
     text-align: center;
     user-select: none;
 
+    &.critical {
+      text-align: left;
+    }
+
     .columnHeader {
       font-weight: bold;
     }
-  }
-
-  .nestingCard {
-    display: flex;
-    flex-direction: column;
   }
 }
 

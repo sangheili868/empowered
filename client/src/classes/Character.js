@@ -4,7 +4,7 @@ import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actions from '../gameData/actions.json'
 import conditionData from '../gameData/conditions.json'
-import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase } from 'lodash'
+import { pick, upperFirst, reject, map, startCase, chain, some, lowerCase, filter } from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 class Character {
@@ -48,7 +48,6 @@ class Character {
         } else {
           const bonus = skills[weaponStats.skill]
           return {
-            range: 5,
             ...weapon,
             ...weaponStats,
             notes: weaponStats.tags && weaponStats.tags.map(upperFirst).join(', '),
@@ -75,28 +74,35 @@ class Character {
       actions: {
         cardinalActions: [
           ...actions.actions.filter(({ tags=[] }) => tags.includes('cardinal')),
-          // ...filter(this.baseStats.features, ({ tags }) => tags.includes('action'))
-          //   .map(feature => ({
-          //     ...feature,
-          //     feature: true,
-          //     cardinal: feature.type.includes('cardinal')
-          //   }))
+          ...filter(this.baseStats.features, ({ category }) => category === 'cardinalAction')
+            .map(feature => ({ ...feature, feature: true}))
         ],
         skillActions: [
-          ...actions.actions.filter(({ tags=[] }) => tags.includes('skill'))
+          ...actions.actions.filter(({ tags=[] }) => tags.includes('skill')),
+          ...filter(this.baseStats.features, ({ category }) => category === 'skillAction')
+            .map(feature => ({ ...feature, feature: true})),
+          ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
+            .filter(({ deleted=false, action: { tags=[] } }) => !deleted && tags.includes('skill')).map('action').value()
         ],
         basicActions: [
-          ...actions.actions.filter(({ tags=[] }) => !tags.includes('skill') && !tags.includes('cardinal'))
+          ...actions.actions.filter(({ tags=[] }) => !tags.includes('skill') && !tags.includes('cardinal')),
+          ...filter(this.baseStats.features, ({ category }) => category === 'basicAction')
+            .map(feature => ({ ...feature, feature: true})),
+            ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
+              .filter(({ deleted=false, action: { tags=[] } }) =>
+                !deleted && !tags.includes('skill') && !tags.includes('cardinal')
+              )
+              .map('action').value()
         ],
         maneuvers: [
           ...actions.maneuvers,
-          // ...filter(this.baseStats.features, ({ type }) => type.includes('maneuver'))
-          //   .map(feature => ({ ...feature, feature: true }))
+          ...filter(this.baseStats.features, ({ category }) => category === 'maneuver')
+            .map(feature => ({ ...feature, feature: true}))
         ],
         reactions: [
           ...actions.reactions,
-          // ...filter(this.baseStats.features, ({ type }) => type.includes('reaction'))
-          //   .map(feature => ({ ...feature, feature: true }))
+          ...filter(this.baseStats.features, ({ category }) => category === 'reaction')
+            .map(feature => ({ ...feature, feature: true}))
         ]
       },
       conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))

@@ -66,12 +66,16 @@ class CharacterSheetShop extends Component {
             }}
             sellButton={index => {
               const score = this.props.shop.abilityScores[index]
+              const isDecreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
               return (score.current <= -3) ? 'At Minimum' : (
                 <EmpButton
                   className={[tableBuy, minus].join(' ')}
                   onClick={this.props.onUpdate.bind(this, {
                     shop: {advancements: this.props.shop.advancements + score.worth},
-                    stats: {abilityScores: { [lowerCase(score.name)]: score.current - 1 }}
+                    stats: {
+                      abilityScores: { [lowerCase(score.name)]: score.current - 1 },
+                      hitPoints: Math.max(0, this.props.stats.hitPoints + (isDecreasingHP ? -1 : 0))
+                    }
                   })}
                 >
                   +{score.worth} Adv.

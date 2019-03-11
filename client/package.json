@@ -20,9 +20,6 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000/",
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -36,6 +33,6 @@
     "sass-loader": "^7.1.0"
   },
   "engines": {
-    "node": "11.11.0"
+    "node": "10.15.1"
   }
 }

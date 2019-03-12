@@ -16,6 +16,7 @@ import { lowerCase, cloneDeep, map, startCase } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
+import featureFields from '../../../gameData/featureFields'
 
 class CharacterSheetShop extends Component {
   render () {
@@ -157,7 +158,7 @@ class CharacterSheetShop extends Component {
                   name: 'Name',
                   description: 'Description'
                 }}
-                fields={{ name: '', description: '', cost: 1 }}
+                fields={featureFields}
                 onEdit={(index, values) => {
                   let newFeatures = cloneDeep(this.props.shop.features)
                   newFeatures[index] = {

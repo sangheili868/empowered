@@ -1,75 +1,65 @@
 {
-  "actions": [
+  "cardinalActions": [
     {
       "name": "Attack",
-      "description": "As a cardinal action, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.",
-      "tags": ["cardinal"]
+      "description": "As a cardinal action, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss."
     },
     {
       "name": "Delay",
-      "description": "As a cardinal action, you gain an additional action on your side's next turn.",
-      "tags": ["cardinal"]
-    },
+      "description": "As a cardinal action, you gain an additional action on your side's next turn."
+    }
+  ],
+  "skillActions": [
     {
       "name": "Wrestle",
-      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers.",
-      "tags": ["skill"]
+      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers."
     },
     {
       "name": "Brace",
-      "description": "As a skill action, roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points above 10. For example, if you roll 22, you get two points of armor.",
-      "tags": ["skill"]
+      "description": "As a skill action, roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points above 10. For example, if you roll 22, you get two points of armor."
     },
     {
       "name": "Frighten",
-      "description": "As a skill action, you attempt to scare off an enemy. Roll intimidation against the willpower of a creature within 20 feet. If you succeed, the creature becomes frightened of you until the start of your side's next turn.",
-      "tags": ["skill"]
+      "description": "As a skill action, you attempt to scare off an enemy. Roll intimidation against the willpower of a creature within 20 feet. If you succeed, the creature becomes frightened of you until the start of your side's next turn."
     },
     {
       "name": "Hide",
-      "description": "As a skill action, roll stealth while behind cover. You are considered unseen to all creatures on the other side of the cover until you reveal yourself, you enter their line of sight, or they take the Search skill action.",
-      "tags": ["skill"]
+      "description": "As a skill action, roll stealth while behind cover. You are considered unseen to all creatures on the other side of the cover until you reveal yourself, you enter their line of sight, or they take the Search skill action."
     },
     {
       "name": "Search",
-      "description": "As a skill action, roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you.",
-      "tags": ["skill"]
+      "description": "As a skill action, roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you."
     },
     {
       "name": "Analyze",
-      "description": "As a skill action, you attempt to predict a creature’s next move by reading its body language. Roll insight against its stealth. If you succeed, that creature must choose now and reveal to you the first action it will take on its next turn.",
-      "tags": ["skill"]
+      "description": "As a skill action, you attempt to predict a creature’s next move by reading its body language. Roll insight against its stealth. If you succeed, that creature must choose now and reveal to you the first action it will take on its next turn."
     },
     {
       "name": "Disrupt",
-      "description": "As a skill action, roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your rolled above 10. For example, if you rolled a 22, the creature gains a -2 bonus.",
-      "tags": ["skill"]
+      "description": "As a skill action, roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your rolled above 10. For example, if you rolled a 22, the creature gains a -2 bonus."
     },
     {
       "name": "Focus",
-      "description": "As a skill action, roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points above 5. For example, if you roll 22, you get a +3 bonus.",
-      "tags": ["skill"]
+      "description": "As a skill action, roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points above 5. For example, if you roll 22, you get a +3 bonus."
     },
     {
       "name": "Help",
-      "description": "As a skill action, when a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll above 10. For example, if you rolled a 22, the creature takes a -2 penalty.",
-      "tags": ["skill"]
+      "description": "As a skill action, when a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll above 10. For example, if you rolled a 22, the creature takes a -2 penalty."
     },
     {
       "name": "Distract",
-      "description": "As a skill action, you attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage.",
-      "tags": ["skill"]
+      "description": "As a skill action, you attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage."
     },
     {
       "name": "Use a skill",
-      "description": "As a skill action, you attempt to take some other action that requires a skill roll. The DM decides the skill you use and the DC to meet.",
-      "tags": ["skill"]
+      "description": "As a skill action, you attempt to take some other action that requires a skill roll. The DM decides the skill you use and the DC to meet."
     },
     {
       "name": "Off-hand Attack",
-      "description": "As a skill action, you strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn.",
-      "tags": ["skill"]
-    },
+      "description": "As a skill action, you strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn."
+    }
+  ],
+  "basicActions": [
     {
       "name": "Dodge",
       "description": "As a basic action, you focus your efforts towards avoiding attacks. You gain +1 to all agility rolls to avoid attacks and features, until the start of your next turn."
@@ -140,7 +130,7 @@
   "reactions": [
     {
       "name": "Attack of Opportunity",
-      "description": "As a reaction when a creature that you can see moves out of a space within 5 feet of you as part of the move action, you can take the attack action, targeting the creature that triggered this reaction."
+      "description": "As a reaction, when a creature that you can see moves out of a space within 5 feet of you as part of the move action, you can take the attack action, targeting the creature that triggered this reaction."
     },
     {
       "name": "Ready",

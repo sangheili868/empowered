@@ -5,7 +5,7 @@
     "action": {
       "name": "Escape",
       "description": "Roll athletics against the grapple DC to end the grappled condition.",
-      "tags": ["skill"]
+      "category": "skillAction"
     }
   },
   "Frightened": {
@@ -14,7 +14,7 @@
     "action": {
       "name": "Calm Down",
       "description": "Roll willpower against the fear DC to end the frightened condition. If you can see the source of fear, roll with disadvantage.",
-      "tags": ["skill"]
+      "category": "skillAction"
     }
   },
   "Prone": {
@@ -22,7 +22,8 @@
     "description": "Your speed is halved and your attacks have disadvantage. Your agility rolls have advantage against ranged attacks and disadvantage against melee attacks. You gain the Stand Up action.",
     "action": {
       "name": "Stand Up",
-      "description": "If your speed is greater than 0, you end the prone condition."
+      "description": "If your speed is greater than 0, you end the prone condition.",
+      "category": "basicAction"
     }
   },
   "Poisoned": {
@@ -31,7 +32,7 @@
     "action": {
       "name": "Resist",
       "description": "Roll Fortitude against the poison DC to end the poisoned condition.",
-      "tags": ["skill"]
+      "category": "skillAction"
     }
   }
 }

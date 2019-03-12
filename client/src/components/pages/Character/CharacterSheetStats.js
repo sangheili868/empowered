@@ -9,6 +9,7 @@ import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import pluralize from 'pluralize'
+import featureFields from '../../../gameData/featureFields';
 
 class CharacterSheetStats extends Component {
   render () {
@@ -162,7 +163,7 @@ class CharacterSheetStats extends Component {
               name: 'Name',
               description: 'Description'
             }}
-            fields={{ name: '', description: '' }}
+            fields={featureFields}
             deleteText={index => `
               If you delete this feature, you will regain ${
                 this.props.stats.features[index].cost

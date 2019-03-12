@@ -84,7 +84,7 @@
     "weapons": [
       {
         "name": "Rapier",
-        "category": "finesseMeleeWeapon"
+        "category": "oneHandedFinesseWeapon"
       },
       {
         "name": "Violin",
@@ -169,6 +169,9 @@
         }
       ],
       "equipment": [
+        {
+          "category": "improvisedWeapon"
+        },
         {
           "category": "lightArmor"
         },

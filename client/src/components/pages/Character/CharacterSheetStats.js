@@ -7,7 +7,7 @@ import CharacterSheetTable from './CharacterSheetTable'
 import { pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
-import { startCase } from 'lodash'
+import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import pluralize from 'pluralize'
 
 class CharacterSheetStats extends Component {
@@ -30,10 +30,15 @@ class CharacterSheetStats extends Component {
               damage: 'Damage',
               notes: 'Notes'
             }}
-            fields={{name: '', category: Object.keys(weaponData).map(weapon => ({
-              text: startCase(weapon),
-              value: weapon
+            fields={{name: '', category: this.props.stats.availableWeapons.map(({ displayName, key}) => ({
+              text: displayName,
+              value: key
             })) }}
+            description={({category}) => {
+              if (category && category.value && !Array.isArray(category.value)) {
+                return equipmentProficiencyData[weaponData[category.value].proficiency].description
+              }
+            }}
             onEdit={(index, values) => {
               let newWeapons = cloneDeep(this.props.stats.weapons)
               newWeapons[index] = values
@@ -158,7 +163,7 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={{ name: '', description: '' }}
-            description={index => `
+            deleteText={index => `
               If you delete this feature, you will regain ${
                 this.props.stats.features[index].cost
               } ${

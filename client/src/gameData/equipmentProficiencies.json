@@ -65,6 +65,12 @@
     ],
     "description": "Heavy shields provide a +5 bonus to agility while raised, and have a -5 speed penalty while equipped."
   },
+  "improvisedWeapon": {
+    "name": "Improvised Weapons",
+    "category": "improvisedWeapon",
+    "requirement": [],
+    "description": "Improvised weapons, including bottles, chairs, and weapons that you are not proficient with, attack with a Brawn roll and deal d4+Brawn damage on a hit. Thrown improvised weapons attack with an Athletics roll and deal d4+Athletics damage on a hit."
+  },
   "unarmedMeleeWeapon": {
     "name": "Unarmed Fighting",
     "category": "unarmedMeleeWeapon",
@@ -74,7 +80,7 @@
         "level": 1
       }
     ],
-    "description": "Unarmed melee weapons, including fists, feet, and tails, can attack with a Brawn roll or an Athletics roll and deal d6 + Athletics or Brawn damage on a hit."
+    "description": "Unarmed melee weapons, including fists, feet, and tails, can attack with a Brawn roll or an Athletics roll and deal d6 + Athletics or Brawn damage on a hit. These weapons can also be used for two-weapon fighting."
   },
   "lightMeleeWeapon": {
     "name": "Light Melee Weapons",
@@ -85,7 +91,7 @@
         "level": -1
       }
     ],
-    "description": "Light melee weapons, including daggers, light axes, and brass knuckles, attack with an Athletics roll and deal d6 + Athletics damage on a hit."
+    "description": "Light melee weapons, including daggers, light axes, and brass knuckles, attack with an Athletics roll and deal d6 + Athletics damage on a hit. These weapons can also be used for two-weapon fighting."
   },
   "finesseMeleeWeapon": {
     "name": "Finesse Melee Weapons",
@@ -129,7 +135,7 @@
         "level": -1
       }
     ],
-    "description": "Light thrown weapons, including daggers and throwing axes, attack with an Athletics roll and deal d6 + Athletics damage on a hit. They can attack targets up to 20ft away or up to 40ft away with disadvantage."
+    "description": "Light thrown weapons, including daggers and throwing axes, attack with an Athletics roll and deal d6 + Athletics damage on a hit. They can attack targets up to 20ft away or up to 40ft away with disadvantage.  These weapons can also be used for two-weapon fighting."
   },
   "heavyThrownWeapon": {
     "name": "Heavy Thrown Weapons",
@@ -188,7 +194,7 @@
         "level": -2
       }
     ],
-    "description": "Light loading weapons, including hand crossbows and pistols, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
+    "description": "Light loading weapons, including hand crossbows and pistols, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage. These weapons can also be used for two-weapon fighting."
   },
   "twoHandedLoadingWeapon": {
     "name": "Two-handed Loading Weapons",

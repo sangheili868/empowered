@@ -90,7 +90,11 @@
           "name": "Native"
         }
       ],
-      "equipment": []
+      "equipment": [
+        {
+          "category": "improvisedWeapon"
+        }
+      ]
     },
     "features": []
   },

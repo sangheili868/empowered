@@ -56,6 +56,10 @@ class Character {
           }
         }
       }),
+      availableWeapons: chain(weaponData).pickBy(({proficiency}) =>
+        this.baseStats.proficiencies.equipment.map(({category}) => category)
+        .includes(proficiency)
+      ).map(({ displayName }, key) => ({ displayName, key })).value(),
       proficiencies: {
         languages: this.baseStats.proficiencies.languages,
         equipment: this.baseStats.proficiencies.equipment.map(proficiency => {

@@ -5,7 +5,10 @@ import EmpButton from '../EmpButton/EmpButton'
 
 class EmpCard extends Component {
   state = {
-    isOpen: this.props.isStartingOpen
+    isOpen: false
+  }
+  componentDidMount () {
+    this.setState({ isOpen: this.props.isStartingOpen })
   }
   handleToggle = () => {
     this.setState(prevState => ({

@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap'
 import { bio, bioTable, row, cell, field, description } from './CharacterPage.module.scss'
 import EmpStringEditor from '../../EmpStringEditor/EmpStringEditor'
 import EmpButton from '../../EmpButton/EmpButton'
-import bioDescriptions from '../../../gameData/bioDescriptions.json'
+import bioFields from '../../../gameData/bioFields.json'
 
 class CharacterSheetBio extends Component {
   state = {
@@ -28,7 +28,7 @@ class CharacterSheetBio extends Component {
               <tr className={row}>
                 <Modal show={this.state.openModal === 'name'} onHide={this.toggleModal}>
                   <Modal.Header closeButton><Modal.Title>Name</Modal.Title></Modal.Header>
-                  <Modal.Body>{bioDescriptions.name}</Modal.Body>
+                  <Modal.Body>{bioFields.name}</Modal.Body>
                   <Modal.Footer><EmpButton onClick={this.toggleModal}>Close</EmpButton></Modal.Footer>
                 </Modal>
                 <td className={[cell, field].join(' ')} onClick={this.toggleModal.bind(this, 'name')}>
@@ -40,11 +40,11 @@ class CharacterSheetBio extends Component {
                     }/>
                   </td>
               </tr>
-              {map(this.props.bio, (value, characteristic) => 
+              {map(this.props.bio, (value, characteristic) =>
                 <tr className={row} key={characteristic}>
                   <Modal show={this.state.openModal === characteristic} onHide={this.toggleModal}>
                     <Modal.Header closeButton><Modal.Title>{startCase(characteristic)}</Modal.Title></Modal.Header>
-                    <Modal.Body>{bioDescriptions[characteristic]}</Modal.Body>
+                    <Modal.Body>{bioFields[characteristic]}</Modal.Body>
                     <Modal.Footer><EmpButton onClick={this.toggleModal}>Close</EmpButton></Modal.Footer>
                   </Modal>
                   <td className={[cell, field].join(' ')} onClick={this.toggleModal.bind(this, characteristic)}>

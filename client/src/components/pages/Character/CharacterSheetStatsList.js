@@ -16,16 +16,19 @@ class CharacterSheetStatsList extends Component {
     }))
   }
   render () {
-    const hasSomeUndeletedItem = some(this.props.items, column => column.length && some(column, item => !item.deleted))
+    const isArray = Array.isArray(this.props.items)
+    const isObject = !isArray && (typeof this.props.items === 'object')
+    const hasSomeUndeletedItem = (isArray && this.props.items.length) ||
+    (isObject && some(this.props.items, column => column.length && some(column, item => !item.deleted)))
     return (hasSomeUndeletedItem || this.props.addToList) ? (
-      <EmpCard isStartingOpen title={this.props.title}>
+      <EmpCard isStartingOpen={hasSomeUndeletedItem} title={this.props.title}>
         <div className={subtitles}>
           {this.props.subtitles && this.props.subtitles.map((subtitleText, index) =>
             <div key={index} className={subtitle}>{subtitleText}</div>
             )}
         </div>
         <div className={list}>
-          {Array.isArray(this.props.items) ? (
+          {isArray ? (
             <div className={column}>
               {this.props.items.map((item, index) => !item.deleted && (
                 this.props.editItem ? this.props.editItem(item, index) : (
@@ -34,7 +37,7 @@ class CharacterSheetStatsList extends Component {
               ))}
               {this.props.addToList && this.props.addToList()}
             </div>
-          ) : (typeof this.props.items === 'object' &&
+          ) : (isObject &&
           Object.keys(this.props.items).map(itemKey =>
             (some(this.props.items[itemKey], item => !item.deleted) || this.props.addToList) &&
             <div key={itemKey} className={column}>

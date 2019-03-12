@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { table, borderless, columnHeader } from "./CharacterPage.module.scss"
-import { startCase, invert } from 'lodash'
+import { startCase, keyBy } from 'lodash'
 import EmpCard from '../../EmpCard/EmpCard'
 import skills from '../../../gameData/skills.json'
 
@@ -9,6 +9,7 @@ class CharacterSheetStatsSkills extends Component {
   topScores = this.scoreNames.slice(0, this.scoreNames.length/2)
   leftScores = this.scoreNames.slice(this.scoreNames.length/2, this.scoreNames.length)
   render () {
+    const skillsByAbility = keyBy(skills, 'abilityScores')
     return (
       <EmpCard isStartingOpen title="Skills">
         <table className={[table, borderless].join(' ')}>
@@ -30,13 +31,13 @@ class CharacterSheetStatsSkills extends Component {
                 </td>
                 {this.topScores.map(topScore =>
                   <td key={topScore}>
-                    <div>{startCase(invert(skills)[[topScore, leftScore]])}</div>
-                    <div>{this.props.skills[invert(skills)[[topScore, leftScore]]]}</div>
+                    <div>{startCase(skillsByAbility[[topScore, leftScore]].name)}</div>
+                    <div>{this.props.skills[skillsByAbility[[topScore, leftScore]].name]}</div>
                   </td>
                 )}
                 <td>
-                  <div>{startCase(invert(skills)[[leftScore, leftScore]])}</div>
-                  <div>{this.props.skills[invert(skills)[[leftScore, leftScore]]]}</div>
+                  <div>{startCase(skillsByAbility[[leftScore, leftScore]].name)}</div>
+                  <div>{this.props.skills[skillsByAbility[[leftScore, leftScore]].name]}</div>
                 </td>
               </tr>
             )}
@@ -44,8 +45,8 @@ class CharacterSheetStatsSkills extends Component {
               <td></td>
               {this.topScores.map(topScore =>
                 <td key={topScore}>
-                  <div>{startCase(invert(skills)[[topScore, topScore]])}</div>
-                  <div>{this.props.skills[invert(skills)[[topScore, topScore]]]}</div>
+                  <div>{startCase(skillsByAbility[[topScore, topScore]].name)}</div>
+                  <div>{this.props.skills[skillsByAbility[[topScore, topScore]].name]}</div>
                 </td>
               )}
             </tr>

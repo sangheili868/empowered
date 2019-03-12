@@ -161,16 +161,14 @@ class CharacterSheetShop extends Component {
                 onEdit={(index, values) => {
                   let newFeatures = cloneDeep(this.props.shop.features)
                   newFeatures[index] = {
-                    ...values,
-                    // type: values.type.split(',')
+                    ...values
                   }
                   this.props.onUpdate({ shop: { features: newFeatures } })
                 }}
                 onAdd={values => this.props.onUpdate({ shop: { features: [
                   ...this.props.shop.features,
                   {
-                    ...values,
-                    // type: values.type.split(',')
+                    ...values
                   }
                 ]}})}
                 buyButton={index => {

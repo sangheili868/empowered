@@ -3,6 +3,7 @@ import { table, borderless, columnHeader } from "./CharacterPage.module.scss"
 import { startCase, keyBy } from 'lodash'
 import EmpCard from '../../EmpCard/EmpCard'
 import skills from '../../../gameData/skills.json'
+import CharacterSheetStatsSkillsDetail from './CharacterSheetStatsSkillsDetail'
 
 class CharacterSheetStatsSkills extends Component {
   scoreNames = Object.keys(this.props.abilityScores)
@@ -31,13 +32,15 @@ class CharacterSheetStatsSkills extends Component {
                 </td>
                 {this.topScores.map(topScore =>
                   <td key={topScore}>
-                    <div>{startCase(skillsByAbility[[topScore, leftScore]].name)}</div>
-                    <div>{this.props.skills[skillsByAbility[[topScore, leftScore]].name]}</div>
+                    <CharacterSheetStatsSkillsDetail
+                      skill={this.props.skills[skillsByAbility[[topScore, leftScore]].name]}
+                    />
                   </td>
                 )}
                 <td>
-                  <div>{startCase(skillsByAbility[[leftScore, leftScore]].name)}</div>
-                  <div>{this.props.skills[skillsByAbility[[leftScore, leftScore]].name]}</div>
+                  <CharacterSheetStatsSkillsDetail
+                    skill={this.props.skills[skillsByAbility[[leftScore, leftScore]].name]}
+                  />
                 </td>
               </tr>
             )}
@@ -45,8 +48,9 @@ class CharacterSheetStatsSkills extends Component {
               <td></td>
               {this.topScores.map(topScore =>
                 <td key={topScore}>
-                  <div>{startCase(skillsByAbility[[topScore, topScore]].name)}</div>
-                  <div>{this.props.skills[skillsByAbility[[topScore, topScore]].name]}</div>
+                  <CharacterSheetStatsSkillsDetail
+                    skill={this.props.skills[skillsByAbility[[topScore, topScore]].name]}
+                  />
                 </td>
               )}
             </tr>
@@ -58,3 +62,4 @@ class CharacterSheetStatsSkills extends Component {
 }
 
 export default CharacterSheetStatsSkills
+

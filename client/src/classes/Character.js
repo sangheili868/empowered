@@ -17,14 +17,16 @@ class Character {
 
   get stats () {
    if (this.baseStats) {
-    const skills = chain(skillData).keyBy('name').mapValues(({abilityScores}) =>
-      abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0)
-    ).value()
+    const skills = chain(skillData).keyBy('name').mapValues(({name, abilityScores}) => ({
+      name,
+      value: abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0),
+      features: this.baseStats.features.filter(({ skillTag }) => skillTag === name)
+    })).value()
     const equipment = this.baseStats.equipment
     return {
       ...this.baseStats,
-      maxHP: skills.fortitude + 10,
-      maxTempHP: skills.fortitude + 10,
+      maxHP: skills.fortitude.value + 10,
+      maxTempHP: skills.fortitude.value + 10,
       maxWounds: 5,
       skills,
       equipment: {
@@ -36,7 +38,7 @@ class Character {
             (equipment.light.reduce((acc, { quantity }) => quantity + acc, 0) / 20) +
             (equipment.gold / 2000)
           ),
-          limit: skills.brawn + 10
+          limit: skills.brawn.value + 10
         }
       },
       weapons: this.baseStats.weapons.map(weapon => {
@@ -45,11 +47,14 @@ class Character {
           console.error("Weapon Type not found", weapon)
           return weapon
         } else {
-          const bonus = skills[weaponStats.skill]
+          const bonus = skills[weaponStats.skill].value
           return {
             ...weapon,
             ...weaponStats,
-            notes: weaponStats.tags && weaponStats.tags.map(upperFirst).join(', '),
+            notes: [
+              ...(weaponStats.tags ? weaponStats.tags.map(upperFirst) : []),
+              ...this.baseStats.features.filter(({ equipmentTag }) => equipmentTag === weaponStats.proficiency).map(({ name }) => name)
+            ].join(', '),
             bonus,
             damage: weaponStats.damageDie + (bonus >= 0 ? " + " : " - ") + Math.abs(bonus)
           }

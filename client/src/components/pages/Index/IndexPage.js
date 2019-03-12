@@ -14,6 +14,7 @@ class IndexPage extends Component {
         <EmpCard title="Creating a Character" contentClassName={card}>
           Follow these steps to create a character:
           <ol>
+            <li>Talk to your DM about the setting and any other assumptions and general ideas they have for the game.</li>
             <li>Come up with a concept based on one or more of the suggestions in the table below.</li>
             <li>Go to the Character page and click "New".</li>
             <li>Fill out all the bio details. You can click on the name of a field for more information.</li>

@@ -39,6 +39,12 @@ class EmpItemEditor extends Component {
   handleDone = () => {
     this.props.onUpdate(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
   }
+  handleKeyPress = ({key}) => {
+    if (key === 'Enter') {
+      this.toggleModal()
+      this.handleDone()
+    }
+  }
   render () {
     return (
       <EmpModal
@@ -63,6 +69,7 @@ class EmpItemEditor extends Component {
                     className={input}
                     value={isObject(value) ? value.value : value}
                     onChange={this.handleChange.bind(this, key)}
+                    onKeyPress={this.handleKeyPress}
                   />
                 )}
               </div>
@@ -91,6 +98,7 @@ class EmpItemEditor extends Component {
           }
         ]}
         onOpen={this.handleOpen}
+        setToggler={toggler => this.toggleModal = toggler}
       >
         {this.props.children}
         {!this.props.isInline && !this.props.isCustomInline &&

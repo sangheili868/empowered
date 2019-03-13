@@ -64,8 +64,8 @@ class CharacterSheetStats extends Component {
               <div key="carryWeight">
                 {
                   "Capacity: " +
-                  this.props.stats.equipment.encumberance.current.toFixed(2) +
-                  " / " + this.props.stats.equipment.encumberance.limit.toFixed(2)
+                  this.props.stats.equipment.encumberance.current.toFixed(1) +
+                  " / " + this.props.stats.equipment.encumberance.limit.toFixed(1)
                 }
               </div>
             ]}

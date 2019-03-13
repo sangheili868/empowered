@@ -7,6 +7,9 @@ class EmpModal extends Component {
   state = {
     isOpen: false
   }
+  componentDidMount () {
+    this.props.setToggler && this.props.setToggler(this.toggleModal)
+  }
   toggleModal = () => {
     if (this.props.isBlocked) this.props.onBlocked()
     else {

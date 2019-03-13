@@ -1,0 +1,20 @@
+@import "src/styles/colors.scss";
+
+.footer {
+  flex-wrap: wrap;
+
+  .closer {
+    margin: 5px;
+  }
+}
+
+.opener {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $orange;
+    color: $white;
+  }
+}

@@ -7,25 +7,20 @@ import {
   pen,
   inline,
   field,
-  fieldLabel,
-  footer,
-  close
+  fieldLabel
 } from './EmpItemEditor.module.scss'
-import { Modal } from 'react-bootstrap'
-import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
+import EmpModal from '../EmpModal/EmpModal'
 import { cloneDeep, startCase, map, merge, mapValues, isObject, isEmpty, isFunction } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
-    isShowingModal: false,
     workingValues: {}
   }
   toggleEditing = () => {
     this.setState({
       workingValues: cloneDeep(this.props.fields),
-      isShowingModal: !this.state.isShowingModal
     })
   }
   chooseTitle = (value) => {
@@ -43,23 +38,15 @@ class EmpItemEditor extends Component {
   }
   handleDone = () => {
     this.props.onUpdate(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
-    this.toggleEditing()
-  }
-  handleDelete = () => {
-    this.toggleEditing()
-    this.props.onDelete()
-  }
-  handleKeyPress = e => {
-    if (e.key === 'Enter') this.handleDone()
   }
   render () {
     return (
-      <span>
-        <Modal show={this.state.isShowingModal} backdrop="static" onHide={this.toggleEditing}>
-          <Modal.Header closeButton>
-            <Modal.Title>{this.props.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      <EmpModal
+        backdrop="static"
+        noStyle
+        title={this.props.title}
+        body={
+          <>
             {map(this.state.workingValues, (value, key) =>
               <div className={field} key={key}>
                 <div className={fieldLabel}>{startCase(key)}</div>
@@ -75,7 +62,6 @@ class EmpItemEditor extends Component {
                     className={input}
                     value={isObject(value) ? value.value : value}
                     onChange={this.handleChange.bind(this, key)}
-                    onKeyPress={this.handleKeyPress}
                   />
                 )}
               </div>
@@ -89,21 +75,25 @@ class EmpItemEditor extends Component {
                 )}
               </div>
             }
-          </Modal.Body>
-          <Modal.Footer className={footer}>
-            <EmpButton className={close} onClick={this.toggleEditing}>Cancel</EmpButton>
-            {this.props.onDelete &&
-              <EmpButton className={close} onClick={this.handleDelete}>Delete</EmpButton>
-            }
-            {!isEmpty(this.state.workingValues) &&
-              <EmpButton className={close} onClick={this.handleDone}>Save</EmpButton>
-            }
-          </Modal.Footer>
-        </Modal>
+          </>
+        }
+        controls={[
+          {
+            label: 'Delete',
+            isHidden: !this.props.onDelete,
+            onClick: this.props.onDelete
+          },
+          {
+            label: 'Save',
+            isHidden: isEmpty(this.state.workingValues),
+            onClick: this.handleDone
+          }
+        ]}
+      >
         {this.props.isInline || this.props.isCustomInline ? (
-          <div className={this.props.isInline ? inline : ''} onClick={this.toggleEditing}>
+          <span className={this.props.isInline ? inline : ''} onClick={this.toggleEditing}>
             {this.props.children}
-          </div>
+          </span>
         ) : (
           <FontAwesomeIcon
             className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
@@ -111,7 +101,7 @@ class EmpItemEditor extends Component {
             onClick={this.toggleEditing}
           />
         )}
-      </span>
+      </EmpModal>
     )
   }
 }

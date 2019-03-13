@@ -4,32 +4,21 @@ import {
   tableAdd,
   titleRow,
   cell,
-  moreInfo,
   buy,
   columnHeader
 } from './CharacterPage.module.scss'
 import { map, chain, mapValues, isEmpty, some } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
-import EmpButton from '../../EmpButton/EmpButton'
-import { Modal } from 'react-bootstrap'
+import EmpModal from '../../EmpModal/EmpModal'
 
 class CharacterSheetTable extends Component {
-  state = {
-    openModal: ''
-  }
   columnTitles = [
     ...Object.values(this.props.columnNames),
     ...this.props.onEdit ? ['Edit'] : [],
     ...this.props.buyButton ? ['Buy'] : [],
     ...this.props.sellButton ? ['Sell'] : []
   ]
-  toggleModal = (modal='') => {
-    this.setState(prevState => ({
-      ...prevState,
-      openModal: (modal === prevState.openModal) ? '' : modal
-    }))
-  }
   render () {
     const hasItems = !isEmpty(this.props.items) && some(this.props.items, item => !item.deleted)
     return (hasItems || this.props.onAdd) ? (
@@ -51,16 +40,12 @@ class CharacterSheetTable extends Component {
                 {map(this.props.columnNames, (value, key) =>
                   <td key={key} className={cell}>
                     {(this.props.tooltips && this.props.tooltips[key]) ? (
-                      <>
-                        <Modal show={this.state.openModal === item[key]} onHide={this.toggleModal}>
-                          <Modal.Header closeButton><Modal.Title>{item[this.props.tooltips[key].title]}</Modal.Title></Modal.Header>
-                          <Modal.Body>{item[this.props.tooltips[key].body]}</Modal.Body>
-                          <Modal.Footer><EmpButton onClick={this.toggleModal}>Close</EmpButton></Modal.Footer>
-                        </Modal>
-                        <div className={moreInfo} onClick={this.toggleModal.bind(this, item[key])}>
-                          {item[key]}
-                        </div>
-                      </>
+                      <EmpModal
+                        title={item[this.props.tooltips[key].title]}
+                        body={item[this.props.tooltips[key].body]}
+                      >
+                        {item[key]}
+                      </EmpModal>
                     ) : (
                       item[key]
                     )}
@@ -71,7 +56,7 @@ class CharacterSheetTable extends Component {
                     <EmpItemEditor
                       isEdit
                       title={'Edit ' + item.name}
-                      description={this.props.description && this.props.description(index)}
+                      description={(this.props.deleteText && this.props.deleteText(index)) || this.props.description}
                       fields={chain(item)
                         .pick(Object.keys(this.props.fields))
                         .mapValues((value, key) => ({ value, default: this.props.fields[key]}))
@@ -107,6 +92,7 @@ class CharacterSheetTable extends Component {
                     {this.props.addText}
                     <EmpItemEditor
                       title={this.props.addText}
+                      description={this.props.description}
                       fields={mapValues(this.props.fields, value => ({ value, default: value }))}
                       onUpdate={this.props.onAdd}
                     />

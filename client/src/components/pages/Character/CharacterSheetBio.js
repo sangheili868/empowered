@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
 import { map, startCase } from 'lodash'
-import { Modal } from 'react-bootstrap'
 import { bio, bioTable, row, cell, field, description } from './CharacterPage.module.scss'
 import EmpStringEditor from '../../EmpStringEditor/EmpStringEditor'
-import EmpButton from '../../EmpButton/EmpButton'
-import bioDescriptions from '../../../gameData/bioDescriptions.json'
+import bioFields from '../../../gameData/bioFields.json'
+import EmpModal from '../../EmpModal/EmpModal'
 
 class CharacterSheetBio extends Component {
-  state = {
-    openModal: ''
-  }
-  toggleModal = (modal='') => {
-    this.setState(prevState => ({
-      ...prevState,
-      openModal: (modal === prevState.openModal) ? '' : modal
-    }))
-  }
   render () {
     return (
       <>
@@ -26,30 +16,26 @@ class CharacterSheetBio extends Component {
           <table className={bioTable}>
             <tbody>
               <tr className={row}>
-                <Modal show={this.state.openModal === 'name'} onHide={this.toggleModal}>
-                  <Modal.Header closeButton><Modal.Title>Name</Modal.Title></Modal.Header>
-                  <Modal.Body>{bioDescriptions.name}</Modal.Body>
-                  <Modal.Footer><EmpButton onClick={this.toggleModal}>Close</EmpButton></Modal.Footer>
-                </Modal>
-                <td className={[cell, field].join(' ')} onClick={this.toggleModal.bind(this, 'name')}>
+                <EmpModal containerComponent='td' className={[cell, field].join(' ')} noStyle title="Name" body={bioFields.name}>
                   Name
+                </EmpModal>
+                <td className={[cell, description].join(' ')}>
+                  <EmpStringEditor value={this.props.name} onUpdate={value =>
+                    this.props.onUpdate({ name: value })
+                  }/>
                 </td>
-                  <td className={[cell, description].join(' ')}>
-                    <EmpStringEditor value={this.props.name} onUpdate={value =>
-                      this.props.onUpdate({ name: value })
-                    }/>
-                  </td>
               </tr>
-              {map(this.props.bio, (value, characteristic) => 
+              {map(this.props.bio, (value, characteristic) =>
                 <tr className={row} key={characteristic}>
-                  <Modal show={this.state.openModal === characteristic} onHide={this.toggleModal}>
-                    <Modal.Header closeButton><Modal.Title>{startCase(characteristic)}</Modal.Title></Modal.Header>
-                    <Modal.Body>{bioDescriptions[characteristic]}</Modal.Body>
-                    <Modal.Footer><EmpButton onClick={this.toggleModal}>Close</EmpButton></Modal.Footer>
-                  </Modal>
-                  <td className={[cell, field].join(' ')} onClick={this.toggleModal.bind(this, characteristic)}>
+                  <EmpModal
+                    containerComponent='td'
+                    className={[cell, field].join(' ')}
+                    noStyle
+                    title={startCase(characteristic)}
+                    body={bioFields[characteristic]}
+                  >
                     {startCase(characteristic)}
-                  </td>
+                  </EmpModal>
                   <td className={[cell, description].join(' ')}>
                     <EmpStringEditor value={value} onUpdate={value => this.props.onUpdate({
                       bio: { [characteristic]: value }

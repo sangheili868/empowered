@@ -1,142 +1,175 @@
 {
   "improvisedMeleeWeapon": {
+    "displayName": "Improvised Melee Weapon",
     "skill": "brawn",
     "damageDie": "d4",
-    "tags": [ "improvised" ]
+    "tags": [ "improvised" ],
+    "proficiency": "improvisedWeapon"
   },
   "athleticsUnarmedWeapon": {
+    "displayName": "Athletics Unarmed Weapon",
     "skill": "athletics",
     "damageDie": "d6",
-    "tags": ["light" ]
+    "tags": ["light" ],
+    "proficiency": "unarmedMeleeWeapon"
   },
   "brawnUnarmedWeapon": {
+    "displayName": "Brawn Unarmed Weapon",
     "skill": "brawn",
     "damageDie": "d6",
-    "tags": ["light" ]
+    "tags": ["light" ],
+    "proficiency": "unarmedMeleeWeapon"
   },
   "lightMeleeWeapon": {
+    "displayName": "Light Melee Weapon",
     "skill": "athletics",
     "damageDie": "d6",
-    "tags": [ "light" ]
+    "tags": [ "light" ],
+    "proficiency": "lightMeleeWeapon"
   },
-  "finesseMeleeWeapon": {
+  "oneHandedFinesseWeapon": {
+    "displayName": "One-handed Finesse Weapon",
     "skill": "athletics",
-    "damageDie": "d8"
+    "damageDie": "d8",
+    "proficiency": "finesseMeleeWeapon"
   },
-  "twoHandedFinesseWeapons": {
+  "twoHandedFinesseWeapon": {
+    "displayName": "Two-handed Finesse Weapon",
     "skill": "athletics",
     "damageDie": "d12",
-    "tags": [ "two-handed" ]
+    "tags": [ "two-handed" ],
+    "proficiency": "finesseMeleeWeapon"
   },
   "oneHandedMeleeWeapon": {
+    "displayName": "One-handed Melee Weapon",
     "skill": "brawn",
-    "damageDie": "d8"
+    "damageDie": "d8",
+    "proficiency": "oneHandedMeleeWeapon"
   },
   "twoHandedMeleeWeapon": {
+    "displayName": "Two-handed Melee Weapon",
     "skill": "brawn",
     "damageDie": "d12",
-    "tags": [ "two-handed" ]
+    "tags": [ "two-handed", "heavy" ],
+    "proficiency": "twoHandedMeleeWeapon"
   },
   "improvisedThrownWeapon": {
+    "displayName": "Improvised Thrown Weapon",
     "skill": "athletics",
     "damageDie": "d4",
-    "range": 20,
-    "tags": [ "improvised", "thrown", "ranged" ]
+    "tags": [ "Short Range 6-20", "Long Range 21-40", "improvised", "thrown" ],
+    "proficiency": "improvisedWeapon"
   },
   "lightThrownWeapon": {
+    "displayName": "Light Thrown Weapon",
     "skill": "athletics",
     "damageDie": "d6",
-    "range": 20,
-    "tags": [ "light", "thrown", "ranged" ]
+    "tags": [ "Short Range 6-20", "Long Range 21-40" ,"light", "thrown" ],
+    "proficiency": "lightThrownWeapon"
   },
   "heavyThrownWeapon": {
+    "displayName": "Heavy Thrown Weapon",
     "skill": "athletics",
     "damageDie": "d8",
-    "range": 40,
-    "tags": [ "thrown", "ranged" ]
+    "tags": [ "Short Range 6-40", "Long Range 41-80", "thrown" ],
+    "proficiency": "heavyThrownWeapon"
   },
   "oneHandedRangedWeapon": {
+    "displayName": "One-handed Ranged Weapon",
     "skill": "perception",
     "damageDie": "d4",
-    "range": 40,
-    "tags": [ "ranged" ]
+    "tags": [ "Short Range 6-40", "Long Range 41-80" ],
+    "proficiency": "oneHandedRangedWeapon"
   },
   "twoHandedRangedWeapon": {
+    "displayName": "Two-handed Ranged Weapon",
     "skill": "perception",
     "damageDie": "d6",
-    "range": 60,
-    "tags": [ "two-handed", "ranged" ]
+    "tags": [ "Short Range 6-60", "Long Range 61-120", "two-handed" ],
+    "proficiency": "twoHandedRangedWeapon"
   },
   "heavyRangedWeapon": {
+    "displayName": "Heavy Ranged Weapon",
     "skill": "perception",
     "damageDie": "d8",
-    "range": 160,
-    "tags": [ "two-handed", "ranged", "heavy" ]
+    "tags": [ "Short Range 6-100", "Long Range 101-200", "two-handed", "heavy" ],
+    "proficiency": "heavyRangedWeapon"
   },
   "lightLoadingWeapon": {
+    "displayName": "Light Loading Weapon",
     "skill": "perception",
     "damageDie": "d8",
-    "range": 40,
-    "tags": [ "light", "loading", "ranged" ]
+    "tags": [ "Short Range 6-40", "Long Range 41-80", "light", "loading" ],
+    "proficiency": "lightLoadingWeapon"
   },
   "twoHandedLoadingWeapon": {
+    "displayName": "Two-handed Loading Weapon",
     "skill": "perception",
     "damageDie": "d10",
-    "range": 60,
-    "tags": [ "two-handed", "ranged", "loading" ]
+    "tags": [ "Short Range 6-60", "Long Range 61-120", "two-handed", "loading" ],
+    "proficiency": "twoHandedLoadingWeapon"
   },
   "heavyLoadingWeapon": {
+    "displayName": "Heavy Loading Weapon",
     "skill": "perception",
     "damageDie": "d12",
-    "range": 160,
-    "tags": [ "two-handed", "ranged", "loading", "heavy" ]
+    "tags": [ "Short Range 6-100", "Long Range 100-200", "two-handed", "loading", "heavy" ],
+    "proficiency": "heavyLoadingWeapon"
   },
   "oneHandedCraftedWeapon": {
+    "displayName": "One-handed Crafted Weapon",
     "skill": "handiwork",
     "damageDie": "d8",
-    "range": 40,
-    "tags": [ "ranged" ]
+    "tags": [ "Short Range 6-40", "Long Range 41-80" ],
+    "proficiency": "craftedWeapon"
   },
   "twoHandedCraftedWeapon": {
+    "displayName": "Two-handed Crafted Weapon",
     "skill": "handiwork",
     "damageDie": "d12",
-    "range": 40,
-    "tags": [ "two-handed", "ranged" ]
+    "tags": [ "Short Range 6-40", "Long Range 41-80", "two-handed" ],
+    "proficiency": "craftedWeapon"
   },
   "oneHandedArcaneWeapon": {
+    "displayName": "One-handed Arcane Weapon",
     "skill": "knowledge",
     "damageDie": "d6",
-    "range": 40,
-    "tags": [ "ranged" ]
+    "tags": [ "Max. Range 40" ],
+    "proficiency": "arcaneMagicWeapon"
   },
   "twoHandedArcaneWeapon": {
+    "displayName": "Two-handed Arcane Weapon",
     "skill": "knowledge",
     "damageDie": "d10",
-    "range": 40,
-    "tags": [ "two-handed", "ranged" ]
+    "tags": [ "Max. Range 40", "two-handed" ],
+    "proficiency": "arcaneMagicWeapon"
   },
   "oneHandedDivineWeapon": {
+    "displayName": "One-handed Divine Weapon",
     "skill": "wisdom",
     "damageDie": "d4",
-    "range": 40,
-    "tags": [ "ranged", "mental" ]
+    "tags": [ "Max. Range 40", "mental" ],
+    "proficiency": "divineMagicWeapon"
   },
   "twoHandedDivineWeapon": {
+    "displayName": "Two-handed Divine Weapon",
     "skill": "wisdom",
     "damageDie": "d8",
-    "range": 40,
-    "tags": [ "two-handed", "ranged", "mental" ]
+    "tags": [ "Max. Range 40", "mental", "two-handed" ],
+    "proficiency": "divineMagicWeapon"
   },
   "oneHandedUnityWeapon": {
+    "displayName": "One-handed Unity Weapon",
     "skill": "synergy",
     "damageDie": "d4",
-    "range": 40,
-    "tags": [ "ranged", "mental" ]
+    "tags": [ "Max. Range 40", "mental" ],
+    "proficiency": "unityMagicWeapon"
   },
   "twoHandedUnityWeapon": {
+    "displayName": "Two-handed Unity Weapon",
     "skill": "synergy",
     "damageDie": "d8",
-    "range": 40,
-    "tags": [ "two-handed", "ranged", "mental" ]
+    "tags": [ "Max. Range 40", "mental", "two-handed" ],
+    "proficiency": "unityMagicWeapon"
   }
 }

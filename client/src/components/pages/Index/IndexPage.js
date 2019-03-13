@@ -42,7 +42,7 @@ class IndexPage extends Component {
             People Places and Gods of Eochora
           </a>
           <a
-            href="https://drive.google.com/open?id=1Lbd4tBYnR8F5GhFDH9I2vDE2TrAFPWgt"
+            href="https://imgur.com/a/j1D6NZF"
             className={link}
             target="_blank"
             rel="noopener noreferrer"

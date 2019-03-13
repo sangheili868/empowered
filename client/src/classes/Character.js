@@ -31,7 +31,7 @@ class Character {
         ...skill,
         value,
         displayValue: addPlus(value),
-        features: this.baseStats.features.filter(({ skillTag }) => skillTag === skill.name)
+        features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
       }
     }).value()
     const equipment = this.baseStats.equipment
@@ -64,7 +64,9 @@ class Character {
             ...weaponStats,
             notes: [
               ...(weaponStats.tags ? weaponStats.tags.map(upperFirst) : []),
-              ...this.baseStats.features.filter(({ equipmentTag }) => equipmentTag === weaponStats.proficiency).map(({ name }) => name)
+              ...this.baseStats.features
+                .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
+                .map(({ name }) => name)
             ].join(', '),
             bonus,
             damage: weaponStats.damageDie + (bonus >= 0 ? " + " : " - ") + Math.abs(bonus)
@@ -98,7 +100,7 @@ class Character {
         reactions: 'reaction'
       }, (acc, actionType, columnName) => acc[columnName] = [
         ...actionsData[columnName],
-        ...filter(this.baseStats.features, ({ actionTag }) => actionTag === actionType)
+        ...filter(this.baseStats.features, ({ actionTags }) => actionTags.includes(actionType))
           .map(feature => ({ ...feature, name: feature.name + '*', feature: true})),
         ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
           .filter(({ deleted=false, action: { category } }) => !deleted && (category === actionType)).map('action').value()

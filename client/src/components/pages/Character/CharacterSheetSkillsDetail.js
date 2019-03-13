@@ -13,7 +13,7 @@ class CharacterSheetSkillsDetail extends Component {
           <div>{this.props.skill.description}</div>
           {hasFeatures &&
             <>
-              <div className={detailTitle}>{title}-based Features:</div>
+              <div className={detailTitle}>Features Related to {title}</div>
               <div>{this.props.skill.features.map(({ name }) => name).join(', ')}</div>
             </>
           }

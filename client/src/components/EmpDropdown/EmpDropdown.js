@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { Dropdown } from 'react-bootstrap'
-import { dropdown } from './EmpDropdown.module.scss'
+import Select from 'react-select'
 
 class EmpDropdown extends Component {
   render () {
     return (
-      <Dropdown>
-        <Dropdown.Toggle>{this.props.title}</Dropdown.Toggle>
-        <Dropdown.Menu className={dropdown}>
-          {this.props.items.map(({ text, value }) => 
-          <Dropdown.Item key={value} onClick={this.props.onSelect.bind(this,value)}>
-            {text}
-          </Dropdown.Item>
-          )}
-        </Dropdown.Menu>
-      </Dropdown>
+      <Select
+        isMulti={this.props.isMulti}
+        options={this.props.options}
+        value={this.props.value}
+        className={this.props.className}
+        theme={baseTheme => ({ ...baseTheme, colors: ({ ...baseTheme.colors, primary: '#E05038' })})}
+        onChange={values => this.props.onSelect(this.props.isMulti ? values.map(({value}) => value) : values.value)}
+      />
     )
   }
 }

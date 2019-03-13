@@ -31,10 +31,13 @@ class CharacterSheetStats extends Component {
               damage: 'Damage',
               notes: 'Notes'
             }}
-            fields={{name: '', category: this.props.stats.availableWeapons.map(({ displayName, key}) => ({
-              text: displayName,
-              value: key
-            })) }}
+            fields={{ name: '', category: {
+                default: '',
+                options: this.props.stats.availableWeapons.map(({ displayName, key}) => ({
+                  label: displayName,
+                  value: key
+                }))
+            }}}
             description={({category}) => {
               if (category && category.value && !Array.isArray(category.value)) {
                 return equipmentProficiencyData[weaponData[category.value].proficiency].description
@@ -173,10 +176,7 @@ class CharacterSheetStats extends Component {
             `}
             onEdit={(index, values) => {
               let newFeatures = cloneDeep(this.props.stats.features)
-              newFeatures[index] = {
-                ...values,
-                // type: values.type.split(',')
-              }
+              newFeatures[index] = values
               this.props.onUpdate({ stats: { features: newFeatures } })
             }}
             onDelete={index => {

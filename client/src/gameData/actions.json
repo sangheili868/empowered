@@ -16,7 +16,7 @@
     },
     {
       "name": "Brace",
-      "description": "As a skill action, roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points above 10. For example, if you roll 22, you get two points of armor."
+      "description": "As a skill action, roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points on your roll. For example, if you roll 22, you get four points of armor."
     },
     {
       "name": "Frighten",
@@ -28,7 +28,7 @@
     },
     {
       "name": "Search",
-      "description": "As a skill action, roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you."
+      "description": "As a skill action, roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you until it hides again."
     },
     {
       "name": "Analyze",
@@ -36,15 +36,15 @@
     },
     {
       "name": "Disrupt",
-      "description": "As a skill action, roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your rolled above 10. For example, if you rolled a 22, the creature gains a -2 bonus."
+      "description": "As a skill action, roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your roll. For example, if you rolled a 22, the creature takes a -4 penalty."
     },
     {
       "name": "Focus",
-      "description": "As a skill action, roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points above 5. For example, if you roll 22, you get a +3 bonus."
+      "description": "As a skill action, roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points on your roll. For example, if you roll 22, you get a +4 bonus."
     },
     {
       "name": "Help",
-      "description": "As a skill action, when a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll above 10. For example, if you rolled a 22, the creature takes a -2 penalty."
+      "description": "As a skill action, when a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll. For example, if you rolled a 22, the creature gains a +4 bonus."
     },
     {
       "name": "Distract",

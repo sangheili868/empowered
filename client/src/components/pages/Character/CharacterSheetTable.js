@@ -7,7 +7,7 @@ import {
   buy,
   columnHeader
 } from './CharacterPage.module.scss'
-import { map, chain, mapValues, isEmpty, some } from 'lodash'
+import { map, mapValues, isEmpty, some } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
 import EmpModal from '../../EmpModal/EmpModal'
@@ -57,11 +57,7 @@ class CharacterSheetTable extends Component {
                       isEdit
                       title={'Edit ' + item.name}
                       description={(this.props.deleteText && this.props.deleteText(index)) || this.props.description}
-                      fields={chain(item)
-                        .pick(Object.keys(this.props.fields))
-                        .mapValues((value, key) => ({ value, default: this.props.fields[key]}))
-                        .value()
-                      }
+                      fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: item[key] }))}
                       onUpdate={this.props.onEdit.bind(this, index)}
                       onDelete={this.props.onDelete ? (
                         this.props.onDelete.bind(this, index)
@@ -93,7 +89,7 @@ class CharacterSheetTable extends Component {
                     <EmpItemEditor
                       title={this.props.addText}
                       description={this.props.description}
-                      fields={mapValues(this.props.fields, value => ({ value, default: value }))}
+                      fields={mapValues(this.props.fields, field => ({ ...field, value: field.default }))}
                       onUpdate={this.props.onAdd}
                     />
                   </div>

@@ -29,7 +29,6 @@ class EmpStringEditor extends Component {
       <div className={editing}>
         <EmpTextInput
           autoFocus
-          type="text"
           className={input}
           value={this.state.workingValue}
           onChange={this.handleChange}

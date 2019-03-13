@@ -12,7 +12,7 @@ import {
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
 import EmpModal from '../EmpModal/EmpModal'
-import { cloneDeep, startCase, map, merge, mapValues, isObject, isEmpty, isFunction } from 'lodash'
+import { cloneDeep, startCase, map, mapValues, isObject, isEmpty, isFunction } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -23,18 +23,32 @@ class EmpItemEditor extends Component {
       workingValues: cloneDeep(this.props.fields),
     })
   }
-  chooseTitle = (value) => {
-    if (value.value && !Array.isArray(value.value)) {
-      return value.default.find(item => item.value === value.value).text
-    } else {
-      return 'Choose one'
-    }
-  }
   handleChange = (key, {target}) => {
-    const newValue = isObject(this.state.workingValues[key].default) ? { value: target.value } : target.value
-    this.setState(prevState => merge(prevState, {
-      workingValues: { [key]: newValue }
+    const fieldData = this.state.workingValues[key]
+    const newValue = fieldData.options ? {
+      ...fieldData,
+      value: target.value
+    } : target.value
+    const isAddingAll = Array.isArray(target.value) && target.value.includes('addAllItems')
+    const valueToSet = isAddingAll ? {
+      ...fieldData,
+      value: fieldData.options.map(({ value }) => value)
+    }: newValue
+    this.setState(prevState => ({
+      ...prevState,
+      workingValues: {
+        ...prevState.workingValues,
+        [key]: valueToSet
+      }
     }))
+  }
+  optionsWithAddAll = (value) => {
+    const isAllSelected = value.options.filter(option => !value.value.includes(option.value)).length === 0
+    const isShowingAddAll = Array.isArray(value.default) && !isAllSelected
+    return [
+      ...(isShowingAddAll ? [{ label: 'Add all', value: 'addAllItems' }] : []),
+      ...value.options
+    ]
   }
   handleDone = () => {
     this.props.onUpdate(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
@@ -56,16 +70,18 @@ class EmpItemEditor extends Component {
           <>
             {map(this.state.workingValues, (value, key) =>
               <div className={field} key={key}>
+              {console.log(value)}
                 <div className={fieldLabel}>{startCase(key)}</div>
-                {Array.isArray(value.default) ? (
+                {value.options ? (
                   <EmpDropdown
-                    title={this.chooseTitle(value)}
-                    items={value.default}
+                    isMulti={Array.isArray(value.default)}
+                    value={value.options.filter(option => value.value.includes(option.value))}
+                    options={this.optionsWithAddAll(value)}
+                    className={input}
                     onSelect={newValue => this.handleChange(key, {target: { value: newValue}})}
                   />
                 ) : (
                   <EmpTextInput
-                    type="text"
                     className={input}
                     value={isObject(value) ? value.value : value}
                     onChange={this.handleChange.bind(this, key)}

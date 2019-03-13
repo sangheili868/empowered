@@ -18,7 +18,7 @@ class EmpItemEditor extends Component {
   state = {
     workingValues: {}
   }
-  toggleEditing = () => {
+  handleOpen = () => {
     this.setState({
       workingValues: cloneDeep(this.props.fields),
     })
@@ -43,8 +43,9 @@ class EmpItemEditor extends Component {
     return (
       <EmpModal
         backdrop="static"
-        noStyle
         title={this.props.title}
+        noStyle={!this.props.isInline || this.props.isCustomInline}
+        className={this.props.isInline ? inline : ''}
         body={
           <>
             {map(this.state.workingValues, (value, key) =>
@@ -91,14 +92,12 @@ class EmpItemEditor extends Component {
         ]}
       >
         {this.props.isInline || this.props.isCustomInline ? (
-          <span className={this.props.isInline ? inline : ''} onClick={this.toggleEditing}>
-            {this.props.children}
-          </span>
+          <span onClick={this.handleOpen}>{this.props.children}</span>
         ) : (
           <FontAwesomeIcon
             className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
             icon={this.props.isEdit ? 'pen-square' : 'plus-square'}
-            onClick={this.toggleEditing}
+            onClick={this.handleOpen}
           />
         )}
       </EmpModal>

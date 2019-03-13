@@ -41,7 +41,7 @@
         "level": -1
       }
     ],
-    "description": "Light shields provide a +1 bonus to agility while raised, and have no speed penalty while equipped."
+    "description": "Light shields provide a +1 bonus to agility when raised, and have no speed penalty while equipped."
   },
   "mediumShield": {
     "name": "Medium Shields",
@@ -52,7 +52,7 @@
         "level": 2
       }
     ],
-    "description": "Medium shields provide a +3 bonus to agility while raised, and have no speed penalty while equipped."
+    "description": "Medium shields provide a +3 bonus when raised instead of your agility modifier for defense rolls and have no speed penalty while equipped."
   },
   "heavyShield": {
     "name": "Heavy Shields",
@@ -63,7 +63,7 @@
         "level": 4
       }
     ],
-    "description": "Heavy shields provide a +5 bonus to agility while raised, and have a -5 speed penalty while equipped."
+    "description": "Heavy shields provide a +5 bonus when raised instead of your agility modifier for defense rolls and have a -5 speed penalty while equipped."
   },
   "improvisedWeapon": {
     "name": "Improvised Weapons",

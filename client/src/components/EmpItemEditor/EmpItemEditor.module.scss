@@ -30,14 +30,7 @@
 }
 
 .inline {
-  padding: 5px;
-  border-radius: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $orange;
-    color: $pale;
-  }
+  padding: 0 5px;
 }
 
 .footer {

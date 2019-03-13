@@ -61,8 +61,8 @@
   ],
   "basicActions": [
     {
-      "name": "Dodge",
-      "description": "As a basic action, you focus your efforts towards avoiding attacks. You gain +1 to all agility rolls to avoid attacks and features, until the start of your next turn."
+      "name": "Defend",
+      "description": "As a basic action, you focus your efforts towards avoiding attacks from a specific creature that you can see. You gain +1 to your next defense roll to avoid an attack or feature from that creature, until the start of your side's next turn."
     },
     {
       "name": "Draw Items",
@@ -70,15 +70,11 @@
     },
     {
       "name": "Interect with Object",
-      "description": "As a basic action, you pick up, kick away, pull, open, move, or interact in some other way with an object that no one is holding or wearing. A skill roll of the DM's choice may be required."
+      "description": "As a basic action, you pick up, kick away, pull, open, move, or interact in some other way with any one object that no one is holding or wearing. A skill roll of the DM's choice may be required, in which case this becomes a skill action."
     },
     {
       "name": "Move",
       "description": "As a basic action, you begin moving a distance up to your speed. You can take other actions at any point of this movement."
-    },
-    {
-      "name": "Raise a Shield",
-      "description": "As a basic action, you gain the agility bonus granted by a shield you are holding until the start of your side's next turn."
     },
     {
       "name": "Ready",
@@ -95,6 +91,10 @@
     {
       "name": "Take Cover",
       "description": "As a basic action, if there is someone or something your size or larger, you can take cover behind it as an action. You have advantage on agility rolls to avoid anything that originates from the other side of the cover."
+    },
+    {
+      "name": "Target",
+      "description": "As a basic action, you focus your efforts towards attacking a specific creature that you can see. You gain +1 to your next attack roll against that creature with a weapon you currently have equipped, until the start of your side's next turn."
     }
   ],
   "maneuvers": [
@@ -131,6 +131,10 @@
     {
       "name": "Attack of Opportunity",
       "description": "As a reaction, when a creature that you can see moves out of a space within 5 feet of you as part of the move action, you can take the attack action, targeting the creature that triggered this reaction."
+    },
+    {
+      "name": "Block",
+      "description": "As a reaction, when you are targeted for an attack and you are holding a shield, you add your shield's bonus to your agility roll if it is a light shield, or use your shield's bonus in place of your agility modifier if it is a medium or heavy shield."
     },
     {
       "name": "Ready",

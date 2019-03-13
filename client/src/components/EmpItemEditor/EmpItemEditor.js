@@ -90,16 +90,15 @@ class EmpItemEditor extends Component {
             onClick: this.handleDone
           }
         ]}
+        onOpen={this.handleOpen}
       >
-        {this.props.isInline || this.props.isCustomInline ? (
-          <span onClick={this.handleOpen}>{this.props.children}</span>
-        ) : (
+        {this.props.children}
+        {!this.props.isInline && !this.props.isCustomInline &&
           <FontAwesomeIcon
             className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
             icon={this.props.isEdit ? 'pen-square' : 'plus-square'}
-            onClick={this.handleOpen}
           />
-        )}
+        }
       </EmpModal>
     )
   }

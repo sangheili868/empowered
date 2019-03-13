@@ -45,11 +45,11 @@
     },
     "abilityScores": {
       "strong": -2,
-      "aware": 0,
+      "aware": 1,
       "smart": 1,
-      "quick": 1,
+      "quick": 2,
       "determined": -1,
-      "social": 2
+      "social": 3
     },
     "powerDice": {
       "d4s": {
@@ -83,10 +83,6 @@
     ],
     "weapons": [
       {
-        "name": "Rapier",
-        "category": "oneHandedFinesseWeapon"
-      },
-      {
         "name": "Violin",
         "category": "twoHandedUnityWeapon"
       },
@@ -104,29 +100,21 @@
           "quantity": 1
         },
         {
-          "name": "Rapier",
-          "quantity": 1
-        },
-        {
           "name": "Violin",
           "quantity": 1
         },
         {
-          "name": "Crystal",
-          "quantity": 1
-        },
-        {
           "name": "Spy's Tools",
-          "quantity": 1
-        },
-        {
-          "name": "Chemist's Tools",
           "quantity": 1
         }
       ],
       "light": [
         {
           "name": "Mentor's Necklace",
+          "quantity": 1
+        },
+        {
+          "name": "Crystal",
           "quantity": 1
         },
         {

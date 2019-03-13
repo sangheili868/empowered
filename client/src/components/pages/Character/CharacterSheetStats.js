@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { stats } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
-import CharacterSheetStatsSkills from "./CharacterSheetStatsSkills"
+import CharacterSheetSkills from "./CharacterSheetSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetTable from './CharacterSheetTable'
 import { pick, cloneDeep } from 'lodash'
@@ -17,7 +17,7 @@ class CharacterSheetStats extends Component {
       <div>
         <CharacterSheetStatsResources stats={this.props.stats} onUpdate={this.props.onUpdate}/>
         <div className={stats}>
-          <CharacterSheetStatsSkills
+          <CharacterSheetSkills
             abilityScores={this.props.stats.abilityScores}
             skills={this.props.stats.skills}
           />
@@ -63,7 +63,7 @@ class CharacterSheetStats extends Component {
               </EmpItemEditor>,
               <div key="carryWeight">
                 {
-                  "Carried Weight: " +
+                  "Capacity: " +
                   this.props.stats.equipment.encumberance.current.toFixed(2) +
                   " / " + this.props.stats.equipment.encumberance.limit.toFixed(2)
                 }

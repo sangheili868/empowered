@@ -17,6 +17,7 @@ import EmpButton from '../../EmpButton/EmpButton'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
 import featureFields from '../../../gameData/featureFields'
+import CharacterSheetSkills from "./CharacterSheetSkills"
 
 class CharacterSheetShop extends Component {
   render () {
@@ -39,12 +40,12 @@ class CharacterSheetShop extends Component {
             items={this.props.shop.abilityScores}
             columnNames={{
               name: 'Name',
-              current: 'Current'
+              displayValue: 'Current'
             }}
             buyButton={index => {
               const score = this.props.shop.abilityScores[index]
               const isIncreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
-              if (score.current > 4) {
+              if (score.value > 4) {
                 return 'At Maximum'
               } else if (score.cost > this.props.shop.advancements) {
                 return `Costs ${score.cost} adv.`
@@ -55,7 +56,7 @@ class CharacterSheetShop extends Component {
                     onClick={this.props.onUpdate.bind(this, {
                       shop: {advancements: this.props.shop.advancements - score.cost},
                       stats: {
-                        abilityScores: { [lowerCase(score.name)]: score.current + 1 },
+                        abilityScores: { [lowerCase(score.name)]: score.value + 1 },
                         hitPoints: this.props.stats.hitPoints + (isIncreasingHP ? 1 : 0)
                       }
                     })}
@@ -68,13 +69,13 @@ class CharacterSheetShop extends Component {
             sellButton={index => {
               const score = this.props.shop.abilityScores[index]
               const isDecreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
-              return (score.current <= -3) ? 'At Minimum' : (
+              return (score.value <= -2) ? 'At Minimum' : (
                 <EmpButton
                   className={[tableBuy, minus].join(' ')}
                   onClick={this.props.onUpdate.bind(this, {
                     shop: {advancements: this.props.shop.advancements + score.worth},
                     stats: {
-                      abilityScores: { [lowerCase(score.name)]: score.current - 1 },
+                      abilityScores: { [lowerCase(score.name)]: score.value - 1 },
                       hitPoints: Math.max(0, this.props.stats.hitPoints + (isDecreasingHP ? -1 : 0))
                     }
                   })}
@@ -83,6 +84,10 @@ class CharacterSheetShop extends Component {
                 </EmpButton>
               )
             }}
+          />
+          <CharacterSheetSkills
+            abilityScores={this.props.stats.abilityScores}
+            skills={this.props.stats.skills}
           />
           {this.props.shop.unlocked &&
             <>

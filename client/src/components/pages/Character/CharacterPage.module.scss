@@ -227,10 +227,6 @@
     width: calc(100% - 20px);
   }
 
-  .title {
-    display: table-cell;
-  }
-
   .cell {
     border: solid $dark 1px;
     border-right: none;
@@ -262,6 +258,11 @@
       }
     }
   }
+}
+
+.detailTitle {
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .columnHeader {

@@ -9,7 +9,10 @@ class EmpModal extends Component {
   }
   toggleModal = () => {
     if (this.props.isBlocked) this.props.onBlocked()
-    else this.setState(prevState => ({ ...prevState, isOpen: !prevState.isOpen }))
+    else {
+      this.state.isOpen ? this.props.onClose && this.props.onClose() : this.props.onOpen && this.props.onOpen()
+      this.setState(prevState => ({ ...prevState, isOpen: !prevState.isOpen }))
+    }
   }
   handleCloser = callback => {
     this.toggleModal()

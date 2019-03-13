@@ -44,12 +44,12 @@
       "type": "walking"
     },
     "abilityScores": {
-      "strong": -3,
-      "aware": -3,
-      "smart": -3,
-      "quick": -3,
-      "determined": -3,
-      "social": -3
+      "strong": -2,
+      "aware": -2,
+      "smart": -2,
+      "quick": -2,
+      "determined": -2,
+      "social": -2
     },
     "powerDice": {
       "d4s": {

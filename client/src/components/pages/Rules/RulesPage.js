@@ -107,7 +107,7 @@ class RulesPage extends Component {
               Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must take the feature that gives you proficiency with it. The only exceptions are basic armor and improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.  When you take this feature, you also get one type of the chosen equipment of your choice. For example, if you take the feature One-Handed Weapon Training, you immediately acquire a one-handed weapon of your choice, such as a longsword or a mace.
             </p>
             <p>
-              You have a carrying capacity equal to your passive brawn. Every item is either Heavy, Medium, or Light. Heavy counts as 1. Medium counts as 0.5, and Light counts as 0.05. A coin counts as 0.0005, so 100 coins is 1 Light Item and 2000 coins is one Heavy Item. If you are over your carrying capacity, you have disadvantage on all quick rolls and your speed is reduced by half.
+              You have a carrying capacity equal to your passive brawn. Every item is either Heavy, Medium, or Light. Heavy counts as 2. Medium counts as 1, and Light counts as 0.1. A coin counts as 0.001, so 100 coins is 1 Light Item and 1000 coins is one Medium Item. If you are over your carrying capacity, you have disadvantage on all quick rolls and your speed is reduced by half.
             </p>
           </div>
         </EmpCard>

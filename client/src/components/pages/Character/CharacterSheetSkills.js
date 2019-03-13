@@ -3,9 +3,9 @@ import { table, borderless, columnHeader } from "./CharacterPage.module.scss"
 import { startCase, keyBy } from 'lodash'
 import EmpCard from '../../EmpCard/EmpCard'
 import skills from '../../../gameData/skills.json'
-import CharacterSheetStatsSkillsDetail from './CharacterSheetStatsSkillsDetail'
+import CharacterSheetSkillsDetail from './CharacterSheetSkillsDetail'
 
-class CharacterSheetStatsSkills extends Component {
+class CharacterSheetSkills extends Component {
   scoreNames = Object.keys(this.props.abilityScores)
   topScores = this.scoreNames.slice(0, this.scoreNames.length/2)
   leftScores = this.scoreNames.slice(this.scoreNames.length/2, this.scoreNames.length)
@@ -20,7 +20,7 @@ class CharacterSheetStatsSkills extends Component {
               {this.topScores.map(topScore =>
                 <td key={topScore}>
                   <div className={columnHeader}>{startCase(topScore)}</div>
-                  <div>{this.props.abilityScores[topScore]}</div>
+                  <div>{this.props.abilityScores[topScore].displayValue}</div>
                 </td>
               )}
             </tr>
@@ -28,17 +28,17 @@ class CharacterSheetStatsSkills extends Component {
               <tr key={leftScore}>
                 <td>
                   <div className={columnHeader}>{startCase(leftScore)}</div>
-                  <div>{this.props.abilityScores[leftScore]}</div>
+                  <div>{this.props.abilityScores[leftScore].displayValue}</div>
                 </td>
                 {this.topScores.map(topScore =>
                   <td key={topScore}>
-                    <CharacterSheetStatsSkillsDetail
+                    <CharacterSheetSkillsDetail
                       skill={this.props.skills[skillsByAbility[[topScore, leftScore]].name]}
                     />
                   </td>
                 )}
                 <td>
-                  <CharacterSheetStatsSkillsDetail
+                  <CharacterSheetSkillsDetail
                     skill={this.props.skills[skillsByAbility[[leftScore, leftScore]].name]}
                   />
                 </td>
@@ -48,7 +48,7 @@ class CharacterSheetStatsSkills extends Component {
               <td></td>
               {this.topScores.map(topScore =>
                 <td key={topScore}>
-                  <CharacterSheetStatsSkillsDetail
+                  <CharacterSheetSkillsDetail
                     skill={this.props.skills[skillsByAbility[[topScore, topScore]].name]}
                   />
                 </td>
@@ -61,5 +61,4 @@ class CharacterSheetStatsSkills extends Component {
   }
 }
 
-export default CharacterSheetStatsSkills
-
+export default CharacterSheetSkills

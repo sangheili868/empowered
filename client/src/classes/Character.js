@@ -3,8 +3,16 @@ import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actionsData from '../gameData/actions.json'
 import conditionData from '../gameData/conditions.json'
-import { upperFirst, transform, map, startCase, pick, reject, chain, some, lowerCase, filter } from 'lodash'
+import { upperFirst, transform, map, startCase, pick, reject, chain, some, lowerCase, filter, mapValues } from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
+
+function addPlus (value) {
+  return (value >= 0 ? '+' : '') + value
+}
+
+function countItems (items) {
+  return chain(items).reject('deleted').reduce((total, { quantity }) => quantity + total, 0).value()
+}
 
 class Character {
   constructor(baseCharacterData) {
@@ -17,26 +25,29 @@ class Character {
 
   get stats () {
    if (this.baseStats) {
-    const skills = chain(skillData).keyBy('name').mapValues(({name, abilityScores}) => ({
-      name,
-      value: abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0),
-      features: this.baseStats.features.filter(({ skillTag }) => skillTag === name)
-    })).value()
+    const skills = chain(skillData).keyBy('name').mapValues(skill => {
+      const value = skill.abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0)
+      return {
+        ...skill,
+        value,
+        displayValue: addPlus(value),
+        features: this.baseStats.features.filter(({ skillTag }) => skillTag === skill.name)
+      }
+    }).value()
     const equipment = this.baseStats.equipment
     return {
       ...this.baseStats,
       maxHP: skills.fortitude.value + 10,
       maxTempHP: skills.fortitude.value + 10,
       maxWounds: 5,
+      abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills,
       equipment: {
         ...this.baseStats.equipment,
         encumberance: {
           current: (
-            (equipment.heavy.reduce((acc, { quantity }) => quantity + acc, 0)) +
-            (equipment.medium.reduce((acc, { quantity }) => quantity + acc, 0) / 2) +
-            (equipment.light.reduce((acc, { quantity }) => quantity + acc, 0) / 20) +
-            (equipment.gold / 2000)
+            (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
+            (countItems(equipment.light) / 10) + (equipment.gold / 1000)
           ),
           limit: skills.brawn.value + 10
         }
@@ -114,11 +125,12 @@ class Character {
       }
       return {
         ...this.baseShop,
-        abilityScores: map(this.baseStats.abilityScores, (current, name) => ({
+        abilityScores: map(this.baseStats.abilityScores, (value, name) => ({
           name: startCase(name),
-          current,
-          cost: Math.max(1, current + 1),
-          worth: Math.max(1, current)
+          value,
+          displayValue: addPlus(value),
+          cost: Math.max(1, value + 1),
+          worth: Math.max(1, value)
         })),
         powerDice: map(this.baseStats.powerDice, ({ max }, dieName) => ({
           name: dieName.slice(0,-1),

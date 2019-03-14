@@ -18,7 +18,10 @@ class CharacterSheetStatsRecovery extends Component {
             </ul>
           </>
         }
-        onConfirm={this.props.onConfirm}
+        controls={[{
+          label: 'Confirm',
+          onClick: this.props.onConfirm
+        }]}
         noStyle
         containerComponent="button"
         className={recoveryButton}

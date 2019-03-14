@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { rules, card, table, critical, columnHeader } from "./RulesPage.module.scss"
+import { rules, card, nestedCard, table, cardTable, cell, critical, columnHeader } from "./RulesPage.module.scss"
 import EmpCard from '../../EmpCard/EmpCard'
-import { startCase } from 'lodash'
+import { startCase, map } from 'lodash'
 import RulesSkill from './RulesSkill'
+import actions from '../../../gameData/actions.json'
+import conditions from '../../../gameData/conditions.json'
 
 class RulesPage extends Component {
   topScores = ['strong', 'aware', 'smart']
@@ -117,7 +119,7 @@ class RulesPage extends Component {
               Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
             </p>
             <p>
-              If you are wielding a shield with which you are proficient, you can take the Block reaction when you are targetted by an attack. This allows you to add the shield's bonus to your agility roll if it is a small shield, or replace your agility modifier with the shield's bonus if it is a medium or large shield.
+              If you are wielding a shield with which you are proficient, you can take the Block reaction when you are targeted by an attack. This allows you to add the shield's bonus to your agility roll if it is a small shield, or replace your agility modifier with the shield's bonus if it is a medium or large shield.
             </p>
             <p>
             When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
@@ -127,61 +129,96 @@ class RulesPage extends Component {
         <EmpCard title="Combat">
           <div className={card}>
             <p>
-              When combat begins, the DM organizes all of the creatures present into sides. The side of the creature that initiated combat goes first. At any time the DM can decide that combat ends and can have a creature change sides. On a side’s turn, each creature on that side can take up to three actions. The creatures on that side can take these actions in any order, and can even separate their actions around the actions of other creatures on that side.  The lists below include actions that every creature can take, but often features add more actions to each of these lists for that character.
+              When combat begins, the DM organizes all of the creatures present into sides. The side of the creature that initiated combat goes first. On a side’s turn, each creature on that side can take up to three actions. The creatures on that side can take these actions in any order, and can even separate their actions around the actions of other creatures on that side.  The lists below include actions that every creature can take, but often features add more actions to each of these lists for that character.
             </p>
             <p>
-              There are three types of actions. You can only take one cardinal action per turn. You can take each skill action once per turn. However, you can take multiple skill actions that require the same skill, as long as they are different actions. You can take each basic action any number of times per turn. If an action specifies that you must spend Also, each creature can perform a reaction on any turn. When you perform a reaction, you cannot perform another reaction until the start of your side’s next turn.
+              There are three types of actions. You can only take one cardinal action per turn. You can take each skill action once per turn. However, you can take multiple skill actions that require the same skill, as long as they are different actions. You can take each basic action any number of times per turn. There are two other options a creature has during combat. Maneuvers are different wrestling techniques that a creature can apply after successfully performing the Wrestle action. Reactions can be performed on any turn, when the appropriate trigger is met. When you perform a reaction, you cannot perform another reaction until the start of your side’s next turn.
             </p>
             <p>
-             You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
+              You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
             </p>
             <p>
               If you roll a natural 20 on an attack roll, you land a critical hit. Roll all damage dice twice (including power dice), double all damage modifiers, and roll on the critical success table below. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table below. If you attack a creature within 5 feet of you, and an enemy of your target is flanking it (on the opposite side of them from you), you gain advantage on the attack. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
             </p>
-            <p>
-              Various actions and features can cause conditions, such as frightened and prone. Each condition grants a new action that allows you to attempt to end the condition. Conditions can also end early if the action or feature that caused it gives a way to.
-            </p>
+            {map(actions, (actionList, category) =>
+              <EmpCard key={category} title={startCase(category)} className={nestedCard}>
+                <table className={cardTable}>
+                  <tbody>
+                    {actionList.map(({ name, description }) =>
+                      <tr key={name}><td className={cell}>{name}</td><td className={cell}>{description}</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </EmpCard>
+            )}
+            <EmpCard title="Critical Tables" className={nestedCard}>
+              <div className={card}>
+                If you critically succeed on an attack roll, roll on the table below.
+                <table className={[table, critical].join(' ')}>
+                  <thead>
+                    <tr><th>d24</th><th>Result</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1-6</td><td>Nothing extra happens</td></tr>
+                    <tr><td>7-9</td><td>The target loses their reaction until the start of their next turn.</td></tr>
+                    <tr><td>10-12</td><td>The target falls prone.</td></tr>
+                    <tr><td>13-15</td><td>The target loses an action on their next turn.</td></tr>
+                    <tr><td>16-17</td><td>The target drops an item of your choice, and it lands 10 feet away.</td></tr>
+                    <tr><td>18-19</td><td>Any creature besides you can use their reaction to make a melee attack against the target.</td></tr>
+                    <tr><td>20-21</td><td>An item of your choice that the target is holding or wearing breaks.</td></tr>
+                    <tr><td>22-23</td><td>The target can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
+                    <tr><td>24</td><td>You roll on this table two more times.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className={card}>
+                If you critically fail on a defense roll, roll on the table below.
+                <table className={[table, critical].join(' ')}>
+                  <thead>
+                    <tr><th>d24</th><th>Result</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>1</td><td>You roll on this table two more times.</td></tr>
+                    <tr><td>2-3</td><td>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
+                    <tr><td>4-5</td><td>You fall prone.</td></tr>
+                    <tr><td>6-7</td><td>You lose an action on your next turn.</td></tr>
+                    <tr><td>8-9</td><td>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
+                    <tr><td>10-12</td><td>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
+                    <tr><td>13-15</td><td>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
+                    <tr><td>16-18</td><td>You lose your reaction until the start of your next turn.</td></tr>
+                    <tr><td>19-24</td><td>Nothing extra happens</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </EmpCard>
           </div>
         </EmpCard>
-        <EmpCard title="Critical Tables">
+        <EmpCard title="Conditions">
           <div className={card}>
-            If you critically succeed on an attack roll, roll on the table below.
-            <table className={[table, critical].join(' ')}>
-              <thead>
-                <tr><th>d24</th><th>Result</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1-6</td><td>Nothing extra happens</td></tr>
-                <tr><td>7-9</td><td>The target loses their reaction until the start of their next turn.</td></tr>
-                <tr><td>10-12</td><td>The target falls prone.</td></tr>
-                <tr><td>13-15</td><td>The target loses an action on their next turn.</td></tr>
-                <tr><td>16-17</td><td>The target drops an item of your choice, and it lands 10 feet away.</td></tr>
-                <tr><td>18-19</td><td>Any creature besides you can use their reaction to make a melee attack against the target.</td></tr>
-                <tr><td>20-21</td><td>An item of your choice that the target is holding or wearing breaks.</td></tr>
-                <tr><td>22-23</td><td>The target can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
-                <tr><td>24</td><td>You roll on this table two more times.</td></tr>
-              </tbody>
-            </table>
+            <p>
+              Various actions and features can cause conditions. Each condition grants a new action that allows you to attempt to end the condition. Conditions can also end early if the action or feature that caused it gives a way to. The DC of a condition is the DC or result of the roll that caused the condition. If there is no such DC, the DM chooses one.
+            </p>
           </div>
-          <div className={card}>
-            If you critically fail on a defense roll, roll on the table below.
-            <table className={[table, critical].join(' ')}>
-              <thead>
-                <tr><th>d24</th><th>Result</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>1</td><td>You roll on this table two more times.</td></tr>
-                <tr><td>2-3</td><td>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
-                <tr><td>4-5</td><td>You fall prone.</td></tr>
-                <tr><td>6-7</td><td>You lose an action on your next turn.</td></tr>
-                <tr><td>8-9</td><td>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
-                <tr><td>10-12</td><td>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
-                <tr><td>13-15</td><td>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
-                <tr><td>16-18</td><td>You lose your reaction until the start of your next turn.</td></tr>
-                <tr><td>19-24</td><td>Nothing extra happens</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <table className={cardTable}>
+            <thead>
+              <tr>
+                <th className={cell}>Conditon</th>
+                <th className={cell}>Effects</th>
+                <th className={cell}>Action</th>
+                <th className={cell}>Action Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {map(conditions, ({ name, description, action }) =>
+                <tr key={name}>
+                  <td className={cell}>{name}</td>
+                  <td className={cell}>{description}</td>
+                  <td className={cell}>{action.name}</td>
+                  <td className={cell}>{action.description}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </EmpCard>
         <EmpCard title="Magic">
           <div className={card}>

@@ -8,6 +8,10 @@
     padding: 10px;
     text-align: justify;
     text-indent: 30pt;
+
+    .nestedCard {
+      width: calc(100% - 10px);
+    }
   }
 
   .table {
@@ -15,12 +19,40 @@
     text-align: center;
     user-select: none;
 
+    &.actionsTable {
+      border: 1px solid $black;
+      border-collapse: collapse;
+
+      .cell {
+        border: 1px solid $black;
+      }
+    }
+
     &.critical {
       text-align: left;
     }
 
     .columnHeader {
       font-weight: bold;
+    }
+  }
+}
+
+.cardTable {
+  font-size: 12px;
+  width: 100%;
+  border-collapse: collapse;
+  text-indent: 0;
+
+  .cell {
+    border: solid $dark 1px;
+    border-right: none;
+    border-bottom: none;
+    padding: 5px 10px;
+
+    &:first-child {
+      border-left: none;
+      white-space: nowrap;
     }
   }
 }

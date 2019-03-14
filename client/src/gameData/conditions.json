@@ -28,7 +28,7 @@
   },
   "Poisoned": {
     "name": "Poisoned",
-    "description": "You have disadvantage on all rolls, except rolls as part of the Resist action, and you gain the Resist action.",
+    "description": "You have disadvantage on all rolls, except rolls as part of the Resist action, and you gain the Resist skill action.",
     "action": {
       "name": "Resist",
       "description": "Roll Fortitude against the poison DC to end the poisoned condition.",

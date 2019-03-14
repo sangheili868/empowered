@@ -47,7 +47,7 @@
   {
     "name": "wisdom",
     "abilityScores": [ "smart", "determined" ],
-    "description": "The DM can call for a wisdom roll when you petition a higher power, make an educated guess, attempt to decipher a puzzle or coded message, or understand an otherworldly or philosophical experience. Wisdom also governs the use of divine and nature focused spells, and divine focuses use wisdom to attack with. Wisdom-based spells often involve healing, necromancy, divination, and blocking or disabling magic. Some wisdom-based spells are Recovery, Raise Zombie, Resurrection, Smite, Augury, Bless, Counterspell, Magic Armor, and Anti Magic Shell."
+    "description": "The DM can call for a wisdom roll when you petition a higher power, make an educated guess, attempt to decipher a puzzle or coded message, or understand a strange, otherworldly or philosophical experience. Engaging with aliens, operating strange technology, and anything beyond the norm might involve wisdom. Wisdom also governs the use of divine and nature focused spells, and divine focuses use wisdom to attack with. Wisdom-based spells often involve healing, necromancy, divination, and blocking or disabling magic. Some wisdom-based spells are Recovery, Raise Zombie, Resurrection, Smite, Augury, Bless, Counterspell, Magic Armor, and Anti Magic Shell."
   },
   {
     "name": "synergy",

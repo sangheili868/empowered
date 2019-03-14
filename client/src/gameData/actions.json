@@ -2,7 +2,7 @@
   "cardinalActions": [
     {
       "name": "Attack",
-      "description": "As a cardinal action, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss."
+      "description": "As a cardinal action, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it has a max range, the target must be within the max range. If it has a short and long range, then the target must be within one of them. Then, roll the skill listed under attack skill. You roll with disadvantage if the target is within the long range of your weapon. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss."
     },
     {
       "name": "Delay",
@@ -51,7 +51,7 @@
       "description": "As a skill action, you attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage."
     },
     {
-      "name": "Use a skill",
+      "name": "Use a Skill",
       "description": "As a skill action, you attempt to take some other action that requires a skill roll. The DM decides the skill you use and the DC to meet."
     },
     {

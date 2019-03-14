@@ -1,0 +1,35 @@
+[
+  {
+    "displayName": "No Shield",
+    "category": "none",
+    "rating": 0,
+    "weight": "none",
+    "speedPenalty": 0,
+    "proficiency": "none"
+  },
+  {
+    "displayName": "Small Shield",
+    "category": "small",
+    "rating": 1,
+    "weight": "medium",
+    "skill": "agility",
+    "speedPenalty": 0,
+    "proficiency": "smallShield"
+  },
+  {
+    "displayName": "Medium Shield",
+    "category": "medium",
+    "rating": 3,
+    "weight": "heavy",
+    "speedPenalty": 0,
+    "proficiency": "mediumShield"
+  },
+  {
+    "displayName": "Large Shield",
+    "category": "large",
+    "rating": 5,
+    "weight": "heavy",
+    "speedPenalty": -5,
+    "proficiency": "largeShield"
+  }
+]

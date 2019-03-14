@@ -17,7 +17,7 @@
   {
     "name": "brawn",
     "abilityScores": [ "strong", "strong" ],
-    "description": "Brawn represents your pure physical strength. Brawn is primarily used for melee weapon attacks, and high brawn is required for wearing heavy armor and using heavy shields and ranged weapons. Additionally, you can carry more equipment with higher brawn. Finally, brawn rolls can be used when moving something heavy, breaking an object with your bare hands, or hanging on to something in a tough situation."
+    "description": "Brawn represents your pure physical strength. Brawn is primarily used for melee weapon attacks, and high brawn is required for wearing heavy armor and using large shields and ranged weapons. Additionally, you can carry more equipment with higher brawn. Finally, brawn rolls can be used when moving something heavy, breaking an object with your bare hands, or hanging on to something in a tough situation."
   },
   {
     "name": "stealth",

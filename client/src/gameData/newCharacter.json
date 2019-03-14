@@ -28,18 +28,16 @@
     "equipment": ""
   },
   "stats": {
-    "hitPoints": 4,
+    "hitPoints": 6,
     "tempHP": 0,
     "wounds": 0,
     "armor": {
-      "rating": 0,
-      "type": "None",
-      "weight": "none"
+      "name": "None",
+      "category": "none"
     },
     "shield": {
-      "rating": 0,
-      "type": "None",
-      "weight": "none"
+      "name": "None",
+      "category": "none"
     },
     "speed": {
       "rating": 20,

@@ -9,7 +9,10 @@ import {
   spacer,
   subtext
 } from "./CharacterPage.module.scss"
-import { startCase } from 'lodash'
+import CharacterSheetResource from './CharacterSheetResource'
+import { chain, mapValues, cloneDeep } from 'lodash'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
 import armorIcon from "../../../icons/soldier.png"
 import shieldIcon from "../../../icons/shield.png"
@@ -18,10 +21,6 @@ import tempHPIcon from "../../../icons/circle-plus.png"
 import speedIcon from "../../../icons/boot.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
-import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues, cloneDeep } from 'lodash'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import d4Icon from "../../../icons/d4.png"
 import d6Icon from "../../../icons/d6.png"
 import d8Icon from "../../../icons/d8.png"
@@ -72,32 +71,22 @@ class CharacterSheetStatsResources extends Component {
               <img className={icon} alt="Armor Icon" src={armorIcon}/>
               <div className={valueRow}>
                 <div className={spacer}></div>
-                <div>{this.props.stats.armor.rating}</div>
+                <div>{this.props.stats.armor.category === 'none' ? '' : this.props.stats.armor.rating}</div>
                 <EmpItemEditor
                   title="Armor"
                   isEdit
                   fields={{
-                    rating: this.props.stats.armor.rating,
-                    type: this.props.stats.armor.type,
-                    weight: {
-                      value: this.props.stats.armor.weight,
-                      default: 'medium',
-                      options: [
-                        { label: 'None', value: 'none' },
-                        { label: 'Light', value: 'light' },
-                        { label: 'Medium', value: 'medium' },
-                        { label: 'Heavy', value: 'heavy' }
-                      ]
+                    name: this.props.stats.armor.name,
+                    category: {
+                      value: this.props.stats.armor.category,
+                      default: 'none',
+                      options: this.props.stats.availableArmor
                     }
                   }}
-                  onUpdate={values => this.props.onUpdate({
-                    stats: {
-                      armor: values
-                    }
-                  })}
+                  onUpdate={values => this.props.onUpdate({ stats: { armor: values } })}
                 />
               </div>
-              <div className={subtext}>{startCase(this.props.stats.armor.type)}</div>
+              <div className={subtext}>{this.props.stats.armor.name}</div>
             </div>
           </div>
           <div className={resource}>
@@ -106,32 +95,22 @@ class CharacterSheetStatsResources extends Component {
               <img className={icon} alt="Shield Icon" src={shieldIcon}/>
               <div className={valueRow}>
                 <div className={spacer}></div>
-                <div>{this.props.stats.shield.rating}</div>
+                <div>{this.props.stats.shield.category === 'none' ? '' : this.props.stats.shield.rating}</div>
                 <EmpItemEditor
                   title="Shield"
                   isEdit
                   fields={{
-                    rating: this.props.stats.shield.rating,
-                    type: this.props.stats.shield.type,
-                    weight: {
-                      value: this.props.stats.armor.weight,
-                      default: 'medium',
-                      options: [
-                        { label: 'None', value: 'none' },
-                        { label: 'Light', value: 'light' },
-                        { label: 'Medium', value: 'medium' },
-                        { label: 'Heavy', value: 'heavy' }
-                      ]
+                    name: this.props.stats.shield.name,
+                    category: {
+                      value: this.props.stats.shield.category,
+                      default: 'none',
+                      options: this.props.stats.availableShields
                     }
                   }}
-                  onUpdate={values => this.props.onUpdate({
-                    stats: {
-                      shield: values
-                    }
-                  })}
+                  onUpdate={values => this.props.onUpdate({ stats: { shield: values } })}
                 />
               </div>
-              <div className={subtext}>{startCase(this.props.stats.shield.type)}</div>
+              <div className={subtext}>{this.props.stats.shield.name}</div>
             </div>
           </div>
           <div className={resource}>

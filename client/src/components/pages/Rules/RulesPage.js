@@ -117,7 +117,7 @@ class RulesPage extends Component {
               Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
             </p>
             <p>
-              If you are wielding a shield with which you are proficient, you can take the Raise a Shield action. This allows you to apply the listed bonus when you roll agility against an attack or spell until your side’s next turn.
+              If you are wielding a shield with which you are proficient, you can take the Block reaction when you are targetted by an attack. This allows you to add the shield's bonus to your agility roll if it is a small shield, or replace your agility modifier with the shield's bonus if it is a medium or large shield.
             </p>
             <p>
             When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.

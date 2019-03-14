@@ -32,13 +32,12 @@
     "tempHP": 0,
     "wounds": 0,
     "armor": {
-      "rating": 1,
-      "type": "lightArmor",
-      "weight": "medium"
+      "name": "Void Elf Armor",
+      "category": "light"
     },
     "shield": {
-      "rating": 0,
-      "type": "none"
+      "name": "None",
+      "category": "none"
     },
     "speed": {
       "rating": 20,

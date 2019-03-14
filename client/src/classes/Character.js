@@ -1,9 +1,24 @@
+import armorData from '../gameData/armor.json'
+import shieldData from '../gameData/shields.json'
 import weaponData from '../gameData/weapons.json'
 import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actionsData from '../gameData/actions.json'
 import conditionData from '../gameData/conditions.json'
-import { upperFirst, transform, map, startCase, pick, reject, chain, some, lowerCase, filter, mapValues } from 'lodash'
+import {
+  upperFirst,
+  transform,
+  map,
+  startCase,
+  pick,
+  reject,
+  chain,
+  some,
+  lowerCase,
+  filter,
+  mapValues,
+  keyBy
+} from 'lodash'
 import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 function addPlus (value) {
@@ -34,6 +49,16 @@ class Character {
         features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
       }
     }).value()
+    const armor = {
+      ...this.baseStats.armor,
+      ...keyBy(armorData, 'category')[this.baseStats.armor.category]
+    }
+    const shieldCatStats = keyBy(shieldData, 'category')[this.baseStats.shield.category]
+    const shield = {
+      ...this.baseStats.shield,
+      ...shieldCatStats,
+      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? skills[shieldCatStats.skill].value : 0))
+    }
     const equipment = {
       ...this.baseStats.equipment,
       ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
@@ -43,13 +68,13 @@ class Character {
           quantity: 1,
           category: 'weapon'
         })),
-        ...this.baseStats.armor.weight === category ? [{
-          name: startCase(this.baseStats.armor.type),
+        ...armor.weight === category ? [{
+          name: armor.name,
           quantity: 1,
           category: 'armor'
         }] : [],
-        ...this.baseStats.shield.weight === category ? [{
-          name: startCase(this.baseStats.shield.type),
+        ...shield.weight === category ? [{
+          name: shield.name,
           quantity: 1,
           category: 'shield'
         }] : []
@@ -61,6 +86,16 @@ class Character {
       maxHP: skills.fortitude.value + 10,
       maxTempHP: skills.fortitude.value + 10,
       maxWounds: 5,
+      armor,
+      availableArmor: chain(armorData).filter(({proficiency}) =>
+        this.baseStats.proficiencies.equipment.map(({category}) => category)
+        .includes(proficiency) || proficiency === 'none'
+      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+      shield,
+      availableShields: chain(shieldData).filter(({proficiency}) =>
+        this.baseStats.proficiencies.equipment.map(({category}) => category)
+        .includes(proficiency) || proficiency === 'none'
+      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills,
       equipment: {

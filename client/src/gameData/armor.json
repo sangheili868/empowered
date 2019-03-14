@@ -1,0 +1,34 @@
+[
+  {
+    "displayName": "No Armor",
+    "category": "none",
+    "rating": 0,
+    "weight": "none",
+    "stealthPenalty": 0,
+    "proficiency": "none"
+  },
+  {
+    "displayName": "Light Armor",
+    "category": "light",
+    "rating": 1,
+    "weight": "medium",
+    "stealthPenalty": 0,
+    "proficiency": "lightArmor"
+  },
+  {
+    "displayName": "Medium Armor",
+    "category": "medium",
+    "rating": 3,
+    "weight": "heavy",
+    "stealthPenalty": -1,
+    "proficiency": "mediumArmor"
+  },
+  {
+    "displayName": "Heavy Armor",
+    "category": "heavy",
+    "rating": 5,
+    "weight": "heavy",
+    "stealthPenalty": -3,
+    "proficiency": "heavyArmor"
+  }
+]

@@ -187,47 +187,42 @@ class CharacterSheetStatsResources extends Component {
               <EmpItemEditor
                 key={index}
                 isInline
-                title={'Edit a Condition'}
-                fields={chain(item)
-                  .pick(['name'])
-                  .mapValues((value) => ({ value, default: Object.keys(conditionData).map(condition => ({
-                    text: condition,
-                    value: condition
-                  }))}))
-                  .value()
-                }
-                onUpdate={values => {
-                  let newConditions = cloneDeep(this.props.stats.conditions)
-                  newConditions[index] = conditionData[values.name]
-                  this.props.onUpdate({ stats: { conditions: newConditions }})
-                }}
+                title={item.name}
                 onDelete={() => {
                   let newConditions = cloneDeep(this.props.stats.conditions)
                   newConditions[index].deleted = true
                   this.props.onUpdate({ stats: { conditions: newConditions }})
                 }}
-                description={({ name }) => name && name.value && conditionData[name.value].description}
+                description={item.description}
               >
                 {item.name}
               </EmpItemEditor>
             }
-            addToList={() =>
-              <EmpItemEditor
-                title={'Add a Condition'}
-                fields={{ name: {
-                  value: '',
-                  default: Object.keys(conditionData).map(condition => ({
-                    text: condition,
-                    value: condition
-                  }))
-                }}}
-                description={({ name }) => name && name.value && conditionData[name.value].description}
-                onUpdate={values => this.props.onUpdate({ stats: { conditions: [
-                  ...this.props.stats.conditions,
-                  values
-                ]}})}
-              />
-            }
+            addToList={() => {
+              const notActiveConditions = Object.keys(conditionData)
+                .filter(condition => !chain(this.props.stats.conditions)
+                  .reject('deleted')
+                  .map('name')
+                  .includes(condition)
+                  .value()
+                )
+                .map(condition => ({ label: condition, value: condition}))
+              return (notActiveConditions.length > 0) && (
+                <EmpItemEditor
+                  title={'Add a Condition'}
+                  fields={{ name: {
+                    value: '',
+                    default: '',
+                    options: notActiveConditions
+                  }}}
+                  description={({ name }) => name && name.value && conditionData[name.value].description}
+                  onUpdate={values => this.props.onUpdate({ stats: { conditions: [
+                    ...this.props.stats.conditions,
+                    values
+                  ]}})}
+                />
+              )
+            }}
           />
         </div>
         <div className={resources}>

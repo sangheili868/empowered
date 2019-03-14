@@ -70,7 +70,6 @@ class EmpItemEditor extends Component {
           <>
             {map(this.state.workingValues, (value, key) =>
               <div className={field} key={key}>
-              {console.log(value)}
                 <div className={fieldLabel}>{startCase(key)}</div>
                 {value.options ? (
                   <EmpDropdown

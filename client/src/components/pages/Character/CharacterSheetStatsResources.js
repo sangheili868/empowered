@@ -7,10 +7,11 @@ import {
   icon,
   valueRow,
   spacer,
+  detailTitle,
   subtext
 } from "./CharacterPage.module.scss"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues, cloneDeep } from 'lodash'
+import { chain, mapValues, cloneDeep, startCase } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
@@ -28,6 +29,9 @@ import d10Icon from "../../../icons/d10.png"
 import d12Icon from "../../../icons/d12.png"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import conditionData from '../../../gameData/conditions.json'
+import armorData from '../../../gameData/armor.json'
+import shieldData from '../../../gameData/shields.json'
+import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -65,54 +69,42 @@ class CharacterSheetStatsResources extends Component {
             icon={tempHPIcon}
             max={this.props.stats.maxTempHP}
           />
-          <div className={resource}>
-            <div className={title}>Armor</div>
-            <div className={info}>
-              <img className={icon} alt="Armor Icon" src={armorIcon}/>
-              <div className={valueRow}>
-                <div className={spacer}></div>
-                <div>{this.props.stats.armor.category === 'none' ? '' : this.props.stats.armor.rating}</div>
-                <EmpItemEditor
-                  title="Armor"
-                  isEdit
-                  fields={{
-                    name: this.props.stats.armor.name,
-                    category: {
-                      value: this.props.stats.armor.category,
-                      default: 'none',
-                      options: this.props.stats.availableArmor
-                    }
-                  }}
-                  onUpdate={values => this.props.onUpdate({ stats: { armor: values } })}
-                />
+          {[
+            { resourceName: 'armor', resourceIcon: armorIcon, categories: armorData },
+            { resourceName: 'shield', resourceIcon: shieldIcon, categories: shieldData }
+          ].map(({resourceName, resourceIcon, categories}) => this.props.stats[resourceName].options.length > 1 &&
+            <div className={resource} key={resourceName}>
+              <div className={title}>{startCase(resourceName)}</div>
+              <div className={info}>
+                <img className={icon} alt={startCase(resourceName) + ' Icon'} src={resourceIcon}/>
+                <div className={valueRow}>
+                  <div className={spacer}></div>
+                  <div>{this.props.stats[resourceName].category === 'none' ? '' : this.props.stats[resourceName].rating}</div>
+                  <EmpItemEditor
+                    title={startCase(resourceName)}
+                    isEdit
+                    fields={{
+                      name: this.props.stats[resourceName].name,
+                      category: {
+                        value: this.props.stats[resourceName].category,
+                        default: 'none',
+                        options: this.props.stats[resourceName].options
+                      }
+
+                    }}
+                    description={({category}) => {
+                      if (category && category.value && !Array.isArray(category.value)) {
+                        const catData = categories.find(cat => cat.category === category.value)
+                        return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
+                      }
+                    }}
+                    onUpdate={values => this.props.onUpdate({ stats: { [resourceName]: values } })}
+                  />
+                </div>
+                <div className={subtext}>{this.props.stats[resourceName].name}</div>
               </div>
-              <div className={subtext}>{this.props.stats.armor.name}</div>
             </div>
-          </div>
-          <div className={resource}>
-            <div className={title}>Shield</div>
-            <div className={info}>
-              <img className={icon} alt="Shield Icon" src={shieldIcon}/>
-              <div className={valueRow}>
-                <div className={spacer}></div>
-                <div>{this.props.stats.shield.category === 'none' ? '' : this.props.stats.shield.rating}</div>
-                <EmpItemEditor
-                  title="Shield"
-                  isEdit
-                  fields={{
-                    name: this.props.stats.shield.name,
-                    category: {
-                      value: this.props.stats.shield.category,
-                      default: 'none',
-                      options: this.props.stats.availableShields
-                    }
-                  }}
-                  onUpdate={values => this.props.onUpdate({ stats: { shield: values } })}
-                />
-              </div>
-              <div className={subtext}>{this.props.stats.shield.name}</div>
-            </div>
-          </div>
+          )}
           <div className={resource}>
             <div className={title}>Speed</div>
             <div className={info}>
@@ -124,14 +116,19 @@ class CharacterSheetStatsResources extends Component {
                   title="Speed"
                   isEdit
                   fields={{
-                    rating: this.props.stats.speed.rating,
+                    baseValue: this.props.stats.speed.baseValue,
                     type: this.props.stats.speed.type
                   }}
-                  onUpdate={values => this.props.onUpdate({
-                    stats: {
-                      speed: values
-                    }
-                  })}
+                  description={this.props.stats.speed.modifier &&
+                    <>
+                      <div className={detailTitle}>Modifiers:</div>
+                      <div>{this.props.stats.speed.modifier}</div>
+                    </>
+                  }
+                  onUpdate={values => this.props.onUpdate({ stats: { speed: {
+                    ...values,
+                    baseValue: parseInt(values.baseValue)
+                  }}})}
                 />
               </div>
               <div className={subtext}>{this.props.stats.speed.type}</div>

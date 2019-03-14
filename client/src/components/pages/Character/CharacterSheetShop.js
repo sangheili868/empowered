@@ -251,7 +251,7 @@ class CharacterSheetShop extends Component {
               <EmpCard isStartingOpen title="Languages">
                 {(
                   this.props.stats.proficiencies.languages.filter(language => !language.deleted).length <
-                  Math.max(2, this.props.stats.skills.synergy)
+                  Math.max(2, this.props.stats.skills.synergy.value)
                 ) ? (
                   <div className={languages}>
                     <div>Learn a new language:</div>

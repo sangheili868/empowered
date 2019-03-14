@@ -40,7 +40,7 @@
       "category": "none"
     },
     "speed": {
-      "rating": 20,
+      "baseValue": 20,
       "type": "walking"
     },
     "abilityScores": {

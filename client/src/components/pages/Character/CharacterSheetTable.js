@@ -3,6 +3,7 @@ import {
   table,
   tableAdd,
   titleRow,
+  disabled,
   cell,
   buy,
   columnHeader
@@ -34,9 +35,8 @@ class CharacterSheetTable extends Component {
             }
           </thead>
           <tbody>
-            {this.props.items
-              .map((item, index) => !item.deleted &&
-              <tr key={index}>
+            {this.props.items.map((item, index) => !item.deleted &&
+              <tr key={index} className={item.isDisabled ? disabled : ''}>
                 {map(this.props.columnNames, (value, key) =>
                   <td key={key} className={cell}>
                     {(this.props.tooltips && this.props.tooltips[key]) ? (

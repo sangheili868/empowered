@@ -19,7 +19,6 @@ import {
   mapValues,
   keyBy
 } from 'lodash'
-import equipmentProficiencies from '../gameData/equipmentProficiencies.json'
 
 function addPlus (value) {
   return (value >= 0 ? '+' : '') + value
@@ -38,29 +37,44 @@ class Character {
     this.baseShop = baseCharacterData.shop
   }
 
+  get armor () {
+    return {
+      ...this.baseStats.armor,
+      ...keyBy(armorData, 'category')[this.baseStats.armor.category],
+      options: chain(armorData).filter(({proficiency}) =>
+        this.baseStats.proficiencies.equipment.map(({category}) => category)
+        .includes(proficiency) || proficiency === 'none'
+      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+    }
+  }
+
   get skills () {
     return chain(skillData).keyBy('name').mapValues(skill => {
       const value = skill.abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0)
+      const isModified = skill.name === 'stealth' && this.armor.stealthPenalty !== 0
+      const modifiedValue = skill.name === 'stealth' ? value + this.armor.stealthPenalty : value
+      const modifierText = this.armor.name +  ': ' + this.armor.stealthPenalty
       return {
         ...skill,
-        value,
-        displayValue: addPlus(value),
-        features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
+        value: modifiedValue,
+        displayValue: addPlus(modifiedValue),
+        features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name)),
+        modifiers: isModified ? modifierText : ''
       }
     }).value()
   }
 
   get stats () {
    if (this.baseStats) {
-    const armor = {
-      ...this.baseStats.armor,
-      ...keyBy(armorData, 'category')[this.baseStats.armor.category]
-    }
     const shieldCatStats = keyBy(shieldData, 'category')[this.baseStats.shield.category]
     const shield = {
       ...this.baseStats.shield,
       ...shieldCatStats,
-      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0))
+      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0)),
+      options: chain(shieldData).filter(({proficiency}) =>
+        this.baseStats.proficiencies.equipment.map(({category}) => category)
+        .includes(proficiency) || proficiency === 'none'
+      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
     }
     const equipment = {
       ...this.baseStats.equipment,
@@ -71,8 +85,8 @@ class Character {
           quantity: 1,
           category: 'weapon'
         })),
-        ...armor.weight === category ? [{
-          name: armor.name,
+        ...this.armor.weight === category ? [{
+          name: this.armor.name,
           quantity: 1,
           category: 'armor'
         }] : [],
@@ -83,21 +97,19 @@ class Character {
         }] : []
       ])
     }
+    console.log(shield)
     return {
       ...this.baseStats,
       maxHP: this.skills.fortitude.value + 10,
       maxTempHP: this.skills.fortitude.value + 10,
       maxWounds: 5,
-      armor,
-      availableArmor: chain(armorData).filter(({proficiency}) =>
-        this.baseStats.proficiencies.equipment.map(({category}) => category)
-        .includes(proficiency) || proficiency === 'none'
-      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+      armor: this.armor,
       shield,
-      availableShields: chain(shieldData).filter(({proficiency}) =>
-        this.baseStats.proficiencies.equipment.map(({category}) => category)
-        .includes(proficiency) || proficiency === 'none'
-      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+      speed: {
+        ...this.baseStats.speed,
+        rating: this.baseStats.speed.baseValue + shield.speedPenalty,
+        modifier: (shield.speedPenalty !== 0) ? shield.name + ': ' + addPlus(shield.speedPenalty) : ''
+      },
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills: this.skills,
       equipment: {
@@ -178,12 +190,12 @@ class Character {
    }
   }
 
-  equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
+  equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencyData)
     .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category, deleted }) => ((category === key) && !deleted)))
     .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
     .map(value => ({
       ...value,
-      isMeetingRequirements: !some(value.requirements, ({ skill, level }) => this.skills[skill].value < level),
+      isDisabled: some(value.requirements, ({ skill, level }) => this.skills[skill].value < level),
       meetingRequirementsMessage: value.requirements && value.requirements
         .filter(({ skill, level }) => this.skills[skill].value < level)
         .map(({ skill }) => startCase(skill) + ' is ' + addPlus(this.skills[skill].value))

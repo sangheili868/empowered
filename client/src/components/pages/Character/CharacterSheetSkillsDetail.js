@@ -7,6 +7,7 @@ class CharacterSheetSkillsDetail extends Component {
   render () {
     const title = startCase(this.props.skill.name)
     const hasFeatures = this.props.skill.features.length > 0
+    const hasModifiers = this.props.skill.modifiers
     return (
       <EmpModal title={title+': '+this.props.skill.displayValue} body={
         <>
@@ -17,9 +18,15 @@ class CharacterSheetSkillsDetail extends Component {
               <div>{this.props.skill.features.map(({ name }) => name).join(', ')}</div>
             </>
           }
+          {hasModifiers &&
+            <>
+              <div className={detailTitle}>Modifiers to {title}</div>
+              <div>{this.props.skill.modifiers}</div>
+            </>
+          }
         </>
       }>
-        <div>{title}{hasFeatures ? ' *' : ''}</div>
+        <div>{title}{hasFeatures || hasModifiers ? ' *' : ''}</div>
         <div>{this.props.skill.displayValue}</div>
       </EmpModal>
     )

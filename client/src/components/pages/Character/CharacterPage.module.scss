@@ -227,6 +227,14 @@
     width: calc(100% - 20px);
   }
 
+  .disabled {
+    color: $lightGrey;
+
+    .buy {
+      color: $failure;
+    }
+  }
+
   .cell {
     border: solid $dark 1px;
     border-right: none;

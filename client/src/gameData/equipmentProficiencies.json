@@ -41,7 +41,7 @@
         "level": 0
       }
     ],
-    "description": "Small shields provide a +1 bonus to agility when raised, and have no speed penalty while equipped."
+    "description": "Small shields provide a +1 bonus to agility when raised and have no speed penalty while equipped."
   },
   "mediumShield": {
     "name": "Medium Shields",

@@ -78,7 +78,17 @@ class CharacterSheetStatsResources extends Component {
                   isEdit
                   fields={{
                     rating: this.props.stats.armor.rating,
-                    type: this.props.stats.armor.type
+                    type: this.props.stats.armor.type,
+                    weight: {
+                      value: this.props.stats.armor.weight,
+                      default: 'medium',
+                      options: [
+                        { label: 'None', value: 'none' },
+                        { label: 'Light', value: 'light' },
+                        { label: 'Medium', value: 'medium' },
+                        { label: 'Heavy', value: 'heavy' }
+                      ]
+                    }
                   }}
                   onUpdate={values => this.props.onUpdate({
                     stats: {
@@ -102,7 +112,17 @@ class CharacterSheetStatsResources extends Component {
                   isEdit
                   fields={{
                     rating: this.props.stats.shield.rating,
-                    type: this.props.stats.shield.type
+                    type: this.props.stats.shield.type,
+                    weight: {
+                      value: this.props.stats.armor.weight,
+                      default: 'medium',
+                      options: [
+                        { label: 'None', value: 'none' },
+                        { label: 'Light', value: 'light' },
+                        { label: 'Medium', value: 'medium' },
+                        { label: 'Heavy', value: 'heavy' }
+                      ]
+                    }
                   }}
                   onUpdate={values => this.props.onUpdate({
                     stats: {

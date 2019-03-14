@@ -11,7 +11,7 @@ class CharacterSheetStatsList extends Component {
     const hasSomeUndeletedItem = (isArray && this.props.items.length) ||
     (isObject && some(this.props.items, column => column.length && some(column, item => !item.deleted)))
     return (hasSomeUndeletedItem || this.props.addToList) ? (
-      <EmpCard isStartingOpen={hasSomeUndeletedItem} title={this.props.title}>
+      <EmpCard isStartingOpen={hasSomeUndeletedItem || this.props.subtitles} title={this.props.title}>
         <div className={subtitles}>
           {this.props.subtitles && this.props.subtitles.map((subtitleText, index) =>
             <div key={index} className={subtitle}>{subtitleText}</div>

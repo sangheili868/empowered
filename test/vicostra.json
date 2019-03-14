@@ -33,7 +33,8 @@
     "wounds": 0,
     "armor": {
       "rating": 1,
-      "type": "lightArmor"
+      "type": "lightArmor",
+      "weight": "medium"
     },
     "shield": {
       "rating": 0,
@@ -84,25 +85,19 @@
     "weapons": [
       {
         "name": "Violin",
-        "category": "twoHandedUnityWeapon"
+        "category": "twoHandedUnityWeapon",
+        "weight": "medium"
       },
       {
         "name": "Crystal",
-        "category": "oneHandedArcaneWeapon"
+        "category": "oneHandedArcaneWeapon",
+        "weight": "light"
       }
     ],
     "equipment": {
       "gold": 150,
       "heavy": [],
       "medium": [
-        {
-          "name": "Light Armor",
-          "quantity": 1
-        },
-        {
-          "name": "Violin",
-          "quantity": 1
-        },
         {
           "name": "Spy's Tools",
           "quantity": 1
@@ -111,10 +106,6 @@
       "light": [
         {
           "name": "Mentor's Necklace",
-          "quantity": 1
-        },
-        {
-          "name": "Crystal",
           "quantity": 1
         },
         {

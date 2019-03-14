@@ -33,11 +33,13 @@
     "wounds": 0,
     "armor": {
       "rating": 0,
-      "type": "none"
+      "type": "None",
+      "weight": "none"
     },
     "shield": {
       "rating": 0,
-      "type": "none"
+      "type": "None",
+      "weight": "none"
     },
     "speed": {
       "rating": 20,

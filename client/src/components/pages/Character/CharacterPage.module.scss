@@ -260,6 +260,20 @@
   }
 }
 
+.inlineHover {
+  padding: 0 5px;
+}
+
+.editButton {
+  background-color: $dark;
+  padding: 0 1px;
+  margin: 5px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 1px $dark;
+  font-size: 24px;
+  color: $yellow;
+}
+
 .detailTitle {
   font-weight: bold;
   margin-top: 10px;

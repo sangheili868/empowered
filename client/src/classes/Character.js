@@ -34,7 +34,28 @@ class Character {
         features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
       }
     }).value()
-    const equipment = this.baseStats.equipment
+    const equipment = {
+      ...this.baseStats.equipment,
+      ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
+        ...this.baseStats.equipment[category],
+        ...this.baseStats.weapons.filter(({weight}) => weight === category).map(weapon => ({
+          name: weapon.name,
+          quantity: 1,
+          category: 'weapon'
+        })),
+        ...this.baseStats.armor.weight === category ? [{
+          name: startCase(this.baseStats.armor.type),
+          quantity: 1,
+          category: 'armor'
+        }] : [],
+        ...this.baseStats.shield.weight === category ? [{
+          name: startCase(this.baseStats.shield.type),
+          quantity: 1,
+          category: 'shield'
+        }] : []
+
+      ])
+    }
     return {
       ...this.baseStats,
       maxHP: skills.fortitude.value + 10,
@@ -43,7 +64,7 @@ class Character {
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills,
       equipment: {
-        ...this.baseStats.equipment,
+        ...equipment,
         encumberance: {
           current: (
             (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +

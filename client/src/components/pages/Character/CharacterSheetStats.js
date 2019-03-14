@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { stats, detailTitle } from './CharacterPage.module.scss'
+import { stats, detailTitle, editButton, inlineHover } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetSkills from "./CharacterSheetSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
@@ -9,7 +9,9 @@ import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import pluralize from 'pluralize'
-import featureFields from '../../../gameData/featureFields';
+import featureFields from '../../../gameData/featureFields'
+import EmpModal from '../../EmpModal/EmpModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class CharacterSheetStats extends Component {
   render () {
@@ -31,13 +33,24 @@ class CharacterSheetStats extends Component {
               damage: 'Damage',
               notes: 'Notes'
             }}
-            fields={{ name: '', category: {
+            fields={{
+              name: '',
+              category: {
                 default: '',
                 options: this.props.stats.availableWeapons.map(({ displayName, key}) => ({
                   label: displayName,
                   value: key
                 }))
-            }}}
+              },
+              weight: {
+                default: 'medium',
+                options: [
+                  { label: 'Light', value: 'light' },
+                  { label: 'Medium', value: 'medium' },
+                  { label: 'Heavy', value: 'heavy' }
+                ]
+              }
+            }}
             description={({category}) => {
               if (category && category.value && !Array.isArray(category.value)) {
                 return equipmentProficiencyData[weaponData[category.value].proficiency].description
@@ -73,7 +86,24 @@ class CharacterSheetStats extends Component {
               </div>
             ]}
             items={pick(this.props.stats.equipment, ['heavy', 'medium', 'light'])}
-            editItem={(columnName, item, index) =>
+            editItem={(columnName, item, index) => item.category ? (
+              <EmpModal
+                key={index}
+                title={item.name}
+                className={inlineHover}
+                body={
+                  <div>
+                    Click on the
+                    <FontAwesomeIcon className={editButton} icon="pen-square"/>
+                    icon next to {item.name} in the {
+                      { weapon: 'Weapons', armor: 'Armor', shield: 'Shield' }[item.category]
+                    } section to edit this item.
+                  </div>
+                }
+              >
+                {item.name}
+              </EmpModal>
+            ) : (
               <EmpItemEditor
                 key={index}
                 isInline
@@ -95,7 +125,7 @@ class CharacterSheetStats extends Component {
               >
                 {item.quantity > 1 ? `${item.name} (${item.quantity})` : item.name}
               </EmpItemEditor>
-            }
+            )}
             addToList={columnName =>
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}

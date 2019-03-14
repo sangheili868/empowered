@@ -37,8 +37,8 @@ class CharacterSheetStatsList extends Component {
                     (this.props.tooltips) ? (
                       <EmpModal
                         key={index}
-                        title={item[this.props.tooltips.title]}
-                        body={item[this.props.tooltips.body]}
+                        title={this.props.tooltips.title(item)}
+                        body={this.props.tooltips.body(item)}
                         className={moreInfo}
                       >
                         {item.name}

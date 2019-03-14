@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { stats } from './CharacterPage.module.scss'
+import { stats, detailTitle } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetSkills from "./CharacterSheetSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
@@ -155,8 +155,17 @@ class CharacterSheetStats extends Component {
             title="Combat"
             items={this.props.stats.actions}
             tooltips={{
-              title: 'name',
-              body: 'description'
+              title: item => item.rootName ? item.rootName : item.name,
+              body: item =>
+                <>
+                  <div>{item.description}</div>
+                  {item.features && item.features.length > 0 &&
+                    <>
+                      <div className={detailTitle}>Features Related to {item.rootName}</div>
+                      <div>{item.features.map(({ name }) => name).join(', ')}</div>
+                    </>
+                  }
+                </>
             }}
           />
           <CharacterSheetTable

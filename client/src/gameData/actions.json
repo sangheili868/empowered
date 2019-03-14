@@ -69,7 +69,7 @@
       "description": "As a basic action, you can stow up to two items from your hands or body into your inventory, and then draw up to two items from your inventory into your hands or onto your body. In addition, you can switch which items are in which hands."
     },
     {
-      "name": "Interect with Object",
+      "name": "Interact with Object",
       "description": "As a basic action, you pick up, kick away, pull, open, move, or interact in some other way with any one object that no one is holding or wearing. A skill roll of the DM's choice may be required, in which case this becomes a skill action."
     },
     {
@@ -77,7 +77,7 @@
       "description": "As a basic action, you begin moving a distance up to your speed. You can take other actions at any point of this movement."
     },
     {
-      "name": "Ready",
+      "name": "Prepare",
       "description": "As a basic action, you prepare to take an action outside of your turn. Choose an action and a trigger. If the chosen action is cardinal, so is this action. If the trigger occurs before the start of your side's next turn, you can use your reaction to perform that action. "
     },
     {
@@ -137,8 +137,8 @@
       "description": "As a reaction, when you are targeted for an attack and you are holding a shield, you add your shield's bonus to your agility roll if it is a light shield, or use your shield's bonus in place of your agility modifier if it is a medium or heavy shield."
     },
     {
-      "name": "Ready",
-      "description": "As a reaction, when an event occurs that you choose as a trigger when you took the Ready action, you perform the action you chose as part of the Ready action."
+      "name": "Trigger Prepare",
+      "description": "As a reaction, when an event occurs that you choose as a trigger when you took the Prepare action, you perform the action you chose as part of the Prepare action."
     },
     {
       "name": "Identify",

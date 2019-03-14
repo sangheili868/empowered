@@ -99,9 +99,17 @@ class Character {
         maneuvers: 'maneuver',
         reactions: 'reaction'
       }, (acc, actionType, columnName) => acc[columnName] = [
-        ...actionsData[columnName],
-        ...filter(this.baseStats.features, ({ actionTags }) => actionTags.includes(actionType))
-          .map(feature => ({ ...feature, name: feature.name + '*', feature: true})),
+        ...actionsData[columnName].map(({ name, description }) => {
+          const relatedFeatures = filter(this.baseStats.features, feature => feature.actionTags.includes(name))
+          return {
+            rootName: name,
+            name: relatedFeatures.length > 0 ? name + ' *' : name,
+            description,
+            features: relatedFeatures
+          }
+        }),
+        ...filter(this.baseStats.features, feature => feature.actionType === actionType)
+          .map(feature => ({ ...feature, rootName: feature.name, name: feature.name + '*', feature: true})),
         ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
           .filter(({ deleted=false, action: { category } }) => !deleted && (category === actionType)).map('action').value()
       ], {}),

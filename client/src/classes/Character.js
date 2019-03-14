@@ -38,9 +38,8 @@ class Character {
     this.baseShop = baseCharacterData.shop
   }
 
-  get stats () {
-   if (this.baseStats) {
-    const skills = chain(skillData).keyBy('name').mapValues(skill => {
+  get skills () {
+    return chain(skillData).keyBy('name').mapValues(skill => {
       const value = skill.abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0)
       return {
         ...skill,
@@ -49,6 +48,10 @@ class Character {
         features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
       }
     }).value()
+  }
+
+  get stats () {
+   if (this.baseStats) {
     const armor = {
       ...this.baseStats.armor,
       ...keyBy(armorData, 'category')[this.baseStats.armor.category]
@@ -57,13 +60,13 @@ class Character {
     const shield = {
       ...this.baseStats.shield,
       ...shieldCatStats,
-      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? skills[shieldCatStats.skill].value : 0))
+      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0))
     }
     const equipment = {
       ...this.baseStats.equipment,
       ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
         ...this.baseStats.equipment[category],
-        ...this.baseStats.weapons.filter(({weight}) => weight === category).map(weapon => ({
+        ...this.baseStats.weapons.filter(({weight, deleted}) => !deleted && (weight === category)).map(weapon => ({
           name: weapon.name,
           quantity: 1,
           category: 'weapon'
@@ -78,13 +81,12 @@ class Character {
           quantity: 1,
           category: 'shield'
         }] : []
-
       ])
     }
     return {
       ...this.baseStats,
-      maxHP: skills.fortitude.value + 10,
-      maxTempHP: skills.fortitude.value + 10,
+      maxHP: this.skills.fortitude.value + 10,
+      maxTempHP: this.skills.fortitude.value + 10,
       maxWounds: 5,
       armor,
       availableArmor: chain(armorData).filter(({proficiency}) =>
@@ -97,7 +99,7 @@ class Character {
         .includes(proficiency) || proficiency === 'none'
       ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
-      skills,
+      skills: this.skills,
       equipment: {
         ...equipment,
         encumberance: {
@@ -105,7 +107,7 @@ class Character {
             (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
             (countItems(equipment.light) / 10) + (equipment.gold / 1000)
           ),
-          limit: skills.brawn.value + 10
+          limit: this.skills.brawn.value + 10
         }
       },
       weapons: this.baseStats.weapons.map(weapon => {
@@ -114,7 +116,7 @@ class Character {
           console.error("Weapon Type not found", weapon)
           return weapon
         } else {
-          const bonus = skills[weaponStats.skill].value
+          const bonus = this.skills[weaponStats.skill].value
           return {
             ...weapon,
             ...weaponStats,
@@ -179,6 +181,17 @@ class Character {
   equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencies)
     .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category, deleted }) => ((category === key) && !deleted)))
     .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
+    .map(value => ({
+      ...value,
+      isMeetingRequirements: !some(value.requirements, ({ skill, level }) => this.skills[skill].value < level),
+      meetingRequirementsMessage: value.requirements && value.requirements
+        .filter(({ skill, level }) => this.skills[skill].value < level)
+        .map(({ skill }) => startCase(skill) + ' is ' + addPlus(this.skills[skill].value))
+        .join(', '),
+      requirementsString: value.requirements ? (
+        value.requirements.map(({ skill, level }) => startCase(skill) + ' ' + addPlus(level)).join(', ')
+      ) : 'None'
+    }))
     .value()
 
   get shop () {

@@ -45,6 +45,7 @@ class CharacterSheetStats extends Component {
               weight: {
                 default: 'medium',
                 options: [
+                  { label: 'None', value: 'none' },
                   { label: 'Light', value: 'light' },
                   { label: 'Medium', value: 'medium' },
                   { label: 'Heavy', value: 'heavy' }

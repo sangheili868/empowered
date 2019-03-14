@@ -2,10 +2,10 @@
   "lightArmor": {
     "name": "Light Armor",
     "category": "lightArmor",
-    "requirement": [
+    "requirements": [
       {
         "skill": "athletics",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "Light armor provides 1 point of damage reduction and has no stealth penalty."
@@ -13,7 +13,7 @@
   "mediumArmor": {
     "name": "Medium Armor",
     "category": "mediumArmor",
-    "requirement": [
+    "requirements": [
       {
         "skill": "athletics",
         "level": 2
@@ -24,7 +24,7 @@
   "heavyArmor": {
     "name": "Heavy Armor",
     "category": "heavyArmor",
-    "requirement": [
+    "requirements": [
       {
         "skill": "brawn",
         "level": 2
@@ -35,10 +35,10 @@
   "smallShield": {
     "name": "Small Shields",
     "category": "smallShield",
-    "requirement": [
+    "requirements": [
       {
         "skill": "athletics",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "Small shields provide a +1 bonus to agility when raised, and have no speed penalty while equipped."
@@ -46,7 +46,7 @@
   "mediumShield": {
     "name": "Medium Shields",
     "category": "mediumShield",
-    "requirement": [
+    "requirements": [
       {
         "skill": "brawn",
         "level": 2
@@ -57,7 +57,7 @@
   "largeShield": {
     "name": "Large Shields",
     "category": "largeShield",
-    "requirement": [
+    "requirements": [
       {
         "skill": "brawn",
         "level": 4
@@ -68,16 +68,16 @@
   "improvisedWeapon": {
     "name": "Improvised Weapons",
     "category": "improvisedWeapon",
-    "requirement": [],
+    "requirements": [],
     "description": "Improvised weapons, including bottles, chairs, and weapons that you are not proficient with, attack with a Brawn roll and deal d4+Brawn damage on a hit. Thrown improvised weapons attack with an Athletics roll and deal d4+Athletics damage on a hit."
   },
   "unarmedMeleeWeapon": {
     "name": "Unarmed Fighting",
     "category": "unarmedMeleeWeapon",
-    "requirement": [
+    "requirements": [
       {
         "skill": "athletics",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "Unarmed melee weapons, including fists, feet, and tails, can attack with a Brawn roll or an Athletics roll and deal d6 + Athletics or Brawn damage on a hit. These weapons can also be used for two-weapon fighting."
@@ -88,7 +88,7 @@
     "requirements": [
       {
         "skill": "athletics",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "Light melee weapons, including daggers, light axes, and brass knuckles, attack with an Athletics roll and deal d6 + Athletics damage on a hit. These weapons can also be used for two-weapon fighting."
@@ -99,7 +99,7 @@
     "requirements": [
       {
         "skill": "athletics",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "Finesse melee weapons, including rapiers and curveblades, attack with an Athletics roll. One-handed finesse weapons deal d8+Athletics damage on a hit, and two-handed finesse weapons deal d12+Athletics damage on a hit. "
@@ -110,7 +110,7 @@
     "requirements": [
       {
         "skill": "brawn",
-        "level": -2
+        "level": 0
       }
     ],
     "description": "One-handed melee weapons, including longswords, maces, and battleaxes, attack with a Brawn roll and deal d8 + Brawn damage on a hit."
@@ -132,7 +132,7 @@
     "requirements": [
       {
         "skill": "athletics",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "Light thrown weapons, including daggers and throwing axes, attack with an Athletics roll and deal d6 + Athletics damage on a hit. They can attack targets up to 20ft away or up to 40ft away with disadvantage.  These weapons can also be used for two-weapon fighting."
@@ -143,7 +143,7 @@
     "requirements": [
       {
         "skill": "athletics",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "Heavy thrown weapons, including javelins, attack with an Athletics roll and deal d8 + Athletics damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
@@ -154,7 +154,7 @@
     "requirements": [
       {
         "skill": "perception",
-        "level": -2
+        "level": 0
       }
     ],
     "description": "One-handed ranged weapons, including slings and blowguns, attack with a Perception roll and deal d4 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
@@ -165,7 +165,7 @@
     "requirements": [
       {
         "skill": "perception",
-        "level": -2
+        "level": 0
       }
     ],
     "description": "Two-handed ranged weapons, including shortbows, attack with a Perception roll and deal d6 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
@@ -191,7 +191,7 @@
     "requirements": [
       {
         "skill": "perception",
-        "level": -2
+        "level": 0
       }
     ],
     "description": "Light loading weapons, including hand crossbows and pistols, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage. These weapons can also be used for two-weapon fighting."
@@ -202,7 +202,7 @@
     "requirements": [
       {
         "skill": "perception",
-        "level": -2
+        "level": 0
       }
     ],
     "description": "Two-handed loading weapons, including light crossbows and rifles, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
@@ -250,7 +250,7 @@
     "requirements": [
       {
         "skill": "wisdom",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "Divine weapons attack with a Wisdom. One-handed divine weapons deal d4 + Wisdom damage on a hit, and two-handed divine weapons deal d8 + Wisdom damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away."
@@ -261,7 +261,7 @@
     "requirements": [
       {
         "skill": "synergy",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "Unity weapons attack with a Synergy. One-handed unity weapons deal d4 + Synergy damage on a hit, and two-handed unity weapons deal d8 + Synergy damage on a hit. This damage is mental and ignores armor. These weapons can attack targets up to 40ft away."
@@ -271,8 +271,8 @@
     "category": "arcanistTool",
     "requirements": [
       {
-        "skill": "handiwork",
-        "level": -1
+        "skill": "knowledge",
+        "level": 4
       }
     ],
     "description": "Arcanist's Tools allow you to enchant objects, create magic weapons, and create static magical effects such as traps and wards."
@@ -283,7 +283,7 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "Artisan's Tools allow you to work with paint, wood, stone, glasss, jewelry, and other materials to create objects or artwork with them."
@@ -294,7 +294,11 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": 0
+      },
+      {
+        "skill": "knowledge",
+        "level": 2
       }
     ],
     "description": "Chemist's tools allow you to create all sorts of potions and poisons."
@@ -305,7 +309,11 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": -2
+      },
+      {
+        "skill": "perception",
+        "level": 2
       }
     ],
     "description": "Explorer's tools allow you to plot maps, set snares, create and deploy traps, and climb sheer surfaces."
@@ -316,7 +324,11 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": -2
+      },
+      {
+        "skill": "brawn",
+        "level": 2
       }
     ],
     "description": "Smith's tools allow you to forge and repair weapons and armor."
@@ -327,7 +339,11 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": -2
+      },
+      {
+        "skill": "persuasion",
+        "level": 2
       }
     ],
     "description": "Spy's Tools allow you to create disguises, fake documents, and forge signatures and seals."
@@ -338,7 +354,11 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": 0
+      },
+      {
+        "skill": "agility",
+        "level": 2
       }
     ],
     "description": "Thief's Tools allow you to pick locks on doors and chests, as well as disable traps."
@@ -349,7 +369,7 @@
     "requirements": [
       {
         "skill": "athletics",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "A proficiency in Mounts allows you to gain the speed of a mount while in combat."
@@ -360,7 +380,7 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": -1
+        "level": 0
       }
     ],
     "description": "A proficiency in sea vehicles allows you to perform any task needed in the maintenance and navigation aboard a naval vessel."
@@ -371,7 +391,7 @@
     "requirements": [
       {
         "skill": "handiwork",
-        "level": 1
+        "level": 2
       }
     ],
     "description": "A proficiency in air vehicles allows you to pilot and control vehicles that fly through the sky, such as airships, balloons, and airplanes."

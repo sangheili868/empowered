@@ -212,7 +212,8 @@ class CharacterSheetShop extends Component {
                     title={startCase(grouping) + ' Proficiencies'}
                     items={proficiencies}
                     columnNames={{
-                      name: 'Name'
+                      name: 'Name',
+                      requirementsString: 'Requirements',
                     }}
                     tooltips={{
                       name: {
@@ -222,7 +223,9 @@ class CharacterSheetShop extends Component {
                     }}
                     buyButton={index => {
                       const proficiency = proficiencies[index]
-                      if (1 > this.props.shop.advancements) {
+                      if (proficiency.meetingRequirementsMessage) {
+                        return proficiency.meetingRequirementsMessage
+                      } else if (1 > this.props.shop.advancements) {
                         return `Costs ${1} adv.`
                       } else {
                         return (

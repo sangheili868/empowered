@@ -41,7 +41,7 @@
     },
     "speed": {
       "baseValue": 20,
-      "type": "walking"
+      "type": "Walking"
     },
     "abilityScores": {
       "strong": -2,

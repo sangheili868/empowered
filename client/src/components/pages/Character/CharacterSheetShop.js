@@ -163,11 +163,13 @@ class CharacterSheetShop extends Component {
                   name: 'Name',
                   description: 'Description'
                 }}
+                isDeletable
                 fields={featureFields}
                 onEdit={(index, values) => {
                   let newFeatures = cloneDeep(this.props.shop.features)
                   newFeatures[index] = {
-                    ...values
+                    ...values,
+                    cost: parseInt(values.cost)
                   }
                   this.props.onUpdate({ shop: { features: newFeatures } })
                 }}
@@ -298,6 +300,26 @@ class CharacterSheetShop extends Component {
             </EmpButton>
           </div>
         }
+        <CharacterSheetTable
+          title="Sell Back"
+          items={this.props.shop.sellBack}
+          columnNames={{
+            name: 'Name',
+            type: 'Type'
+          }}
+          sellButton={index => {
+            const item = this.props.shop.sellBack[index]
+            return (
+              <EmpButton
+                className={[tableBuy, minus].join(' ')}
+                onClick={item.handleDelete.bind(this, this.props.onUpdate)}
+              >
+                +{item.worth} Adv.
+              </EmpButton>
+            )
+          }}
+        >
+        </CharacterSheetTable>
       </>
     )
   }

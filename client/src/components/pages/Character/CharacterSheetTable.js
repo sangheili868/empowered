@@ -56,14 +56,10 @@ class CharacterSheetTable extends Component {
                     <EmpItemEditor
                       isEdit
                       title={'Edit ' + item.name}
-                      description={(this.props.deleteText && this.props.deleteText(index)) || this.props.description}
+                      description={this.props.description}
                       fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: item[key] }))}
                       onUpdate={this.props.onEdit.bind(this, index)}
-                      onDelete={this.props.onDelete ? (
-                        this.props.onDelete.bind(this, index)
-                      ) : (
-                        this.props.onEdit.bind(this, index, {deleted: true})
-                      )}
+                      onDelete={this.props.isDeletable ? this.props.onEdit.bind(this, index, {deleted: true}) : undefined}
                     />
                   </td>
                 }

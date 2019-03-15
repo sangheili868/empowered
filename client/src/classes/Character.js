@@ -17,7 +17,9 @@ import {
   lowerCase,
   filter,
   mapValues,
-  keyBy
+  keyBy,
+  flatMap,
+  cloneDeep
 } from 'lodash'
 
 function addPlus (value) {
@@ -97,7 +99,6 @@ class Character {
         }] : []
       ])
     }
-    console.log(shield)
     return {
       ...this.baseStats,
       maxHP: this.skills.fortitude.value + 10,
@@ -243,7 +244,44 @@ class Character {
           otherWeapon: this.equipmentIncludesAny(['thrownWeapon', 'craftedWeapon', 'magicWeapon']),
           tool: this.equipmentIncludesAny(['tool']),
           vehicle: this.equipmentIncludesAny(['vehicle'])
-        }
+        },
+        sellBack: [
+          ...flatMap(this.baseStats.proficiencies, (proficiencies, type) => proficiencies
+            .map(({ name, category, deleted }, index) => ({
+              name: (type === 'languages') ? name : equipmentProficiencyData[category].name,
+              worth: (type === 'languages') ? 0 : 1,
+              deleted,
+              type: startCase(type),
+              handleDelete: (onUpdate) => {
+                let newItems = cloneDeep(this.baseStats.proficiencies[type])
+                newItems[index].deleted = true
+                onUpdate({ stats: { proficiencies: { [type]: newItems }}})
+                if (type !== 'languages') {
+                  onUpdate({ shop: { advancements: parseInt(this.baseShop.advancements) + 1 } })
+                }
+              }
+            })).filter(({ deleted }) => !deleted)
+          ),
+          ...this.baseStats.features.map(({ name, cost, deleted }, index) => ({
+            name,
+            worth: cost,
+            deleted,
+            type: 'Feature',
+            handleDelete: onUpdate => {
+              let newFeatures = cloneDeep(this.baseStats.features)
+              const newShopFeature = cloneDeep(this.baseStats.features[index])
+              newFeatures[index] = { deleted: true }
+              onUpdate({ stats: { features: newFeatures } })
+              onUpdate({ shop: {
+                advancements: parseInt(this.baseShop.advancements) + (cost || 0),
+                features: [
+                  ...this.baseShop.features,
+                  newShopFeature
+                ]
+              }})
+            }
+          })).filter(({ deleted }) => !deleted)
+        ]
       }
     } else {
       return {}

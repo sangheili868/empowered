@@ -8,7 +8,6 @@ import { pick, cloneDeep } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
-import pluralize from 'pluralize'
 import featureFields from '../../../gameData/featureFields'
 import EmpModal from '../../EmpModal/EmpModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -62,6 +61,7 @@ class CharacterSheetStats extends Component {
               newWeapons[index] = values
               this.props.onUpdate({ stats: { weapons: newWeapons } })
             }}
+            isDeletable
             onAdd={values => this.props.onUpdate({ stats: { weapons: [
                   ...this.props.stats.weapons,
                   values
@@ -151,16 +151,7 @@ class CharacterSheetStats extends Component {
                 key={index}
                 isInline
                 title={item.name}
-                description={columnName === 'languages' ? '' : (
-                  <>
-                    <p>{item.description}</p>
-                    <p>
-                      If you delete your {
-                        this.props.stats.proficiencies[columnName][index].name
-                      } proficiency, you will regain 1 advancement.
-                    </p>
-                  </>
-                )}
+                description={item.description}
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
                 }) : {}}
@@ -168,14 +159,6 @@ class CharacterSheetStats extends Component {
                   let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
                   newItems[index] = values
                   this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
-                }}
-                onDelete={() => {
-                  let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
-                  newItems[index].deleted = true
-                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
-                  if (columnName !== 'languages') {
-                    this.props.onUpdate({ shop: { advancements: parseInt(this.props.shop.advancements) + 1 } })
-                  }
                 }}
               >
                 {item.name}
@@ -207,30 +190,10 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={featureFields}
-            deleteText={index => `
-              If you delete this feature, you will regain ${
-                this.props.stats.features[index].cost
-              } ${
-                pluralize('advancement', this.props.stats.features[index].cost)
-              }.
-            `}
             onEdit={(index, values) => {
               let newFeatures = cloneDeep(this.props.stats.features)
               newFeatures[index] = values
               this.props.onUpdate({ stats: { features: newFeatures } })
-            }}
-            onDelete={index => {
-              let newFeatures = cloneDeep(this.props.stats.features)
-              const newShopFeature = cloneDeep(this.props.stats.features[index])
-              newFeatures[index] = { deleted: true }
-              this.props.onUpdate({ stats: { features: newFeatures } })
-              this.props.onUpdate({ shop: {
-                advancements: parseInt(this.props.shop.advancements) + (newShopFeature.cost || 0),
-                features: [
-                  ...this.props.shop.features,
-                  newShopFeature
-                ]
-              }})
             }}
           />
         </div>

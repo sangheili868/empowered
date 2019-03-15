@@ -91,6 +91,11 @@
         "name": "Crystal",
         "category": "oneHandedArcaneWeapon",
         "weight": "light"
+      },
+      {
+        "name": "Elvish Dagger",
+        "category": "lightMeleeWeapon",
+        "weight": "light"
       }
     ],
     "equipment": {
@@ -154,7 +159,7 @@
           "category": "lightArmor"
         },
         {
-          "category": "finesseMeleeWeapon"
+          "category": "lightMeleeWeapon"
         },
         {
           "category": "arcaneMagicWeapon"
@@ -245,7 +250,7 @@
         "actionTags": ["Frighten", "Analyze", "Help", "Distract", "Use a Skill"],
         "actionType": "",
         "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you have disadvantage on social rolls involving this person for 1 day, unless you convince them otherwise.",
-        "cost": 1
+        "cost": 0
       }
     ]
   },

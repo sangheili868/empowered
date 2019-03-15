@@ -11,7 +11,7 @@ import {
   subtext
 } from "./CharacterPage.module.scss"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues, cloneDeep, startCase } from 'lodash'
+import { chain, mapValues, startCase } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
@@ -32,6 +32,7 @@ import conditionData from '../../../gameData/conditions.json'
 import armorData from '../../../gameData/armor.json'
 import shieldData from '../../../gameData/shields.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
+import withoutIndex from '../../../utils/withoutIndex'
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -48,7 +49,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Hit Points"
             value={this.props.stats.hitPoints}
-            onUpdate={(value) => this.props.onUpdate({stats: { hitPoints: value}})}
+            onUpdate={value => this.props.updateCharacter('stats.hitPoints', value)}
             alt="Hit Points Icon"
             icon={hitPointsIcon}
             max={this.props.stats.maxHP}
@@ -56,7 +57,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Wounds"
             value={this.props.stats.wounds}
-            onUpdate={(value) => this.props.onUpdate({stats: { wounds: value}})}
+            onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
             alt="Wound Icon"
             icon={woundIcon}
             max={this.props.stats.maxWounds}
@@ -64,7 +65,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Temp. HP"
             value={this.props.stats.tempHP}
-            onUpdate={(value) => this.props.onUpdate({stats: { tempHP: value}})}
+            onUpdate={value => this.props.updateCharacter('stats.tempHP', value)}
             alt="Temp. HP Icon"
             icon={tempHPIcon}
             max={this.props.stats.maxTempHP}
@@ -98,7 +99,7 @@ class CharacterSheetStatsResources extends Component {
                         return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
                       }
                     }}
-                    onUpdate={values => this.props.onUpdate({ stats: { [resourceName]: values } })}
+                    onSave={values => this.props.updateCharacter(['stats', resourceName], values)}
                   />
                 </div>
                 <div className={subtext}>{this.props.stats[resourceName].name}</div>
@@ -125,10 +126,10 @@ class CharacterSheetStatsResources extends Component {
                       <div>{this.props.stats.speed.modifier}</div>
                     </>
                   }
-                  onUpdate={values => this.props.onUpdate({ stats: { speed: {
-                    ...values,
-                    baseValue: parseInt(values.baseValue)
-                  }}})}
+                  onSave={({ baseValue, type }) => this.props.updateCharacter([
+                    { path: 'stats.speed.baseValue', value: parseInt(baseValue) },
+                    { path: 'stats.speed.type', value: type}
+                  ])}
                 />
               </div>
               <div className={subtext}>{this.props.stats.speed.type}</div>
@@ -141,24 +142,23 @@ class CharacterSheetStatsResources extends Component {
               icon={restIcon}
               duration="8 hours"
               effects={[
-                'Recover all hitpoints.',
+                'Recover all hit points.',
                 'Recover all power dice.',
                 'Lose all temporary hit points.'
               ]}
-              onConfirm={() => {
-                this.props.onUpdate({ stats: {
-                  hitPoints: this.props.stats.maxHP,
-                  tempHP: 0,
-                  powerDice: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max }))
-                }})
-              }}
+              onConfirm={this.props.updateCharacter.bind(this, [
+                  { path: 'stats.hitPoints', value: this.props.stats.maxHP },
+                  { path: 'stats.tempHP', value: 0 },
+                  { path: 'stats.powerDice', value: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max })) },
+                ])
+              }
             />
             <CharacterSheetStatsRecovery
               title="Downtime"
               icon={downtimeIcon}
               duration="5 days"
               effects={[
-                'Recover all hitpoints.',
+                'Recover all hit points.',
                 'Recover all power dice.',
                 'Lose all temporary hit points.',
                 'Heal all wounds.',
@@ -166,14 +166,13 @@ class CharacterSheetStatsResources extends Component {
                 'Reject features from the shop.',
                 'Perform a downtime activity.',
               ]}
-              onConfirm={() => {
-                this.props.onUpdate({ stats: {
-                  hitPoints: this.props.stats.maxHP,
-                  tempHP: 0,
-                  wounds: 0,
-                  powerDice: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max }))
-                }})
-              }}
+              onConfirm={this.props.updateCharacter.bind(this, [
+                  { path: 'stats.hitPoints', value: this.props.stats.maxHP },
+                  { path: 'stats.wounds', value: 0 },
+                  { path: 'stats.tempHP', value: 0 },
+                  { path: 'stats.powerDice', value: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max })) },
+                ])
+              }
             />
           </div>
           <CharacterSheetStatsList
@@ -184,11 +183,7 @@ class CharacterSheetStatsResources extends Component {
                 key={index}
                 isInline
                 title={item.name}
-                onDelete={() => {
-                  let newConditions = cloneDeep(this.props.stats.conditions)
-                  newConditions[index].deleted = true
-                  this.props.onUpdate({ stats: { conditions: newConditions }})
-                }}
+                onDelete={this.props.updateCharacter.bind(this, 'stats.conditions', withoutIndex(this.props.stats.conditions, index))}
                 description={item.description}
               >
                 {item.name}
@@ -196,12 +191,7 @@ class CharacterSheetStatsResources extends Component {
             }
             addToList={() => {
               const notActiveConditions = Object.keys(conditionData)
-                .filter(condition => !chain(this.props.stats.conditions)
-                  .reject('deleted')
-                  .map('name')
-                  .includes(condition)
-                  .value()
-                )
+                .filter(condition => !chain(this.props.stats.conditions).map('name').includes(condition).value())
                 .map(condition => ({ label: condition, value: condition}))
               return (notActiveConditions.length > 0) && (
                 <EmpItemEditor
@@ -212,10 +202,10 @@ class CharacterSheetStatsResources extends Component {
                     options: notActiveConditions
                   }}}
                   description={({ name }) => name && name.value && conditionData[name.value].description}
-                  onUpdate={values => this.props.onUpdate({ stats: { conditions: [
+                  onSave={values => this.props.updateCharacter('stats.conditions', [
                     ...this.props.stats.conditions,
                     values
-                  ]}})}
+                  ])}
                 />
               )
             }}
@@ -229,9 +219,7 @@ class CharacterSheetStatsResources extends Component {
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}
-                onUpdate={(value) => this.props.onUpdate({stats: { powerDice: { [dieSize]: {
-                  current: value
-                }}}})}
+                onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
                 alt={dieSize}
                 icon={this.diceIcons[dieSize]}
                 max={max}

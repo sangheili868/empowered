@@ -15,7 +15,7 @@ import fontAwesomeIcons from './icons/fontAwesomeIcons'
 library.add(fontAwesomeIcons)
 
 class App extends Component {
-  state = { 
+  state = {
     characterData: {
       baseCharacter: null,
       character: null,

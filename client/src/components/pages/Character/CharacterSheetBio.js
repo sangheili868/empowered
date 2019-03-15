@@ -9,9 +9,7 @@ class CharacterSheetBio extends Component {
   render () {
     return (
       <>
-        <div>
-          Click on a field name for more information and examples.
-        </div>
+        <div>Click on a field name for more information and examples.</div>
         <div className={bio}>
           <table className={bioTable}>
             <tbody>
@@ -20,8 +18,8 @@ class CharacterSheetBio extends Component {
                   Name
                 </EmpModal>
                 <td className={[cell, description].join(' ')}>
-                  <EmpStringEditor value={this.props.name} onUpdate={value =>
-                    this.props.onUpdate({ name: value })
+                  <EmpStringEditor value={this.props.name} onSave={value =>
+                    this.props.updateCharacter('name', value)
                   }/>
                 </td>
               </tr>
@@ -37,9 +35,10 @@ class CharacterSheetBio extends Component {
                     {startCase(characteristic)}
                   </EmpModal>
                   <td className={[cell, description].join(' ')}>
-                    <EmpStringEditor value={value} onUpdate={value => this.props.onUpdate({
-                      bio: { [characteristic]: value }
-                    })}/>
+                    <EmpStringEditor
+                      value={value}
+                      onSave={value => this.props.updateCharacter(['bio', characteristic], value)}
+                    />
                   </td>
                 </tr>
               )}

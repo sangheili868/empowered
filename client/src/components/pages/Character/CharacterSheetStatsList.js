@@ -8,10 +8,9 @@ class CharacterSheetStatsList extends Component {
   render () {
     const isArray = Array.isArray(this.props.items)
     const isObject = !isArray && (typeof this.props.items === 'object')
-    const hasSomeUndeletedItem = (isArray && this.props.items.length) ||
-    (isObject && some(this.props.items, column => column.length && some(column, item => !item.deleted)))
-    return (hasSomeUndeletedItem || this.props.addToList) ? (
-      <EmpCard isStartingOpen={hasSomeUndeletedItem || this.props.subtitles} title={this.props.title}>
+    const hasSomeItem = (isArray && this.props.items.length) || (isObject && some(this.props.items, column => column.length))
+    return (hasSomeItem || this.props.addToList) ? (
+      <EmpCard isStartingOpen={hasSomeItem || this.props.subtitles} title={this.props.title}>
         <div className={subtitles}>
           {this.props.subtitles && this.props.subtitles.map((subtitleText, index) =>
             <div key={index} className={subtitle}>{subtitleText}</div>
@@ -20,19 +19,19 @@ class CharacterSheetStatsList extends Component {
         <div className={list}>
           {isArray ? (
             <div className={column}>
-              {this.props.items.map((item, index) => !item.deleted && (
+              {this.props.items.map((item, index) =>
                 this.props.editItem ? this.props.editItem(item, index) : (
                   <div key={index}>{item.name}</div>
                 )
-              ))}
+              )}
               {this.props.addToList && this.props.addToList()}
             </div>
           ) : (isObject &&
           Object.keys(this.props.items).map(itemKey =>
-            (some(this.props.items[itemKey], item => !item.deleted) || this.props.addToList) &&
+            (this.props.items[itemKey].length || this.props.addToList) &&
             <div key={itemKey} className={column}>
                 <div className={columnHeader}>{startCase(itemKey)}</div>
-                {this.props.items[itemKey].map((item, index) => !item.deleted && (
+                {this.props.items[itemKey].map((item, index) =>
                   this.props.editItem ? this.props.editItem(itemKey, item, index) : (
                     (this.props.tooltips) ? (
                       <EmpModal
@@ -47,7 +46,7 @@ class CharacterSheetStatsList extends Component {
                       <div key={index}>{item.name}</div>
                     )
                   )
-                ))}
+                )}
                 {this.props.addToList && this.props.addToList(itemKey)}
               </div>
             )

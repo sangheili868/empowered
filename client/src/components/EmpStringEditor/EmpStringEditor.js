@@ -18,7 +18,7 @@ class EmpStringEditor extends Component {
     this.setState({workingValue: target.value})
   }
   handleDone = () => {
-    this.props.onUpdate(this.state.workingValue)
+    this.props.onSave(this.state.workingValue)
     this.toggleEditing()
   }
   handleKeyPress = e => {

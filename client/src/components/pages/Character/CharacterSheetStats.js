@@ -4,19 +4,20 @@ import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetSkills from "./CharacterSheetSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import CharacterSheetTable from './CharacterSheetTable'
-import { pick, cloneDeep } from 'lodash'
+import { pick } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import featureFields from '../../../gameData/featureFields'
 import EmpModal from '../../EmpModal/EmpModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import withoutIndex from '../../../utils/withoutIndex'
 
 class CharacterSheetStats extends Component {
   render () {
     return (
       <div>
-        <CharacterSheetStatsResources stats={this.props.stats} onUpdate={this.props.onUpdate}/>
+        <CharacterSheetStatsResources stats={this.props.stats} updateCharacter={this.props.updateCharacter}/>
         <div className={stats}>
           <CharacterSheetSkills
             abilityScores={this.props.stats.abilityScores}
@@ -56,16 +57,12 @@ class CharacterSheetStats extends Component {
                 return equipmentProficiencyData[weaponData[category.value].proficiency].description
               }
             }}
-            onEdit={(index, values) => {
-              let newWeapons = cloneDeep(this.props.stats.weapons)
-              newWeapons[index] = values
-              this.props.onUpdate({ stats: { weapons: newWeapons } })
-            }}
-            isDeletable
-            onAdd={values => this.props.onUpdate({ stats: { weapons: [
-                  ...this.props.stats.weapons,
-                  values
-            ]}})}
+            onEdit={(index, values) => this.props.updateCharacter(['stats', 'weapons', index], values)}
+            onDelete={index => this.props.updateCharacter(['stats', 'weapons'], withoutIndex(
+              this.props.stats.base.weapons,
+              index
+            ))}
+            onAdd={values => this.props.updateCharacter('stats.weapons', [ ...this.props.stats.base.weapons, values ])}
           />
           <CharacterSheetStatsList
             title="Equipment"
@@ -74,7 +71,7 @@ class CharacterSheetStats extends Component {
                 isInline
                 title="Edit Gold"
                 fields={{gold: this.props.stats.equipment.gold}}
-                onUpdate={({gold}) => this.props.onUpdate({ stats: { equipment: { gold }}})}
+                onSave={({gold}) => this.props.updateCharacter('stats.equipment.gold', gold)}
               >
                 <div key="gold">Gold: {this.props.stats.equipment.gold}</div>
               </EmpItemEditor>,
@@ -110,19 +107,16 @@ class CharacterSheetStats extends Component {
                 isInline
                 title={'Edit a ' + columnName + ' Item'}
                 fields={this.props.stats.equipment[columnName][index]}
-                onUpdate={values => {
-                  let newItems = cloneDeep(this.props.stats.equipment[columnName])
-                  newItems[index] = {
+                onSave={values => {
+                  this.props.updateCharacter(['stats', 'equipment', columnName, index], {
                     name: values.name,
                     quantity: parseInt(values.quantity)
-                  }
-                  this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
+                  })
                 }}
-                onDelete={() => {
-                  let newItems = cloneDeep(this.props.stats.equipment[columnName])
-                  newItems[index].deleted = true
-                  this.props.onUpdate({ stats: { equipment: { [columnName]: newItems }}})
-                }}
+                onDelete={this.props.updateCharacter.bind(this,
+                  ['stats', 'equipment', columnName],
+                  withoutIndex(this.props.stats.base.equipment[columnName], index)
+                )}
               >
                 {item.quantity > 1 ? `${item.name} (${item.quantity})` : item.name}
               </EmpItemEditor>
@@ -131,15 +125,13 @@ class CharacterSheetStats extends Component {
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}
                 fields={{ name: '', quantity: 1 }}
-                onUpdate={values =>
-                  this.props.onUpdate({ stats: { equipment: { [columnName]: [
-                    ...this.props.stats.equipment[columnName],
-                    {
-                      name: values.name,
-                      quantity: parseInt(values.quantity)
-                    }
-                  ]}}})
-                }
+                onSave={values => this.props.updateCharacter(['stats', 'equipment', columnName], [
+                  ...this.props.stats.base.equipment[columnName],
+                  {
+                    name: values.name,
+                    quantity: parseInt(values.quantity)
+                  }
+                ])}
               />
             }
           />
@@ -155,11 +147,7 @@ class CharacterSheetStats extends Component {
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
                 }) : {}}
-                onUpdate={values => {
-                  let newItems = cloneDeep(this.props.stats.proficiencies[columnName])
-                  newItems[index] = values
-                  this.props.onUpdate({ stats: { proficiencies: { [columnName]: newItems }}})
-                }}
+                onSave={values => this.props.updateCharacter(['stats', 'proficiencies', columnName, index], values)}
               >
                 {item.name}
               </EmpItemEditor>
@@ -190,11 +178,7 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={featureFields}
-            onEdit={(index, values) => {
-              let newFeatures = cloneDeep(this.props.stats.features)
-              newFeatures[index] = values
-              this.props.onUpdate({ stats: { features: newFeatures } })
-            }}
+            onEdit={(index, values) => this.props.updateCharacter(['stats', 'features', index], values)}
           />
         </div>
       </div>

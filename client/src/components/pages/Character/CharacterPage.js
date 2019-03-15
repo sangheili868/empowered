@@ -4,14 +4,14 @@ import EmpJsonExporter from '../../EmpJsonExporter'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
-import { merge, cloneDeep } from 'lodash'
+import { merge, cloneDeep, every, has, set } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
-  state = { 
+  state = {
     warningState: '',
     isOpeningFile: false
   };
@@ -36,12 +36,25 @@ class CharacterPage extends Component {
     })
     this.setState({ isOpeningFile: false })
   }
-  updateCharacter = newData => {
+  updateCharacter = (paths, newValue) => {
+    /*
+      Single mode: updateCharacter('stats.hitPoints', 10)
+      Single mode: updateCharacter(['stats','tempHP'], 10)
+      Multi mode: updateCharacter([
+        { path: 'stat.hitPoints', value: 0},
+        { path: ['stats', 'tempHP'], value: 0}
+      ])
+    */
+    const isMultiMode = every(paths, pathValue => has(pathValue, 'path') && has(pathValue, 'value'))
+    let baseCharacter = cloneDeep(this.props.characterData.baseCharacter)
+    if (isMultiMode) {
+      paths.map(({ path, value }) => set(baseCharacter, path, value))
+    } else {
+     set(baseCharacter, paths, newValue)
+    }
     this.props.updateCharacter({
-      character: new Character(merge(
-        this.props.characterData.baseCharacter,
-        newData
-      )),
+      baseCharacter,
+      character: new Character(baseCharacter),
       isDirty: true
     })
   }
@@ -55,7 +68,7 @@ class CharacterPage extends Component {
           <Alert className={alert} variant="danger">
             <div>Warning: Your character has unsaved changes!</div>
             <EmpJsonExporter
-              className={saveButton} 
+              className={saveButton}
               content={this.props.characterData.character.exportData}
               fileName={this.props.characterData.fileName}
               onSave={this.handleSave}
@@ -96,7 +109,7 @@ class CharacterPage extends Component {
             <Route exact path='/character' render={() => <Redirect to='/character/bio'/>}/>
             <CharacterSheet
               character={this.props.characterData.character}
-              onUpdate={this.updateCharacter}
+              updateCharacter={this.updateCharacter}
             />
           </div>
         }

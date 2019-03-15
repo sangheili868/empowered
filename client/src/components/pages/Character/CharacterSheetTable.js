@@ -8,7 +8,7 @@ import {
   buy,
   columnHeader
 } from './CharacterPage.module.scss'
-import { map, mapValues, isEmpty, some } from 'lodash'
+import { map, mapValues, isEmpty } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
 import EmpModal from '../../EmpModal/EmpModal'
@@ -21,7 +21,7 @@ class CharacterSheetTable extends Component {
     ...this.props.sellButton ? ['Sell'] : []
   ]
   render () {
-    const hasItems = !isEmpty(this.props.items) && some(this.props.items, item => !item.deleted)
+    const hasItems = !isEmpty(this.props.items)
     return (hasItems || this.props.onAdd) ? (
       <EmpCard isStartingOpen title={this.props.title}>
         <table className={table}>
@@ -35,7 +35,7 @@ class CharacterSheetTable extends Component {
             }
           </thead>
           <tbody>
-            {this.props.items.map((item, index) => !item.deleted &&
+            {this.props.items.map((item, index) =>
               <tr key={index} className={item.isDisabled ? disabled : ''}>
                 {map(this.props.columnNames, (value, key) =>
                   <td key={key} className={cell}>
@@ -58,8 +58,8 @@ class CharacterSheetTable extends Component {
                       title={'Edit ' + item.name}
                       description={this.props.description}
                       fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: item[key] }))}
-                      onUpdate={this.props.onEdit.bind(this, index)}
-                      onDelete={this.props.isDeletable ? this.props.onEdit.bind(this, index, {deleted: true}) : undefined}
+                      onSave={this.props.onEdit.bind(this, index)}
+                      onDelete={this.props.onDelete && this.props.onDelete.bind(this, index)}
                     />
                   </td>
                 }
@@ -86,7 +86,7 @@ class CharacterSheetTable extends Component {
                       title={this.props.addText}
                       description={this.props.description}
                       fields={mapValues(this.props.fields, field => ({ ...field, value: field.default }))}
-                      onUpdate={this.props.onAdd}
+                      onSave={this.props.onAdd}
                     />
                   </div>
                 </td>

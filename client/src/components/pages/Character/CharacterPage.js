@@ -4,14 +4,14 @@ import EmpJsonExporter from '../../EmpJsonExporter'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
-import { merge, cloneDeep } from 'lodash'
+import { merge, cloneDeep, set } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
-  state = { 
+  state = {
     warningState: '',
     isOpeningFile: false
   };
@@ -45,6 +45,11 @@ class CharacterPage extends Component {
       isDirty: true
     })
   }
+  setCharacter = (path, value) => {
+    let clone = cloneDeep(this.props.characterData.baseCharacter)
+    set(clone, path, value)
+    this.props.updateCharacter({ character: new Character(clone), isDirty: true })
+  }
   handleSave = () => {
     this.props.updateCharacter({isDirty: false})
   }
@@ -55,7 +60,7 @@ class CharacterPage extends Component {
           <Alert className={alert} variant="danger">
             <div>Warning: Your character has unsaved changes!</div>
             <EmpJsonExporter
-              className={saveButton} 
+              className={saveButton}
               content={this.props.characterData.character.exportData}
               fileName={this.props.characterData.fileName}
               onSave={this.handleSave}
@@ -97,6 +102,7 @@ class CharacterPage extends Component {
             <CharacterSheet
               character={this.props.characterData.character}
               onUpdate={this.updateCharacter}
+              setCharacter={this.setCharacter}
             />
           </div>
         }

@@ -25,7 +25,7 @@ class CharacterSheet extends Component {
             </div>
           </div>
           <div>
-            {this.props.character.portrait ? ( 
+            {this.props.character.portrait ? (
               <img
                 alt='Failed to load character portrait'
                 src={this.props.character.portrait}
@@ -39,7 +39,7 @@ class CharacterSheet extends Component {
               isDeletable
               isEdit={this.props.character.portrait}
               fields={{ portrait: this.props.character.portrait }}
-              onUpdate={values => this.props.onUpdate({portrait: values.portrait})}
+              onUpdate={values => this.props.setCharacter('portrait', values.portrait)}
               onDelete={this.props.onUpdate.bind(this, {portrait: ''})}
             />
           </div>
@@ -52,7 +52,7 @@ class CharacterSheet extends Component {
             props: {
               bio: this.props.character.bio,
               name: this.props.character.name,
-              onUpdate: this.props.onUpdate
+              setCharacter: this.props.setCharacter
             }
           },
           {
@@ -62,7 +62,8 @@ class CharacterSheet extends Component {
             props: {
               stats: this.props.character.stats,
               shop: this.props.character.shop,
-              onUpdate: this.props.onUpdate
+              onUpdate: this.props.onUpdate,
+              setCharacter: this.props.setCharacter
             }
           },
           {
@@ -72,7 +73,8 @@ class CharacterSheet extends Component {
             props: {
               shop: this.props.character.shop,
               stats: this.props.character.stats,
-              onUpdate: this.props.onUpdate
+              onUpdate: this.props.onUpdate,
+              setCharacter: this.props.setCharacter
             }
           }
         ]}/>

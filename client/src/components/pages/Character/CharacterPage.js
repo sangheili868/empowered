@@ -4,7 +4,7 @@ import EmpJsonExporter from '../../EmpJsonExporter'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
-import { merge, cloneDeep, set } from 'lodash'
+import { merge, cloneDeep, every, has, set } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
@@ -45,10 +45,27 @@ class CharacterPage extends Component {
       isDirty: true
     })
   }
-  setCharacter = (path, value) => {
-    let clone = cloneDeep(this.props.characterData.baseCharacter)
-    set(clone, path, value)
-    this.props.updateCharacter({ character: new Character(clone), isDirty: true })
+  setCharacter = (paths, newValue) => {
+    /*
+      Single mode: setCharacter('stats.hitPoints', 10)
+      Single mode: setCharacter(['stats','tempHP'], 10)
+      Multi mode: setCharacter([
+        { path: 'stat.hitPoints', value: 0},
+        { path: ['stats', 'tempHP'], value: 0}
+      ])
+    */
+    const isMultiMode = every(paths, pathValue => has(pathValue, 'path') && has(pathValue, 'value'))
+    let baseCharacter = cloneDeep(this.props.characterData.baseCharacter)
+    if (isMultiMode) {
+      paths.map(({ path, value }) => set(baseCharacter, path, value))
+    } else {
+     set(baseCharacter, paths, newValue)
+    }
+    this.props.updateCharacter({
+      baseCharacter,
+      character: new Character(baseCharacter),
+      isDirty: true
+    })
   }
   handleSave = () => {
     this.props.updateCharacter({isDirty: false})

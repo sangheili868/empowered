@@ -253,7 +253,7 @@ class Character {
               worth: (type === 'languages') ? 0 : 1,
               category,
               type: startCase(type),
-              handleDelete: setCharacter => setCharacter([
+              handleDelete: updateCharacter => updateCharacter([
                 { path: ['stats', 'proficiencies', type ], value: withoutIndex(this.baseStats.proficiencies[type], index) },
                 ...(type === 'languages') ? [] : [
                   { path: 'shop.advancements', value: parseInt(this.baseShop.advancements) + 1 },
@@ -265,7 +265,7 @@ class Character {
             name,
             worth: cost,
             type: 'Feature',
-            handleDelete: setCharacter => setCharacter([
+            handleDelete: updateCharacter => updateCharacter([
               { path: 'shop.features', value: [ ...this.baseShop.features, this.baseStats.features[index] ] },
               { path: 'shop.advancements', value: parseInt(this.baseShop.advancements) + (cost || 0) },
               { path: 'stats.features', value: withoutIndex(this.baseStats.features, index) },

@@ -51,7 +51,7 @@ class EmpItemEditor extends Component {
     ]
   }
   handleDone = () => {
-    this.props.onUpdate(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
+    this.props.onSave(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
   }
   handleKeyPress = ({key}) => {
     if (key === 'Enter') {

@@ -58,7 +58,7 @@ class CharacterSheetTable extends Component {
                       title={'Edit ' + item.name}
                       description={this.props.description}
                       fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: item[key] }))}
-                      onUpdate={this.props.onEdit.bind(this, index)}
+                      onSave={this.props.onEdit.bind(this, index)}
                       onDelete={this.props.onDelete && this.props.onDelete.bind(this, index)}
                     />
                   </td>
@@ -86,7 +86,7 @@ class CharacterSheetTable extends Component {
                       title={this.props.addText}
                       description={this.props.description}
                       fields={mapValues(this.props.fields, field => ({ ...field, value: field.default }))}
-                      onUpdate={this.props.onAdd}
+                      onSave={this.props.onAdd}
                     />
                   </div>
                 </td>

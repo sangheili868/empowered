@@ -18,8 +18,8 @@ class CharacterSheetBio extends Component {
                   Name
                 </EmpModal>
                 <td className={[cell, description].join(' ')}>
-                  <EmpStringEditor value={this.props.name} onUpdate={value =>
-                    this.props.setCharacter('name', value)
+                  <EmpStringEditor value={this.props.name} onSave={value =>
+                    this.props.updateCharacter('name', value)
                   }/>
                 </td>
               </tr>
@@ -37,7 +37,7 @@ class CharacterSheetBio extends Component {
                   <td className={[cell, description].join(' ')}>
                     <EmpStringEditor
                       value={value}
-                      onUpdate={value => this.props.setCharacter(['bio', characteristic], value)}
+                      onSave={value => this.props.updateCharacter(['bio', characteristic], value)}
                     />
                   </td>
                 </tr>

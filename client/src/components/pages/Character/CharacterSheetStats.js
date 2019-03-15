@@ -17,7 +17,7 @@ class CharacterSheetStats extends Component {
   render () {
     return (
       <div>
-        <CharacterSheetStatsResources stats={this.props.stats} setCharacter={this.props.setCharacter}/>
+        <CharacterSheetStatsResources stats={this.props.stats} updateCharacter={this.props.updateCharacter}/>
         <div className={stats}>
           <CharacterSheetSkills
             abilityScores={this.props.stats.abilityScores}
@@ -57,12 +57,12 @@ class CharacterSheetStats extends Component {
                 return equipmentProficiencyData[weaponData[category.value].proficiency].description
               }
             }}
-            onEdit={(index, values) => this.props.setCharacter(['stats', 'weapons', index], values)}
-            onDelete={index => this.props.setCharacter(['stats', 'weapons'], withoutIndex(
+            onEdit={(index, values) => this.props.updateCharacter(['stats', 'weapons', index], values)}
+            onDelete={index => this.props.updateCharacter(['stats', 'weapons'], withoutIndex(
               this.props.stats.base.weapons,
               index
             ))}
-            onAdd={values => this.props.setCharacter('stats.weapons', [ ...this.props.stats.base.weapons, values ])}
+            onAdd={values => this.props.updateCharacter('stats.weapons', [ ...this.props.stats.base.weapons, values ])}
           />
           <CharacterSheetStatsList
             title="Equipment"
@@ -71,7 +71,7 @@ class CharacterSheetStats extends Component {
                 isInline
                 title="Edit Gold"
                 fields={{gold: this.props.stats.equipment.gold}}
-                onUpdate={({gold}) => this.props.setCharacter('stats.equipment.gold', gold)}
+                onSave={({gold}) => this.props.updateCharacter('stats.equipment.gold', gold)}
               >
                 <div key="gold">Gold: {this.props.stats.equipment.gold}</div>
               </EmpItemEditor>,
@@ -107,13 +107,13 @@ class CharacterSheetStats extends Component {
                 isInline
                 title={'Edit a ' + columnName + ' Item'}
                 fields={this.props.stats.equipment[columnName][index]}
-                onUpdate={values => {
-                  this.props.setCharacter(['stats', 'equipment', columnName, index], {
+                onSave={values => {
+                  this.props.updateCharacter(['stats', 'equipment', columnName, index], {
                     name: values.name,
                     quantity: parseInt(values.quantity)
                   })
                 }}
-                onDelete={this.props.setCharacter.bind(this,
+                onDelete={this.props.updateCharacter.bind(this,
                   ['stats', 'equipment', columnName],
                   withoutIndex(this.props.stats.base.equipment[columnName], index)
                 )}
@@ -125,7 +125,7 @@ class CharacterSheetStats extends Component {
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}
                 fields={{ name: '', quantity: 1 }}
-                onUpdate={values => this.props.setCharacter(['stats', 'equipment', columnName], [
+                onSave={values => this.props.updateCharacter(['stats', 'equipment', columnName], [
                   ...this.props.stats.base.equipment[columnName],
                   {
                     name: values.name,
@@ -147,7 +147,7 @@ class CharacterSheetStats extends Component {
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
                 }) : {}}
-                onUpdate={values => this.props.setCharacter(['stats', 'proficiencies', columnName, index], values)}
+                onSave={values => this.props.updateCharacter(['stats', 'proficiencies', columnName, index], values)}
               >
                 {item.name}
               </EmpItemEditor>
@@ -178,7 +178,7 @@ class CharacterSheetStats extends Component {
               description: 'Description'
             }}
             fields={featureFields}
-            onEdit={(index, values) => this.props.setCharacter(['stats', 'features', index], values)}
+            onEdit={(index, values) => this.props.updateCharacter(['stats', 'features', index], values)}
           />
         </div>
       </div>

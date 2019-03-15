@@ -36,20 +36,11 @@ class CharacterPage extends Component {
     })
     this.setState({ isOpeningFile: false })
   }
-  updateCharacter = newData => {
-    this.props.updateCharacter({
-      character: new Character(merge(
-        this.props.characterData.baseCharacter,
-        newData
-      )),
-      isDirty: true
-    })
-  }
-  setCharacter = (paths, newValue) => {
+  updateCharacter = (paths, newValue) => {
     /*
-      Single mode: setCharacter('stats.hitPoints', 10)
-      Single mode: setCharacter(['stats','tempHP'], 10)
-      Multi mode: setCharacter([
+      Single mode: updateCharacter('stats.hitPoints', 10)
+      Single mode: updateCharacter(['stats','tempHP'], 10)
+      Multi mode: updateCharacter([
         { path: 'stat.hitPoints', value: 0},
         { path: ['stats', 'tempHP'], value: 0}
       ])
@@ -118,8 +109,7 @@ class CharacterPage extends Component {
             <Route exact path='/character' render={() => <Redirect to='/character/bio'/>}/>
             <CharacterSheet
               character={this.props.characterData.character}
-              onUpdate={this.updateCharacter}
-              setCharacter={this.setCharacter}
+              updateCharacter={this.updateCharacter}
             />
           </div>
         }

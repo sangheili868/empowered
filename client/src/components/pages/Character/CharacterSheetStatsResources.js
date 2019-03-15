@@ -49,7 +49,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Hit Points"
             value={this.props.stats.hitPoints}
-            onUpdate={(value) => this.props.setCharacter('stats.hitPoints', value)}
+            onUpdate={value => this.props.updateCharacter('stats.hitPoints', value)}
             alt="Hit Points Icon"
             icon={hitPointsIcon}
             max={this.props.stats.maxHP}
@@ -57,7 +57,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Wounds"
             value={this.props.stats.wounds}
-            onUpdate={(value) => this.props.setCharacter('stats.wounds', value)}
+            onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
             alt="Wound Icon"
             icon={woundIcon}
             max={this.props.stats.maxWounds}
@@ -65,7 +65,7 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Temp. HP"
             value={this.props.stats.tempHP}
-            onUpdate={(value) => this.props.setCharacter('stats.tempHP', value)}
+            onUpdate={value => this.props.updateCharacter('stats.tempHP', value)}
             alt="Temp. HP Icon"
             icon={tempHPIcon}
             max={this.props.stats.maxTempHP}
@@ -99,7 +99,7 @@ class CharacterSheetStatsResources extends Component {
                         return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
                       }
                     }}
-                    onUpdate={values => this.props.setCharacter(['stats', resourceName], values)}
+                    onSave={values => this.props.updateCharacter(['stats', resourceName], values)}
                   />
                 </div>
                 <div className={subtext}>{this.props.stats[resourceName].name}</div>
@@ -126,7 +126,7 @@ class CharacterSheetStatsResources extends Component {
                       <div>{this.props.stats.speed.modifier}</div>
                     </>
                   }
-                  onUpdate={({ baseValue, type }) => this.props.setCharacter([
+                  onSave={({ baseValue, type }) => this.props.updateCharacter([
                     { path: 'stats.speed.baseValue', value: parseInt(baseValue) },
                     { path: 'stats.speed.type', value: type}
                   ])}
@@ -146,7 +146,7 @@ class CharacterSheetStatsResources extends Component {
                 'Recover all power dice.',
                 'Lose all temporary hit points.'
               ]}
-              onConfirm={this.props.setCharacter.bind(this, [
+              onConfirm={this.props.updateCharacter.bind(this, [
                   { path: 'stats.hitPoints', value: this.props.stats.maxHP },
                   { path: 'stats.tempHP', value: 0 },
                   { path: 'stats.powerDice', value: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max })) },
@@ -166,7 +166,7 @@ class CharacterSheetStatsResources extends Component {
                 'Reject features from the shop.',
                 'Perform a downtime activity.',
               ]}
-              onConfirm={this.props.setCharacter.bind(this, [
+              onConfirm={this.props.updateCharacter.bind(this, [
                   { path: 'stats.hitPoints', value: this.props.stats.maxHP },
                   { path: 'stats.wounds', value: 0 },
                   { path: 'stats.tempHP', value: 0 },
@@ -183,7 +183,7 @@ class CharacterSheetStatsResources extends Component {
                 key={index}
                 isInline
                 title={item.name}
-                onDelete={this.props.setCharacter.bind(this, 'stats.conditions', withoutIndex(this.props.stats.conditions, index))}
+                onDelete={this.props.updateCharacter.bind(this, 'stats.conditions', withoutIndex(this.props.stats.conditions, index))}
                 description={item.description}
               >
                 {item.name}
@@ -202,7 +202,7 @@ class CharacterSheetStatsResources extends Component {
                     options: notActiveConditions
                   }}}
                   description={({ name }) => name && name.value && conditionData[name.value].description}
-                  onUpdate={values => this.props.setCharacter('stats.conditions', [
+                  onSave={values => this.props.updateCharacter('stats.conditions', [
                     ...this.props.stats.conditions,
                     values
                   ])}
@@ -219,7 +219,7 @@ class CharacterSheetStatsResources extends Component {
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}
-                onUpdate={value => this.props.setCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
+                onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
                 alt={dieSize}
                 icon={this.diceIcons[dieSize]}
                 max={max}

@@ -1,6 +1,2 @@
-import { cloneDeep } from 'lodash'
-export default (array, index) => {
-  const clone = cloneDeep(array)
-  clone.splice(index, 1)
-  return clone
-}
+import { chain } from 'lodash'
+export default (array, index) => chain(array).omit(index).map().value()

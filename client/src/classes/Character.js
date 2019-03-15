@@ -5,21 +5,20 @@ import skillData from '../gameData/skills.json'
 import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actionsData from '../gameData/actions.json'
 import conditionData from '../gameData/conditions.json'
+import withoutIndex from '../utils/withoutIndex'
 import {
   upperFirst,
   transform,
   map,
   startCase,
   pick,
-  reject,
   chain,
   some,
   lowerCase,
   filter,
   mapValues,
   keyBy,
-  flatMap,
-  cloneDeep
+  flatMap
 } from 'lodash'
 
 function addPlus (value) {
@@ -27,7 +26,7 @@ function addPlus (value) {
 }
 
 function countItems (items) {
-  return chain(items).reject('deleted').reduce((total, { quantity }) => quantity + total, 0).value()
+  return chain(items).reduce((total, { quantity }) => quantity + total, 0).value()
 }
 
 class Character {
@@ -82,7 +81,7 @@ class Character {
       ...this.baseStats.equipment,
       ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
         ...this.baseStats.equipment[category],
-        ...this.baseStats.weapons.filter(({weight, deleted}) => !deleted && (weight === category)).map(weapon => ({
+        ...this.baseStats.weapons.filter(({weight}) => (weight === category)).map(weapon => ({
           name: weapon.name,
           quantity: 1,
           category: 'weapon'
@@ -101,6 +100,7 @@ class Character {
     }
     return {
       ...this.baseStats,
+      base: this.baseStats,
       maxHP: this.skills.fortitude.value + 10,
       maxTempHP: this.skills.fortitude.value + 10,
       maxWounds: 5,
@@ -182,7 +182,7 @@ class Character {
         ...filter(this.baseStats.features, feature => feature.actionType === actionType)
           .map(feature => ({ ...feature, rootName: feature.name, name: feature.name + '*', feature: true})),
         ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
-          .filter(({ deleted=false, action: { category } }) => !deleted && (category === actionType)).map('action').value()
+          .filter(({ action: { category } }) => (category === actionType)).map('action').value()
       ], {}),
       conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
     }
@@ -192,7 +192,7 @@ class Character {
   }
 
   equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencyData)
-    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category, deleted }) => ((category === key) && !deleted)))
+    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category }) => category === key))
     .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
     .map(value => ({
       ...value,
@@ -217,6 +217,7 @@ class Character {
       }
       return {
         ...this.baseShop,
+        base: this.baseShop,
         abilityScores: map(this.baseStats.abilityScores, (value, name) => ({
           name: startCase(name),
           value,
@@ -247,41 +248,29 @@ class Character {
         },
         sellBack: [
           ...flatMap(this.baseStats.proficiencies, (proficiencies, type) => proficiencies
-            .map(({ name, category, deleted }, index) => ({
+            .map(({ name, category }, index) => ({
               name: (type === 'languages') ? name : equipmentProficiencyData[category].name,
               worth: (type === 'languages') ? 0 : 1,
-              deleted,
               category,
               type: startCase(type),
-              handleDelete: (onUpdate) => {
-                let newItems = cloneDeep(this.baseStats.proficiencies[type])
-                newItems[index].deleted = true
-                onUpdate({ stats: { proficiencies: { [type]: newItems }}})
-                if (type !== 'languages') {
-                  onUpdate({ shop: { advancements: parseInt(this.baseShop.advancements) + 1 } })
-                }
-              }
-            })).filter(({ name, category, deleted }) => !deleted && category !== 'improvisedWeapon')
+              handleDelete: setCharacter => setCharacter([
+                { path: ['stats', 'proficiencies', type ], value: withoutIndex(this.baseStats.proficiencies[type], index) },
+                ...(type === 'languages') ? [] : [
+                  { path: 'shop.advancements', value: parseInt(this.baseShop.advancements) + 1 },
+                ]
+              ])
+            })).filter(({ category }) => category !== 'improvisedWeapon')
           ),
-          ...this.baseStats.features.map(({ name, cost, deleted }, index) => ({
+          ...this.baseStats.features.map(({ name, cost }, index) => ({
             name,
             worth: cost,
-            deleted,
             type: 'Feature',
-            handleDelete: onUpdate => {
-              let newFeatures = cloneDeep(this.baseStats.features)
-              const newShopFeature = cloneDeep(this.baseStats.features[index])
-              newFeatures[index] = { deleted: true }
-              onUpdate({ stats: { features: newFeatures } })
-              onUpdate({ shop: {
-                advancements: parseInt(this.baseShop.advancements) + (cost || 0),
-                features: [
-                  ...this.baseShop.features,
-                  newShopFeature
-                ]
-              }})
-            }
-          })).filter(({ deleted }) => !deleted)
+            handleDelete: setCharacter => setCharacter([
+              { path: 'shop.features', value: [ ...this.baseShop.features, this.baseStats.features[index] ] },
+              { path: 'shop.advancements', value: parseInt(this.baseShop.advancements) + (cost || 0) },
+              { path: 'stats.features', value: withoutIndex(this.baseStats.features, index) },
+            ])
+          }))
         ]
       }
     } else {
@@ -292,27 +281,8 @@ class Character {
   get exportData () {
     return {
       ...pick(this, ['name', 'portrait', 'bio']),
-      stats: {
-        ...this.baseStats,
-        weapons: reject(this.baseStats.weapons, 'deleted'),
-        features: reject(this.baseStats.features, 'deleted'),
-        conditions: reject(this.baseStats.conditions, 'deleted'),
-        equipment: {
-          ...this.baseStats.equipment,
-          heavy: reject(this.baseStats.equipment.heavy, 'deleted'),
-          medium: reject(this.baseStats.equipment.medium, 'deleted'),
-          light: reject(this.baseStats.equipment.light, 'deleted')
-        },
-        proficiencies: {
-          ...this.baseStats.proficiencies,
-          languages: reject(this.baseStats.proficiencies.languages, 'deleted'),
-          equipment: reject(this.baseStats.proficiencies.equipment, 'deleted')
-        }
-      },
-      shop: {
-        ...this.baseShop,
-        features: reject(this.baseShop.features, 'deleted')
-      }
+      stats: this.baseStats,
+      shop: this.baseShop
     }
   }
 }

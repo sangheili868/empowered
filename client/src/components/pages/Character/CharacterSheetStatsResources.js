@@ -191,12 +191,7 @@ class CharacterSheetStatsResources extends Component {
             }
             addToList={() => {
               const notActiveConditions = Object.keys(conditionData)
-                .filter(condition => !chain(this.props.stats.conditions)
-                  .reject('deleted')
-                  .map('name')
-                  .includes(condition)
-                  .value()
-                )
+                .filter(condition => !chain(this.props.stats.conditions).map('name').includes(condition).value())
                 .map(condition => ({ label: condition, value: condition}))
               return (notActiveConditions.length > 0) && (
                 <EmpItemEditor

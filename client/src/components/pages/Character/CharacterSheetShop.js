@@ -45,7 +45,9 @@ class CharacterSheetShop extends Component {
             buyButton={index => {
               const score = this.props.shop.abilityScores[index]
               const isIncreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
-              if (score.value > 4) {
+              if (!this.props.shop.unlocked && score.value > 2) {
+                return 'At Maximum Starting Value'
+              } else if (score.value > 4) {
                 return 'At Maximum'
               } else if (score.cost > this.props.shop.advancements) {
                 return `Costs ${score.cost} adv.`
@@ -282,6 +284,26 @@ class CharacterSheetShop extends Component {
                   </div>
                 )}
               </EmpCard>
+              <CharacterSheetTable
+                title="Sell Back"
+                items={this.props.shop.sellBack}
+                columnNames={{
+                  name: 'Name',
+                  type: 'Type'
+                }}
+                sellButton={index => {
+                  const item = this.props.shop.sellBack[index]
+                  return (
+                    <EmpButton
+                      className={[tableBuy, minus].join(' ')}
+                      onClick={item.handleDelete.bind(this, this.props.onUpdate)}
+                    >
+                      +{item.worth} Adv.
+                    </EmpButton>
+                  )
+                }}
+              >
+              </CharacterSheetTable>
             </>
           }
         </div>
@@ -300,26 +322,6 @@ class CharacterSheetShop extends Component {
             </EmpButton>
           </div>
         }
-        <CharacterSheetTable
-          title="Sell Back"
-          items={this.props.shop.sellBack}
-          columnNames={{
-            name: 'Name',
-            type: 'Type'
-          }}
-          sellButton={index => {
-            const item = this.props.shop.sellBack[index]
-            return (
-              <EmpButton
-                className={[tableBuy, minus].join(' ')}
-                onClick={item.handleDelete.bind(this, this.props.onUpdate)}
-              >
-                +{item.worth} Adv.
-              </EmpButton>
-            )
-          }}
-        >
-        </CharacterSheetTable>
       </>
     )
   }

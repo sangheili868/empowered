@@ -251,6 +251,7 @@ class Character {
               name: (type === 'languages') ? name : equipmentProficiencyData[category].name,
               worth: (type === 'languages') ? 0 : 1,
               deleted,
+              category,
               type: startCase(type),
               handleDelete: (onUpdate) => {
                 let newItems = cloneDeep(this.baseStats.proficiencies[type])
@@ -260,7 +261,7 @@ class Character {
                   onUpdate({ shop: { advancements: parseInt(this.baseShop.advancements) + 1 } })
                 }
               }
-            })).filter(({ deleted }) => !deleted)
+            })).filter(({ name, category, deleted }) => !deleted && category !== 'improvisedWeapon')
           ),
           ...this.baseStats.features.map(({ name, cost, deleted }, index) => ({
             name,

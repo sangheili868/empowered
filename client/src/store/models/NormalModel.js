@@ -21,7 +21,7 @@ export default class NormalModel extends Model {
   }
 
   static get nestedModel () {
-    throw('this is an abstract function and needs implementation')
+    return {}
   }
 
   static processStrategy (value) {

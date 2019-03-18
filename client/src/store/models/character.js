@@ -1,6 +1,7 @@
 import {attr, fk} from 'redux-orm'
 import  NormalModel from './NormalModel'
 import Bio from './bio'
+import Stats from './stats'
 
 export default class Character extends NormalModel {
   static get modelName() { return 'Character' }
@@ -9,13 +10,16 @@ export default class Character extends NormalModel {
       id: attr(),
       portrait: attr(),
       bio: fk('Bio', 'characters'),
-      stats: attr(), // will be fk('Stats', 'character')
+      stats: fk('Stats', 'character'),
       shop: attr() // will be fk('Shop', 'character')
     }
   }
 
   static get nestedModel() {
-    return {Bio: Bio}
+    return {
+      Bio,
+      Stats
+    }
   }
 
   static reducer(action, Character, _session) {

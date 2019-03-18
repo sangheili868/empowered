@@ -78,7 +78,7 @@
         padding: 10px;
 
         &.field {
-          background-color: $orange;
+          background-color: $blue;
           color: $white;
           width: 100px;
           cursor: pointer;
@@ -88,7 +88,7 @@
           }
 
           &:hover {
-            background-color: $darkOrange;
+            background-color: $darkBlue;
           }
         }
 
@@ -241,12 +241,8 @@
     }
   }
 
-  .disabled {
-    color: $lightGrey;
-
-    .buy {
-      color: $failure;
-    }
+  .buy {
+    color: $failure;
   }
 
   .cell {

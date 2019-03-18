@@ -10,6 +10,7 @@ class CharacterSheetBio extends Component {
     return (
       <>
         <div>Click on a field name for more information and examples.</div>
+        <div>Click on the text to change it.</div>
         <div className={bio}>
           <table className={bioTable}>
             <tbody>

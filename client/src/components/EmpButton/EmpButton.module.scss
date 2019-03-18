@@ -1,9 +1,9 @@
 @import "src/styles/colors.scss";
 
 .button {
-  color: $white;
   padding: 5px;
-  background-color: $orange;
+  background-color: $blue;
+  color: $white;
   border-radius: 10px;
   border: none;
   cursor: pointer;
@@ -16,6 +16,6 @@
   }
 
   &:hover {
-    background-color: $darkOrange;
+    background-color: $darkBlue;
   }
 }

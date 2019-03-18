@@ -68,6 +68,7 @@ class EmpItemEditor extends Component {
         className={this.props.isInline ? inline : ''}
         body={
           <>
+            {map(this.state.workingValues, (value, key) => <>{key}<br/></>)}
             {map(this.state.workingValues, (value, key) =>
               <div className={field} key={key}>
                 <div className={fieldLabel}>{startCase(key)}</div>

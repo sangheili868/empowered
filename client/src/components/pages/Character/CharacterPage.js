@@ -4,7 +4,7 @@ import EmpJsonExporter from '../../EmpJsonExporter'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
-import { merge, cloneDeep, every, has, set } from 'lodash'
+import { cloneDeep, every, has, set } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'

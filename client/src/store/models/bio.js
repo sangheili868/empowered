@@ -1,4 +1,4 @@
-import {attr, Model} from 'redux-orm'
+import {attr} from 'redux-orm'
 import  NormalModel from './NormalModel'
 
 export default class Bio extends NormalModel {

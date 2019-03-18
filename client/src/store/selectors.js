@@ -30,7 +30,7 @@ export const character = ormCreateSelector(
     // that Session instance as an argument instead.
     dbStateSelector,
     (session, id) => {
-        return session.Caracter.withId(id)
+        return session.Character.withId(id)
     }
 )
 

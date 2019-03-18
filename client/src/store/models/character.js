@@ -8,9 +8,9 @@ export default class Character extends NormalModel {
     return {
       id: attr(),
       portrait: attr(),
-      bio: fk('Bio', 'caracters'),
-      stats: attr(), // will be fk('Stats', 'caracter')
-      shop: attr() // will be fk('Shop', 'caracter')
+      bio: fk('Bio', 'characters'),
+      stats: attr(), // will be fk('Stats', 'character')
+      shop: attr() // will be fk('Shop', 'character')
     }
   }
 

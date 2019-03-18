@@ -12,7 +12,7 @@ import {
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
 import EmpModal from '../EmpModal/EmpModal'
-import { cloneDeep, startCase, map, mapValues, isObject, isEmpty, isFunction } from 'lodash'
+import { cloneDeep, startCase, mapValues, isObject, isEmpty, isFunction } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -20,7 +20,7 @@ class EmpItemEditor extends Component {
   }
   handleOpen = () => {
     this.setState({
-      workingValues: cloneDeep(this.props.fields),
+      workingValues: cloneDeep(this.props.fields)
     })
   }
   handleChange = (key, {target}) => {
@@ -68,28 +68,30 @@ class EmpItemEditor extends Component {
         className={this.props.isInline ? inline : ''}
         body={
           <>
-            {map(this.state.workingValues, (value, key) => <>{key}<br/></>)}
-            {map(this.state.workingValues, (value, key) =>
-              <div className={field} key={key}>
-                <div className={fieldLabel}>{startCase(key)}</div>
-                {value.options ? (
-                  <EmpDropdown
-                    isMulti={Array.isArray(value.default)}
-                    value={value.options.filter(option => value.value.includes(option.value))}
-                    options={this.optionsWithAddAll(value)}
-                    className={input}
-                    onSelect={newValue => this.handleChange(key, {target: { value: newValue}})}
-                  />
-                ) : (
-                  <EmpTextInput
-                    className={input}
-                    value={isObject(value) ? value.value : value}
-                    onChange={this.handleChange.bind(this, key)}
-                    onKeyPress={this.handleKeyPress}
-                  />
-                )}
-              </div>
-            )}
+            {this.props.fields && Object.keys(this.props.fields).map(key => {
+              const value = this.state.workingValues[key]
+              return value && (
+                <div className={field} key={key}>
+                  <div className={fieldLabel}>{startCase(key)}</div>
+                  {value.options ? (
+                    <EmpDropdown
+                      isMulti={Array.isArray(value.default)}
+                      value={value.options.filter(option => value.value.includes(option.value))}
+                      options={this.optionsWithAddAll(value)}
+                      className={input}
+                      onSelect={newValue => this.handleChange(key, {target: { value: newValue}})}
+                    />
+                  ) : (
+                    <EmpTextInput
+                      className={input}
+                      value={isObject(value) ? value.value : value}
+                      onChange={this.handleChange.bind(this, key)}
+                      onKeyPress={this.handleKeyPress}
+                    />
+                  )}
+                </div>
+              )
+            })}
             {this.props.description &&
               <div>
                 {isFunction(this.props.description) ? (

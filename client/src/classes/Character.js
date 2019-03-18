@@ -174,7 +174,7 @@ class Character {
           const relatedFeatures = filter(this.baseStats.features, feature => feature.actionTags.includes(name))
           return {
             rootName: name,
-            name: relatedFeatures.length > 0 ? name + ' *' : name,
+            name: relatedFeatures.length > 0 ? name + '*' : name,
             description,
             features: relatedFeatures
           }

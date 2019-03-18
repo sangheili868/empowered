@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { startCase } from 'lodash'
 import EmpModal from '../../EmpModal/EmpModal'
-import { detailTitle } from './CharacterPage.module.scss'
+import { detailTitle, borderlessCell } from './CharacterPage.module.scss'
 
 class CharacterSheetSkillsDetail extends Component {
   render () {
@@ -25,8 +25,8 @@ class CharacterSheetSkillsDetail extends Component {
             </>
           }
         </>
-      }>
-        <div>{title}{hasFeatures || hasModifiers ? ' *' : ''}</div>
+      } className={borderlessCell}>
+        <div>{title}{hasFeatures || hasModifiers ? '*' : ''}</div>
         <div>{this.props.skill.displayValue}</div>
       </EmpModal>
     )

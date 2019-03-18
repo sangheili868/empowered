@@ -211,6 +211,11 @@
   .column {
     padding: 0 10px 5px;
 
+
+    @media screen and (max-width: 400px) {
+      padding: 0 5px 5px;
+    }
+
     .moreInfo {
       padding: 0 5px;
     }
@@ -225,6 +230,12 @@
   &.borderless {
     margin: 0 10px 10px;
     width: calc(100% - 20px);
+
+    .borderlessCell {
+      @media screen and (max-width: 400px) {
+        padding: 2px;
+      }
+    }
   }
 
   .disabled {

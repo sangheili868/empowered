@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { rules, card, nestedCard, table, cardTable, cell, critical, columnHeader } from "./RulesPage.module.scss"
+import { rules, card, nestedCard, table, cardTable, cell, critical, columnHeader, skillDetail } from "./RulesPage.module.scss"
 import EmpCard from '../../EmpCard/EmpCard'
 import { startCase, map } from 'lodash'
 import RulesSkill from './RulesSkill'
@@ -18,12 +18,12 @@ class RulesPage extends Component {
               <tr>
                 <td></td>
                 {this.topScores.map(topScore =>
-                  <td key={topScore} className={columnHeader}>{startCase(topScore)}</td>
+                  <td key={topScore} className={[columnHeader, skillDetail].join(' ')}>{startCase(topScore)}</td>
                 )}
               </tr>
               {this.leftScores.map(leftScore =>
                 <tr key={leftScore}>
-                  <td className={columnHeader}>{startCase(leftScore)}</td>
+                  <td className={[columnHeader, skillDetail].join(' ')}>{startCase(leftScore)}</td>
                   {this.topScores.map(topScore =>
                     <td key={topScore}><RulesSkill firstScore={topScore} secondScore={leftScore}/></td>
                   )}
@@ -138,7 +138,7 @@ class RulesPage extends Component {
               You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
             </p>
             <p>
-              If you roll a natural 20 on an attack roll, you land a critical hit. Roll all damage dice twice (including power dice), double all damage modifiers, and roll on the critical success table below. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table below. If you attack a creature within 5 feet of you, and an enemy of your target is flanking it (on the opposite side of them from you), you gain advantage on the attack. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
+               If you attack a creature that cannot sense you, you gain advantage on the attack roll. If a creature that cannot sense you attacks you, you have advantage on the defense roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
             </p>
             {map(actions, (actionList, category) =>
               <EmpCard key={category} title={startCase(category)} className={nestedCard}>
@@ -153,40 +153,36 @@ class RulesPage extends Component {
             )}
             <EmpCard title="Critical Tables" className={nestedCard}>
               <div className={card}>
-                If you critically succeed on an attack roll, roll on the table below.
+                If you make an attack or defense roll and roll a natural 20 on the d20 before modifiers, or beat the other creature's roll by 10 or more, you critically succeed. If you critically succeed on an attack roll, the attack automatically hits, you roll all damage dice twice, you add all damage modifiers twice, and you roll on the table below. If you critically succeed on a defense roll, the attack automatically misses, and you roll on the table below.
                 <table className={[table, critical].join(' ')}>
-                  <thead>
-                    <tr><th>d24</th><th>Result</th></tr>
-                  </thead>
+                  <thead><tr><th className={cell}>d24</th><th className={cell}>Result</th></tr></thead>
                   <tbody>
-                    <tr><td>1-6</td><td>Nothing extra happens</td></tr>
-                    <tr><td>7-9</td><td>The target loses their reaction until the start of their next turn.</td></tr>
-                    <tr><td>10-12</td><td>The target falls prone.</td></tr>
-                    <tr><td>13-15</td><td>The target loses an action on their next turn.</td></tr>
-                    <tr><td>16-17</td><td>The target drops an item of your choice, and it lands 10 feet away.</td></tr>
-                    <tr><td>18-19</td><td>Any creature besides you can use their reaction to make a melee attack against the target.</td></tr>
-                    <tr><td>20-21</td><td>An item of your choice that the target is holding or wearing breaks.</td></tr>
-                    <tr><td>22-23</td><td>The target can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
-                    <tr><td>24</td><td>You roll on this table two more times.</td></tr>
+                    <tr><td className={cell}>1-6</td><td className={cell}>Nothing extra happens</td></tr>
+                    <tr><td className={cell}>7-9</td><td className={cell}>The creature you are fighting loses their reaction until the start of their next turn.</td></tr>
+                    <tr><td className={cell}>10-12</td><td className={cell}>The creature you are fighting falls prone.</td></tr>
+                    <tr><td className={cell}>13-15</td><td className={cell}>The creature you are fighting loses an action on their next turn.</td></tr>
+                    <tr><td className={cell}>16-17</td><td className={cell}>The creature you are fighting drops an item of your choice, and it lands 10 feet away.</td></tr>
+                    <tr><td className={cell}>18-19</td><td className={cell}>Any creature besides you can use their reaction to make a melee attack against the creature you are fighting.</td></tr>
+                    <tr><td className={cell}>20-21</td><td className={cell}>An item of your choice that the creature you are fighting is holding or wearing breaks.</td></tr>
+                    <tr><td className={cell}>22-23</td><td className={cell}>The creature you are fighting can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
+                    <tr><td className={cell}>24</td><td className={cell}>You roll on this table two more times.</td></tr>
                   </tbody>
                 </table>
               </div>
               <div className={card}>
-                If you critically fail on a defense roll, roll on the table below.
+                If you make an attack or defense roll and roll a natural 1 on the d20 before modifiers, or the other creature beats your roll by 10 or more, you critically fail. If you critically fail an attack roll, the attack automatically misses, and you roll on the table below. If you critically fail a defense roll, the attack automatically hits, the attacker rolls all damage dice twice, the attacker adds all damage modifiers twice, and you roll on the table below.
                 <table className={[table, critical].join(' ')}>
-                  <thead>
-                    <tr><th>d24</th><th>Result</th></tr>
-                  </thead>
+                  <thead><tr><th className={cell}>d24</th><th className={cell}>Result</th></tr></thead>
                   <tbody>
-                    <tr><td>1</td><td>You roll on this table two more times.</td></tr>
-                    <tr><td>2-3</td><td>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
-                    <tr><td>4-5</td><td>You fall prone.</td></tr>
-                    <tr><td>6-7</td><td>You lose an action on your next turn.</td></tr>
-                    <tr><td>8-9</td><td>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
-                    <tr><td>10-12</td><td>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
-                    <tr><td>13-15</td><td>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
-                    <tr><td>16-18</td><td>You lose your reaction until the start of your next turn.</td></tr>
-                    <tr><td>19-24</td><td>Nothing extra happens</td></tr>
+                    <tr><td className={cell}>1</td><td className={cell}>You roll on this table two more times.</td></tr>
+                    <tr><td className={cell}>2-3</td><td className={cell}>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
+                    <tr><td className={cell}>4-5</td><td className={cell}>You fall prone.</td></tr>
+                    <tr><td className={cell}>6-7</td><td className={cell}>You lose an action on your next turn.</td></tr>
+                    <tr><td className={cell}>8-9</td><td className={cell}>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
+                    <tr><td className={cell}>10-12</td><td className={cell}>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
+                    <tr><td className={cell}>13-15</td><td className={cell}>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
+                    <tr><td className={cell}>16-18</td><td className={cell}>You lose your reaction until the start of your next turn.</td></tr>
+                    <tr><td className={cell}>19-24</td><td className={cell}>Nothing extra happens</td></tr>
                   </tbody>
                 </table>
               </div>

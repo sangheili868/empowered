@@ -19,17 +19,16 @@
     text-align: center;
     user-select: none;
 
-    &.actionsTable {
+    &.critical {
+      text-align: left;
+      text-indent: 0;
       border: 1px solid $black;
       border-collapse: collapse;
 
       .cell {
+        min-width: 50px;
         border: 1px solid $black;
       }
-    }
-
-    &.critical {
-      text-align: left;
     }
 
     .columnHeader {
@@ -54,5 +53,15 @@
       border-left: none;
       white-space: nowrap;
     }
+  }
+}
+
+.skillDetail {
+  @media screen and (max-width: 480px) {
+    padding: 2px;
+    font-size: 12px;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 10px;
   }
 }

@@ -1,6 +1,7 @@
-import {attr, Model} from 'redux-orm';
+import {attr, Model} from 'redux-orm'
+import  NormalModel from './NormalModel'
 
-export default class Bio extends Model {
+export default class Bio extends NormalModel {
   static get modelName() { return 'Bio' }
   static get fields() {
     return {
@@ -31,16 +32,16 @@ export default class Bio extends Model {
     }
   }
   static reducer(_state, action, Bio, _session){
-    const { payload, type } = action;
+    const { payload, type } = action
     switch (type) {
       case 'createBio':
-        Bio.create({...payload});
+        Bio.create({...payload})
         break
       case 'deleteBio':
-        Bio.withId(payload).delete();
-        break;
+        Bio.withId(payload).delete()
+        break
       default:
-        break;
+        break
     }
   }
 }

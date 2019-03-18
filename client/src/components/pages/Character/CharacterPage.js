@@ -10,11 +10,15 @@ import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
+import { characters } from '../../../store/selectors'
+import actions from '../../../store/actions'
+import { connect } from 'react-redux';
+
 class CharacterPage extends Component {
   state = { 
     warningState: '',
     isOpeningFile: false
-  };
+  }
   handleOpenWarning = () => {
     if (this.props.characterData.isDirty) this.setState({warningState: 'create'})
     else this.createNewCharacter()
@@ -28,6 +32,9 @@ class CharacterPage extends Component {
     this.setState({isDirty: true})
   }
   loadCharacter = (baseCharacter, fileName) => {
+    let t = this
+    this.props.createCharacter(baseCharacter)
+    debugger
     this.props.updateCharacter({
       baseCharacter,
       character: new Character(baseCharacter),
@@ -104,10 +111,10 @@ class CharacterPage extends Component {
     );
   }
 }
-const stateToProps = (state) => {
+function stateToProps(state) {
   return {
-    character: characters(state) ? characters(state)[0] : null
+    characterORM: characters(state)
   }
 }
 
-export default connect(stateToProps, dispatchToProps)(CharacterPage);
+export default connect(stateToProps, actions)(CharacterPage);

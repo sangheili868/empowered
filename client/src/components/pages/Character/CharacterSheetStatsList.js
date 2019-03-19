@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { subtitles, subtitle, list, column, moreInfo, columnHeader } from './CharacterPage.module.scss'
+import { subtitles, subtitle, list, moreInfo, columnHeader } from './CharacterPage.module.scss'
 import { startCase, some } from 'lodash'
 import EmpCard from '../../EmpCard/EmpCard'
 import EmpModal from '../../EmpModal/EmpModal'
@@ -18,7 +18,7 @@ class CharacterSheetStatsList extends Component {
         </div>
         <div className={list}>
           {isArray ? (
-            <div className={column}>
+            <div>
               {this.props.items.map((item, index) =>
                 this.props.editItem ? this.props.editItem(item, index) : (
                   <div key={index}>{item.name}</div>
@@ -29,7 +29,7 @@ class CharacterSheetStatsList extends Component {
           ) : (isObject &&
           Object.keys(this.props.items).map(itemKey =>
             (this.props.items[itemKey].length || this.props.addToList) &&
-            <div key={itemKey} className={column}>
+              <div key={itemKey}>
                 <div className={columnHeader}>{startCase(itemKey)}</div>
                 {this.props.items[itemKey].map((item, index) =>
                   this.props.editItem ? this.props.editItem(itemKey, item, index) : (
@@ -50,7 +50,7 @@ class CharacterSheetStatsList extends Component {
                 {this.props.addToList && this.props.addToList(itemKey)}
               </div>
             )
-            )}
+          )}
         </div>
       </EmpCard>
     ) : null

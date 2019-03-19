@@ -4,7 +4,7 @@
     "description": "Your speed becomes 0, and you gain the Escape skill action.",
     "action": {
       "name": "Escape",
-      "description": "Roll athletics against the grapple DC to end the grappled condition.",
+      "description": "As a skill action, roll athletics against the grapple DC to end the grappled condition.",
       "category": "skillAction"
     }
   },
@@ -13,7 +13,7 @@
     "description": "You must use your first action each turn to move away from the source of fear. You cannot willingly move closer to the source of fear, and you have disadvantage on all rolls. You gain the Calm Down skill action.",
     "action": {
       "name": "Calm Down",
-      "description": "Roll willpower against the fear DC to end the frightened condition. If you can see the source of fear, roll with disadvantage.",
+      "description": "As a skill action, roll willpower against the fear DC to end the frightened condition. If you can see the source of fear, roll with disadvantage.",
       "category": "skillAction"
     }
   },
@@ -22,7 +22,7 @@
     "description": "Your speed is halved and your attacks have disadvantage. Your agility rolls have advantage against ranged attacks and disadvantage against melee attacks. You gain the Stand Up action.",
     "action": {
       "name": "Stand Up",
-      "description": "If your speed is greater than 0, you end the prone condition.",
+      "description": "As a basic action, if your speed is greater than 0, you end the prone condition.",
       "category": "basicAction"
     }
   },
@@ -31,7 +31,7 @@
     "description": "You have disadvantage on all rolls, except rolls as part of the Resist action, and you gain the Resist skill action.",
     "action": {
       "name": "Resist",
-      "description": "Roll Fortitude against the poison DC to end the poisoned condition.",
+      "description": "As a skill action, roll Fortitude against the poison DC to end the poisoned condition.",
       "category": "skillAction"
     }
   }

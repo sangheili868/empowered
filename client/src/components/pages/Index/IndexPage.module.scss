@@ -12,14 +12,18 @@
     .concept {
       width: 150px;
       white-space: nowrap;
-      border: 1px solid $dark;
+      border: 1px solid $lightGrey;
       padding: 3px 10px;
     }
   }
 
   .link {
-    color: $orange;
+    color: $blue;
     text-decoration: underline;
     display: block;
+
+    &:hover {
+      color: $darkBlue;
+    }
   }
 }

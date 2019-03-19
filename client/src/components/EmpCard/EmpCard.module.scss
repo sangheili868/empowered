@@ -2,20 +2,21 @@
 
 .card {
   display: inline-block;
-  border: 1px solid $dark;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 5px;
+  box-shadow: 0 2px 5px 0 rgba($black, 0.26);
 
   .title {
     display: flex;
+    border-radius: 5px;
+    text-transform: uppercase;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     min-width: 100px;
-    font-size: 16px;
-    font-weight: bold;
     padding: 0 10px;
-    background-color: $orange;
+    margin: 0;
+    box-shadow: none;
+    background-color: $blue;
     color: $white;
 
     .spacer {
@@ -35,5 +36,6 @@
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
+    overflow: hidden;
   }
 }

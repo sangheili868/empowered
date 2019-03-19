@@ -1,17 +1,7 @@
 import React, { Component } from 'react'
-import {
-  resources,
-  resource,
-  title,
-  info,
-  icon,
-  valueRow,
-  spacer,
-  detailTitle,
-  subtext
-} from "./CharacterPage.module.scss"
+import { resources, detailTitle, plus } from "./CharacterPage.module.scss"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues, startCase } from 'lodash'
+import { chain, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
@@ -19,7 +9,7 @@ import armorIcon from "../../../icons/soldier.png"
 import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
 import tempHPIcon from "../../../icons/circle-plus.png"
-import speedIcon from "../../../icons/boot.png"
+import speedIcon from "../../../icons/feet.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
 import d4Icon from "../../../icons/d4.png"
@@ -33,6 +23,9 @@ import armorData from '../../../gameData/armor.json'
 import shieldData from '../../../gameData/shields.json'
 import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
 import withoutIndex from '../../../utils/withoutIndex'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EmpCard from '../../EmpCard/EmpCard';
+import CharacterSheetTrait from './CharacterSheetTrait'
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -49,94 +42,92 @@ class CharacterSheetStatsResources extends Component {
           <CharacterSheetResource
             title="Hit Points"
             value={this.props.stats.hitPoints}
-            onUpdate={value => this.props.updateCharacter('stats.hitPoints', value)}
-            alt="Hit Points Icon"
-            icon={hitPointsIcon}
             max={this.props.stats.maxHP}
+            icon={hitPointsIcon}
+            onUpdate={value => this.props.updateCharacter('stats.hitPoints', value)}
           />
           <CharacterSheetResource
             title="Wounds"
             value={this.props.stats.wounds}
-            onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
-            alt="Wound Icon"
-            icon={woundIcon}
             max={this.props.stats.maxWounds}
+            icon={woundIcon}
+            onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
           />
           <CharacterSheetResource
             title="Temp. HP"
             value={this.props.stats.tempHP}
-            onUpdate={value => this.props.updateCharacter('stats.tempHP', value)}
-            alt="Temp. HP Icon"
-            icon={tempHPIcon}
             max={this.props.stats.maxTempHP}
+            icon={tempHPIcon}
+            onUpdate={value => this.props.updateCharacter('stats.tempHP', value)}
           />
-          {[
-            { resourceName: 'armor', resourceIcon: armorIcon, categories: armorData },
-            { resourceName: 'shield', resourceIcon: shieldIcon, categories: shieldData }
-          ].map(({resourceName, resourceIcon, categories}) => this.props.stats[resourceName].options.length > 1 &&
-            <div className={resource} key={resourceName}>
-              <div className={title}>{startCase(resourceName)}</div>
-              <div className={info}>
-                <img className={icon} alt={startCase(resourceName) + ' Icon'} src={resourceIcon}/>
-                <div className={valueRow}>
-                  <div className={spacer}></div>
-                  <div>{this.props.stats[resourceName].category === 'none' ? '' : this.props.stats[resourceName].rating}</div>
-                  <EmpItemEditor
-                    title={startCase(resourceName)}
-                    isEdit
-                    fields={{
-                      name: this.props.stats[resourceName].name,
-                      category: {
-                        value: this.props.stats[resourceName].category,
-                        default: 'none',
-                        options: this.props.stats[resourceName].options
-                      }
+          {this.props.stats.armor.options.length > 1 &&
+            <CharacterSheetTrait
+              trait="armor"
+              value={this.props.stats.armor.rating}
+              subtext={this.props.stats.armor.name}
+              icon={armorIcon}
+              fields={{
+                name: this.props.stats.armor.name,
+                category: {
+                  value: this.props.stats.armor.category,
+                  default: 'none',
+                  options: this.props.stats.armor.options
+                }
+              }}
+              description={({category}) => {
+                if (category && category.value && !Array.isArray(category.value)) {
+                  const catData = armorData.find(cat => cat.category === category.value)
+                  return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
+                }
+              }}
+              onUpdate={this.props.updateCharacter}
+            />
+          }
+          {this.props.stats.shield.options.length > 1 &&
+            <CharacterSheetTrait
+              trait="shield"
+              value={this.props.stats.shield.rating}
+              subtext={this.props.stats.shield.name}
+              icon={shieldIcon}
+              fields={{
+                name: this.props.stats.shield.name,
+                category: {
+                  value: this.props.stats.shield.category,
+                  default: 'none',
+                  options: this.props.stats.shield.options
+                }
+              }}
+              description={({category}) => {
+                if (category && category.value && !Array.isArray(category.value)) {
+                  const catData = shieldData.find(cat => cat.category === category.value)
+                  return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
+                }
+              }}
+              onUpdate={this.props.updateCharacter}
+            />
+          }
+          <CharacterSheetTrait
+            trait="speed"
+            value={this.props.stats.speed.rating + 'ft.'}
+            subtext={this.props.stats.speed.type}
+            icon={speedIcon}
+            fields={{
+              baseValue: this.props.stats.speed.baseValue,
+              type: this.props.stats.speed.type
+            }}
+            description={this.props.stats.speed.modifier &&
+              <>
+                <div className={detailTitle}>Modifiers:</div>
+                <div>{this.props.stats.speed.modifier}</div>
+              </>
+            }
+            onUpdate={(path, {baseValue, type}) => this.props.updateCharacter(path, {
+              baseValue: parseInt(baseValue),
+              type
+            })}
+          />
 
-                    }}
-                    description={({category}) => {
-                      if (category && category.value && !Array.isArray(category.value)) {
-                        const catData = categories.find(cat => cat.category === category.value)
-                        return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
-                      }
-                    }}
-                    onSave={values => this.props.updateCharacter(['stats', resourceName], values)}
-                  />
-                </div>
-                <div className={subtext}>{this.props.stats[resourceName].name}</div>
-              </div>
-            </div>
-          )}
-          <div className={resource}>
-            <div className={title}>Speed</div>
-            <div className={info}>
-              <img className={icon} alt="Speed Icon" src={speedIcon}/>
-              <div className={valueRow}>
-                <div className={spacer}></div>
-                <div>{this.props.stats.speed.rating}ft.</div>
-                <EmpItemEditor
-                  title="Speed"
-                  isEdit
-                  fields={{
-                    baseValue: this.props.stats.speed.baseValue,
-                    type: this.props.stats.speed.type
-                  }}
-                  description={this.props.stats.speed.modifier &&
-                    <>
-                      <div className={detailTitle}>Modifiers:</div>
-                      <div>{this.props.stats.speed.modifier}</div>
-                    </>
-                  }
-                  onSave={({ baseValue, type }) => this.props.updateCharacter([
-                    { path: 'stats.speed.baseValue', value: parseInt(baseValue) },
-                    { path: 'stats.speed.type', value: type}
-                  ])}
-                />
-              </div>
-              <div className={subtext}>{this.props.stats.speed.type}</div>
-            </div>
-          </div>
-          <div className={resource}>
-            <div className={title}>Recovery</div>
+          <EmpCard title="Recovery">
             <CharacterSheetStatsRecovery
               title="Rest"
               icon={restIcon}
@@ -174,7 +165,7 @@ class CharacterSheetStatsResources extends Component {
                 ])
               }
             />
-          </div>
+          </EmpCard>
           <CharacterSheetStatsList
             title="Conditions"
             items={this.props.stats.conditions}
@@ -195,18 +186,21 @@ class CharacterSheetStatsResources extends Component {
                 .map(condition => ({ label: condition, value: condition}))
               return (notActiveConditions.length > 0) && (
                 <EmpItemEditor
-                  title={'Add a Condition'}
+                  title="Add a Condition"
                   fields={{ name: {
                     value: '',
                     default: '',
                     options: notActiveConditions
                   }}}
                   description={({ name }) => name && name.value && conditionData[name.value].description}
+                  mode="noStyle"
                   onSave={values => this.props.updateCharacter('stats.conditions', [
                     ...this.props.stats.conditions,
                     values
                   ])}
-                />
+                >
+                  <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+                </EmpItemEditor>
               )
             }}
           />
@@ -219,10 +213,9 @@ class CharacterSheetStatsResources extends Component {
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}
-                onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
-                alt={dieSize}
                 icon={this.diceIcons[dieSize]}
                 max={max}
+                onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
               />
             )
             .value()

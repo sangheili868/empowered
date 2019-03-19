@@ -20,9 +20,9 @@ class CharacterSheetStatsRecovery extends Component {
         }
         controls={[{
           label: 'Confirm',
-          onClick: this.props.onConfirm
+          onClick: this.props.onConfirm,
+          mode: 'secondary'
         }]}
-        noStyle
         containerComponent="button"
         className={recoveryButton}
       >

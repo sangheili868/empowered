@@ -1,7 +1,7 @@
 {
-  "name": "Vicostra Vramiir",
-  "portrait": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/e99a57e7-879f-4c9f-9e6b-e668ea7cf839/db84b4a-30403627-9237-4c07-8fbe-8e46dff568ed.png/v1/fill/w_833,h_960,q_70,strp/drow_bard____tg__shit_post_generator__by_bog_roll_db84b4a-pre.jpg",
   "bio": {
+    "name": "Vicostra Vramiir",
+    "portrait": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/e99a57e7-879f-4c9f-9e6b-e668ea7cf839/db84b4a-30403627-9237-4c07-8fbe-8e46dff568ed.png/v1/fill/w_833,h_960,q_70,strp/drow_bard____tg__shit_post_generator__by_bog_roll_db84b4a-pre.jpg",
     "highConcept": "Illusionist Spy who Cannot Stand Dissatisfaction",
     "flaw": "Pathological Liar",
     "ancestry": "Void Elf",
@@ -29,7 +29,7 @@
   },
   "stats": {
     "hitPoints": 7,
-    "tempHP": 0,
+    "tempHP": 3,
     "wounds": 0,
     "armor": {
       "name": "Void Elf Armor",
@@ -41,7 +41,7 @@
     },
     "speed": {
       "baseValue": 20,
-      "type": "walking"
+      "type": "Walking"
     },
     "abilityScores": {
       "strong": -2,

@@ -8,13 +8,15 @@ class EmpCard extends Component {
     isOpen: false
   }
   componentDidMount () {
-    this.setState({ isOpen: this.props.isStartingOpen })
+    this.setState({ isOpen: this.props.isStartingOpen || this.props.isLocked })
   }
   handleToggle = () => {
-    this.setState(prevState => ({
-      ...prevState,
-      isOpen: !prevState.isOpen
-    }))
+    if (!this.props.isLocked) {
+      this.setState(prevState => ({
+        ...prevState,
+        isOpen: !prevState.isOpen
+      }))
+    }
   }
   render () {
     return (
@@ -22,7 +24,11 @@ class EmpCard extends Component {
         <EmpButton className={title} onClick={this.handleToggle}>
           <div className={spacer}></div>
           {this.props.title}
-          <FontAwesomeIcon className={caret} icon={this.state.isOpen ? 'caret-down' : 'caret-up'}/>
+          {this.props.isLocked ? (
+            <div className={spacer}></div>
+          ) : (
+            <FontAwesomeIcon className={caret} icon={this.state.isOpen ? 'caret-down' : 'caret-up'}/>
+          )}
         </EmpButton>
         <div className={[this.props.contentClassName, ...(this.state.isOpen ? [] : [hidden])].join(' ')}>
           {this.props.children}

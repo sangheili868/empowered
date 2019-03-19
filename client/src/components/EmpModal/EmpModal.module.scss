@@ -1,22 +1,14 @@
 @import "src/styles/colors.scss";
 
+.title {
+  background-color: $orange;
+  color: $white;
+}
+
 .footer {
   flex-wrap: wrap;
 
   .closer {
     margin: 5px;
-  }
-}
-
-.opener {
-  padding: 3px;
-  margin: 2px;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: $blue;
-  color: $white;
-
-  &:hover {
-    background-color: $darkBlue;
   }
 }

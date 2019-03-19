@@ -1,52 +1,35 @@
 import React, { Component } from 'react'
 import { map, startCase } from 'lodash'
-import { bio, bioTable, row, cell, field, description } from './CharacterPage.module.scss'
-import EmpStringEditor from '../../EmpStringEditor/EmpStringEditor'
+import { bio, table, cell, field } from './CharacterPage.module.scss'
 import bioFields from '../../../gameData/bioFields.json'
-import EmpModal from '../../EmpModal/EmpModal'
+import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetBio extends Component {
+  calcDetails = (details, name) => {
+    const isTruncating = name === 'portrait' && details
+    const truncatedDetails = details.slice(0, 50) + '...'
+    const defaultDetails = details || 'CLICK HERE TO EDIT'
+    return isTruncating ? truncatedDetails : defaultDetails
+  }
   render () {
     return (
-      <>
-        <div>Click on a field name for more information and examples.</div>
-        <div>Click on the text to change it.</div>
-        <div className={bio}>
-          <table className={bioTable}>
-            <tbody>
-              <tr className={row}>
-                <EmpModal containerComponent='td' className={[cell, field].join(' ')} noStyle title="Name" body={bioFields.name}>
-                  Name
-                </EmpModal>
-                <td className={[cell, description].join(' ')}>
-                  <EmpStringEditor value={this.props.name} onSave={value =>
-                    this.props.updateCharacter('name', value)
-                  }/>
-                </td>
-              </tr>
-              {map(this.props.bio, (value, characteristic) =>
-                <tr className={row} key={characteristic}>
-                  <EmpModal
-                    containerComponent='td'
-                    className={[cell, field].join(' ')}
-                    noStyle
-                    title={startCase(characteristic)}
-                    body={bioFields[characteristic]}
-                  >
-                    {startCase(characteristic)}
-                  </EmpModal>
-                  <td className={[cell, description].join(' ')}>
-                    <EmpStringEditor
-                      value={value}
-                      onSave={value => this.props.updateCharacter(['bio', characteristic], value)}
-                    />
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </>
+      <table className={[bio, table].join(' ')}>
+        <tbody>
+          {map(this.props.bio, (details, name) =>
+            <EmpItemEditor
+              key={name}
+              title={'Edit ' + startCase(name)}
+              mode="tr"
+              description={bioFields[name]}
+              fields={{ details: details || '' }}
+              onSave={value => this.props.updateCharacter(['bio', name], value.details)}
+            >
+              <td className={[cell, field].join(' ')}>{startCase(name)}</td>
+              <td className={cell}>{this.calcDetails(details, name)}</td>
+            </EmpItemEditor>
+          )}
+        </tbody>
+      </table>
     )
   }
 }

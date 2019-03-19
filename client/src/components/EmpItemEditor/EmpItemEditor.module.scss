@@ -1,21 +1,10 @@
 @import "src/styles/colors.scss";
 
-.button {
-  background-color: $dark;
-  padding: 0 1px;
+.plus {
   margin: 5px;
-  border-radius: 3px;
-  box-shadow: 1px 1px 5px 1px $dark;
   cursor: pointer;
   font-size: 24px;
-
-  &.plus {
-    color: $success;
-  }
-
-  &.pen {
-    color: $yellow;
-  }
+  color: $green;
 }
 
 .field {
@@ -27,10 +16,6 @@
   .input {
     width: 70%;
   }
-}
-
-.inline {
-  padding: 0 5px;
 }
 
 .footer {

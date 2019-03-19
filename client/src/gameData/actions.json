@@ -134,7 +134,7 @@
     },
     {
       "name": "Block",
-      "description": "As a reaction, when you are targeted for an attack and you are holding a shield, you add your shield's bonus to your agility roll if it is a small shield, or use your shield's bonus in place of your agility modifier if it is a medium or large shield."
+      "description": "As a reaction, when you are targeted for an attack and you are holding a shield, you roll a d20 and add your shield's bonus instead of rolling agility."
     },
     {
       "name": "Trigger Prepare",

@@ -22,12 +22,12 @@
     &.critical {
       text-align: left;
       text-indent: 0;
-      border: 1px solid $dark;
+      border: 1px solid $lightGrey;
       border-collapse: collapse;
 
       .cell {
         min-width: 50px;
-        border: 1px solid $dark;
+        border: 1px solid $lightGrey;
       }
     }
 
@@ -44,7 +44,7 @@
   text-indent: 0;
 
   .cell {
-    border: solid $dark 1px;
+    border: solid $lightGrey 1px;
     border-right: none;
     border-bottom: none;
     padding: 5px 10px;

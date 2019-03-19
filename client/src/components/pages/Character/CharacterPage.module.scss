@@ -49,138 +49,69 @@
   }
 }
 
-.bio {
-  border: 1px solid $dark;
-  border-radius: 10px;
-  margin: 5px;
-
-  .bioTable {
-    border-collapse: collapse;
-    width: 100%;
-
-    .row {
-      border-top: 1px solid $dark;
-
-      &:first-of-type {
-        border-top: none;
-
-        .cell.field {
-          border-radius: 10px 0 0 0;
-        }
-      }
-
-      &:last-of-type .cell.field {
-        border-radius: 0 0 0 10px;
-      }
-
-      .cell {
-        font-size: 14px;
-        padding: 10px;
-
-        &.field {
-          background-color: $blue;
-          color: $white;
-          width: 100px;
-          cursor: pointer;
-
-          &:active {
-            box-shadow: inset 1px 1px 5px 1px $grey;
-          }
-
-          &:hover {
-            background-color: $darkBlue;
-          }
-        }
-
-        &.description {
-          text-align: left;
-          border-left: 1px solid $dark;
-        }
-      }
-    }
-  }
-}
-
 .resources {
   display: flex;
   justify-content: space-around;
   flex: 1;
   flex-wrap: wrap;
   align-items: baseline;
+  user-select: none;
 
   .resource {
-    margin: 20px;
-  }
-
-  .info {
-    position: relative;
-    user-select: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    min-width: 0;
+    margin: auto;
     font-weight: bold;
     font-size: 24px;
+  }
 
-    .valueRow {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 10px;
+  .valueRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      .counter {
-        background-color: $dark;
-        padding: 0 1px;
-        border-radius: 3px;
-        box-shadow: 1px 1px 5px 1px $dark;
-        cursor: pointer;
+    .counter {
+      padding: 0 2px;
+      margin: 0 10px;
 
-        &:active {
-          box-shadow: none;
-        }
-
-        &.minus {
-          color: $failure;
-        }
-
-        &.plus {
-          color: $success;
-        }
-
-        &.hidden {
-          visibility: hidden;
-        }
-      }
-
-      .spacer {
-        width: 31px;
+      &.hidden {
+        visibility: hidden;
       }
     }
 
-    .icon {
-      top: 0;
-      position: absolute;
-      left: calc(50% - 25px);
-      opacity: 0.2;
-      width: 50px;
+    .spacer {
+      width: 31px;
     }
+  }
 
-    .value {
-      display: flex;
-    }
+  .trait {
+    padding: 0;
+    margin: 0;
+  }
 
-    .subtext {
-      font-size: 14px;
-    }
+  .subtext {
+    font-size: 12px;
+    font-weight: bold;
   }
 
   .recoveryButton {
     min-width: 0;
     font-size: 14px;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
+    margin: 10px;
 
     .recoveryImg {
       height: 25px;
+    }
+
+    &:hover .recoveryImg {
+      filter: invert(100%);
     }
   }
 }
@@ -208,17 +139,8 @@
   margin: 0 3px 3px;
   font-size: 12px;
 
-  .column {
-    padding: 0 10px 5px;
-
-
-    @media screen and (max-width: 400px) {
-      padding: 0 5px 5px;
-    }
-
-    .moreInfo {
-      padding: 0 5px;
-    }
+  .moreInfo {
+    min-width: 0;
   }
 }
 
@@ -227,9 +149,21 @@
   width: 100%;
   border-collapse: collapse;
 
+  &.bio {
+    font-size: 16px;
+    border-bottom: 1px solid $lightGrey;
+
+    .field {
+      width: 150px;
+      background-color: $blue;
+      color: $white;
+    }
+  }
+
   &.borderless {
     margin: 0 10px 10px;
     width: calc(100% - 20px);
+
     @media screen and (max-width: 400px) {
       margin: 0 5px 5px;
     }
@@ -237,18 +171,14 @@
     .borderlessCell {
       @media screen and (max-width: 400px) {
         padding: 2px;
+        margin: 0;
+        min-width: 0;
       }
     }
   }
 
-  .buy {
-    color: $failure;
-  }
-
   .cell {
-    border: solid $dark 1px;
-    border-right: none;
-    border-bottom: none;
+    border-top: solid $lightGrey 1px;
     padding: 5px 10px;
 
     &.columnHeader {
@@ -258,38 +188,21 @@
     &:first-child {
       border-left: none;
     }
-
-    &.buy {
-      min-width: 100px;
-      height: 40px;
-    }
-
-    .tableBuy {
-      min-width: 0;
-
-      &.plus {
-        background-color: $success;
-      }
-
-      &.minus {
-        background-color: $failure;
-      }
-    }
   }
 }
 
-.inlineHover {
-  padding: 0 5px;
+.plus {
+  margin: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  color: $green;
 }
 
-.editButton {
-  background-color: $dark;
-  padding: 0 1px;
+.minus {
   margin: 5px;
-  border-radius: 3px;
-  box-shadow: 1px 1px 5px 1px $dark;
-  font-size: 24px;
-  color: $yellow;
+  cursor: pointer;
+  font-size: 30px;
+  color: $red;
 }
 
 .detailTitle {
@@ -312,11 +225,6 @@
   padding: 10px;
   font-size: 12px;
   max-width: 200px;
-
-  .newLanguage {
-    background-color: $success;
-    margin-top: 10px;
-  }
 }
 
 .unlockText {

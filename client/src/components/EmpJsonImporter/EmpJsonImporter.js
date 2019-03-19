@@ -27,10 +27,8 @@ class EmpJsonImporter extends Component {
             label: 'Confirm',
             onClick: this.openFileDialog
           }]}
-          noStyle
           isBlocked={!this.props.isWarning}
           onBlocked={this.openFileDialog}
-          containerComponent="button"
         >
           Load
         </EmpModal>

@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  input,
-  button,
-  plus,
-  pen,
-  inline,
-  field,
-  fieldLabel
-} from './EmpItemEditor.module.scss'
+import { input, field, fieldLabel } from './EmpItemEditor.module.scss'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
 import EmpModal from '../EmpModal/EmpModal'
-import { cloneDeep, startCase, mapValues, isObject, isEmpty, isFunction } from 'lodash'
+import { cloneDeep, startCase, mapValues, isObject, isEmpty, isFunction, pick } from 'lodash'
 
 class EmpItemEditor extends Component {
   state = {
@@ -63,17 +54,15 @@ class EmpItemEditor extends Component {
     return (
       <EmpModal
         backdrop="static"
-        title={this.props.title}
-        noStyle={!this.props.isInline || this.props.isCustomInline}
-        className={this.props.isInline ? inline : ''}
+        {...pick(this.props, ['title', 'mode', 'isDisabled', 'children', 'className', 'style'])}
         body={
           <>
-            {this.props.fields && Object.keys(this.props.fields).map(key => {
+            {isObject(this.props.fields) && Object.keys(this.props.fields).map(key => {
               const value = this.state.workingValues[key]
-              return value && (
+              return (
                 <div className={field} key={key}>
                   <div className={fieldLabel}>{startCase(key)}</div>
-                  {value.options ? (
+                  {value && value.options ? (
                     <EmpDropdown
                       isMulti={Array.isArray(value.default)}
                       value={value.options.filter(option => value.value.includes(option.value))}
@@ -103,29 +92,24 @@ class EmpItemEditor extends Component {
             }
           </>
         }
+        closeText="CANCEL"
         controls={[
           {
-            label: 'Delete',
+            label: 'DELETE',
             isHidden: !this.props.onDelete,
-            onClick: this.props.onDelete
+            onClick: this.props.onDelete,
+            mode: 'warning'
           },
           {
-            label: 'Save',
+            label: 'SAVE',
             isHidden: isEmpty(this.state.workingValues),
-            onClick: this.handleDone
+            onClick: this.handleDone,
+            mode: 'secondary'
           }
         ]}
         onOpen={this.handleOpen}
         setToggler={toggler => this.toggleModal = toggler}
-      >
-        {this.props.children}
-        {!this.props.isInline && !this.props.isCustomInline &&
-          <FontAwesomeIcon
-            className={[button, (this.props.isEdit ? pen : plus)].join(' ')}
-            icon={this.props.isEdit ? 'pen-square' : 'plus-square'}
-          />
-        }
-      </EmpModal>
+      />
     )
   }
 }

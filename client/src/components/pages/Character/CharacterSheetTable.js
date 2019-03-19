@@ -2,21 +2,19 @@ import React, { Component } from 'react'
 import {
   table,
   tableAdd,
-  titleRow,
-  disabled,
   cell,
-  buy,
+  plus,
   columnHeader
 } from './CharacterPage.module.scss'
-import { map, mapValues, isEmpty } from 'lodash'
+import { mapValues, isEmpty } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../EmpCard/EmpCard'
-import EmpModal from '../../EmpModal/EmpModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CharacterSheetTableRow from './CharacterSheetTableRow'
 
 class CharacterSheetTable extends Component {
   columnTitles = [
     ...Object.values(this.props.columnNames),
-    ...this.props.onEdit ? ['Edit'] : [],
     ...this.props.buyButton ? ['Buy'] : [],
     ...this.props.sellButton ? ['Sell'] : []
   ]
@@ -36,49 +34,12 @@ class CharacterSheetTable extends Component {
           </thead>
           <tbody>
             {this.props.items.map((item, index) =>
-              <tr key={index} className={item.isDisabled ? disabled : ''}>
-                {map(this.props.columnNames, (value, key) =>
-                  <td key={key} className={cell}>
-                    {(this.props.tooltips && this.props.tooltips[key]) ? (
-                      <EmpModal
-                        title={item[this.props.tooltips[key].title]}
-                        body={item[this.props.tooltips[key].body]}
-                      >
-                        {item[key]}
-                      </EmpModal>
-                    ) : (
-                      item[key]
-                    )}
-                  </td>
-                )}
-                {this.props.onEdit &&
-                  <td className={cell}>
-                    <EmpItemEditor
-                      isEdit
-                      title={'Edit ' + item.name}
-                      description={this.props.description}
-                      fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: item[key] }))}
-                      onSave={this.props.onEdit.bind(this, index)}
-                      onDelete={this.props.onDelete && this.props.onDelete.bind(this, index)}
-                    />
-                  </td>
-                }
-                {this.props.buyButton &&
-                  <td className={[cell, buy].join(' ')}>
-                    {this.props.buyButton(index)}
-                  </td>
-                }
-                {this.props.sellButton &&
-                  <td className={[cell, buy].join(' ')}>
-                    {this.props.sellButton(index)}
-                  </td>
-                }
-              </tr>
+              <CharacterSheetTableRow key={index} item={item} index={index} {...this.props}/>
             )}
           </tbody>
           {this.props.onAdd &&
             <tfoot>
-              <tr className={titleRow}>
+              <tr>
                 <td className={hasItems ? cell : ''} colSpan={this.columnTitles.length}>
                   <div className={tableAdd}>
                     {this.props.addText}
@@ -86,8 +47,11 @@ class CharacterSheetTable extends Component {
                       title={this.props.addText}
                       description={this.props.description}
                       fields={mapValues(this.props.fields, field => ({ ...field, value: field.default }))}
+                      mode="noStyle"
                       onSave={this.props.onAdd}
-                    />
+                    >
+                      <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+                    </EmpItemEditor>
                   </div>
                 </td>
               </tr>

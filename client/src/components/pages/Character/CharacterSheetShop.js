@@ -3,11 +3,7 @@ import CharacterSheetTable from './CharacterSheetTable'
 import {
   stats,
   resources,
-  tableBuy,
-  plus,
-  minus,
   languages,
-  newLanguage,
   unlockText
 } from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
@@ -54,14 +50,11 @@ class CharacterSheetShop extends Component {
                 return `Costs ${score.cost} adv.`
               } else {
                 return (
-                  <EmpButton
-                    className={[tableBuy, plus].join(' ')}
-                    onClick={this.props.updateCharacter.bind(this, [
-                      { path: 'shop.advancements', value: this.props.shop.advancements - score.cost },
-                      { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value + 1 },
-                      { path: 'stats.hitPoints', value: this.props.stats.hitPoints + (isIncreasingHP ? 1 : 0) }
-                    ])}
-                  >
+                  <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
+                    { path: 'shop.advancements', value: this.props.shop.advancements - score.cost },
+                    { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value + 1 },
+                    { path: 'stats.hitPoints', value: this.props.stats.hitPoints + (isIncreasingHP ? 1 : 0) }
+                  ])}>
                     -{score.cost} Adv.
                   </EmpButton>
                 )
@@ -71,14 +64,11 @@ class CharacterSheetShop extends Component {
               const score = this.props.shop.abilityScores[index]
               const isDecreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
               return (score.value <= -2) ? 'At Minimum' : (
-                <EmpButton
-                  className={[tableBuy, minus].join(' ')}
-                  onClick={this.props.updateCharacter.bind(this, [
-                    { path: 'shop.advancements', value: this.props.shop.advancements + score.worth },
-                    { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value - 1 },
-                    { path: 'stats.hitPoints', value: Math.max(0, this.props.stats.hitPoints + (isDecreasingHP ? -1 : 0)) }
-                  ])}
-                >
+                <EmpButton mode="warning" onClick={this.props.updateCharacter.bind(this, [
+                  { path: 'shop.advancements', value: this.props.shop.advancements + score.worth },
+                  { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value - 1 },
+                  { path: 'stats.hitPoints', value: Math.max(0, this.props.stats.hitPoints + (isDecreasingHP ? -1 : 0)) }
+                ])}>
                   +{score.worth} Adv.
                 </EmpButton>
               )
@@ -105,19 +95,16 @@ class CharacterSheetShop extends Component {
                     return `Costs ${die.cost} adv.`
                   } else {
                     return (
-                      <EmpButton
-                        className={[tableBuy, plus].join(' ')}
-                        onClick={this.props.updateCharacter.bind(this, [
-                          { path: 'shop.advancements', value: this.props.shop.advancements - die.cost },
-                          { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current + 1, max: die.current + 1 } },
-                          ...(die.name === 'd4') ? [] : [{
-                            path: ['stats', 'powerDice', die.smallerDie], value: {
-                                current: die.smallerDieCount - 1,
-                                max: die.smallerDieCount - 1
-                              }
-                            }]
-                        ])}
-                      >
+                      <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
+                        { path: 'shop.advancements', value: this.props.shop.advancements - die.cost },
+                        { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current + 1, max: die.current + 1 } },
+                        ...(die.name === 'd4') ? [] : [{
+                          path: ['stats', 'powerDice', die.smallerDie], value: {
+                              current: die.smallerDieCount - 1,
+                              max: die.smallerDieCount - 1
+                            }
+                          }]
+                      ])}>
                         -{die.cost} Adv.
                       </EmpButton>
                     )
@@ -126,19 +113,16 @@ class CharacterSheetShop extends Component {
                 sellButton={index => {
                   const die = this.props.shop.powerDice[index]
                   return (die.current === 0) ? 'At Minimum' : (
-                    <EmpButton
-                      className={[tableBuy, minus].join(' ')}
-                      onClick={this.props.updateCharacter.bind(this, [
-                        { path: 'shop.advancements', value: this.props.shop.advancements + die.worth },
-                        { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current - 1, max: die.current - 1 } },
-                        ...(die.name === 'd4') ? [] :[{
-                          path: ['stats', 'powerDice', die.smallerDie], value: {
-                              current: die.smallerDieCount + 1,
-                              max: die.smallerDieCount + 1
-                            }
-                          }]
-                      ])}
-                    >
+                    <EmpButton mode="warning" onClick={this.props.updateCharacter.bind(this, [
+                      { path: 'shop.advancements', value: this.props.shop.advancements + die.worth },
+                      { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current - 1, max: die.current - 1 } },
+                      ...(die.name === 'd4') ? [] :[{
+                        path: ['stats', 'powerDice', die.smallerDie], value: {
+                            current: die.smallerDieCount + 1,
+                            max: die.smallerDieCount + 1
+                          }
+                        }]
+                    ])}>
                       +{die.worth} Adv.
                     </EmpButton>
                   )
@@ -154,10 +138,12 @@ class CharacterSheetShop extends Component {
                 }}
                 isDeletable
                 fields={featureFields}
-                onEdit={(index, values) => this.props.updateCharacter(['shop', 'features', index], {
+                onEdit={(index, values) => {
+                  debugger
+                  return this.props.updateCharacter(['shop', 'features', index], {
                   ...values,
                   cost: parseInt(values.cost)
-                })}
+                })}}
                 onDelete={index => this.props.updateCharacter('shop.features', withoutIndex(
                   this.props.shop.base.features,
                   index
@@ -172,14 +158,14 @@ class CharacterSheetShop extends Component {
                     return `Costs ${feature.cost} adv.`
                   } else {
                     return (
-                      <EmpButton
-                        className={[tableBuy, plus].join(' ')}
-                        onClick={this.props.updateCharacter.bind(this,[
+                      <EmpButton mode="success" onClick={event => {
+                        event.stopPropagation()
+                        return this.props.updateCharacter([
                           { path: 'shop.features', value: withoutIndex(this.props.shop.base.features, index) },
                           { path: 'shop.advancements', value: this.props.shop.advancements - feature.cost },
                           { path: 'stats.features', value: [ ...this.props.stats.base.features, feature ]}
-                        ])}
-                      >
+                        ])
+                      }}>
                         -{feature.cost} Adv.
                       </EmpButton>
                     )
@@ -187,44 +173,36 @@ class CharacterSheetShop extends Component {
                 }}
               />
               {map(this.props.shop.proficiencies, (proficiencies, grouping) =>
-                  <CharacterSheetTable
-                    key={grouping}
-                    title={startCase(grouping) + ' Proficiencies'}
-                    items={proficiencies}
-                    columnNames={{
-                      name: 'Name',
-                      requirementsString: 'Requirements',
-                    }}
-                    tooltips={{
-                      name: {
-                        title: 'name',
-                        body: 'description'
-                      }
-                    }}
-                    buyButton={index => {
-                      const proficiency = proficiencies[index]
-                      if (proficiency.meetingRequirementsMessage) {
-                        return proficiency.meetingRequirementsMessage
-                      } else if (1 > this.props.shop.advancements) {
-                        return `Costs ${1} adv.`
-                      } else {
-                        return (
-                          <EmpButton
-                            className={[tableBuy, plus].join(' ')}
-                            onClick={() => this.props.updateCharacter([
-                              { path: 'shop.advancements', value: this.props.shop.advancements - 1 },
-                              { path: 'stats.proficiencies.equipment', value: [
-                                ...this.props.stats.base.proficiencies.equipment,
-                                proficiency
-                              ]}
-                            ])}
-                          >
-                            -1 Adv.
-                          </EmpButton>
-                        )
-                      }
-                    }}
-                  />
+                <CharacterSheetTable
+                  key={grouping}
+                  title={startCase(grouping) + ' Proficiencies'}
+                  items={proficiencies}
+                  columnNames={{
+                    name: 'Name',
+                    requirementsString: 'Requirements',
+                  }}
+                  tooltip={{ title: item => item.name, body: item => item.description }}
+                  buyButton={index => {
+                    const proficiency = proficiencies[index]
+                    if (proficiency.meetingRequirementsMessage) {
+                      return proficiency.meetingRequirementsMessage
+                    } else if (1 > this.props.shop.advancements) {
+                      return `Costs ${1} adv.`
+                    } else {
+                      return (
+                        <EmpButton mode="success" onClick={() => this.props.updateCharacter([
+                          { path: 'shop.advancements', value: this.props.shop.advancements - 1 },
+                          { path: 'stats.proficiencies.equipment', value: [
+                            ...this.props.stats.base.proficiencies.equipment,
+                            proficiency
+                          ]}
+                        ])}>
+                          -1 Adv.
+                        </EmpButton>
+                      )
+                    }
+                  }}
+                />
               )}
               <EmpCard isStartingOpen title="Languages">
                 {(this.props.stats.proficiencies.languages.length < Math.max(2, this.props.stats.skills.synergy.value)) ? (
@@ -233,13 +211,14 @@ class CharacterSheetShop extends Component {
                     <EmpItemEditor
                       title="Add a Language"
                       fields={{ name: '' }}
+                      mode="success"
                       onSave={language => this.props.updateCharacter('stats.proficiencies.languages', [
                         ...this.props.stats.base.proficiencies.languages,
                         language
                       ])}
                       isCustomInline
                     >
-                      <EmpButton className={newLanguage}>Free</EmpButton>
+                      Free
                     </EmpItemEditor>
                   </div>
                 ) : (
@@ -259,10 +238,7 @@ class CharacterSheetShop extends Component {
                 sellButton={index => {
                   const item = this.props.shop.sellBack[index]
                   return (
-                    <EmpButton
-                      className={[tableBuy, minus].join(' ')}
-                      onClick={item.handleDelete.bind(this, this.props.updateCharacter)}
-                    >
+                    <EmpButton mode="warning" onClick={item.handleDelete.bind(this, this.props.updateCharacter)}>
                       +{item.worth} Adv.
                     </EmpButton>
                   )

@@ -41,7 +41,7 @@
         "level": 0
       }
     ],
-    "description": "Small shields provide a +1 bonus to agility when raised and have no speed penalty while equipped."
+    "description": "Small shields can be used to block. They have a shield bonus equal to your agility + 1 and no speed penalty while equipped."
   },
   "mediumShield": {
     "name": "Medium Shields",
@@ -52,7 +52,7 @@
         "level": 2
       }
     ],
-    "description": "Medium shields provide a +3 bonus when raised instead of your agility modifier for defense rolls and have no speed penalty while equipped."
+    "description": "Medium shields can be used to block. They have a +3 shield bonus and no speed penalty while equipped."
   },
   "largeShield": {
     "name": "Large Shields",
@@ -63,7 +63,7 @@
         "level": 4
       }
     ],
-    "description": "Large shields provide a +5 bonus when raised instead of your agility modifier for defense rolls and have a -5 speed penalty while equipped."
+    "description": "Large shields can be used to block. They have a +5 shield bonus and a -5 speed penalty while equipped."
   },
   "improvisedWeapon": {
     "name": "Improvised Weapons",

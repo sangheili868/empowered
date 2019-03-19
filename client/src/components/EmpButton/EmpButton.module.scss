@@ -2,20 +2,86 @@
 
 .button {
   padding: 5px;
-  background-color: $blue;
-  color: $white;
-  border-radius: 10px;
-  border: none;
+  margin: 5px;
+  text-align: center;
+  color: $black;
+  background-color: $white;
+  border-radius: 2px;
+  transition: background-color 300ms, color 300ms;
   cursor: pointer;
-  box-shadow: 0 0 5px 1px $grey;
-  transition: background-color 500ms;
   min-width: 80px;
-
-  &:active {
-    box-shadow: inset 1px 1px 5px 1px $grey;
-  }
+  box-shadow: 0 2px 5px 0 rgba($black, 0.26);
 
   &:hover {
-    background-color: $darkBlue;
+    background-color: $blue;
+    color: $white;
+  }
+
+  &.noStyle {
+    box-shadow: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+
+  &.tr {
+    box-shadow: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &.primary {
+    background-color: $orange;
+    color: $white;
+
+    &:hover {
+      background-color: $darkOrange;
+    }
+  }
+
+  &.secondary {
+    background-color: $blue;
+    color: $white;
+
+    &:hover {
+      background-color: $darkBlue;
+    }
+  }
+
+  &.warning {
+    background-color: $red;
+    color: $white;
+
+    &:hover {
+      background-color: $darkRed;
+    }
+  }
+
+  &.success {
+    background-color: $green;
+    color: $white;
+
+    &:hover {
+      background-color: $darkGreen;
+    }
+  }
+
+  &.text {
+    box-shadow: none;
+
+    &:hover {
+      background-color: $lightGrey;
+      color: $black;
+    }
+  }
+
+  &.disabled {
+    color: $lightGrey
   }
 }

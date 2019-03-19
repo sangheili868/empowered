@@ -4,7 +4,6 @@ import CharacterSheetBio from './CharacterSheetBio'
 import CharacterSheetShop from './CharacterSheetShop'
 import { header, name, portrait } from './CharacterPage.module.scss'
 import EmpNavigator from '../../EmpNavigator/EmpNavigator'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheet extends Component {
   render () {
@@ -12,7 +11,7 @@ class CharacterSheet extends Component {
       <div>
         <div className={header}>
           <div>
-            <div className={name}>{this.props.character.name || 'Unnamed Character'}</div>
+            <div className={name}>{this.props.character.bio.name || 'Unnamed Character'}</div>
             <div>{this.props.character.bio.highConcept}</div>
             <div>{this.props.character.bio.flaw}</div>
             <div>
@@ -25,23 +24,13 @@ class CharacterSheet extends Component {
             </div>
           </div>
           <div>
-            {this.props.character.portrait ? (
+            {this.props.character.bio.portrait &&
               <img
                 alt='Failed to load character portrait'
-                src={this.props.character.portrait}
+                src={this.props.character.bio.portrait}
                 className={portrait}
               />
-            ) : (
-              <div>Add a portrait</div>
-            )}
-            <EmpItemEditor
-              title="Enter the URL of an image."
-              isDeletable
-              isEdit={this.props.character.portrait}
-              fields={{ portrait: this.props.character.portrait }}
-              onSave={values => this.props.updateCharacter('portrait', values.portrait)}
-              onDelete={this.props.updateCharacter.bind(this, 'portrait', '')}
-            />
+            }
           </div>
         </div>
         <EmpNavigator routes={[
@@ -52,6 +41,7 @@ class CharacterSheet extends Component {
             props: {
               bio: this.props.character.bio,
               name: this.props.character.name,
+              portrait: this.props.character.portrait,
               updateCharacter: this.props.updateCharacter
             }
           },

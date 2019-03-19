@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { footer, closer, opener } from './EmpModal.module.scss'
+import { title, footer, closer } from './EmpModal.module.scss'
 import { Modal } from 'react-bootstrap'
 import EmpButton from '../EmpButton/EmpButton'
+import { pick } from 'lodash'
 
 class EmpModal extends Component {
   state = {
@@ -22,29 +23,31 @@ class EmpModal extends Component {
     callback()
   }
   render () {
-    const ContainerComponent = this.props.containerComponent === 'button' ? EmpButton : (
-      this.props.containerComponent || 'div'
-    )
     return (
       <>
         <Modal show={this.state.isOpen} backdrop={this.props.backdrop} onHide={this.toggleModal}>
-          <Modal.Header closeButton><Modal.Title>{this.props.title}</Modal.Title></Modal.Header>
+          <Modal.Header className={title} closeButton><Modal.Title>{this.props.title}</Modal.Title></Modal.Header>
           <Modal.Body>{this.props.body}</Modal.Body>
           <Modal.Footer className={footer}>
-            <EmpButton className={closer} onClick={this.toggleModal}>Close</EmpButton>
-            {this.props.controls && this.props.controls.map(({ label, isHidden, onClick}) => !isHidden &&
-              <EmpButton key={label} className={closer} onClick={this.handleCloser.bind(this, onClick)}>
+            <EmpButton className={closer} mode='text' onClick={this.toggleModal}>
+              {this.props.closeText || 'CLOSE'}
+            </EmpButton>
+            {this.props.controls && this.props.controls.map(({ label, isHidden, mode, onClick }) => !isHidden &&
+              <EmpButton
+                key={label}
+                className={closer}
+                mode={mode}
+                onClick={this.handleCloser.bind(this, onClick)}
+              >
                 {label}
               </EmpButton>
             )}
           </Modal.Footer>
         </Modal>
-        <ContainerComponent
-          className={[ this.props.className, this.props.noStyle ? '' : opener].join(' ')}
+        <EmpButton
+          {...pick(this.props, ['mode', 'isDisabled', 'children', 'className', 'style'])}
           onClick={this.toggleModal}
-        >
-          {this.props.children}
-        </ContainerComponent>
+        />
       </>
     )
   }

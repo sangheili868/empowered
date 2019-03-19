@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { stats, detailTitle, editButton, inlineHover } from './CharacterPage.module.scss'
+import { stats, detailTitle, plus } from './CharacterPage.module.scss'
 import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
 import CharacterSheetSkills from "./CharacterSheetSkills"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
@@ -88,12 +88,9 @@ class CharacterSheetStats extends Component {
               <EmpModal
                 key={index}
                 title={item.name}
-                className={inlineHover}
                 body={
                   <div>
-                    Click on the
-                    <FontAwesomeIcon className={editButton} icon="pen-square"/>
-                    icon next to {item.name} in the {
+                    Click on {item.name} in the {
                       { weapon: 'Weapons', armor: 'Armor', shield: 'Shield' }[item.category]
                     } section to edit this item.
                   </div>
@@ -125,6 +122,7 @@ class CharacterSheetStats extends Component {
               <EmpItemEditor
                 title={'Add a ' + columnName + ' Item'}
                 fields={{ name: '', quantity: 1 }}
+                mode="noStyle"
                 onSave={values => this.props.updateCharacter(['stats', 'equipment', columnName], [
                   ...this.props.stats.base.equipment[columnName],
                   {
@@ -132,7 +130,9 @@ class CharacterSheetStats extends Component {
                     quantity: parseInt(values.quantity)
                   }
                 ])}
-              />
+              >
+                <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+              </EmpItemEditor>
             }
           />
           <CharacterSheetStatsList

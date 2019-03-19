@@ -4,7 +4,8 @@ import {
   stats,
   resources,
   languages,
-  unlockText
+  unlockText,
+  unlockButton
 } from './CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import advancementsIcon from "../../../icons/chevron.png"
@@ -255,7 +256,7 @@ class CharacterSheetShop extends Component {
               dice, features, proficiencies. Alternatively, click below to unlock the full
               shop. However, you will need to add features yourself.
             </div>
-            <EmpButton onClick={this.props.updateCharacter.bind(this, [
+            <EmpButton mode='secondary' className={unlockButton} onClick={this.props.updateCharacter.bind(this, [
               { path: 'shop.unlocked', value: true },
               { path: 'shop.advancements', value: this.props.shop.advancements + 15 }
             ])}>

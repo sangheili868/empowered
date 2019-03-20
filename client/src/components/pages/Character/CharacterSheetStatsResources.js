@@ -209,6 +209,7 @@ class CharacterSheetStatsResources extends Component {
               <EmpItemEditor
                 key={index}
                 isInline
+                mode="warning"
                 title={item.name}
                 onDelete={this.props.updateCharacter.bind(this, 'stats.conditions', withoutIndex(this.props.stats.conditions, index))}
                 description={item.description}

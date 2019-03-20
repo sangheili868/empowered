@@ -50,11 +50,14 @@ class EmpItemEditor extends Component {
       this.handleDone()
     }
   }
+  selectedValue = ({value, options}) => {
+    return options.filter(option => Array.isArray(value) ? value.includes(option.value) : value === option.value)
+  }
   render () {
     return (
       <EmpModal
         backdrop="static"
-        {...pick(this.props, ['title', 'mode', 'isDisabled', 'children', 'className', 'style'])}
+        {...pick(this.props, ['title', 'mode', 'isFaDisabled', 'children', 'className', 'style'])}
         body={
           <>
             {isObject(this.props.fields) && Object.keys(this.props.fields).map(key => {
@@ -65,7 +68,7 @@ class EmpItemEditor extends Component {
                   {value && value.options ? (
                     <EmpDropdown
                       isMulti={Array.isArray(value.default)}
-                      value={value.options.filter(option => value.value.includes(option.value))}
+                      value={this.selectedValue(value)}
                       options={this.optionsWithAddAll(value)}
                       className={input}
                       onSelect={newValue => this.handleChange(key, {target: { value: newValue}})}

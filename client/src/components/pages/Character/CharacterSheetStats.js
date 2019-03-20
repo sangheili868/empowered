@@ -142,8 +142,19 @@ class CharacterSheetStats extends Component {
               <EmpItemEditor
                 key={index}
                 isInline
+                mode={item.features && item.features.length > 0 ? 'primary' : ''}
                 title={item.name}
-                description={item.description}
+                description={
+                  <>
+                    <div>{item.description}</div>
+                    {item.features && item.features.length > 0 &&
+                      <>
+                        <div className={detailTitle}>Features Related to {item.name}</div>
+                        <div>{item.features.map(({ name }) => name).join(', ')}</div>
+                      </>
+                    }
+                  </>
+                }
                 fields={columnName === 'languages' ? ({
                   name: this.props.stats.proficiencies[columnName][index].name
                 }) : {}}

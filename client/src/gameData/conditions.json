@@ -2,6 +2,9 @@
   "Grappled": {
     "name": "Grappled",
     "description": "Your speed becomes 0, and you gain the Escape skill action.",
+    "skillTags": [],
+    "equipmentTags": [],
+    "actionTags": [],
     "action": {
       "name": "Escape",
       "description": "As a skill action, roll athletics against the grapple DC to end the grappled condition.",
@@ -11,6 +14,9 @@
   "Frightened": {
     "name": "Frightened",
     "description": "You must use your first action each turn to move away from the source of fear. You cannot willingly move closer to the source of fear, and you have disadvantage on all rolls. You gain the Calm Down skill action.",
+    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
+    "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
+    "actionTags":["Move"],
     "action": {
       "name": "Calm Down",
       "description": "As a skill action, roll willpower against the fear DC to end the frightened condition. If you can see the source of fear, roll with disadvantage.",
@@ -20,15 +26,21 @@
   "Prone": {
     "name": "Prone",
     "description": "Your speed is halved and your attacks have disadvantage. Your agility rolls have advantage against ranged attacks and disadvantage against melee attacks. You gain the Stand Up action.",
+    "skillTags": ["agility"],
+    "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon"],
+    "actionTags": [],
     "action": {
       "name": "Stand Up",
       "description": "As a basic action, if your speed is greater than 0, you end the prone condition.",
       "category": "basicAction"
-    }
+  }
   },
   "Poisoned": {
     "name": "Poisoned",
     "description": "You have disadvantage on all rolls, except rolls as part of the Resist action, and you gain the Resist skill action.",
+    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
+    "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
+    "actionTags": [],
     "action": {
       "name": "Resist",
       "description": "As a skill action, roll Fortitude against the poison DC to end the poisoned condition.",
@@ -38,6 +50,9 @@
   "Unconscious": {
     "name": "Unconscious",
     "description": "You fall prone and drop what you are holding. You cannot move, speak, take actions, or take reactions. You roll normally for fortitude, wisdom, and willpower. You have disadvantage on perception rolls and agility rolls against ranged attacks. You automatically critically fail all other rolls. Creatures within 5ft of you gain the Awaken cardinal action as long as you are not knocked out.",
+    "actionTags": ["Attack", "Delay", "Wrestle", "Brace", "Frighten", "Hide", "Search", "Analyze", "Disrupt", "Focus", "Help", "Distract", "Use a Skill", "Off-hand Attack", "Defend", "Draw Items", "Interact with Object", "Move", "Mount", "Prepare", "Reload", "Step Away", "Take Cover", "Target", "Disarm", "Grab", "Seize", "Shove", "Tackle", "Throw", "Trip", "Attack of Opportunity", "Block", "Trigger Prepare", "Identify"],
+    "skillTags": ["athletics", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "synergy", "knowledge", "agility", "persuasion"],
+    "equipmentTags" :["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
     "action": {
       "name": "Awaken",
       "description": "As a cardinal action, you wake up an unconscious creature within 5ft that is not knocked out.",
@@ -46,6 +61,9 @@
   },
   "Slowed": {
     "name": "Slowed",
-    "description": "You have disadvantage on all quick rolls and you can only take one action each turn."
+    "description": "You have disadvantage on all quick rolls and you can only take one action each turn.",
+    "actionTags": ["Wrestle", "Hide", "Disrupt", "Use a Skill"],
+    "skillTags": ["athletics", "stealth", "handiwork", "agility"],
+    "equipmentTags": ["smallShield", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "craftedWeapon", "arcanistTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle", "artisanTool"]
   }
 }

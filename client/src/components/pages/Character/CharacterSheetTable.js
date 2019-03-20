@@ -42,7 +42,6 @@ class CharacterSheetTable extends Component {
               <tr>
                 <td className={hasItems ? cell : ''} colSpan={this.columnTitles.length}>
                   <div className={tableAdd}>
-                    {this.props.addText}
                     <EmpItemEditor
                       title={this.props.addText}
                       description={this.props.description}

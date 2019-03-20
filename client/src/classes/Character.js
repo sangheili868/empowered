@@ -163,9 +163,11 @@ class Character {
             console.error('Equipment Proficiency Not Found', proficiency)
             return proficiency
           } else {
+            const features = this.baseStats.features.filter(({equipmentTags}) => equipmentTags.includes(proficiency.category))
             return {
               ...proficiency,
-              ...equipmentProficiencyStats
+              ...equipmentProficiencyStats,
+              features
             }
           }
         }),
@@ -191,7 +193,7 @@ class Character {
         ...chain(this.baseStats.conditions)
           .map(condition => ({ ...condition, ...conditionData[condition.name]}))
           .filter(({ action }) => action && (action.category === actionType))
-          .map(({ action }) => ({ ...action, mode: 'success' }))
+          .map(({ action }) => ({ ...action, mode: 'warning' }))
           .value()
       ], {}),
       conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))

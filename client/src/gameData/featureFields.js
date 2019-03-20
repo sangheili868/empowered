@@ -8,6 +8,7 @@ export default {
   description: { default: '' },
   cost: { default: 1 },
   actionType: { default: '', options: [
+    { label: 'No Action', value: '' },
     { label: 'Cardinal Action', value: 'cardinalAction' },
     { label: 'Skill Action', value: 'skillAction' },
     { label: 'Basic Action', value: 'basicAction' },

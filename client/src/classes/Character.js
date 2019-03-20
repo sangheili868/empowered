@@ -80,22 +80,44 @@ class Character {
         .includes(proficiency) || proficiency === 'none'
       ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
     }
+    const weapons = this.baseStats.weapons.map(weapon => {
+      const weaponStats = weaponData[weapon.category]
+      if (!weaponStats) {
+        console.error("Weapon Type not found", weapon)
+        return weapon
+      } else {
+        const bonus = this.skills[weaponStats.skill].value
+        return {
+          ...weapon,
+          ...weaponStats,
+          name: weapon.name || weaponStats.displayName,
+          notes: [
+            ...(weaponStats.tags ? weaponStats.tags.map(upperFirst) : []),
+            ...this.baseStats.features
+              .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
+              .map(({ name }) => name)
+          ].join(', '),
+          bonus: addPlus(bonus),
+          damage: weaponStats.damageDie + ' ' + addPlus(bonus, true)
+        }
+      }
+    })
     const equipment = {
       ...this.baseStats.equipment,
       ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
         ...this.baseStats.equipment[category],
-        ...this.baseStats.weapons.filter(({weight}) => (weight === category)).map(weapon => ({
+        ...weapons.filter(({weight}) => (weight === category)).map(weapon => ({
           name: weapon.name,
           quantity: 1,
           category: 'weapon'
         })),
         ...this.armor.weight === category ? [{
-          name: this.armor.name,
+          name: this.armor.name || this.armor.displayName,
           quantity: 1,
           category: 'armor'
         }] : [],
         ...shield.weight === category ? [{
-          name: shield.name,
+          name: shield.name || shield.displayName,
           quantity: 1,
           category: 'shield'
         }] : []
@@ -128,27 +150,7 @@ class Character {
           limit: this.skills.brawn.passive
         }
       },
-      weapons: this.baseStats.weapons.map(weapon => {
-        const weaponStats = weaponData[weapon.category]
-        if (!weaponStats) {
-          console.error("Weapon Type not found", weapon)
-          return weapon
-        } else {
-          const bonus = this.skills[weaponStats.skill].value
-          return {
-            ...weapon,
-            ...weaponStats,
-            notes: [
-              ...(weaponStats.tags ? weaponStats.tags.map(upperFirst) : []),
-              ...this.baseStats.features
-                .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
-                .map(({ name }) => name)
-            ].join(', '),
-            bonus: addPlus(bonus),
-            damage: weaponStats.damageDie + ' ' + addPlus(bonus, true)
-          }
-        }
-      }),
+      weapons,
       availableWeapons: chain(weaponData).pickBy(({proficiency}) =>
         this.baseStats.proficiencies.equipment.map(({category}) => category)
         .includes(proficiency)

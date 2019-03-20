@@ -32,11 +32,11 @@
     "tempHP": 0,
     "wounds": 0,
     "armor": {
-      "name": "None",
+      "name": "",
       "category": "none"
     },
     "shield": {
-      "name": "None",
+      "name": "",
       "category": "none"
     },
     "speed": {

@@ -12,11 +12,6 @@ import agilityIcon from "../../../icons/crosshair.png"
 import speedIcon from "../../../icons/foot.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
-import d4Icon from "../../../icons/d4.png"
-import d6Icon from "../../../icons/d6.png"
-import d8Icon from "../../../icons/d8.png"
-import d10Icon from "../../../icons/d10.png"
-import d12Icon from "../../../icons/d12.png"
 import CharacterSheetStatsList from './CharacterSheetStatsList'
 import conditionData from '../../../gameData/conditions.json'
 import armorData from '../../../gameData/armor.json'
@@ -30,13 +25,6 @@ import CharacterSheetPowerDice from './CharacterSheetPowerDice'
 import EmpButton from '../../EmpButton/EmpButton';
 
 class CharacterSheetStatsResources extends Component {
-  diceIcons = {
-    'd4s': d4Icon,
-    'd6s': d6Icon,
-    'd8s': d8Icon,
-    'd10s': d10Icon,
-    'd12s': d12Icon,
-  }
   woundUpdaters = value => {
     let conditionUpdate = []
     if (value >= this.props.stats.maxWounds) {
@@ -107,7 +95,7 @@ class CharacterSheetStatsResources extends Component {
             <CharacterSheetTrait
               trait="shield"
               value={this.props.stats.shield.rating}
-              subtext={this.props.stats.shield.name}
+              subtext={this.props.stats.shield.name || this.props.stats.shield.displayName}
               icon={shieldIcon}
               fields={{
                 name: this.props.stats.shield.name,
@@ -130,7 +118,7 @@ class CharacterSheetStatsResources extends Component {
             <CharacterSheetTrait
               trait="armor"
               value={this.props.stats.armor.rating}
-              subtext={this.props.stats.armor.name}
+              subtext={this.props.stats.armor.name || this.props.stats.armor.displayName}
               icon={armorIcon}
               fields={{
                 name: this.props.stats.armor.name,
@@ -259,14 +247,11 @@ class CharacterSheetStatsResources extends Component {
             .map(({current, max}, dieSize) =>
               <CharacterSheetPowerDice
                 key={dieSize}
-                title={'Power '+ dieSize}
                 value={current}
-                icon={this.diceIcons[dieSize]}
+                dieSize={dieSize}
                 max={max}
                 onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
-              >
-                Max: {max}
-              </CharacterSheetPowerDice>
+              />
             )
             .value()
           }

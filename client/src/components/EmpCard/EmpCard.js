@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { card, title, spacer, caret, hidden } from './EmpCard.module.scss'
+import { card, title, locked, spacer, caret, hidden } from './EmpCard.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpButton from '../EmpButton/EmpButton'
 
 class EmpCard extends Component {
   state = {
-    isOpen: false
-  }
-  componentDidMount () {
-    this.setState({ isOpen: this.props.isStartingOpen || this.props.isLocked })
+    isOpen: this.props.isStartingOpen || this.props.isLocked
   }
   handleToggle = () => {
     if (!this.props.isLocked) {
@@ -21,7 +18,7 @@ class EmpCard extends Component {
   render () {
     return (
       <div className={[card, this.props.className].join(' ')}>
-        <EmpButton className={title} onClick={this.handleToggle}>
+        <EmpButton className={[title, (this.props.isLocked ? locked : '')].join(' ')} mode='secondary' onClick={this.handleToggle}>
           <div className={spacer}></div>
           {this.props.title}
           {this.props.isLocked ? (

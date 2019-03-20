@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { resources, detailTitle, plus } from "./CharacterPage.module.scss"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues } from 'lodash'
+import { chain, mapValues, uniqBy } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
 import armorIcon from "../../../icons/soldier.png"
 import shieldIcon from "../../../icons/shield.png"
 import woundIcon from "../../../icons/bandage.png"
-import tempHPIcon from "../../../icons/circle-plus.png"
+import agilityIcon from "../../../icons/crosshair.png"
 import speedIcon from "../../../icons/feet.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
@@ -26,6 +26,7 @@ import withoutIndex from '../../../utils/withoutIndex'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpCard from '../../EmpCard/EmpCard';
 import CharacterSheetTrait from './CharacterSheetTrait'
+import EmpButton from '../../EmpButton/EmpButton';
 
 class CharacterSheetStatsResources extends Component {
   diceIcons = {
@@ -35,54 +36,72 @@ class CharacterSheetStatsResources extends Component {
     'd10s': d10Icon,
     'd12s': d12Icon,
   }
+  woundUpdaters = value => {
+    let conditionUpdate = []
+    if (value >= this.props.stats.maxWounds) {
+      conditionUpdate = [{ path: 'stats.conditions', value: uniqBy([
+        ...this.props.stats.conditions,
+        { name: 'Unconscious' },
+        { name: 'Prone' }
+      ], 'name')}]
+    }
+    return [
+      { path: 'stats.wounds', value },
+      ...conditionUpdate
+    ]
+  }
+  hpUpdaters = value => {
+    let woundUpdate = []
+    if (value <= 0) {
+      value += this.props.stats.maxHP
+      woundUpdate = this.woundUpdaters(this.props.stats.wounds + 1)
+    }
+    return [
+      { path: 'stats.hitPoints', value },
+      ...woundUpdate
+    ]
+  }
   render () {
     return (
       <div>
         <div className={resources}>
+          {this.props.stats.isKOed ? (
+            <EmpCard title="Knocked Out" isStartingOpen>
+              <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
+                { path: 'stats.hitPoints', value: 1 },
+                { path: 'stats.wounds', value: this.props.stats.maxWounds - 1 }
+              ])}>
+                Recover
+              </EmpButton>
+            </EmpCard>
+          ) : (
+            <>
+              <CharacterSheetResource
+                title="Hit Points"
+                value={this.props.stats.hitPoints}
+                max={this.props.stats.maxOverheal || this.props.stats.maxHP}
+                isAlwaysShowingMinus
+                icon={hitPointsIcon}
+                onUpdate={value => this.props.updateCharacter(this.hpUpdaters(value))}
+              >
+                Max: {this.props.stats.maxHP} {this.props.stats.maxOverheal > 0 && 'Overheal: ' + this.props.stats.maxOverheal}
+              </CharacterSheetResource>
+              <CharacterSheetResource
+                title="Wounds"
+                value={this.props.stats.wounds}
+                max={this.props.stats.maxWounds}
+                icon={woundIcon}
+                onUpdate={value => this.props.updateCharacter(this.woundUpdaters(value))}
+              >
+                Max: {this.props.stats.maxWounds}
+              </CharacterSheetResource>
+            </>
+          )}
           <CharacterSheetResource
-            title="Hit Points"
-            value={this.props.stats.hitPoints}
-            max={this.props.stats.maxHP}
-            icon={hitPointsIcon}
-            onUpdate={value => this.props.updateCharacter('stats.hitPoints', value)}
+            title="evasion"
+            value={this.props.stats.evasion}
+            icon={agilityIcon}
           />
-          <CharacterSheetResource
-            title="Wounds"
-            value={this.props.stats.wounds}
-            max={this.props.stats.maxWounds}
-            icon={woundIcon}
-            onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
-          />
-          <CharacterSheetResource
-            title="Temp. HP"
-            value={this.props.stats.tempHP}
-            max={this.props.stats.maxTempHP}
-            icon={tempHPIcon}
-            onUpdate={value => this.props.updateCharacter('stats.tempHP', value)}
-          />
-          {this.props.stats.armor.options.length > 1 &&
-            <CharacterSheetTrait
-              trait="armor"
-              value={this.props.stats.armor.rating}
-              subtext={this.props.stats.armor.name}
-              icon={armorIcon}
-              fields={{
-                name: this.props.stats.armor.name,
-                category: {
-                  value: this.props.stats.armor.category,
-                  default: 'none',
-                  options: this.props.stats.armor.options
-                }
-              }}
-              description={({category}) => {
-                if (category && category.value && !Array.isArray(category.value)) {
-                  const catData = armorData.find(cat => cat.category === category.value)
-                  return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
-                }
-              }}
-              onUpdate={this.props.updateCharacter}
-            />
-          }
           {this.props.stats.shield.options.length > 1 &&
             <CharacterSheetTrait
               trait="shield"
@@ -100,6 +119,29 @@ class CharacterSheetStatsResources extends Component {
               description={({category}) => {
                 if (category && category.value && !Array.isArray(category.value)) {
                   const catData = shieldData.find(cat => cat.category === category.value)
+                  return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
+                }
+              }}
+              onUpdate={this.props.updateCharacter}
+            />
+          }
+          {this.props.stats.armor.options.length > 1 &&
+            <CharacterSheetTrait
+              trait="armor"
+              value={this.props.stats.armor.rating}
+              subtext={this.props.stats.armor.name}
+              icon={armorIcon}
+              fields={{
+                name: this.props.stats.armor.name,
+                category: {
+                  value: this.props.stats.armor.category,
+                  default: 'none',
+                  options: this.props.stats.armor.options
+                }
+              }}
+              description={({category}) => {
+                if (category && category.value && !Array.isArray(category.value)) {
+                  const catData = armorData.find(cat => cat.category === category.value)
                   return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
                 }
               }}
@@ -127,7 +169,7 @@ class CharacterSheetStatsResources extends Component {
             })}
           />
 
-          <EmpCard title="Recovery">
+          <EmpCard title="Recovery" isStartingOpen>
             <CharacterSheetStatsRecovery
               title="Rest"
               icon={restIcon}
@@ -135,12 +177,16 @@ class CharacterSheetStatsResources extends Component {
               effects={[
                 'Recover all hit points.',
                 'Recover all power dice.',
-                'Lose all temporary hit points.'
+                'Lose any overhealing.',
+                'All conditions end'
               ]}
               onConfirm={this.props.updateCharacter.bind(this, [
                   { path: 'stats.hitPoints', value: this.props.stats.maxHP },
-                  { path: 'stats.tempHP', value: 0 },
                   { path: 'stats.powerDice', value: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max })) },
+                  { path: 'stats.conditions', value: [] },
+                  ...(this.props.stats.wounds >= this.props.stats.maxWounds ? [
+                    { path: 'stats.wounds', value: this.props.stats.maxWounds - 1 }
+                  ] : [])
                 ])
               }
             />
@@ -151,7 +197,8 @@ class CharacterSheetStatsResources extends Component {
               effects={[
                 'Recover all hit points.',
                 'Recover all power dice.',
-                'Lose all temporary hit points.',
+                'Lose any overhealing.',
+                'All conditions end',
                 'Heal all wounds.',
                 'Spend advancements.',
                 'Reject features from the shop.',
@@ -160,8 +207,8 @@ class CharacterSheetStatsResources extends Component {
               onConfirm={this.props.updateCharacter.bind(this, [
                   { path: 'stats.hitPoints', value: this.props.stats.maxHP },
                   { path: 'stats.wounds', value: 0 },
-                  { path: 'stats.tempHP', value: 0 },
                   { path: 'stats.powerDice', value: mapValues(this.props.stats.powerDice, ({max}) => ({ current: max, max })) },
+                  { path: 'stats.conditions', value: [] }
                 ])
               }
             />
@@ -216,7 +263,9 @@ class CharacterSheetStatsResources extends Component {
                 icon={this.diceIcons[dieSize]}
                 max={max}
                 onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
-              />
+              >
+                Max: {max}
+              </CharacterSheetResource>
             )
             .value()
           }

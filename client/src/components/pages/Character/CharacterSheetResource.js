@@ -26,7 +26,7 @@ class CharacterSheetResource extends Component {
     return [
       counter,
       type,
-      ...(isShowing && this.props.onUpdate ? [] : [hidden])
+      ...(isShowing ? [] : [hidden])
     ].join (' ')
   }
 
@@ -35,21 +35,25 @@ class CharacterSheetResource extends Component {
       <EmpCard isLocked title={this.props.title}>
        <div className={info}>
          <div className={valueRow}>
-           <FontAwesomeIcon
-              className={this.counterClasses(minus, this.props.value > 0)}
-              onClick={this.handleDecrement}
-              icon="minus-square"
-            />
+            {this.props.onUpdate &&
+              <FontAwesomeIcon
+                className={this.counterClasses(minus, this.props.value > 0 || this.props.isAlwaysShowingMinus)}
+                onClick={this.handleDecrement}
+                icon="minus-square"
+              />
+            }
             <div className={resource} style={{ backgroundImage: `url(${this.props.icon})` }}>
               {this.props.value}
             </div>
-            <FontAwesomeIcon
-              className={this.counterClasses(plus, !this.props.max || (this.props.value < this.props.max))}
-              onClick={this.handleIncrement}
-              icon="plus-square"
-            />
+            {this.props.onUpdate &&
+              <FontAwesomeIcon
+                className={this.counterClasses(plus, !this.props.max || (this.props.value < this.props.max))}
+                onClick={this.handleIncrement}
+                icon="plus-square"
+              />
+            }
           </div>
-          <div className={subtext}>Max: {this.props.max}</div>
+          <div className={subtext}>{this.props.children}</div>
         </div>
       </EmpCard>
 

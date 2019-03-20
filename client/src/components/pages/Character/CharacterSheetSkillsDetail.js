@@ -9,7 +9,7 @@ class CharacterSheetSkillsDetail extends Component {
     const hasFeatures = this.props.skill.features.length > 0
     const hasModifiers = this.props.skill.modifiers
     return (
-      <EmpModal title={title+': '+this.props.skill.displayValue} body={
+      <EmpModal title={title+': '+this.props.skill.displayValue} mode={this.props.skill.mode} body={
         <>
           <div>{this.props.skill.description}</div>
           {hasFeatures &&
@@ -26,7 +26,7 @@ class CharacterSheetSkillsDetail extends Component {
           }
         </>
       } className={borderlessCell}>
-        <div>{title}{hasFeatures || hasModifiers ? '*' : ''}</div>
+        <div>{title}</div>
         <div>{this.props.skill.displayValue}</div>
       </EmpModal>
     )

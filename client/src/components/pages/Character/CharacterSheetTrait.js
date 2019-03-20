@@ -4,7 +4,7 @@ import EmpCard from '../../EmpCard/EmpCard'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import { startCase } from 'lodash'
 
-class CharacterSheetResource extends Component {
+class CharacterSheetTrait extends Component {
   render () {
     return (
       <EmpCard isLocked title={startCase(this.props.trait)}>
@@ -26,4 +26,4 @@ class CharacterSheetResource extends Component {
   }
 }
 
-export default CharacterSheetResource
+export default CharacterSheetTrait

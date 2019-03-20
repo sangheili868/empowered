@@ -26,7 +26,6 @@ class CharacterSheetTableRow extends Component {
         <EmpModal
           title={this.props.tooltip.title(this.props.item)}
           mode="tr"
-          isDisabled={this.props.isDisabled}
           body={this.props.tooltip.body(this.props.item)}
         >
           {this.renderRowItems()}
@@ -37,7 +36,6 @@ class CharacterSheetTableRow extends Component {
         <EmpItemEditor
           title={'Edit ' + this.props.item.name}
           mode="tr"
-          isDisabled={this.props.isDisabled}
           description={this.props.description}
           fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: this.props.item[key] }))}
           onSave={this.props.onEdit.bind(this, this.props.index)}

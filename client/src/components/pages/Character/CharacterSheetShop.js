@@ -3,6 +3,7 @@ import CharacterSheetTable from './CharacterSheetTable'
 import {
   stats,
   resources,
+  warning,
   languages,
   unlockText,
   unlockButton
@@ -44,11 +45,17 @@ class CharacterSheetShop extends Component {
               const score = this.props.shop.abilityScores[index]
               const isIncreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
               if (!this.props.shop.unlocked && score.value > 2) {
-                return 'At Maximum Starting Value'
+                return (
+                  <div className={warning}>At Maximum Starting Value</div>
+                )
               } else if (score.value > 4) {
-                return 'At Maximum'
+                return (
+                  <div className={warning}>At Maximum</div>
+                )
               } else if (score.cost > this.props.shop.advancements) {
-                return `Costs ${score.cost} adv.`
+                return (
+                  <div className={warning}>Costs {score.cost} adv.</div>
+                )
               } else {
                 return (
                   <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
@@ -64,7 +71,9 @@ class CharacterSheetShop extends Component {
             sellButton={index => {
               const score = this.props.shop.abilityScores[index]
               const isDecreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
-              return (score.value <= -2) ? 'At Minimum' : (
+              return (score.value <= -2) ? (
+                <div className={warning}>At Minimum</div>
+              ) : (
                 <EmpButton mode="warning" onClick={this.props.updateCharacter.bind(this, [
                   { path: 'shop.advancements', value: this.props.shop.advancements + score.worth },
                   { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value - 1 },
@@ -91,9 +100,13 @@ class CharacterSheetShop extends Component {
                 buyButton={index => {
                   const die = this.props.shop.powerDice[index]
                   if (die.smallerDieCount < 1) {
-                    return `No ${die.smallerDie}`
+                    return (
+                      <div className={warning}>No {die.smallerDie}</div>
+                    )
                   } else if (die.cost > this.props.shop.advancements) {
-                    return `Costs ${die.cost} adv.`
+                    return (
+                      <div className={warning}>Costs {die.cost} adv.</div>
+                    )
                   } else {
                     return (
                       <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
@@ -113,7 +126,9 @@ class CharacterSheetShop extends Component {
                 }}
                 sellButton={index => {
                   const die = this.props.shop.powerDice[index]
-                  return (die.current === 0) ? 'At Minimum' : (
+                  return (die.current === 0) ? (
+                    <div className={warning}>At Minimum</div>
+                  ) : (
                     <EmpButton mode="warning" onClick={this.props.updateCharacter.bind(this, [
                       { path: 'shop.advancements', value: this.props.shop.advancements + die.worth },
                       { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current - 1, max: die.current - 1 } },
@@ -156,7 +171,9 @@ class CharacterSheetShop extends Component {
                 buyButton={index => {
                   const feature = cloneDeep(this.props.shop.features[index])
                   if (feature.cost > this.props.shop.advancements) {
-                    return `Costs ${feature.cost} adv.`
+                    return (
+                      <div className={warning}>Costs {feature.cost} adv.</div>
+                    )
                   } else {
                     return (
                       <EmpButton mode="success" onClick={event => {
@@ -186,18 +203,25 @@ class CharacterSheetShop extends Component {
                   buyButton={index => {
                     const proficiency = proficiencies[index]
                     if (proficiency.meetingRequirementsMessage) {
-                      return proficiency.meetingRequirementsMessage
+                      return (
+                        <div className={warning}>{proficiency.meetingRequirementsMessage}</div>
+                      )
                     } else if (1 > this.props.shop.advancements) {
-                      return `Costs ${1} adv.`
+                      return (
+                        <div className={warning}>Costs 1 adv.</div>
+                      )
                     } else {
                       return (
-                        <EmpButton mode="success" onClick={() => this.props.updateCharacter([
-                          { path: 'shop.advancements', value: this.props.shop.advancements - 1 },
-                          { path: 'stats.proficiencies.equipment', value: [
-                            ...this.props.stats.base.proficiencies.equipment,
-                            proficiency
-                          ]}
-                        ])}>
+                        <EmpButton mode="success" onClick={event => {
+                          event.stopPropagation()
+                          return this.props.updateCharacter([
+                            { path: 'shop.advancements', value: this.props.shop.advancements - 1 },
+                            { path: 'stats.proficiencies.equipment', value: [
+                              ...this.props.stats.base.proficiencies.equipment,
+                              proficiency
+                            ]}
+                          ])
+                        }}>
                           -1 Adv.
                         </EmpButton>
                       )

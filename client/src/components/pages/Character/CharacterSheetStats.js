@@ -157,13 +157,14 @@ class CharacterSheetStats extends Component {
             title="Combat"
             items={this.props.stats.actions}
             tooltips={{
-              title: item => item.rootName ? item.rootName : item.name,
+              mode: item => item.mode || '',
+              title: item => item.name,
               body: item =>
                 <>
                   <div>{item.description}</div>
                   {item.features && item.features.length > 0 &&
                     <>
-                      <div className={detailTitle}>Features Related to {item.rootName}</div>
+                      <div className={detailTitle}>Features Related to {item.name}</div>
                       <div>{item.features.map(({ name }) => name).join(', ')}</div>
                     </>
                   }

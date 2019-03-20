@@ -16,8 +16,10 @@
     padding: 0 10px;
     margin: 0;
     box-shadow: none;
-    background-color: $blue;
-    color: $white;
+
+    &.locked {
+      pointer-events: none;
+    }
 
     .spacer {
       width: 20px;

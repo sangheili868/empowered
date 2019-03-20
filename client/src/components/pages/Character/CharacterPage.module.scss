@@ -57,6 +57,16 @@
   align-items: baseline;
   user-select: none;
 
+  .info {
+    padding: 5px 0 0;
+    margin: 5px 0 0;
+  }
+
+  .trait {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
   .resource {
     background-position: center;
     background-repeat: no-repeat;
@@ -88,14 +98,11 @@
     }
   }
 
-  .trait {
-    padding: 0;
-    margin: 0;
-  }
-
   .subtext {
     font-size: 12px;
     font-weight: bold;
+    margin-bottom: 5px;
+    min-height: 20px;
   }
 
   .recoveryButton {
@@ -212,6 +219,10 @@
 
 .columnHeader {
   font-weight: bold;
+
+  &.listHeader {
+    padding: 0 5px;
+  }
 }
 
 .tableAdd {
@@ -219,6 +230,10 @@
   justify-content: center;
   align-items: center;
   margin: 5px;
+}
+
+.warning {
+  color: $red;
 }
 
 .languages {

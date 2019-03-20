@@ -74,7 +74,11 @@
     },
     {
       "name": "Move",
-      "description": "As a basic action, you begin moving a distance up to your speed. You can take other actions at any point of this movement."
+      "description": "As a basic action, you begin moving a distance up to your speed. You can take other actions at any point of this movement. If you are riding a creature or vehicle, you use its speed instead of your own."
+    },
+    {
+      "name": "Mount",
+      "description": "As a basic action, you begin riding a creature adjacent to you. It must be at least one size larger than you and have the proper anatomy. While mounted, any actions the mount takes count as your own actions. You may need to roll persuasion when you command the mount to take an action."
     },
     {
       "name": "Prepare",

@@ -55,13 +55,13 @@ class RulesPage extends Component {
         <EmpCard title="Health">
           <div className={card}>
             <p>
-              You have a number of hit points equal to your passive fortitude. When you take damage that reduces your hit points to 0, you take a wound, and then your hit points return to their max. Then, any remaining damage carries over to this new health pool. FOr example, if you have 10 hitpoints and take 23 damage, you take two wounds and your hit points become 7/10. When you take the fifth wound, make a DC 10 willpower check. If you fail, you die. If you succeed, you fall unconscious for 5 hours and gain a permanent, negative feature of the DM’s choice.
+              You have a number of hit points equal to your passive fortitude. When you take damage that reduces your hit points to 0, you take a wound, and then your hit points return to their max. Then, any remaining damage carries over to this new health pool. For example, if you have 10 hitpoints and take 23 damage, you take two wounds and your hit points become 7/10. When you take a fifth wound, make a death roll by rolling willpower against DC 10. If you fail, you die. If you succeed, you are knocked out. You fall unconscious for 5 hours and gain a permanent, negative feature of the DM’s choice.
             </p>
             <p>
-              While unconscious this way, keep track of your negative hit points. If your hit points ever go beneath zero minus your maximum hit points, you die. If you take any additional damage, roll willpower versus DC 10. If you fail, you die. If you receive enough healing to return your hit points to 1 or more, you wake up. After five hours unconscious this way, you return to 1 hit point and wake up.
+             If you take any additional damage while knocked out, you repeat the death roll. This time, the DC is equal to the damage taken. If you receive healing while knocked out, you wake up. After five hours unconscious this way, you return to 1 hit point and four wounds, and wake up.
             </p>
             <p>
-              If you regain hit points from any source, and you are healed above your hit point maximum, and you have at least one wound, the remaining healing becomes temporary hit points. You cannot have more THP than your passive fortitude. THP goes away when you take a rest, and if you gain THP while you have THP, you must choose to replace the current THP with the new THP, or not gain the new THP. Healing cannot restore wounds unless it specifically says so.
+              If you regain hit points from any source, and you have at least one wound, you can be healed to a hit point value above your hit point maximum. This is called overhealing. When overhealing, your hit points cannot go above twice your passive fortitude. Taking a rest or downtime resets your hit points to their normal value, so you lose any overhealing at that time. If you receive any healing while you are overhealed, you must either ignore that healing or lose the overhealing you have before applying the new overhealing. Healing cannot restore wounds unless it specifically says so.
             </p>
           </div>
         </EmpCard>
@@ -106,10 +106,10 @@ class RulesPage extends Component {
         <EmpCard title="Equipment">
           <div className={card}>
             <p>
-              Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must take the feature that gives you proficiency with it. The only exceptions are basic armor and improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.  When you take this feature, you also get one type of the chosen equipment of your choice. For example, if you take the feature One-Handed Weapon Training, you immediately acquire a one-handed weapon of your choice, such as a longsword or a mace.
+              Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must take the feature that gives you proficiency with it. The only exceptions are improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.
             </p>
             <p>
-              You have a carrying capacity equal to your passive brawn. Every item is either Heavy, Medium, or Light. Heavy counts as 2. Medium counts as 1, and Light counts as 0.1. A coin counts as 0.001, so 100 coins is 1 Light Item and 1000 coins is one Medium Item. If you are over your carrying capacity, you have disadvantage on all quick rolls and your speed is reduced by half.
+              You have a carrying capacity equal to your passive brawn. Every item is either Heavy, Medium, or Light. Heavy counts as 2. Medium counts as 1, and Light counts as 0.1. A coin counts as 0.001, so 100 coins is 1 Light Item and 1000 coins is one Medium Item. If you are over your carrying capacity, you are slowed.
             </p>
           </div>
         </EmpCard>
@@ -119,7 +119,7 @@ class RulesPage extends Component {
               Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
             </p>
             <p>
-              If you are wielding a shield with which you are proficient, you can take the Block reaction when you are targeted by an attack. This allows you to add the shield's bonus to your agility roll if it is a small shield, or replace your agility modifier with the shield's bonus if it is a medium or large shield.
+              If you are wielding a shield with which you are proficient, you can take the Block reaction when you roll evasion, using the shield's bonus as your evasion modifier, instead of your agility.
             </p>
             <p>
             When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
@@ -135,7 +135,7 @@ class RulesPage extends Component {
               There are three types of actions. You can only take one cardinal action per turn. You can take each skill action once per turn. However, you can take multiple skill actions that require the same skill, as long as they are different actions. You can take each basic action any number of times per turn. There are two other options a creature has during combat. Maneuvers are different wrestling techniques that a creature can apply after successfully performing the Wrestle action. Reactions can be performed on any turn, when the appropriate trigger is met. When you perform a reaction, you cannot perform another reaction until the start of your side’s next turn.
             </p>
             <p>
-              You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
+              You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls evasion (normally the agility modifier), otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
             </p>
             <p>
                If you attack a creature that cannot sense you, you gain advantage on the attack roll. If a creature that cannot sense you attacks you, you have advantage on the defense roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
@@ -192,7 +192,7 @@ class RulesPage extends Component {
         <EmpCard title="Conditions">
           <div className={card}>
             <p>
-              Various actions and features can cause conditions. Each condition grants a new action that allows you to attempt to end the condition. Conditions can also end early if the action or feature that caused it gives a way to. The DC of a condition is the DC or result of the roll that caused the condition. If there is no such DC, the DM chooses one.
+              Various actions and features can cause conditions. Each condition grants a new action that allows you or someone else to attempt to end your condition. Conditions can also end early if the action or feature that caused it gives a way to. The DC of a condition is the DC or result of the roll that caused the condition. If there is no such DC, the DM chooses one.
             </p>
           </div>
           <table className={cardTable}>
@@ -209,8 +209,8 @@ class RulesPage extends Component {
                 <tr key={name}>
                   <td className={cell}>{name}</td>
                   <td className={cell}>{description}</td>
-                  <td className={cell}>{action.name}</td>
-                  <td className={cell}>{action.description}</td>
+                  <td className={cell}>{action ? action.name : 'None'}</td>
+                  <td className={cell}>{action ? action.description : 'None'}</td>
                 </tr>
               )}
             </tbody>

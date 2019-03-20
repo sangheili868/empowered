@@ -39,10 +39,10 @@ class CharacterPage extends Component {
   updateCharacter = (paths, newValue) => {
     /*
       Single mode: updateCharacter('stats.hitPoints', 10)
-      Single mode: updateCharacter(['stats','tempHP'], 10)
+      Single mode: updateCharacter(['stats','wounds'], 10)
       Multi mode: updateCharacter([
         { path: 'stat.hitPoints', value: 0},
-        { path: ['stats', 'tempHP'], value: 0}
+        { path: ['stats', 'wounds'], value: 0}
       ])
     */
     const isMultiMode = every(paths, pathValue => has(pathValue, 'path') && has(pathValue, 'value'))

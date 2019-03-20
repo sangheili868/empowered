@@ -21,8 +21,8 @@ import {
   flatMap
 } from 'lodash'
 
-function addPlus (value) {
-  return (value >= 0 ? '+' : '') + value
+function addPlus (value, isSpaced) {
+  return (value >= 0 ? '+' : '-') + (isSpaced ? ' ' : '') + Math.abs(value)
 }
 
 function countItems (items) {
@@ -55,12 +55,14 @@ class Character {
       const isModified = skill.name === 'stealth' && this.armor.stealthPenalty !== 0
       const modifiedValue = skill.name === 'stealth' ? value + this.armor.stealthPenalty : value
       const modifierText = this.armor.name +  ': ' + this.armor.stealthPenalty
+      const features = this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
       return {
         ...skill,
         value: modifiedValue,
         displayValue: addPlus(modifiedValue),
-        features: this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name)),
-        modifiers: isModified ? modifierText : ''
+        features,
+        modifiers: isModified ? modifierText : '',
+        mode: features.length > 0 ? 'primary' : ''
       }
     }).value()
   }
@@ -102,8 +104,10 @@ class Character {
       ...this.baseStats,
       base: this.baseStats,
       maxHP: this.skills.fortitude.value + 10,
-      maxTempHP: this.skills.fortitude.value + 10,
+      maxOverheal: (this.baseStats.wounds > 0 ? 2 : 0) * (this.skills.fortitude.value + 10),
       maxWounds: 5,
+      isKOed: this.baseStats.wounds > 4,
+      evasion: addPlus(this.skills.agility.value),
       armor: this.armor,
       shield,
       speed: {
@@ -139,8 +143,8 @@ class Character {
                 .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
                 .map(({ name }) => name)
             ].join(', '),
-            bonus,
-            damage: weaponStats.damageDie + (bonus >= 0 ? " + " : " - ") + Math.abs(bonus)
+            bonus: addPlus(bonus),
+            damage: weaponStats.damageDie + ' ' + addPlus(bonus, true)
           }
         }
       }),
@@ -173,16 +177,19 @@ class Character {
         ...actionsData[columnName].map(({ name, description }) => {
           const relatedFeatures = filter(this.baseStats.features, feature => feature.actionTags.includes(name))
           return {
-            rootName: name,
-            name: relatedFeatures.length > 0 ? name + '*' : name,
+            name,
             description,
-            features: relatedFeatures
+            features: relatedFeatures,
+            mode: relatedFeatures.length > 0 ? 'primary' : ''
           }
         }),
         ...filter(this.baseStats.features, feature => feature.actionType === actionType)
-          .map(feature => ({ ...feature, rootName: feature.name, name: feature.name + '*', feature: true})),
-        ...chain(this.baseStats.conditions).map(condition => ({ ...condition, ...conditionData[condition.name]}))
-          .filter(({ action: { category } }) => (category === actionType)).map('action').value()
+          .map(feature => ({ ...feature, mode: 'primary' })),
+        ...chain(this.baseStats.conditions)
+          .map(condition => ({ ...condition, ...conditionData[condition.name]}))
+          .filter(({ action }) => action && (action.category === actionType))
+          .map(({ action }) => ({ ...action, mode: 'success' }))
+          .value()
       ], {}),
       conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
     }
@@ -192,17 +199,16 @@ class Character {
   }
 
   equipmentIncludesAny = (searchStrings) => chain(equipmentProficiencyData)
-    .pickBy((value, key) => !some(this.baseStats.proficiencies.equipment, ({ category }) => category === key))
-    .filter((value, key) => some(searchStrings, searchString => lowerCase(key).includes(lowerCase(searchString))))
-    .map(value => ({
-      ...value,
-      isDisabled: some(value.requirements, ({ skill, level }) => this.skills[skill].value < level),
-      meetingRequirementsMessage: value.requirements && value.requirements
+    .pickBy((proficiency, name) => !some(this.baseStats.proficiencies.equipment, ({ category }) => category === name))
+    .filter((proficiency, name) => some(searchStrings, searchString => lowerCase(name).includes(lowerCase(searchString))))
+    .map(proficiency => ({
+      ...proficiency,
+      meetingRequirementsMessage: proficiency.requirements && proficiency.requirements
         .filter(({ skill, level }) => this.skills[skill].value < level)
         .map(({ skill }) => startCase(skill) + ' is ' + addPlus(this.skills[skill].value))
         .join(', '),
-      requirementsString: value.requirements ? (
-        value.requirements.map(({ skill, level }) => startCase(skill) + ' ' + addPlus(level)).join(', ')
+      requirementsString: proficiency.requirements ? (
+        proficiency.requirements.map(({ skill, level }) => startCase(skill) + ' ' + addPlus(level)).join(', ')
       ) : 'None'
     }))
     .value()

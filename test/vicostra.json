@@ -29,8 +29,7 @@
   },
   "stats": {
     "hitPoints": 7,
-    "tempHP": 3,
-    "wounds": 0,
+    "wounds": 4,
     "armor": {
       "name": "Void Elf Armor",
       "category": "light"
@@ -78,7 +77,7 @@
         "name": "Frightened"
       },
       {
-        "name": "Grappled"
+        "name": "Prone"
       }
     ],
     "weapons": [
@@ -245,9 +244,9 @@
       },
       {
         "name": "Pathological Liar",
-        "skillTags": ["intimidation", "insight", "synergy", "persuasion"],
+        "skillTags": [],
         "equipmentTags": [],
-        "actionTags": ["Frighten", "Analyze", "Help", "Distract", "Use a Skill"],
+        "actionTags": [],
         "actionType": "",
         "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you have disadvantage on social rolls involving this person for 1 day, unless you convince them otherwise.",
         "cost": 0

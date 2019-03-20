@@ -34,5 +34,18 @@
       "description": "As a skill action, roll Fortitude against the poison DC to end the poisoned condition.",
       "category": "skillAction"
     }
+  },
+  "Unconscious": {
+    "name": "Unconscious",
+    "description": "You fall prone and drop what you are holding. You cannot move, speak, take actions, or take reactions. You roll normally for fortitude, wisdom, and willpower. You have disadvantage on perception rolls and agility rolls against ranged attacks. You automatically critically fail all other rolls. Creatures within 5ft of you gain the Awaken cardinal action as long as you are not knocked out.",
+    "action": {
+      "name": "Awaken",
+      "description": "As a cardinal action, you wake up an unconscious creature within 5ft that is not knocked out.",
+      "category": "cardinalAction"
+    }
+  },
+  "Slowed": {
+    "name": "Slowed",
+    "description": "You have disadvantage on all quick rolls and you can only take one action each turn."
   }
 }

@@ -5,11 +5,11 @@ import { chain, mapValues, uniqBy } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
-import armorIcon from "../../../icons/soldier.png"
+import armorIcon from "../../../icons/armor.png"
 import shieldIcon from "../../../icons/shield.png"
-import woundIcon from "../../../icons/bandage.png"
+import woundIcon from "../../../icons/skull.png"
 import agilityIcon from "../../../icons/crosshair.png"
-import speedIcon from "../../../icons/feet.png"
+import speedIcon from "../../../icons/foot.png"
 import restIcon from "../../../icons/campfire.png"
 import downtimeIcon from "../../../icons/inn.png"
 import d4Icon from "../../../icons/d4.png"

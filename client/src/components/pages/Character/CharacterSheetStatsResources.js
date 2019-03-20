@@ -93,7 +93,7 @@ class CharacterSheetStatsResources extends Component {
                 icon={woundIcon}
                 onUpdate={value => this.props.updateCharacter(this.woundUpdaters(value))}
               >
-                Max: {this.props.stats.maxWounds}
+                Death Roll At: {this.props.stats.maxWounds}
               </CharacterSheetResource>
             </>
           )}

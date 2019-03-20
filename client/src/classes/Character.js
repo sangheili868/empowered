@@ -59,6 +59,7 @@ class Character {
       return {
         ...skill,
         value: modifiedValue,
+        passive: modifiedValue + 10,
         displayValue: addPlus(modifiedValue),
         features,
         modifiers: isModified ? modifierText : '',
@@ -103,8 +104,8 @@ class Character {
     return {
       ...this.baseStats,
       base: this.baseStats,
-      maxHP: this.skills.fortitude.value + 10,
-      maxOverheal: (this.baseStats.wounds > 0 ? 2 : 0) * (this.skills.fortitude.value + 10),
+      maxHP: this.skills.fortitude.passive,
+      maxOverheal: (this.baseStats.wounds > 0 ? 2 : 0) * (this.skills.fortitude.passive),
       maxWounds: 5,
       isKOed: this.baseStats.wounds > 4,
       evasion: addPlus(this.skills.agility.value),
@@ -124,7 +125,7 @@ class Character {
             (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
             (countItems(equipment.light) / 10) + (equipment.gold / 1000)
           ),
-          limit: this.skills.brawn.value + 10
+          limit: this.skills.brawn.passive
         }
       },
       weapons: this.baseStats.weapons.map(weapon => {

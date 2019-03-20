@@ -121,6 +121,31 @@
       filter: invert(100%);
     }
   }
+
+  .dice {
+    display: flex;
+    justify-content: center;
+
+    .button {
+      min-width: 40px;
+      border-radius: 10px;
+
+      .icon {
+        height: 30px;
+        filter: invert(100%);
+      }
+
+      &.used {
+        .icon {
+          filter: invert(80%);
+        }
+
+        &:hover .icon {
+          filter: invert(100%);
+        }
+      }
+    }
+  }
 }
 
 .stats {

@@ -26,6 +26,7 @@ import withoutIndex from '../../../utils/withoutIndex'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpCard from '../../EmpCard/EmpCard';
 import CharacterSheetTrait from './CharacterSheetTrait'
+import CharacterSheetPowerDice from './CharacterSheetPowerDice'
 import EmpButton from '../../EmpButton/EmpButton';
 
 class CharacterSheetStatsResources extends Component {
@@ -98,7 +99,7 @@ class CharacterSheetStatsResources extends Component {
             </>
           )}
           <CharacterSheetResource
-            title="evasion"
+            title="Evasion"
             value={this.props.stats.evasion}
             icon={agilityIcon}
           />
@@ -256,7 +257,7 @@ class CharacterSheetStatsResources extends Component {
           {chain(this.props.stats.powerDice)
             .pickBy('max')
             .map(({current, max}, dieSize) =>
-              <CharacterSheetResource
+              <CharacterSheetPowerDice
                 key={dieSize}
                 title={'Power '+ dieSize}
                 value={current}
@@ -265,7 +266,7 @@ class CharacterSheetStatsResources extends Component {
                 onUpdate={value => this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)}
               >
                 Max: {max}
-              </CharacterSheetResource>
+              </CharacterSheetPowerDice>
             )
             .value()
           }

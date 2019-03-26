@@ -7,7 +7,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { cloneDeep, every, has, set } from 'lodash'
 import EmpButton from '../../EmpButton/EmpButton';
 import newCharacter from '../../../gameData/newCharacter'
-import { alert, manageCharacter, saveButton } from './CharacterPage.module.scss'
+import { alert, saveButton, manageCharacter } from './CharacterPage.module.scss'
 import { Modal, Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {

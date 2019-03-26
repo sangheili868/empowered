@@ -1,0 +1,25 @@
+.subtitles {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 12px;
+
+  .subtitle {
+    margin: 5px;
+  }
+}
+
+.list {
+  display: inline-flex;
+  margin: 0 3px 3px;
+  font-size: 12px;
+
+  .moreInfo {
+    min-width: 0;
+  }
+
+  .listHeader {
+    font-weight: bold;
+    padding: 0 5px;
+  }
+}

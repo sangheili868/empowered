@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { table, borderless, columnHeader } from "./CharacterPage.module.scss"
+import { table, borderless, columnHeader } from "./CharacterSheetTable.module.scss"
 import { startCase, keyBy } from 'lodash'
-import EmpCard from '../../EmpCard/EmpCard'
-import skills from '../../../gameData/skills.json'
+import EmpCard from '../../../EmpCard/EmpCard'
+import skills from '../../../../gameData/skills.json'
 import CharacterSheetSkillsDetail from './CharacterSheetSkillsDetail'
 
 class CharacterSheetSkills extends Component {

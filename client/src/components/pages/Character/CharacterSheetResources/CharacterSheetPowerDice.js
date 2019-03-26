@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import EmpCard from '../../EmpCard/EmpCard';
-import EmpButton from '../../EmpButton/EmpButton';
+import EmpCard from '../../../EmpCard/EmpCard';
+import EmpButton from '../../../EmpButton/EmpButton';
 import { range } from 'lodash'
-import { dice, button, icon, used } from './CharacterPage.module.scss'
+import { dice, button, icon, used } from './CharacterSheetResources.module.scss'
 
-import d4Icon from "../../../icons/d4.png"
-import d6Icon from "../../../icons/d6.png"
-import d8Icon from "../../../icons/d8.png"
-import d10Icon from "../../../icons/d10.png"
-import d12Icon from "../../../icons/d12.png"
+import d4Icon from "../../../../icons/d4.png"
+import d6Icon from "../../../../icons/d6.png"
+import d8Icon from "../../../../icons/d8.png"
+import d10Icon from "../../../../icons/d10.png"
+import d12Icon from "../../../../icons/d12.png"
 
 class CharacterSheetPowerDice extends Component {
   get dieIcon () {

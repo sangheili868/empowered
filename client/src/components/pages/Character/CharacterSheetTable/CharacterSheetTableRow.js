@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor';
-import { cell } from './CharacterPage.module.scss'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor';
+import { cell } from './CharacterSheetTable.module.scss'
 import { map, mapValues } from 'lodash'
-import EmpModal from '../../EmpModal/EmpModal';
+import EmpModal from '../../../EmpModal/EmpModal';
 
 class CharacterSheetTableRow extends Component {
   renderRowItems = () => {

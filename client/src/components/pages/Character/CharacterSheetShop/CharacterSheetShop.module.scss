@@ -1,0 +1,20 @@
+@import "src/styles/colors.scss";
+
+.warning {
+  color: $red;
+}
+
+.languages {
+  padding: 10px;
+  font-size: 12px;
+  max-width: 200px;
+}
+
+.unlockText {
+  margin: 20px;
+}
+
+.unlockButton {
+  width: 200px;
+  margin: auto;
+}

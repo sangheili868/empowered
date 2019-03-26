@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
-import { resources, detailTitle, plus, dying } from "./CharacterPage.module.scss"
+import { dying } from "./CharacterSheetResources.module.scss"
+import { plus, detailTitle, resources } from '../CharacterPage.module.scss'
 import CharacterSheetResource from './CharacterSheetResource'
 import { chain, mapValues } from 'lodash'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
-import hitPointsIcon from "../../../icons/heart.png"
-import armorIcon from "../../../icons/armor.png"
-import shieldIcon from "../../../icons/shield.png"
-import woundIcon from "../../../icons/skull.png"
-import agilityIcon from "../../../icons/crosshair.png"
-import speedIcon from "../../../icons/foot.png"
-import restIcon from "../../../icons/campfire.png"
-import downtimeIcon from "../../../icons/inn.png"
-import CharacterSheetStatsList from './CharacterSheetStatsList'
-import conditionData from '../../../gameData/conditions.json'
-import armorData from '../../../gameData/armor.json'
-import shieldData from '../../../gameData/shields.json'
-import equipmentProficiencyData from '../../../gameData/equipmentProficiencies.json'
-import withoutIndex from '../../../utils/withoutIndex'
+import hitPointsIcon from "../../../../icons/heart.png"
+import armorIcon from "../../../../icons/armor.png"
+import shieldIcon from "../../../../icons/shield.png"
+import woundIcon from "../../../../icons/skull.png"
+import agilityIcon from "../../../../icons/crosshair.png"
+import speedIcon from "../../../../icons/foot.png"
+import restIcon from "../../../../icons/campfire.png"
+import downtimeIcon from "../../../../icons/inn.png"
+import CharacterSheetStatsList from '../CharacterSheetList/CharacterSheetList'
+import conditionData from '../../../../gameData/conditions.json'
+import armorData from '../../../../gameData/armor.json'
+import shieldData from '../../../../gameData/shields.json'
+import equipmentProficiencyData from '../../../../gameData/equipmentProficiencies.json'
+import withoutIndex from '../../../../utils/withoutIndex'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import EmpCard from '../../EmpCard/EmpCard';
+import EmpCard from '../../../EmpCard/EmpCard';
 import CharacterSheetTrait from './CharacterSheetTrait'
 import CharacterSheetPowerDice from './CharacterSheetPowerDice'
-import EmpButton from '../../EmpButton/EmpButton';
+import EmpButton from '../../../EmpButton/EmpButton';
 
 class CharacterSheetStatsResources extends Component {
   hpUpdaters = value => {
@@ -38,7 +39,7 @@ class CharacterSheetStatsResources extends Component {
   }
   render () {
     return (
-      <div>
+      <>
         <div className={resources}>
           {this.props.stats.isKOed ? (
             <EmpCard title="DYING" mode="warning" isStartingOpen>
@@ -246,7 +247,7 @@ class CharacterSheetStatsResources extends Component {
             .value()
           }
         </div>
-      </div>
+      </>
     )
   }
 }

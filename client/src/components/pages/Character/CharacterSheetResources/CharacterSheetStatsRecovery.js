@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { recoveryButton, recoveryImg } from './CharacterPage.module.scss'
-import EmpModal from '../../EmpModal/EmpModal';
+import { recoveryButton, recoveryImg } from './CharacterSheetResources.module.scss'
+import EmpModal from '../../../EmpModal/EmpModal';
 
 class CharacterSheetStatsRecovery extends Component {
   render () {

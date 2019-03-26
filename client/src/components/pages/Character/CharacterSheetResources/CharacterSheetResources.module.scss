@@ -1,0 +1,103 @@
+@import "src/styles/colors.scss";
+
+.dying {
+  margin: 10px;
+  max-width: 300px;
+  color: $red;
+}
+
+.trait {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.subtext {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  min-height: 20px;
+}
+
+.recoveryButton {
+  min-width: 0;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+
+  .recoveryImg {
+    height: 25px;
+  }
+
+  &:hover .recoveryImg {
+    filter: invert(100%);
+  }
+}
+
+.dice {
+  display: flex;
+  justify-content: center;
+
+  .button {
+    min-width: 40px;
+    border-radius: 10px;
+
+    .icon {
+      height: 30px;
+      filter: invert(100%);
+    }
+
+    &.used {
+      .icon {
+        filter: invert(80%);
+      }
+
+      &:hover .icon {
+        filter: invert(100%);
+      }
+    }
+  }
+}
+
+.info {
+  padding: 5px 0 0;
+  margin: 5px 0 0;
+
+  .valueRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .counter {
+      padding: 0 2px;
+      margin: 0 10px;
+
+      &.minus {
+        margin: 5px;
+        cursor: pointer;
+        font-size: 30px;
+        color: $red;
+      }
+
+      &.hidden {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.resource {
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  min-width: 0;
+  margin: auto;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+
+

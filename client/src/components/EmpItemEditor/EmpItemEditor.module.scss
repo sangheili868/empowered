@@ -1,12 +1,5 @@
 @import "src/styles/colors.scss";
 
-.plus {
-  margin: 5px;
-  cursor: pointer;
-  font-size: 24px;
-  color: $green;
-}
-
 .field {
   margin: 5px;
   display: flex;
@@ -15,13 +8,5 @@
 
   .input {
     width: 70%;
-  }
-}
-
-.footer {
-  flex-wrap: wrap;
-
-  .close {
-    margin: 5px;
   }
 }

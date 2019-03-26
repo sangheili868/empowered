@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { editor, editing, input, doneButton, close } from './EmpStringEditor.module.scss'
+import { editor, editing, input, doneButton } from './EmpStringEditor.module.scss'
 import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 
@@ -35,7 +35,7 @@ class EmpStringEditor extends Component {
           onKeyPress={this.handleKeyPress}
           onBlur={this.handleDone}
         />
-        <div className={close}>
+        <div>
           <EmpButton className={doneButton} onClick={this.handleDone}>Done</EmpButton>
           <EmpButton className={doneButton} onClick={this.toggleEditing}>Cancel</EmpButton>
         </div>

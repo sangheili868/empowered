@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { startCase } from 'lodash'
-import EmpModal from '../../EmpModal/EmpModal'
-import { detailTitle, borderlessCell } from './CharacterPage.module.scss'
+import EmpModal from '../../../EmpModal/EmpModal'
+import { borderlessCell } from './CharacterSheetTable.module.scss'
+import { detailTitle } from '../CharacterPage.module.scss'
 
 class CharacterSheetSkillsDetail extends Component {
   render () {

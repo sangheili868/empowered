@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import {
-  table,
-  tableAdd,
-  cell,
-  plus,
-  columnHeader
-} from './CharacterPage.module.scss'
+import { table, tableAdd, cell, columnHeader } from './CharacterSheetTable.module.scss'
+import { plus } from '../CharacterPage.module.scss'
 import { mapValues, isEmpty } from 'lodash'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import EmpCard from '../../EmpCard/EmpCard'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
+import EmpCard from '../../../EmpCard/EmpCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CharacterSheetTableRow from './CharacterSheetTableRow'
 

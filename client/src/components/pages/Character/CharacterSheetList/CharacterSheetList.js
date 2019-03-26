@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { subtitles, subtitle, list, moreInfo, columnHeader, listHeader } from './CharacterPage.module.scss'
+import { subtitles, subtitle, list, moreInfo, listHeader } from './CharacterSheetList.module.scss'
 import { startCase, some } from 'lodash'
-import EmpCard from '../../EmpCard/EmpCard'
-import EmpModal from '../../EmpModal/EmpModal'
+import EmpCard from '../../../EmpCard/EmpCard'
+import EmpModal from '../../../EmpModal/EmpModal'
 
 class CharacterSheetStatsList extends Component {
   render () {
@@ -30,7 +30,7 @@ class CharacterSheetStatsList extends Component {
           Object.keys(this.props.items).map(itemKey =>
             (this.props.items[itemKey].length || this.props.addToList) &&
               <div key={itemKey}>
-                <div className={[columnHeader, listHeader].join(' ')}>{startCase(itemKey)}</div>
+                <div className={listHeader}>{startCase(itemKey)}</div>
                 {this.props.items[itemKey].map((item, index) =>
                   this.props.editItem ? this.props.editItem(itemKey, item, index) : (
                     (this.props.tooltips) ? (

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { map, startCase } from 'lodash'
-import { bio, table, cell, field } from './CharacterPage.module.scss'
-import bioFields from '../../../gameData/bioFields.json'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import { bio, table, cell, field } from './CharacterSheetTable.module.scss'
+import bioFields from '../../../../gameData/bioFields.json'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetBio extends Component {
   calcDetails = (details, name) => {

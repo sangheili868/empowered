@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { resource, trait, subtext } from "./CharacterPage.module.scss"
-import EmpCard from '../../EmpCard/EmpCard'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
+import { resource, trait, subtext } from "./CharacterSheetResources.module.scss"
+import EmpCard from '../../../EmpCard/EmpCard'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import { startCase } from 'lodash'
 
 class CharacterSheetTrait extends Component {

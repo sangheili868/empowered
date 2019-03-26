@@ -4,13 +4,13 @@ import {
   resource,
   valueRow,
   counter,
-  plus,
   minus,
   hidden,
   subtext
-} from "./CharacterPage.module.scss"
+} from "./CharacterSheetResources.module.scss"
+import { plus } from '../CharacterPage.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import EmpCard from '../../EmpCard/EmpCard'
+import EmpCard from '../../../EmpCard/EmpCard'
 
 class CharacterSheetResource extends Component {
 

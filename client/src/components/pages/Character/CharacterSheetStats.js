@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { stats, detailTitle, plus } from './CharacterPage.module.scss'
-import CharacterSheetStatsResources from "./CharacterSheetStatsResources"
-import CharacterSheetSkills from "./CharacterSheetSkills"
-import CharacterSheetStatsList from './CharacterSheetStatsList'
-import CharacterSheetTable from './CharacterSheetTable'
+import { sheetPage, detailTitle, plus } from './CharacterPage.module.scss'
+import CharacterSheetStatsResources from "./CharacterSheetResources/CharacterSheetStatsResources"
+import CharacterSheetSkills from "./CharacterSheetTable/CharacterSheetSkills"
+import CharacterSheetStatsList from './CharacterSheetList/CharacterSheetList'
+import CharacterSheetTable from './CharacterSheetTable/CharacterSheetTable'
 import { pick } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import weaponData from '../../../gameData/weapons.json'
@@ -18,7 +18,7 @@ class CharacterSheetStats extends Component {
     return (
       <div>
         <CharacterSheetStatsResources stats={this.props.stats} updateCharacter={this.props.updateCharacter}/>
-        <div className={stats}>
+        <div className={sheetPage}>
           <CharacterSheetSkills
             abilityScores={this.props.stats.abilityScores}
             skills={this.props.stats.skills}

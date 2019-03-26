@@ -1,39 +1,31 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from './CharacterSheetTable'
-import {
-  stats,
-  resources,
-  warning,
-  languages,
-  unlockText,
-  unlockButton
-} from './CharacterPage.module.scss'
-import CharacterSheetResource from './CharacterSheetResource'
-import advancementsIcon from "../../../icons/chevron.png"
+import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import { warning, languages, unlockText, unlockButton } from './CharacterSheetShop.module.scss'
+import { sheetPage, resources } from '../CharacterPage.module.scss'
+import CharacterSheetResource from '../CharacterSheetResources/CharacterSheetResource'
+import advancementsIcon from "../../../../icons/chevron.png"
 import { lowerCase, cloneDeep, map, startCase } from 'lodash'
-import EmpButton from '../../EmpButton/EmpButton'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import EmpCard from '../../EmpCard/EmpCard'
-import featureFields from '../../../gameData/featureFields'
-import CharacterSheetSkills from "./CharacterSheetSkills"
-import withoutIndex from '../../../utils/withoutIndex'
+import EmpButton from '../../../EmpButton/EmpButton'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
+import EmpCard from '../../../EmpCard/EmpCard'
+import featureFields from '../../../../gameData/featureFields'
+import CharacterSheetSkills from "../CharacterSheetTable/CharacterSheetSkills"
+import withoutIndex from '../../../../utils/withoutIndex'
 
 class CharacterSheetShop extends Component {
   render () {
     return (
       <>
-        <div className={stats}>
-          <div className={resources}>
-            <CharacterSheetResource
-              title="Advancements"
-              value={this.props.shop.advancements}
-              onUpdate={value => this.props.updateCharacter('shop.advancements', value)}
-              alt="Advancements Icon"
-              icon={advancementsIcon}
-            />
-          </div>
+        <div className={resources}>
+          <CharacterSheetResource
+            title="Advancements"
+            value={this.props.shop.advancements}
+            onUpdate={value => this.props.updateCharacter('shop.advancements', value)}
+            alt="Advancements Icon"
+            icon={advancementsIcon}
+          />
         </div>
-        <div className={stats}>
+        <div className={sheetPage}>
           <CharacterSheetTable
             title="Ability Scores"
             items={this.props.shop.abilityScores}

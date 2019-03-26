@@ -129,7 +129,7 @@ class Character {
       maxHP: this.skills.fortitude.passive,
       maxOverheal: (this.baseStats.wounds > 0 ? 2 : 0) * (this.skills.fortitude.passive),
       maxWounds: 5,
-      isKOed: this.baseStats.wounds > 4,
+      isDying: this.baseStats.wounds > 4,
       evasion: addPlus(this.skills.agility.value),
       armor: this.armor,
       shield,

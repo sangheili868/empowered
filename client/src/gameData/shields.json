@@ -4,6 +4,7 @@
     "category": "none",
     "rating": 0,
     "weight": "none",
+    "skill": "agility",
     "speedPenalty": 0,
     "proficiency": "none"
   },

@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpButton from '../EmpButton/EmpButton'
 
 class EmpCard extends Component {
+
   state = {
     isOpen: this.props.isStartingOpen || this.props.isLocked
   }
+
   handleToggle = () => {
     if (!this.props.isLocked) {
       this.setState(prevState => ({
@@ -15,6 +17,14 @@ class EmpCard extends Component {
       }))
     }
   }
+
+  get contentClasses () {
+    return [
+      this.props.contentClassName,
+      ...(this.state.isOpen ? [] : [hidden])
+    ].join(' ')
+  }
+
   render () {
     return (
       <div className={[card, this.props.className].join(' ')}>
@@ -31,9 +41,7 @@ class EmpCard extends Component {
             <FontAwesomeIcon className={caret} icon={this.state.isOpen ? 'caret-down' : 'caret-up'}/>
           )}
         </EmpButton>
-        <div className={[this.props.contentClassName, ...(this.state.isOpen ? [] : [hidden])].join(' ')}>
-          {this.props.children}
-        </div>
+        <div className={this.contentClasses}>{this.props.children}</div>
       </div>
     )
   }

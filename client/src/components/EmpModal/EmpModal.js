@@ -5,12 +5,15 @@ import EmpButton from '../EmpButton/EmpButton'
 import { pick } from 'lodash'
 
 class EmpModal extends Component {
+
   state = {
     isOpen: false
   }
+
   componentDidMount () {
     this.props.setToggler && this.props.setToggler(this.toggleModal)
   }
+
   toggleModal = () => {
     if (this.props.isBlocked) this.props.onBlocked()
     else {
@@ -18,10 +21,12 @@ class EmpModal extends Component {
       this.setState(prevState => ({ ...prevState, isOpen: !prevState.isOpen }))
     }
   }
+
   handleCloser = callback => {
     this.toggleModal()
     callback()
   }
+  
   render () {
     return (
       <>

@@ -4,6 +4,7 @@ import EmpModal from '../EmpModal/EmpModal'
 
 let fileReader
 class EmpJsonImporter extends Component {
+
   handleNewFile = ({ target }) => {
     const file = target.files[0]
     fileReader = new FileReader()
@@ -13,10 +14,12 @@ class EmpJsonImporter extends Component {
     }
     fileReader.readAsText(file)
   }
+
   openFileDialog = () => {
     document.getElementById('importer').click()
     this.setState({ isShowingWarning: false })
   }
+
   render() {
     return (
       <div className={this.props.className}>

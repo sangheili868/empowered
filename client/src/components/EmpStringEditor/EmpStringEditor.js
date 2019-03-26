@@ -4,26 +4,36 @@ import EmpButton from '../EmpButton/EmpButton'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 
 class EmpStringEditor extends Component {
+
   state = {
     isEditing: false,
     workingValue: null
   }
+
+  get value () {
+    return this.props.value === '' ? 'Click here to edit' : this.props.value
+  }
+
   toggleEditing = () => {
     this.setState({
       workingValue: this.props.value,
       isEditing: !this.state.isEditing
     })
   }
+
   handleChange = ({target}) => {
     this.setState({workingValue: target.value})
   }
+
   handleDone = () => {
     this.props.onSave(this.state.workingValue)
     this.toggleEditing()
   }
+
   handleKeyPress = e => {
     if (e.key === 'Enter') this.handleDone()
   }
+
   render () {
     return this.state.isEditing ? (
       <div className={editing}>
@@ -42,7 +52,7 @@ class EmpStringEditor extends Component {
       </div>
     ) : (
       <div className={[this.props.className, editor].join(' ')} onClick={this.toggleEditing}>
-        {this.props.value === '' ? 'Click here to edit' : this.props.value}
+        {this.value}
       </div>
     )
   }

@@ -5,19 +5,35 @@ import EmpCard from '../../../EmpCard/EmpCard'
 import EmpModal from '../../../EmpModal/EmpModal'
 
 class CharacterSheetStatsList extends Component {
+
+  get isArray () {
+    return Array.isArray(this.props.items)
+  }
+
+  get isObject () {
+    return !this.isArray && (typeof this.props.items === 'object')
+  }
+
+  get hasAnyItems () {
+    return (this.isArray && this.props.items.length) ||
+    (this.isObject && some(this.props.items, column => column.length)) ||
+    this.props.addToList
+  }
+
+  columnHasAnyItems = itemKey => {
+    return this.props.items[itemKey].length || this.props.addToList
+  }
+
   render () {
-    const isArray = Array.isArray(this.props.items)
-    const isObject = !isArray && (typeof this.props.items === 'object')
-    const hasSomeItem = (isArray && this.props.items.length) || (isObject && some(this.props.items, column => column.length))
-    return (hasSomeItem || this.props.addToList) ? (
+    return this.hasAnyItems ? (
       <EmpCard isStartingOpen title={this.props.title}>
         <div className={subtitles}>
           {this.props.subtitles && this.props.subtitles.map((subtitleText, index) =>
             <div key={index} className={subtitle}>{subtitleText}</div>
-            )}
+          )}
         </div>
         <div className={list}>
-          {isArray ? (
+          {this.isArray ? (
             <div>
               {this.props.items.map((item, index) =>
                 this.props.editItem ? this.props.editItem(item, index) : (
@@ -26,9 +42,8 @@ class CharacterSheetStatsList extends Component {
               )}
               {this.props.addToList && this.props.addToList()}
             </div>
-          ) : (isObject &&
-          Object.keys(this.props.items).map(itemKey =>
-            (this.props.items[itemKey].length || this.props.addToList) &&
+          ) : (this.isObject &&
+            Object.keys(this.props.items).map(itemKey => this.columnHasAnyItems(itemKey) &&
               <div key={itemKey}>
                 <div className={listHeader}>{startCase(itemKey)}</div>
                 {this.props.items[itemKey].map((item, index) =>

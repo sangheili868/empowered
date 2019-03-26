@@ -11,6 +11,7 @@ import d10Icon from "../../../../icons/d10.png"
 import d12Icon from "../../../../icons/d12.png"
 
 class CharacterSheetPowerDice extends Component {
+
   get dieIcon () {
     return {
       'd4s': d4Icon,
@@ -20,26 +21,43 @@ class CharacterSheetPowerDice extends Component {
       'd12s': d12Icon,
     }[this.props.dieSize]
   }
+
+  get highlightedRange () {
+    return range(this.props.value)
+  }
+
+  get usedRange () {
+    return range(this.props.max - this.props.value)
+  }
+
+  handleDecrease = () => {
+    this.props.onUpdate(this.props.value - 1)
+  }
+
+  handleIncrease = () => {
+    this.props.onUpdate(this.props.value + 1)
+  }
+
   render () {
     return (
       <div>
         <EmpCard title={'Power ' + this.props.dieSize} isStartingOpen>
           <div className={dice}>
-            {range(this.props.value).map(index =>
+            {this.highlightedRange.map(index =>
               <EmpButton
                 key={index}
                 mode="primary"
                 className={button}
-                onClick={this.props.onUpdate.bind(this, this.props.value - 1)}
+                onClick={this.handleDecrease}
               >
                 <img className={icon} alt={this.props.title} src={this.dieIcon}/>
               </EmpButton>
             )}
-            {range(this.props.max - this.props.value).map(index =>
+            {this.usedRange.map(index =>
               <EmpButton
                 key={index + this.props.value}
                 className={[button, used].join(' ')}
-                onClick={this.props.onUpdate.bind(this, this.props.value + 1)}
+                onClick={this.handleIncrease}
               >
                 <img className={icon} alt={this.props.title} src={this.dieIcon}/>
               </EmpButton>

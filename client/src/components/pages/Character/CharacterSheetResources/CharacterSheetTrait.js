@@ -5,6 +5,11 @@ import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import { startCase } from 'lodash'
 
 class CharacterSheetTrait extends Component {
+
+  handleSave = values => {
+    return this.props.onUpdate(['stats', this.props.trait], values)
+  }
+
   render () {
     return (
       <EmpCard isLocked title={startCase(this.props.trait)}>
@@ -14,7 +19,7 @@ class CharacterSheetTrait extends Component {
           className={trait}
           fields={this.props.fields}
           description={this.props.description}
-          onSave={values => this.props.onUpdate(['stats', this.props.trait], values)}
+          onSave={this.handleSave}
         >
           <div className={resource} style={{ backgroundImage: `url(${this.props.icon})` }}>
             {this.props.value}

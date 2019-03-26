@@ -57,6 +57,12 @@
   align-items: baseline;
   user-select: none;
 
+  .dying {
+    margin: 10px;
+    max-width: 300px;
+    color: $red;
+  }
+
   .info {
     padding: 5px 0 0;
     margin: 5px 0 0;

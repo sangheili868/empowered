@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { resources, detailTitle, plus } from "./CharacterPage.module.scss"
+import { resources, detailTitle, plus, dying } from "./CharacterPage.module.scss"
 import CharacterSheetResource from './CharacterSheetResource'
-import { chain, mapValues, uniqBy } from 'lodash'
+import { chain, mapValues } from 'lodash'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsRecovery from './CharacterSheetStatsRecovery';
 import hitPointsIcon from "../../../icons/heart.png"
@@ -25,25 +25,11 @@ import CharacterSheetPowerDice from './CharacterSheetPowerDice'
 import EmpButton from '../../EmpButton/EmpButton';
 
 class CharacterSheetStatsResources extends Component {
-  woundUpdaters = value => {
-    let conditionUpdate = []
-    if (value >= this.props.stats.maxWounds) {
-      conditionUpdate = [{ path: 'stats.conditions', value: uniqBy([
-        ...this.props.stats.conditions,
-        { name: 'Unconscious' },
-        { name: 'Prone' }
-      ], 'name')}]
-    }
-    return [
-      { path: 'stats.wounds', value },
-      ...conditionUpdate
-    ]
-  }
   hpUpdaters = value => {
     let woundUpdate = []
     if (value <= 0) {
       value += this.props.stats.maxHP
-      woundUpdate = this.woundUpdaters(this.props.stats.wounds + 1)
+      woundUpdate = [{ path: 'stats.wounds', value: this.props.stats.wounds + 1 }]
     }
     return [
       { path: 'stats.hitPoints', value },
@@ -55,13 +41,16 @@ class CharacterSheetStatsResources extends Component {
       <div>
         <div className={resources}>
           {this.props.stats.isKOed ? (
-            <EmpCard title="Knocked Out" isStartingOpen>
-              <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
-                { path: 'stats.hitPoints', value: 1 },
-                { path: 'stats.wounds', value: this.props.stats.maxWounds - 1 }
-              ])}>
-                Recover
-              </EmpButton>
+            <EmpCard title="DYING" mode="warning" isStartingOpen>
+              <div className={dying}>
+                Roll willpower. If you roll 10 or higher, click "Recover". Otherwise, you die.
+                <EmpButton mode="success" onClick={this.props.updateCharacter.bind(this, [
+                  { path: 'stats.hitPoints', value: 1 },
+                  { path: 'stats.wounds', value: this.props.stats.maxWounds - 1 }
+                ])}>
+                  Recover
+                </EmpButton>
+              </div>
             </EmpCard>
           ) : (
             <>
@@ -80,7 +69,7 @@ class CharacterSheetStatsResources extends Component {
                 value={this.props.stats.wounds}
                 max={this.props.stats.maxWounds}
                 icon={woundIcon}
-                onUpdate={value => this.props.updateCharacter(this.woundUpdaters(value))}
+                onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
               >
                 Death Roll At: {this.props.stats.maxWounds}
               </CharacterSheetResource>

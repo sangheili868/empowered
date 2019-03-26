@@ -18,7 +18,11 @@ class EmpCard extends Component {
   render () {
     return (
       <div className={[card, this.props.className].join(' ')}>
-        <EmpButton className={[title, (this.props.isLocked ? locked : '')].join(' ')} mode='secondary' onClick={this.handleToggle}>
+        <EmpButton
+          className={[title, (this.props.isLocked ? locked : '')].join(' ')}
+          mode={this.props.mode || 'secondary'}
+          onClick={this.handleToggle}
+        >
           <div className={spacer}></div>
           {this.props.title}
           {this.props.isLocked ? (

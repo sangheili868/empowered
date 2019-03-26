@@ -55,10 +55,7 @@ class RulesPage extends Component {
         <EmpCard title="Health">
           <div className={card}>
             <p>
-              You have a number of hit points equal to your passive fortitude. When you take damage that reduces your hit points to 0, you take a wound, and then your hit points return to their max. Then, any remaining damage carries over to this new health pool. For example, if you have 10 hitpoints and take 23 damage, you take two wounds and your hit points become 7/10. When you take a fifth wound, make a death roll by rolling willpower against DC 10. If you fail, you die. If you succeed, you are knocked out. You fall unconscious for 5 hours and gain a permanent, negative feature of the DM’s choice.
-            </p>
-            <p>
-             If you take any additional damage while knocked out, you repeat the death roll. This time, the DC is equal to the damage taken. If you receive healing while knocked out, you wake up. After five hours unconscious this way, you return to 1 hit point and four wounds, and wake up.
+              You have a number of hit points equal to your passive fortitude. When you take damage that reduces your hit points to 0, you take a wound, and then your hit points return to their max. Then, any remaining damage carries over to this new health pool. For example, if you have 10 hitpoints and take 23 damage, you take two wounds and your hit points become 7/10. When you would take a fifth wound, instead make a death roll by rolling willpower against DC 10. If you fail, you die. If you succeed, you return to 1 hit point and 4 wounds and you gain a permanent, negative feature of the DM’s choice, called an injury. The only way to remove an injury is by taking downtime to recuperate. You cannot perform any other downtime activity while recuperating.
             </p>
             <p>
               If you regain hit points from any source, and you have at least one wound, you can be healed to a hit point value above your hit point maximum. This is called overhealing. When overhealing, your hit points cannot go above twice your passive fortitude. Taking a rest or downtime resets your hit points to their normal value, so you lose any overhealing at that time. If you receive any healing while you are overhealed, you must either ignore that healing or lose the overhealing you have before applying the new overhealing. Healing cannot restore wounds unless it specifically says so.
@@ -122,7 +119,7 @@ class RulesPage extends Component {
               If you are wielding a shield with which you are proficient, you can take the Block reaction when you roll evasion, using the shield's bonus as your evasion modifier, instead of your agility.
             </p>
             <p>
-            When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
+              When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
             </p>
           </div>
         </EmpCard>
@@ -138,7 +135,7 @@ class RulesPage extends Component {
               You can only take the attack action once per turn, and you cannot take any other cardinal actions on a turn where you take the attack action. When you make an attack, choose a target that you can see. If the weapon does not have a range, the target must be within 5ft of you. If it does have a range, the target can be within twice the range listed. If the target is greater than the range listed but less than twice the range listed, the attack roll is made at disadvantage. Then, roll the skill listed under attack skill. If the damage type is physical or does multiple types of damage, the target rolls evasion (normally the agility modifier), otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage.
             </p>
             <p>
-               If you attack a creature that cannot sense you, you gain advantage on the attack roll. If a creature that cannot sense you attacks you, you have advantage on the defense roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
+              Before rolling an attack, you can declare a nonlethal strike. All damage you inflict is halved, and if the target would die, they are knocked unconscious instead, until they recover any hit points. If you attack a creature that cannot sense you, you gain advantage on the attack roll. If a creature that cannot sense you attacks you, you have advantage on the defense roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
             </p>
             {map(actions, (actionList, category) =>
               <EmpCard key={category} title={startCase(category)} className={nestedCard}>

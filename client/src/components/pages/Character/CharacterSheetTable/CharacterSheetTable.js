@@ -8,18 +8,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CharacterSheetTableRow from './CharacterSheetTableRow'
 
 class CharacterSheetTable extends Component {
+
   columnTitles = [
     ...Object.values(this.props.columnNames),
     ...this.props.buyButton ? ['Buy'] : [],
     ...this.props.sellButton ? ['Sell'] : []
   ]
+
+  get hasItems () {
+    return !isEmpty(this.props.items)
+  }
+
+  get fields () {
+    return mapValues(this.props.fields, field => ({ ...field, value: field.default }))
+  }
+
   render () {
-    const hasItems = !isEmpty(this.props.items)
-    return (hasItems || this.props.onAdd) ? (
+    return (this.hasItems || this.props.onAdd) ? (
       <EmpCard isStartingOpen title={this.props.title}>
         <table className={table}>
           <thead>
-            {hasItems &&
+            {this.hasItems &&
               <tr>
                 {this.columnTitles.map(title =>
                   <th key={title} className={[columnHeader, cell].join(' ')}>{title}</th>
@@ -35,12 +44,12 @@ class CharacterSheetTable extends Component {
           {this.props.onAdd &&
             <tfoot>
               <tr>
-                <td className={hasItems ? cell : ''} colSpan={this.columnTitles.length}>
+                <td className={this.hasItems ? cell : ''} colSpan={this.columnTitles.length}>
                   <div className={tableAdd}>
                     <EmpItemEditor
                       title={this.props.addText}
                       description={this.props.description}
-                      fields={mapValues(this.props.fields, field => ({ ...field, value: field.default }))}
+                      fields={this.fields}
                       mode="noStyle"
                       onSave={this.props.onAdd}
                     >

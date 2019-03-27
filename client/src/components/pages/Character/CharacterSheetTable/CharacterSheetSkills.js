@@ -6,11 +6,26 @@ import skills from '../../../../gameData/skills.json'
 import CharacterSheetSkillsDetail from './CharacterSheetSkillsDetail'
 
 class CharacterSheetSkills extends Component {
-  scoreNames = Object.keys(this.props.abilityScores)
-  topScores = this.scoreNames.slice(0, this.scoreNames.length/2)
-  leftScores = this.scoreNames.slice(this.scoreNames.length/2, this.scoreNames.length)
+
+  get topScores () {
+    const scoreNames = Object.keys(this.props.abilityScores)
+    return scoreNames.slice(0, scoreNames.length/2)
+  }
+
+  get leftScores () {
+    const scoreNames = Object.keys(this.props.abilityScores)
+    return scoreNames.slice(scoreNames.length/2, scoreNames.length)
+  }
+
+  get skillsByAbility () {
+    return keyBy(skills, 'abilityScores')
+  }
+
+  getSkill (firstScore, secondScore) {
+    return this.props.skills[this.skillsByAbility[[firstScore, secondScore]].name]
+  }
+
   render () {
-    const skillsByAbility = keyBy(skills, 'abilityScores')
     return (
       <EmpCard isStartingOpen title="Skills">
         <table className={[table, borderless].join(' ')}>
@@ -31,27 +46,15 @@ class CharacterSheetSkills extends Component {
                   <div>{this.props.abilityScores[leftScore].displayValue}</div>
                 </td>
                 {this.topScores.map(topScore =>
-                  <td key={topScore}>
-                    <CharacterSheetSkillsDetail
-                      skill={this.props.skills[skillsByAbility[[topScore, leftScore]].name]}
-                    />
-                  </td>
+                  <td key={topScore}><CharacterSheetSkillsDetail skill={this.getSkill(topScore, leftScore)}/></td>
                 )}
-                <td>
-                  <CharacterSheetSkillsDetail
-                    skill={this.props.skills[skillsByAbility[[leftScore, leftScore]].name]}
-                  />
-                </td>
+                <td><CharacterSheetSkillsDetail skill={this.getSkill(leftScore, leftScore)}/></td>
               </tr>
             )}
             <tr>
               <td></td>
               {this.topScores.map(topScore =>
-                <td key={topScore}>
-                  <CharacterSheetSkillsDetail
-                    skill={this.props.skills[skillsByAbility[[topScore, topScore]].name]}
-                  />
-                </td>
+                <td key={topScore}><CharacterSheetSkillsDetail skill={this.getSkill(topScore, topScore)}/></td>
               )}
             </tr>
           </tbody>

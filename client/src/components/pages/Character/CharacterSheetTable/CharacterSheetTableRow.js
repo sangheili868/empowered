@@ -5,6 +5,15 @@ import { map, mapValues } from 'lodash'
 import EmpModal from '../../../EmpModal/EmpModal';
 
 class CharacterSheetTableRow extends Component {
+
+  get fields () {
+    return mapValues(this.props.fields, (field, key) => ({ ...field, value: this.props.item[key] }))
+  }
+
+  handleDelete = () => {
+    this.props.onDelete && this.props.onDelete(this.props.index)
+  }
+
   renderRowItems = () => {
     return (
       <>
@@ -20,6 +29,7 @@ class CharacterSheetTableRow extends Component {
       </>
     )
   }
+
   render () {
     if (this.props.tooltip) {
       return (
@@ -37,9 +47,9 @@ class CharacterSheetTableRow extends Component {
           title={'Edit ' + this.props.item.name}
           mode="tr"
           description={this.props.description}
-          fields={mapValues(this.props.fields, (field, key) => ({ ...field, value: this.props.item[key] }))}
+          fields={this.fields}
           onSave={this.props.onEdit.bind(this, this.props.index)}
-          onDelete={this.props.onDelete && this.props.onDelete.bind(this, this.props.index)}
+          onDelete={this.handleDelete}
         >
           {this.renderRowItems()}
         </EmpItemEditor>

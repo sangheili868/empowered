@@ -5,28 +5,22 @@ import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
 import { cloneDeep, every, has, set } from 'lodash'
-import EmpButton from '../../EmpButton/EmpButton';
+import EmpModal from '../../EmpModal/EmpModal'
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, saveButton, manageCharacter } from './CharacterPage.module.scss'
-import { Modal, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 
 class CharacterPage extends Component {
+
   state = {
-    warningState: '',
     isOpeningFile: false
-  };
-  handleOpenWarning = () => {
-    if (this.props.characterData.isDirty) this.setState({warningState: 'create'})
-    else this.createNewCharacter()
   }
-  handleCloseWarning = () => {
-    this.setState({warningState: ''})
-  }
+
   createNewCharacter = () => {
-    this.handleCloseWarning()
     this.loadCharacter(cloneDeep(newCharacter), 'newCharacter.json')
     this.setState({isDirty: true})
   }
+
   loadCharacter = (baseCharacter, fileName) => {
     this.props.updateCharacter({
       baseCharacter,
@@ -36,6 +30,7 @@ class CharacterPage extends Component {
     })
     this.setState({ isOpeningFile: false })
   }
+
   updateCharacter = (paths, newValue) => {
     /*
       Single mode: updateCharacter('stats.hitPoints', 10)
@@ -58,9 +53,11 @@ class CharacterPage extends Component {
       isDirty: true
     })
   }
+
   handleSave = () => {
     this.props.updateCharacter({isDirty: false})
   }
+
   render() {
     return (
       <div>
@@ -77,22 +74,21 @@ class CharacterPage extends Component {
             </EmpJsonExporter>
           </Alert>
         }
-        <Modal show={this.state.warningState !== ''} onHide={this.handleCloseWarning}>
-          <Modal.Header closeButton>
-            <Modal.Title>Create New Character</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Are you sure you want to clear the character data and load another character?
-          </Modal.Body>
-          <Modal.Footer>
-            <EmpButton onClick={this.handleCloseWarning}>No</EmpButton>
-            <EmpButton onClick={this.createNewCharacter}>Yes</EmpButton>
-          </Modal.Footer>
-        </Modal>
         <div className={manageCharacter}>
-          <EmpButton onClick={this.handleOpenWarning}>
+          <EmpModal
+            isBlocked={!this.props.characterData.isDirty}
+            title="Create New Character"
+            body="Are you sure you want to clear the character data and load a new character?"
+            closeText="CANCEL"
+            controls={[{
+              label: 'CONFIRM',
+              onClick: this.createNewCharacter
+            }]}
+            onHide={this.handleCloseWarning}
+            onBlocked={this.createNewCharacter}
+          >
             New
-          </EmpButton>
+          </EmpModal>
           <EmpJsonImporter isWarning={this.props.characterData.isDirty} onFileOpen={this.loadCharacter}/>
           {this.props.characterData.character && !this.props.characterData.isDirty &&
             <EmpJsonExporter

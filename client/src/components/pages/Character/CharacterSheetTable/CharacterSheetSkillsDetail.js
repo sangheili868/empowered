@@ -5,29 +5,42 @@ import { borderlessCell } from './CharacterSheetTable.module.scss'
 import { detailTitle } from '../CharacterPage.module.scss'
 
 class CharacterSheetSkillsDetail extends Component {
+  get skillName () {
+    return startCase(this.props.skill.name)
+  }
+
+  get hasFeatures () {
+    return this.props.skill.features.length > 0
+  }
+
+  get hasModifiers () {
+    return this.props.skill.modifiers
+  }
+
+  get features () {
+    return this.props.skill.features.map(({ name }) => name).join(', ')
+  }
+
   render () {
-    const title = startCase(this.props.skill.name)
-    const hasFeatures = this.props.skill.features.length > 0
-    const hasModifiers = this.props.skill.modifiers
     return (
-      <EmpModal title={title+': '+this.props.skill.displayValue} mode={this.props.skill.mode} body={
+      <EmpModal title={this.skillName+': '+this.props.skill.displayValue} mode={this.props.skill.mode} body={
         <>
           <div>{this.props.skill.description}</div>
-          {hasFeatures &&
+          {this.hasFeatures &&
             <>
-              <div className={detailTitle}>Features Related to {title}</div>
-              <div>{this.props.skill.features.map(({ name }) => name).join(', ')}</div>
+              <div className={detailTitle}>Features Related to {this.skillName}</div>
+              <div>{this.features}</div>
             </>
           }
-          {hasModifiers &&
+          {this.hasModifiers &&
             <>
-              <div className={detailTitle}>Modifiers to {title}</div>
+              <div className={detailTitle}>Modifiers to {this.skillName}</div>
               <div>{this.props.skill.modifiers}</div>
             </>
           }
         </>
       } className={borderlessCell}>
-        <div>{title}</div>
+        <div>{this.skillName}</div>
         <div>{this.props.skill.displayValue}</div>
       </EmpModal>
     )

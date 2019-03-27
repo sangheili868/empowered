@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetStats from "./CharacterSheetStats"
+import CharacterSheetStats from "./CharacterSheetStats/CharacterSheetStats"
 import CharacterSheetBio from './CharacterSheetTable/CharacterSheetBio'
 import CharacterSheetShop from './CharacterSheetShop/CharacterSheetShop'
 import { header, name, portrait } from './CharacterPage.module.scss'

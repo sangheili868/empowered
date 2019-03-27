@@ -5,12 +5,18 @@ import bioFields from '../../../../gameData/bioFields.json'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 
 class CharacterSheetBio extends Component {
+
   calcDetails = (details, name) => {
     const isTruncating = name === 'portrait' && details
     const truncatedDetails = details.slice(0, 50) + '...'
     const defaultDetails = details || 'CLICK HERE TO EDIT'
     return isTruncating ? truncatedDetails : defaultDetails
   }
+
+  handleSave = (name, value) => {
+    return this.props.updateCharacter(['bio', name], value.details)
+  }
+
   render () {
     return (
       <table className={[bio, table].join(' ')}>
@@ -22,7 +28,7 @@ class CharacterSheetBio extends Component {
               mode="tr"
               description={bioFields[name]}
               fields={{ details: details || '' }}
-              onSave={value => this.props.updateCharacter(['bio', name], value.details)}
+              onSave={this.handleSave.bind(this, name)}
             >
               <td className={[cell, field].join(' ')}>{startCase(name)}</td>
               <td className={cell}>{this.calcDetails(details, name)}</td>

@@ -32,7 +32,7 @@ class CharacterSheetStatsResources extends Component {
     ])
   }
 
-  handleUpdateDice = value => {
+  handleUpdateDice = (dieSize, value) => {
     this.props.updateCharacter(['stats', 'powerDice', dieSize, 'current'], value)
   }
 
@@ -92,7 +92,7 @@ class CharacterSheetStatsResources extends Component {
                 value={current}
                 dieSize={dieSize}
                 max={max}
-                onUpdate={this.handleUpdateDice}
+                onUpdate={this.handleUpdateDice.bind(this, dieSize)}
               />
             )
             .value()

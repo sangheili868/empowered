@@ -26,6 +26,7 @@ class EmpJsonImporter extends Component {
         <EmpModal
           title="Loading Character From File"
           body="Are you sure you want to clear the character data and load another character?"
+          closeText="CANCEL"
           controls={[{
             label: 'Confirm',
             onClick: this.openFileDialog

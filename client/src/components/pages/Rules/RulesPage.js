@@ -1,45 +1,17 @@
 import React, { Component } from 'react';
-import { rules, card, nestedCard, table, cardTable, cell, critical, columnHeader, skillDetail } from "./RulesPage.module.scss"
+import { card, nestedCard, table } from "./RulesPage.module.scss"
 import EmpCard from '../../EmpCard/EmpCard'
-import { startCase, map } from 'lodash'
-import RulesSkill from './RulesSkill'
-import actions from '../../../gameData/actions.json'
-import conditions from '../../../gameData/conditions.json'
+import CharacterSheetSkills from '../Character/CharacterSheetTable/CharacterSheetSkills'
+import RulesActions from './RulesActions'
+import RulesConditions from './RulesConditions'
+import RulesCriticals from './RulesCriticals'
 
 class RulesPage extends Component {
-  topScores = ['strong', 'aware', 'smart']
-  leftScores = ['quick', 'determined', 'social']
   render() {
     return (
-      <div className={rules}>
-        <EmpCard title="Skill Grid" isStartingOpen>
-          <table className={table}>
-            <tbody>
-              <tr>
-                <td></td>
-                {this.topScores.map(topScore =>
-                  <td key={topScore} className={[columnHeader, skillDetail].join(' ')}>{startCase(topScore)}</td>
-                )}
-              </tr>
-              {this.leftScores.map(leftScore =>
-                <tr key={leftScore}>
-                  <td className={[columnHeader, skillDetail].join(' ')}>{startCase(leftScore)}</td>
-                  {this.topScores.map(topScore =>
-                    <td key={topScore}><RulesSkill firstScore={topScore} secondScore={leftScore}/></td>
-                  )}
-                  <td><RulesSkill firstScore={leftScore} secondScore={leftScore}/></td>
-                </tr>
-              )}
-              <tr>
-                <td></td>
-                {this.topScores.map(topScore =>
-                  <td key={topScore}><RulesSkill firstScore={topScore} secondScore={topScore}/></td>
-                )}
-              </tr>
-            </tbody>
-          </table>
-        </EmpCard>
-        <EmpCard title="Using Skills">
+      <>
+        <CharacterSheetSkills noSpacing/>
+        <EmpCard title="Using Skills" noSpacing>
           <div className={card}>
             <p>
               You have six ability scores and fifteen skills. Most skills are tied to two different ability scores. Each of these skills has a modifier equal to the sum of each of these ability scores. For example, the skill Athletics is tied to the abilities Strong and Quick. So if your Strong score is +3 and your Quick score is -1, your Athletics modifier is +2. Some other skills are tied to only one ability. Their modifiers are equal to twice the ability score. For example, a Strong score of +3 gives you a Brawn modifier of +6.
@@ -52,7 +24,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Health">
+        <EmpCard title="Health" noSpacing>
           <div className={card}>
             <p>
               You have a number of hit points equal to your passive fortitude. When you take damage that reduces your hit points to 0, you take a wound, and then your hit points return to their max. Then, any remaining damage carries over to this new health pool. For example, if you have 10 hitpoints and take 23 damage, you take two wounds and your hit points become 7/10. When you would take a fifth wound, instead make a death roll by rolling willpower against DC 10. If you fail, you die. If you succeed, you return to 1 hit point and 4 wounds and you gain a permanent, negative feature of the DM’s choice, called an injury. The only way to remove an injury is by taking downtime to recuperate. You cannot perform any other downtime activity while recuperating.
@@ -62,7 +34,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Power Dice">
+        <EmpCard title="Power Dice" noSpacing>
           <div className={card}>
             <p>
               You have a number of power dice of various sizes. For example, you might have 2d4 and 1d6 power dice. These dice are used for various features. When you use a power dice in any way, roll it, and then it is gone. When you rest, you regain all your power dice.
@@ -73,21 +45,19 @@ class RulesPage extends Component {
             <table className={table}>
               <thead><tr><th colSpan="2">Boosted Probabilities</th></tr></thead>
               <tbody>
-                <tr><td>d4</td><td>25%</td></tr>
-                <tr><td>d6</td><td>50%</td></tr>
-                <tr><td>d8</td><td>63%</td></tr>
-                <tr><td>d10</td><td>70%</td></tr>
-                <tr><td>d12</td><td>75%</td></tr>
+                {[4,6,8,10,12].map(dieSize =>
+                  <tr><td>d{dieSize}</td><td>{100 - (300 / dieSize)}%</td></tr>
+                )}
               </tbody>
             </table>
           </div>
         </EmpCard>
-        <EmpCard title="Recovery">
+        <EmpCard title="Recovery" noSpacing>
           <div className={card}>
             There are two types of recovery: rest and downtime. Rest takes about 8 hours to complete, and you can only rest once every 24 hours. After completing a rest, you regain all of your spent power dice and lost hit points. Downtime takes at least five days but can last as long as you want. For every five days that you spend in downtime, you recover all of your wounds and can perform one downtime activity. Also, when you take downtime, you can spend advancements. Finally, you can reject any features from the advancement shop. Those features are removed from your shop, and the DM creates new ones to fill the empty spaces at the end of the downtime.
           </div>
         </EmpCard>
-        <EmpCard title="Advancements">
+        <EmpCard title="Advancements" noSpacing>
           <div className={card}>
             <p>
               Every character starts with 35 advancements, and you can expect to earn on average 1 advancement per session. When you begin your adventure, and every time you take downtime, you can spend your advancements in your advancement shop. Your shop includes several things common to all players, such as increasing ability scores, adding more power dice, increasing the size of power dice, and gaining new proficiencies.
@@ -100,7 +70,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Equipment">
+        <EmpCard title="Equipment" noSpacing>
           <div className={card}>
             <p>
               Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must take the feature that gives you proficiency with it. The only exceptions are improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.
@@ -110,7 +80,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Armor, Shields, and Weapons">
+        <EmpCard title="Armor, Shields, and Weapons" noSpacing>
           <div className={card}>
             <p>
               Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
@@ -123,7 +93,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Combat">
+        <EmpCard title="Combat" noSpacing>
           <div className={card}>
             <p>
               When combat begins, the DM organizes all of the creatures present into sides. The side of the creature that initiated combat goes first. On a side’s turn, each creature on that side can take up to three actions. The creatures on that side can take these actions in any order, and can even separate their actions around the actions of other creatures on that side.  The lists below include actions that every creature can take, but often features add more actions to each of these lists for that character.
@@ -137,83 +107,21 @@ class RulesPage extends Component {
             <p>
               Before rolling an attack, you can declare a nonlethal strike. All damage you inflict is halved, and if the target would die, they are knocked unconscious instead, until they recover any hit points. If you attack a creature that cannot sense you, you gain advantage on the attack roll. If a creature that cannot sense you attacks you, you have advantage on the defense roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss.
             </p>
-            {map(actions, (actionList, category) =>
-              <EmpCard key={category} title={startCase(category)} className={nestedCard}>
-                <table className={cardTable}>
-                  <tbody>
-                    {actionList.map(({ name, description }) =>
-                      <tr key={name}><td className={cell}>{name}</td><td className={cell}>{description}</td></tr>
-                    )}
-                  </tbody>
-                </table>
-              </EmpCard>
-            )}
-            <EmpCard title="Critical Tables" className={nestedCard}>
-              <div className={card}>
-                If you make an attack or defense roll and roll a natural 20 on the d20 before modifiers, or beat the other creature's roll by 10 or more, you critically succeed. If you critically succeed on an attack roll, the attack automatically hits, you roll all damage dice twice, you add all damage modifiers twice, and you roll on the table below. If you critically succeed on a defense roll, the attack automatically misses, and you roll on the table below.
-                <table className={[table, critical].join(' ')}>
-                  <thead><tr><th className={cell}>d24</th><th className={cell}>Result</th></tr></thead>
-                  <tbody>
-                    <tr><td className={cell}>1-6</td><td className={cell}>Nothing extra happens</td></tr>
-                    <tr><td className={cell}>7-9</td><td className={cell}>The creature you are fighting loses their reaction until the start of their next turn.</td></tr>
-                    <tr><td className={cell}>10-12</td><td className={cell}>The creature you are fighting falls prone.</td></tr>
-                    <tr><td className={cell}>13-15</td><td className={cell}>The creature you are fighting loses an action on their next turn.</td></tr>
-                    <tr><td className={cell}>16-17</td><td className={cell}>The creature you are fighting drops an item of your choice, and it lands 10 feet away.</td></tr>
-                    <tr><td className={cell}>18-19</td><td className={cell}>Any creature besides you can use their reaction to make a melee attack against the creature you are fighting.</td></tr>
-                    <tr><td className={cell}>20-21</td><td className={cell}>An item of your choice that the creature you are fighting is holding or wearing breaks.</td></tr>
-                    <tr><td className={cell}>22-23</td><td className={cell}>The creature you are fighting can only take 1 action on their side's next turn, and it cannot be a cardinal action.</td></tr>
-                    <tr><td className={cell}>24</td><td className={cell}>You roll on this table two more times.</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div className={card}>
-                If you make an attack or defense roll and roll a natural 1 on the d20 before modifiers, or the other creature beats your roll by 10 or more, you critically fail. If you critically fail an attack roll, the attack automatically misses, and you roll on the table below. If you critically fail a defense roll, the attack automatically hits, the attacker rolls all damage dice twice, the attacker adds all damage modifiers twice, and you roll on the table below.
-                <table className={[table, critical].join(' ')}>
-                  <thead><tr><th className={cell}>d24</th><th className={cell}>Result</th></tr></thead>
-                  <tbody>
-                    <tr><td className={cell}>1</td><td className={cell}>You roll on this table two more times.</td></tr>
-                    <tr><td className={cell}>2-3</td><td className={cell}>You can only take 1 action on your side's next turn, and it cannot be a cardinal action.</td></tr>
-                    <tr><td className={cell}>4-5</td><td className={cell}>You fall prone.</td></tr>
-                    <tr><td className={cell}>6-7</td><td className={cell}>You lose an action on your next turn.</td></tr>
-                    <tr><td className={cell}>8-9</td><td className={cell}>You drop an item of the attacker's choice, and it lands 10 feet away.</td></tr>
-                    <tr><td className={cell}>10-12</td><td className={cell}>Any creature besides the attacker can use their reaction to make a melee attack against You.</td></tr>
-                    <tr><td className={cell}>13-15</td><td className={cell}>An item of the attacker's choice that you are holding or wearing breaks.</td></tr>
-                    <tr><td className={cell}>16-18</td><td className={cell}>You lose your reaction until the start of your next turn.</td></tr>
-                    <tr><td className={cell}>19-24</td><td className={cell}>Nothing extra happens</td></tr>
-                  </tbody>
-                </table>
-              </div>
+            <RulesActions/>
+            <EmpCard title="Critical Hits" className={nestedCard} noSpacing>
+              <div className={card}><RulesCriticals/></div>
             </EmpCard>
           </div>
         </EmpCard>
-        <EmpCard title="Conditions">
+        <EmpCard title="Conditions" noSpacing>
           <div className={card}>
             <p>
               Various actions and features can cause conditions. Each condition grants a new action that allows you or someone else to attempt to end your condition. Conditions can also end early if the action or feature that caused it gives a way to. The DC of a condition is the DC or result of the roll that caused the condition. If there is no such DC, the DM chooses one.
             </p>
           </div>
-          <table className={cardTable}>
-            <thead>
-              <tr>
-                <th className={cell}>Conditon</th>
-                <th className={cell}>Effects</th>
-                <th className={cell}>Action</th>
-                <th className={cell}>Action Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {map(conditions, ({ name, description, action }) =>
-                <tr key={name}>
-                  <td className={cell}>{name}</td>
-                  <td className={cell}>{description}</td>
-                  <td className={cell}>{action ? action.name : 'None'}</td>
-                  <td className={cell}>{action ? action.description : 'None'}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          <RulesConditions/>
         </EmpCard>
-        <EmpCard title="Magic">
+        <EmpCard title="Magic" noSpacing>
           <div className={card}>
             <p>
               Any feature that requires an arcane, divine, or unity focus is called a spell. Most spells use wisdom, synergy, or knowledge, and are more effective the higher the skill modifier is. To cast a spell, you must have a focus of a certain kind, which draws magical energy from one of the three sources: arcane, divine, or unity. Each focus has a built-in magical attack, using a skill based on the source. To attack with a focus, it must be in your main hand. To cast a spell with a focus, it must be in either your main hand or off-hand.
@@ -229,7 +137,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Technology">
+        <EmpCard title="Technology" noSpacing>
           <div className={card}>
             <p>
               Certain weapons, especially those created and designed by a specific person, are often too complex for someone to use well without advanced understanding of how it works. These sorts of weapons are called crafted weapons, and attack using handiwork. This represents your skill in operating them.
@@ -239,7 +147,7 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-      </div>
+      </>
     );
   }
 }

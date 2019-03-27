@@ -17,16 +17,18 @@
   }
 
   &.borderless {
-    margin: 0 10px 10px;
-    width: calc(100% - 20px);
+    width: auto;
+    margin: 5px auto;
+    font-size: inherit;
 
     @media screen and (max-width: 400px) {
       margin: 0 5px 5px;
+      font-size: 12px;
     }
 
     .borderlessCell {
       @media screen and (max-width: 400px) {
-        padding: 2px;
+        padding: 4px;
         margin: 0;
         min-width: 0;
       }

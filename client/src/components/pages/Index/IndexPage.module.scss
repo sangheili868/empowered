@@ -8,6 +8,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 
     .concept {
       width: 150px;
@@ -17,13 +18,13 @@
     }
   }
 
-  .link {
-    color: $blue;
-    text-decoration: underline;
-    display: block;
+  .links {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 
-    &:hover {
-      color: $darkBlue;
+    .link {
+      min-width: 300px;
     }
   }
 }

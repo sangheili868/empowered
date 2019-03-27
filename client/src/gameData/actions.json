@@ -57,6 +57,10 @@
     {
       "name": "Off-hand Attack",
       "description": "As a skill action, you strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn."
+    },
+    {
+      "name": "Repair",
+      "description": "As a skill action, roll handiwork to fix one jammed, malfunctioning, damaged, or otherwise broken item that you are holding. The DC is 10 for a weapon that is jammed or malfunctioning as a result of a natural 1 on an attack roll."
     }
   ],
   "basicActions": [

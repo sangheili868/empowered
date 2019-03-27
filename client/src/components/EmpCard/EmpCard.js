@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { card, title, locked, spacer, caret, hidden } from './EmpCard.module.scss'
+import { card, title, locked, spacer, caret, hidden, noSpacing } from './EmpCard.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpButton from '../EmpButton/EmpButton'
 
@@ -18,6 +18,22 @@ class EmpCard extends Component {
     }
   }
 
+  get cardClasses () {
+    return [
+      card,
+      this.props.className,
+      ...(this.props.noSpacing ? [noSpacing] : [])
+    ].join(' ')
+  }
+
+  get titleClasses () {
+    return [
+      title,
+      ...(this.props.noSpacing ? [noSpacing] : []),
+      (this.props.isLocked ? locked : '')
+    ].join(' ')
+  }
+
   get contentClasses () {
     return [
       this.props.contentClassName,
@@ -27,9 +43,9 @@ class EmpCard extends Component {
 
   render () {
     return (
-      <div className={[card, this.props.className].join(' ')}>
+      <div className={this.cardClasses}>
         <EmpButton
-          className={[title, (this.props.isLocked ? locked : '')].join(' ')}
+          className={this.titleClasses}
           mode={this.props.mode || 'secondary'}
           onClick={this.handleToggle}
         >

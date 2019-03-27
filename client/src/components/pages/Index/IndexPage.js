@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import EmpCard from '../../EmpCard/EmpCard'
-import { card, concepts, concept, link } from './IndexPage.module.scss'
+import { card, concepts, concept, links, link } from './IndexPage.module.scss'
 import characterConcepts from '../../../gameData/characterConcepts.json'
+import EmpButton from '../../EmpButton/EmpButton'
+
 class IndexPage extends Component {
   render() {
     return (
@@ -11,45 +13,51 @@ class IndexPage extends Component {
           Click "How to Play" to learn the rules, or follow the steps below to make your
           first character!
         </p>
-        <EmpCard title="Creating a Character" contentClassName={card}>
-          Follow these steps to create a character:
-          <ol>
-            <li>Talk to your DM about the setting and any other assumptions and general ideas they have for the game.</li>
-            <li>Come up with a concept based on one or more of the suggestions in the table below.</li>
-            <li>Go to the Character page and click "New".</li>
-            <li>Fill out all the bio details. You can click on the name of a field for more information.</li>
-            <li>Go to the Shop page and spend 20 advancements on ability scores.</li>
-            <li>Save your character and send it to your DM. They will add features and equipment to your character based on your bio and send the file back.</li>
-            <li>Load the updated character, and go to the shop tab. Spend the rest of your advancements on anything in the shop.</li>
-            <li>Send the completed character back to your DM so they have the final version.</li>
-          </ol>
-          <EmpCard title="Character Concepts" contentClassName={[card, concepts].join(' ')}>
-            {characterConcepts.map((characterConcept, index) =>
-              <div key={index} className={concept}>{characterConcept}</div>
-            )}
-          </EmpCard>
+        <EmpCard title="Creating a Character" noSpacing>
+          <div className={card}>
+            Follow these steps to create a character:
+            <ol>
+              <li>Talk to your DM about the setting and any other assumptions and general ideas they have for the game.</li>
+              <li>Come up with a concept based on one or more of the suggestions in the table below.</li>
+              <li>Go to the Character page and click "New".</li>
+              <li>Fill out all the bio details. You can click on the name of a field for more information.</li>
+              <li>Go to the Shop page and spend 20 advancements on ability scores.</li>
+              <li>Save your character and send it to your DM. They will add features and equipment to your character based on your bio and send the file back.</li>
+              <li>Load the updated character, and go to the shop tab. Spend the rest of your advancements on anything in the shop.</li>
+              <li>Send the completed character back to your DM so they have the final version.</li>
+            </ol>
+            <EmpCard title="Character Concepts" contentClassName={[card, concepts].join(' ')}>
+              {characterConcepts.map((characterConcept, index) =>
+                <div key={index} className={concept}>{characterConcept}</div>
+              )}
+            </EmpCard>
+          </div>
         </EmpCard>
-        <EmpCard title="Setting" contentClassName={card}>
-          The Empowered RPG System is designed to be setting independent. It can be used
-          for gritty low fantasy, hard science fiction, or anything in between. However,
-          the default setting for Empowered is Eochora. More about Eochora can be found
-          in the links below:
-          <a
-            href="https:/docs.google.com/presentation/d/1H5h-JR5U3ElDHoe3jb9z_efW2N-Jk2JLePFMJBR0PZw/edit?usp=sharing"
-            className={link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            People Places and Gods of Eochora
-          </a>
-          <a
-            href="https://imgur.com/a/j1D6NZF"
-            className={link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Map of Eochora
-          </a>
+        <EmpCard title="Setting" noSpacing>
+          <div className={card}>
+            <p>
+              The Empowered RPG System is designed to be setting independent. It can be used
+              for gritty low fantasy, hard science fiction, or anything in between. However,
+              the default setting for Empowered is Eochora. More about Eochora can be found
+              in the links below:
+            </p>
+            <div className={links}>
+              <a
+                href="https:/docs.google.com/presentation/d/1H5h-JR5U3ElDHoe3jb9z_efW2N-Jk2JLePFMJBR0PZw/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <EmpButton mode="secondary" className={link}>People, Places, and Gods of Eochora</EmpButton>
+              </a>
+              <a
+                href="https://imgur.com/a/j1D6NZF"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <EmpButton mode="secondary" className={link}>Map of Eochora</EmpButton>
+              </a>
+            </div>
+          </div>
         </EmpCard>
       </div>
     );

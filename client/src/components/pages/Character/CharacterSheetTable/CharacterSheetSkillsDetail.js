@@ -10,7 +10,7 @@ class CharacterSheetSkillsDetail extends Component {
   }
 
   get hasFeatures () {
-    return this.props.skill.features.length > 0
+    return this.props.skill.features && this.props.skill.features.length > 0
   }
 
   get hasModifiers () {
@@ -21,9 +21,13 @@ class CharacterSheetSkillsDetail extends Component {
     return this.props.skill.features.map(({ name }) => name).join(', ')
   }
 
+  get title () {
+    return this.props.skill.displayValue ? this.skillName+': '+this.props.skill.displayValue : this.skillName
+  }
+
   render () {
     return (
-      <EmpModal title={this.skillName+': '+this.props.skill.displayValue} mode={this.props.skill.mode} body={
+      <EmpModal title={this.title} mode={this.props.skill.mode} body={
         <>
           <div>{this.props.skill.description}</div>
           {this.hasFeatures &&

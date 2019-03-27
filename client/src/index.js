@@ -15,6 +15,7 @@ import fontAwesomeIcons from './icons/fontAwesomeIcons'
 library.add(fontAwesomeIcons)
 
 class App extends Component {
+
   state = {
     characterData: {
       baseCharacter: null,
@@ -23,6 +24,17 @@ class App extends Component {
       fileName: ''
     }
   }
+
+  updateCharacter = newCharacterData => {
+    this.setState(prevState => ({
+      ...prevState,
+      characterData: {
+        ...prevState.characterData,
+        ...newCharacterData
+      }
+    }))
+  }
+
   render() {
     return (
       <div className="App">
@@ -45,13 +57,7 @@ class App extends Component {
             component: CharacterPage,
             props: {
               characterData: this.state.characterData,
-              updateCharacter: newCharacterData => this.setState(prevState => ({
-                ...prevState,
-                characterData: {
-                  ...prevState.characterData,
-                  ...newCharacterData
-                }
-              }))
+              updateCharacter: this.updateCharacter
             }
           }
         ]}/>

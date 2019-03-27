@@ -8,7 +8,6 @@ class IndexPage extends Component {
   render() {
     return (
       <div>
-        <p>Welcome to the Empowered RPG System!</p>
         <p>
           Click "How to Play" to learn the rules, or follow the steps below to make your
           first character!

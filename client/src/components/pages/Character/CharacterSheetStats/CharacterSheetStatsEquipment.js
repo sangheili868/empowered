@@ -90,7 +90,7 @@ class CharacterSheetStatsEquipment extends Component {
   render () {
     return (
       <CharacterSheetList
-        title="Equipment"
+        title="Gear"
         subtitles={this.subtitles}
         items={pick(this.props.equipment, ['heavy', 'medium', 'light'])}
         editItem={this.renderEditItem}

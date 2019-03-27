@@ -52,7 +52,7 @@ class App extends Component {
             component: RulesPage
           },
           {
-            label: 'Characters',
+            label: 'Character',
             route: '/character',
             component: CharacterPage,
             props: {

@@ -70,26 +70,13 @@ class RulesPage extends Component {
             </p>
           </div>
         </EmpCard>
-        <EmpCard title="Equipment" noSpacing>
+        <EmpCard title="Equipment and Gear" noSpacing>
           <div className={card}>
             <p>
-              Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must take the feature that gives you proficiency with it. The only exceptions are improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.
+              Equipment refers to special items that require training to use. These include weapons, armor, shields, focuses, tools, and vehicles. To properly use equipment, you must purchase proficiency with it from your shop. The only exceptions are improvised weapons, which anyone can use. When you use a weapon that you are not proficient with, it counts as an improvised weapon.
             </p>
             <p>
-              You have a carrying capacity equal to your passive brawn. Every item is either Heavy, Medium, or Light. Heavy counts as 2. Medium counts as 1, and Light counts as 0.1. A coin counts as 0.001, so 100 coins is 1 Light Item and 1000 coins is one Medium Item. If you are over your carrying capacity, you are slowed.
-            </p>
-          </div>
-        </EmpCard>
-        <EmpCard title="Armor, Shields, and Weapons" noSpacing>
-          <div className={card}>
-            <p>
-              Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
-            </p>
-            <p>
-              If you are wielding a shield with which you are proficient, you can take the Block reaction when you roll evasion, using the shield's bonus as your evasion modifier, instead of your agility.
-            </p>
-            <p>
-              When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
+              The items you carrying, including your equipment, are your gear. You have a carrying capacity equal to your passive brawn. Every piece of gear is either Heavy, Medium, or Light. Heavy counts as 2. Medium counts as 1, and Light counts as 0.1. A coin counts as 0.001, so 100 coins is 1 Light Item and 1000 coins is one Medium Item. If you are over your carrying capacity, you are slowed (see conditions).
             </p>
           </div>
         </EmpCard>
@@ -111,6 +98,19 @@ class RulesPage extends Component {
             <EmpCard title="Critical Hits" className={nestedCard} noSpacing>
               <div className={card}><RulesCriticals/></div>
             </EmpCard>
+          </div>
+        </EmpCard>
+        <EmpCard title="Armor, Shields, and Weapons" noSpacing>
+          <div className={card}>
+            <p>
+              Whenever you take physical damage from any source, before applying the damage to your hit points, reduce the damage by the amount of damage reduction that your armor has, to a minimum of 1 damage. If your armor has a stealth penalty, whenever you make a stealth roll, reduce the result by the stealth penalty. If you are wearing armor that you are not proficient in, your movement speed is halved, and you have disadvantage on all quick and attack rolls.
+            </p>
+            <p>
+              If you are wielding a shield with which you are proficient, you can take the Block reaction when you roll evasion, using the shield's bonus as your evasion modifier, instead of your agility.
+            </p>
+            <p>
+              When you take the attack action, you can make an attack using a weapon with which you are proficient. If you attack with a weapon with which you are not proficient, it counts as an improvised weapon. If a weapon falls into multiple categories, you must be proficient in the category to use that attack option. For example, if you have Light Weapon Training but not Light Thrown Weapon Training, and you try to throw a dagger, it counts as an improvised weapon.
+            </p>
           </div>
         </EmpCard>
         <EmpCard title="Conditions" noSpacing>

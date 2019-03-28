@@ -15,6 +15,8 @@ class CharacterSheetStats extends Component {
   {
     const hasFeatures = item.features && item.features.length > 0
     const features = hasFeatures && item.features.map(({ name }) => name).join(', ')
+    const hasConditions = item.conditions && item.conditions.length > 0
+    const conditions = hasConditions && item.conditions.map(({ name }) => name).join(', ')
     return (
       <>
         <div>{item.description}</div>
@@ -22,6 +24,13 @@ class CharacterSheetStats extends Component {
           <>
             <div className={detailTitle}>Features Related to {item.name}</div>
             <div>{features}</div>
+          </>
+        }
+
+        {hasConditions &&
+          <>
+            <div className={detailTitle}>Conditions Affecting {item.name}</div>
+            <div>{conditions}</div>
           </>
         }
       </>

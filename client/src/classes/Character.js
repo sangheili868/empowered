@@ -56,6 +56,10 @@ class Character {
     }
   }
 
+  get conditions () {
+    return this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
+  }
+
   get skills () {
     return chain(skillData).keyBy('name').mapValues(skill => {
       const value = skill.abilityScores.reduce((acc, ability) => acc + this.baseStats.abilityScores[ability], 0)
@@ -63,14 +67,19 @@ class Character {
       const modifiedValue = skill.name === 'stealth' ? value + this.armor.stealthPenalty : value
       const modifierText = this.armor.name +  ': ' + this.armor.stealthPenalty
       const features = this.baseStats.features.filter(({ skillTags }) => skillTags.includes(skill.name))
+      const conditions = this.conditions.filter(({ skillTags }) => skillTags.includes(skill.name))
+      let mode = ''
+      if (conditions.length > 0) mode = 'warning'
+      else if (features.length > 0) mode = 'primary'
       return {
         ...skill,
         value: modifiedValue,
         passive: modifiedValue + 10,
         displayValue: addPlus(modifiedValue),
         features,
+        conditions,
         modifiers: isModified ? modifierText : '',
-        mode: features.length > 0 ? 'primary' : ''
+        mode
       }
     }).value()
   }
@@ -109,6 +118,9 @@ class Character {
           notes: [
             ...(weaponStats.tags ? weaponStats.tags.map(upperFirst) : []),
             ...this.baseStats.features
+              .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
+              .map(({ name }) => name),
+            ...this.conditions
               .filter(({ equipmentTags }) => equipmentTags.includes(weaponStats.proficiency))
               .map(({ name }) => name)
           ].join(', '),
@@ -195,12 +207,17 @@ class Character {
         reactions: 'reaction'
       }, (acc, actionType, columnName) => acc[columnName] = [
         ...actionsData[columnName].map(({ name, description }) => {
-          const relatedFeatures = filter(this.baseStats.features, feature => feature.actionTags.includes(name))
+          const features = this.baseStats.features.filter(({ actionTags }) => actionTags.includes(name))
+          const conditions = this.conditions.filter(({ actionTags }) => actionTags.includes(name))
+          let mode = ''
+          if (conditions.length > 0) mode = 'warning'
+          else if (features.length > 0) mode = 'primary'
           return {
             name,
             description,
-            features: relatedFeatures,
-            mode: relatedFeatures.length > 0 ? 'primary' : ''
+            features,
+            conditions,
+            mode
           }
         }),
         ...filter(this.baseStats.features, feature => feature.actionType === actionType)
@@ -211,7 +228,7 @@ class Character {
           .map(({ action }) => ({ ...action, mode: 'warning' }))
           .value()
       ], {}),
-      conditions: this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
+      conditions: this.conditions
     }
    } else {
      return {}

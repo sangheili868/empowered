@@ -17,8 +17,16 @@ class CharacterSheetSkillsDetail extends Component {
     return this.props.skill.modifiers
   }
 
+  get hasConditions () {
+    return this.props.skill.conditions
+  }
+
   get features () {
     return this.props.skill.features.map(({ name }) => name).join(', ')
+  }
+
+  get conditions () {
+    return this.props.skill.conditions.map(({ name }) => name).join(', ')
   }
 
   get title () {
@@ -34,6 +42,12 @@ class CharacterSheetSkillsDetail extends Component {
             <>
               <div className={detailTitle}>Features Related to {this.skillName}</div>
               <div>{this.features}</div>
+            </>
+          }
+          {this.hasConditions &&
+            <>
+              <div className={detailTitle}>Conditions Affecting {this.skillName}</div>
+              <div>{this.conditions}</div>
             </>
           }
           {this.hasModifiers &&

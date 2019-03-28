@@ -12,10 +12,30 @@ import CharacterSheetTrait from './CharacterSheetTrait'
 
 class CharacterSheetStatsResourcesTraits extends Component {
 
-  buildDescription = (categoryData, { category }) => {
-    if (category && category.value && !Array.isArray(category.value)) {
-      const catData = categoryData.find(cat => cat.category === category.value)
-      return (catData.proficiency !== 'none') ? equipmentProficiencyData[catData.proficiency].description : ''
+  renderDescription = (categoryData, featuresByCategory, { category: selectedCategory }) => {
+    let proficiencyDescription = ''
+    let featuresDescription = ''
+    const hasSelected = selectedCategory && selectedCategory.value && !Array.isArray(selectedCategory.value)
+
+    if (hasSelected) {
+      const selectedCategoryData = categoryData.find(cat => cat.category === selectedCategory.value)
+      const selectedProficiencyData = equipmentProficiencyData[selectedCategoryData.proficiency]
+      const selectedCategoryFeatures = featuresByCategory[selectedCategory.value]
+
+      proficiencyDescription = selectedProficiencyData && selectedProficiencyData.description
+      featuresDescription = selectedCategoryFeatures && selectedCategoryFeatures.map(({name}) => name).join(', ')
+
+      return (
+        <>
+          <div>{proficiencyDescription}</div>
+          {featuresDescription &&
+            <>
+              <div className={detailTitle}>Features Related to {selectedCategoryData.displayName}</div>
+              <div>{featuresDescription}</div>
+            </>
+          }
+        </>
+      )
     }
   }
 
@@ -34,6 +54,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
             value={this.props.shield.rating}
             subtext={this.props.shield.name || this.props.shield.displayName}
             icon={shieldIcon}
+            hasFeatures={this.props.shield.hasFeatures}
             fields={{
               name: this.props.shield.name,
               category: {
@@ -42,7 +63,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
                 options: this.props.shield.options
               }
             }}
-            description={this.buildDescription.bind(this, shieldData)}
+            description={this.renderDescription.bind(this, shieldData, this.props.shield.features)}
             onUpdate={this.props.updateCharacter}
           />
         }
@@ -52,6 +73,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
             value={this.props.armor.rating}
             subtext={this.props.armor.name || this.props.armor.displayName}
             icon={armorIcon}
+            hasFeatures={this.props.armor.hasFeatures}
             fields={{
               name: this.props.armor.name,
               category: {
@@ -60,7 +82,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
                 options: this.props.armor.options
               }
             }}
-            description={this.buildDescription.bind(this, armorData)}
+            description={this.renderDescription.bind(this, armorData, this.props.armor.features)}
             onUpdate={this.props.updateCharacter}
           />
         }

@@ -40,13 +40,13 @@ class CharacterSheetStatsWeapons extends Component {
 
   handleDelete = index => {
     this.props.updateCharacter(['stats', 'weapons'], withoutIndex(
-      this.props.stats.base.weapons,
+      this.props.currentWeapons,
       index
     ))
   }
 
   handleAdd = values => {
-    this.props.updateCharacter('stats.weapons', [ ...this.props.stats.base.weapons, values ])
+    this.props.updateCharacter('stats.weapons', [ ...this.props.currentWeapons, values ])
   }
 
   render () {

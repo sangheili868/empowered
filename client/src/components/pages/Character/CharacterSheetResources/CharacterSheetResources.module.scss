@@ -6,16 +6,13 @@
   color: $red;
 }
 
-.trait {
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
 .subtext {
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 5px;
-  min-height: 20px;
+  min-height: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .recoveryButton {
@@ -73,11 +70,18 @@
       padding: 0 2px;
       margin: 0 10px;
 
+      &.inverted {
+        color: $red;
+      }
+
       &.minus {
-        margin: 5px;
         cursor: pointer;
         font-size: 30px;
         color: $red;
+
+        &.inverted {
+          color: $green;
+        }
       }
 
       &.hidden {

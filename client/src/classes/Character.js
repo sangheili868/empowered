@@ -39,13 +39,20 @@ class Character {
   }
 
   get armor () {
+    const categoryData = keyBy(armorData, 'category')
     return {
       ...this.baseStats.armor,
-      ...keyBy(armorData, 'category')[this.baseStats.armor.category],
+      ...categoryData[this.baseStats.armor.category],
       options: chain(armorData).filter(({proficiency}) =>
         this.baseStats.proficiencies.equipment.map(({category}) => category)
         .includes(proficiency) || proficiency === 'none'
       ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+      hasFeatures: this.baseStats.features.some(({ equipmentTags }) =>
+        equipmentTags.includes(categoryData[this.baseStats.armor.category].proficiency)
+      ),
+      features: mapValues(categoryData, ({proficiency}) => this.baseStats.features.filter(({ equipmentTags }) =>
+        equipmentTags.includes(proficiency)
+      ))
     }
   }
 
@@ -70,7 +77,9 @@ class Character {
 
   get stats () {
    if (this.baseStats) {
-    const shieldCatStats = keyBy(shieldData, 'category')[this.baseStats.shield.category]
+
+    const shieldCategoryData = keyBy(shieldData, 'category')
+    const shieldCatStats = shieldCategoryData[this.baseStats.shield.category]
     const shield = {
       ...this.baseStats.shield,
       ...shieldCatStats,
@@ -79,6 +88,12 @@ class Character {
         this.baseStats.proficiencies.equipment.map(({category}) => category)
         .includes(proficiency) || proficiency === 'none'
       ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
+      hasFeatures: this.baseStats.features.some(({ equipmentTags }) =>
+        equipmentTags.includes(shieldCategoryData[this.baseStats.shield.category].proficiency)
+      ),
+      features: mapValues(shieldCategoryData, ({proficiency}) => this.baseStats.features.filter(({ equipmentTags }) =>
+        equipmentTags.includes(proficiency)
+      ))
     }
     const weapons = this.baseStats.weapons.map(weapon => {
       const weaponStats = weaponData[weapon.category]

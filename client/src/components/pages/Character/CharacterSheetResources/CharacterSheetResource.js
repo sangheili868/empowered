@@ -6,6 +6,7 @@ import {
   counter,
   minus,
   hidden,
+  inverted,
   subtext
 } from "./CharacterSheetResources.module.scss"
 import { plus } from '../CharacterPage.module.scss'
@@ -18,7 +19,8 @@ class CharacterSheetResource extends Component {
     return [
       counter,
       type,
-      ...(isShowing ? [] : [hidden])
+      ...(isShowing ? [] : [hidden]),
+      ...(this.props.isInvertingControls ? [inverted] : [])
     ].join (' ')
   }
 
@@ -38,20 +40,26 @@ class CharacterSheetResource extends Component {
     this.props.onUpdate(parseInt(this.props.value) - 1)
   }
 
+  get renderPlus () {
+    return this.props.onUpdate &&
+      <FontAwesomeIcon className={this.plusClasses} onClick={this.handleIncrement} icon="plus-square"/>
+  }
+
+  get renderMinus () {
+    return this.props.onUpdate &&
+      <FontAwesomeIcon className={this.minusClasses} onClick={this.handleDecrement} icon="minus-square"/>
+  }
+
   render () {
     return (
       <EmpCard isLocked title={this.props.title}>
        <div className={info}>
          <div className={valueRow}>
-            {this.props.onUpdate &&
-              <FontAwesomeIcon className={this.minusClasses} onClick={this.handleDecrement} icon="minus-square"/>
-            }
+            {this.props.isInvertingControls ? this.renderPlus : this.renderMinus}
             <div className={resource} style={{ backgroundImage: `url(${this.props.icon})` }}>
               {this.props.value}
             </div>
-            {this.props.onUpdate &&
-              <FontAwesomeIcon className={this.plusClasses} onClick={this.handleIncrement} icon="plus-square"/>
-            }
+            {this.props.isInvertingControls ? this.renderMinus : this.renderPlus}
           </div>
           <div className={subtext}>{this.props.children}</div>
         </div>

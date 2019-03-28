@@ -20,8 +20,23 @@ class CharacterSheetStatsHealth extends Component {
     ])
   }
 
-  get hitPointsSubtext () {
-    return `Max: ${this.props.maxHP} ${this.props.maxOverheal > 0 && 'Overheal: ' + this.props.maxOverheal}`
+  handleHitPointsSetMax = () => {
+    this.props.updateCharacter('stats.hitPoints', this.props.maxHP)
+  }
+
+  handleHitPointsSetMaxOverheal = () => {
+    this.props.updateCharacter('stats.hitPoints', this.props.maxOverheal)
+  }
+
+  get renderHitPointsSubtext () {
+    return (
+      <>
+        <EmpButton onClick={this.handleHitPointsSetMax}>Max: {this.props.maxHP}</EmpButton>
+        {this.props.maxOverheal > 0 &&
+          <EmpButton onClick={this.handleHitPointsSetMaxOverheal}>Overheal: {this.props.maxOverheal}</EmpButton>
+        }
+      </>
+    )
   }
 
   render () {
@@ -49,13 +64,14 @@ class CharacterSheetStatsHealth extends Component {
               icon={hitPointsIcon}
               onUpdate={this.handleHitPointsUpdate}
             >
-              {this.hitPointsSubtext}
+              {this.renderHitPointsSubtext}
             </CharacterSheetResource>
             <CharacterSheetResource
               title="Wounds"
               value={this.props.wounds}
               max={this.props.maxWounds}
               icon={woundIcon}
+              isInvertingControls
               onUpdate={value => this.props.updateCharacter('stats.wounds', value)}
             >
               Death Roll At: {this.props.maxWounds}

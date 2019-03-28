@@ -1,32 +1,32 @@
 import React, { Component } from 'react'
-import { resource, trait, subtext } from "./CharacterSheetResources.module.scss"
-import EmpCard from '../../../EmpCard/EmpCard'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
-import { startCase } from 'lodash'
+import { pick, startCase } from 'lodash'
+import CharacterSheetResource from './CharacterSheetResource'
 
 class CharacterSheetTrait extends Component {
 
+  get editorMode () {
+    return this.props.hasFeatures ? 'primary' : ''
+  }
+
   handleSave = values => {
+    console.log(values, this.props.trait)
     return this.props.onUpdate(['stats', this.props.trait], values)
   }
 
   render () {
     return (
-      <EmpCard isLocked title={startCase(this.props.trait)}>
+      <CharacterSheetResource {...pick(this.props, ['value', 'icon'])} title={startCase(this.props.trait)}>
         <EmpItemEditor
           title={'Edit ' + startCase(this.props.trait)}
-          mode="text"
-          className={trait}
+          mode={this.editorMode}
           fields={this.props.fields}
           description={this.props.description}
           onSave={this.handleSave}
         >
-          <div className={resource} style={{ backgroundImage: `url(${this.props.icon})` }}>
-            {this.props.value}
-          </div>
-          <div className={subtext}>{this.props.subtext}</div>
+          {this.props.subtext}
         </EmpItemEditor>
-      </EmpCard>
+      </CharacterSheetResource>
     )
   }
 }

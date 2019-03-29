@@ -43,14 +43,14 @@ class IndexPage extends Component {
             </p>
             <div className={links}>
               <a
-                href="https:/docs.google.com/presentation/d/1H5h-JR5U3ElDHoe3jb9z_efW2N-Jk2JLePFMJBR0PZw/edit?usp=sharing"
+                href="http://docs.google.com/presentation/d/1H5h-JR5U3ElDHoe3jb9z_efW2N-Jk2JLePFMJBR0PZw/edit?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <EmpButton mode="secondary" className={link}>People, Places, and Gods of Eochora</EmpButton>
               </a>
               <a
-                href="https://imgur.com/a/j1D6NZF"
+                href="http://imgur.com/a/j1D6NZF"
                 target="_blank"
                 rel="noopener noreferrer"
               >

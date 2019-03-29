@@ -1,47 +1,50 @@
 const ObjectID = require('mongodb').ObjectID
+const _ = require('lodash')
 
-exports.readAll = (db, body, responder) => {
+exports.readAllNames = (db, body, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.find().toArray((err, characterDocuments) => {
+  const projection = { 'bio.name': 1 }
+  characterCollection.find({}, { projection }).toArray((err, characterDocuments) => {
     if(err) throw err
-    console.log(characterDocuments)
+    console.log(`Read ${characterDocuments.length} character names`)
     responder.send(characterDocuments)
   })
 }
 
 exports.create = (db, { body: { character } }, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.insert(character, (err, result) => {
+  characterCollection.insertOne(character, (err, result) => {
     if(err) throw err
-    const id = result.insertedIds[0]
-    console.log(`Created character with id ${id} using data ${JSON.stringify(character)}`)
-    responder.send(id)
+    const _id = result.insertedId
+    console.log(`Created character ${_id}`)
+    responder.send(_id)
   })
 }
 
-exports.read = (db, { body: { id } }, responder) => {
+exports.read = (db, { body: { _id } }, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.findOne({ _id: new ObjectID(id) }, (err, characterDocument) => {
+  characterCollection.findOne({ _id: new ObjectID(_id) }, (err, characterDocument) => {
     if(err) throw err
-    console.log(`Reading character: ${JSON.stringify(characterDocument)}`)
+    console.log(`Reading character ${_id}`)
     responder.send(characterDocument)
   })
 }
 
-exports.update = (db, { body: { id, character } }, responder) => {
+exports.update = (db, { body: { _id, character } }, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.replaceOne({ _id: new ObjectID(id) }, character, (err, result) => {
+  const characterData = _.omit(character, '_id')
+  characterCollection.replaceOne({ _id: new ObjectID(_id) }, characterData, (err, result) => {
     if(err) throw err
-    console.log(`Updated character with id ${id} using data ${JSON.stringify(character)}`)
+    console.log(`Updated character ${_id}`)
     responder.send()
   })
 }
 
-exports.delete = (db, { body: { id } }, responder) => {
+exports.delete = (db, { body: { _id } }, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.deleteOne({ _id: new ObjectID(id) }, (err, result) => {
+  characterCollection.deleteOne({ _id: new ObjectID(_id) }, (err, result) => {
     if(err) throw err
-    console.log(`Deleted character with id ${id}`)
+    console.log(`Deleted character with id ${_id}`)
     responder.send()
   })
 }

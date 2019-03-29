@@ -1,34 +1,30 @@
 import React, { Component } from 'react'
-import EmpJsonImporter from '../../EmpJsonImporter/EmpJsonImporter'
-import EmpJsonExporter from '../../EmpJsonExporter'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
 import { cloneDeep, every, has, set } from 'lodash'
 import EmpModal from '../../EmpModal/EmpModal'
 import newCharacter from '../../../gameData/newCharacter'
-import { alert, saveButton, manageCharacter } from './CharacterPage.module.scss'
+import { alert, manageCharacter } from './CharacterPage.module.scss'
 import { Alert } from 'react-bootstrap'
+import CharacterLoader from './CharacterLoader'
 
 class CharacterPage extends Component {
 
-  state = {
-    isOpeningFile: false
-  }
-
   createNewCharacter = () => {
-    this.loadCharacter(cloneDeep(newCharacter), 'newCharacter.json')
-    this.setState({isDirty: true})
-  }
-
-  loadCharacter = (baseCharacter, fileName) => {
+    const baseCharacter = cloneDeep(newCharacter)
     this.props.updateCharacter({
       baseCharacter,
       character: new Character(baseCharacter),
-      isDirty: false,
-      fileName
+      isUnnamed: true,
     })
-    this.setState({ isOpeningFile: false })
+  }
+
+  handleLoad = baseCharacter => {
+    this.props.updateCharacter({
+      baseCharacter,
+      character: new Character(baseCharacter),
+    })
   }
 
   updateCharacter = (paths, newValue) => {
@@ -49,34 +45,21 @@ class CharacterPage extends Component {
     }
     this.props.updateCharacter({
       baseCharacter,
-      character: new Character(baseCharacter),
-      isDirty: true
+      character: new Character(baseCharacter)
     })
-  }
-
-  handleSave = () => {
-    this.props.updateCharacter({isDirty: false})
   }
 
   render() {
     return (
       <div>
-        {this.props.characterData.isDirty &&
+        {this.props.characterData.isUnnamed &&
           <Alert className={alert} variant="danger">
-            <div>Warning: Your character has unsaved changes!</div>
-            <EmpJsonExporter
-              className={saveButton}
-              content={this.props.characterData.character.exportData}
-              fileName={this.props.characterData.fileName}
-              onSave={this.handleSave}
-            >
-              Save
-            </EmpJsonExporter>
+            Warning: Your character will not be saved until it is given a name!
           </Alert>
         }
         <div className={manageCharacter}>
           <EmpModal
-            isBlocked={!this.props.characterData.isDirty}
+            isBlocked={!this.props.characterData.isUnnamed}
             title="Create New Character"
             body="Are you sure you want to clear the character data and load a new character?"
             closeText="CANCEL"
@@ -89,16 +72,7 @@ class CharacterPage extends Component {
           >
             New
           </EmpModal>
-          <EmpJsonImporter isWarning={this.props.characterData.isDirty} onFileOpen={this.loadCharacter}/>
-          {this.props.characterData.character && !this.props.characterData.isDirty &&
-            <EmpJsonExporter
-              content={this.props.characterData.character.exportData}
-              fileName={this.props.characterData.fileName}
-              onSave={this.handleSave}
-            >
-              Export
-            </EmpJsonExporter>
-          }
+          <CharacterLoader isUnnamed={this.props.characterData.isUnnamed} onLoad={this.handleLoad}/>
         </div>
         {this.props.characterData.character &&
           <div>

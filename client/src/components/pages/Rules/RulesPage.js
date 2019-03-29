@@ -46,7 +46,7 @@ class RulesPage extends Component {
               <thead><tr><th colSpan="2">Boosted Probabilities</th></tr></thead>
               <tbody>
                 {[4,6,8,10,12].map(dieSize =>
-                  <tr><td>d{dieSize}</td><td>{100 - (300 / dieSize)}%</td></tr>
+                  <tr key={dieSize}><td>d{dieSize}</td><td>{100 - (300 / dieSize)}%</td></tr>
                 )}
               </tbody>
             </table>

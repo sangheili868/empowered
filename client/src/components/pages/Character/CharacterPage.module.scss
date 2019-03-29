@@ -8,10 +8,6 @@
   justify-content: space-around;
   align-items: center;
   display: flex;
-
-  .saveButton {
-    margin: 10px;
-  }
 }
 
 .manageCharacter {
@@ -43,6 +39,11 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
+}
+
+
+.warningText {
+  color: $red;
 }
 
 .plus {

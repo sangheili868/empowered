@@ -20,12 +20,57 @@ class App extends Component {
     characterData: {
       baseCharacter: null,
       character: null,
-      isDirty: false,
-      fileName: ''
+      isUnnamed: false
     }
   }
 
+  updateCharacterInDatabase = data => {
+    fetch('/api/character/update', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    this.setState(prevState => ({
+      ...prevState,
+      characterData: {
+        ...prevState.characterData,
+        isUnnamed: false
+      }
+    }))
+  }
+
+  createCharacterInDatabase = character => {
+    fetch('/api/character/create', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ character })
+    })
+    .then(response => response.json())
+    .then(newId => {
+      this.setState(prevState => ({
+        ...prevState,
+        characterData: {
+          ...prevState.characterData,
+          baseCharacter: {
+            ...prevState.characterData.baseCharacter,
+            _id: newId
+          },
+          isUnnamed: false
+        }
+      }))
+    })
+  }
+
   updateCharacter = newCharacterData => {
+    const character = newCharacterData.baseCharacter
+    const _id = character._id
+
+    if (_id) {
+      this.updateCharacterInDatabase({ character, _id })
+    } else if (character.bio.name) {
+      this.createCharacterInDatabase(character)
+    }
+
     this.setState(prevState => ({
       ...prevState,
       characterData: {

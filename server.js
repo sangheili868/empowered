@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000
 const MongoClient = require('mongodb').MongoClient
 const uri = 'mongodb://cmaheu:l33tSUPAh4x0r@ds249035.mlab.com:49035/heroku_156sz8g7'
 
-MongoClient.connect(uri, (err, client) => {
+MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if(err) throw err
   const db = client.db('heroku_156sz8g7')
 
@@ -17,7 +17,7 @@ MongoClient.connect(uri, (err, client) => {
   // API calls
   app.post('/api/character/create', character.create.bind(this, db))
   app.post('/api/character/read', character.read.bind(this, db))
-  app.post('/api/character/readAll', character.readAll.bind(this, db))
+  app.post('/api/character/readAllNames', character.readAllNames.bind(this, db))
   app.post('/api/character/update', character.update.bind(this, db))
   app.post('/api/character/delete', character.delete.bind(this, db))
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
-import { warning } from './CharacterSheetShop.module.scss'
+import { warningText } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
 import featureFields from '../../../../gameData/featureFields'
 import withoutIndex from '../../../../utils/withoutIndex'
@@ -40,7 +40,7 @@ class CharacterSheetShopFeatures extends Component {
   renderBuyButton = index => {
     const feature = cloneDeep(this.props.features[index])
     return (feature.cost > this.props.advancements) ? (
-      <div className={warning}>Costs {feature.cost} adv.</div>
+      <div className={warningText}>Costs {feature.cost} adv.</div>
     ) : (
       <EmpButton mode="success" onClick={this.handleBuy.bind(this, index, feature)}>-{feature.cost} Adv.</EmpButton>
     )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { warning, languages } from './CharacterSheetShop.module.scss'
+import { languages } from './CharacterSheetShop.module.scss'
+import { warningText } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
@@ -22,9 +23,9 @@ class CharacterSheetShopProficiencies extends Component {
   renderBuyEquipmentButton = (proficiencies, index) => {
     const proficiency = proficiencies[index]
     if (proficiency.meetingRequirementsMessage) {
-      return <div className={warning}>{proficiency.meetingRequirementsMessage}</div>
+      return <div className={warningText}>{proficiency.meetingRequirementsMessage}</div>
     } else if (1 > this.props.advancements) {
-      return <div className={warning}>Costs 1 adv.</div>
+      return <div className={warningText}>Costs 1 adv.</div>
     } else {
       return <EmpButton mode="success" onClick={this.handleBuyEquipment.bind(this, proficiency)}>-1 Adv. </EmpButton>
     }

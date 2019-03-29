@@ -26,7 +26,7 @@ class EmpItemEditor extends Component {
         mode: 'warning'
       },
       {
-        label: 'SAVE',
+        label: this.props.saveLabel || 'SAVE',
         isHidden: isEmpty(this.state.workingValues),
         onClick: this.handleDone,
         mode: 'secondary'
@@ -34,10 +34,10 @@ class EmpItemEditor extends Component {
     ]
   }
 
-  handleOpen = () => {
-    this.setState({
-      workingValues: cloneDeep(this.props.fields)
-    })
+  handleOpen = async () => {
+    this.setState({ workingValues: cloneDeep(this.props.fields) })
+    if (this.props.onOpen) await this.props.onOpen()
+    this.setState({ workingValues: cloneDeep(this.props.fields) })
   }
 
   handleDone = () => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { warning } from './CharacterSheetShop.module.scss'
+import { warningText } from '../CharacterPage.module.scss'
 import { lowerCase } from 'lodash'
 import EmpButton from '../../../EmpButton/EmpButton'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
@@ -27,11 +27,11 @@ class CharacterSheetShopAbilityScores extends Component {
   renderBuyButton = index => {
     const score = this.props.abilityScores[index]
     if (!this.props.unlocked && score.value > 2) {
-      return <div className={warning}>At Maximum Starting Value</div>
+      return <div className={warningText}>At Maximum Starting Value</div>
     } else if (score.value > 4) {
-      return <div className={warning}>At Maximum</div>
+      return <div className={warningText}>At Maximum</div>
     } else if (score.cost > this.props.advancements) {
-      return <div className={warning}>Costs {score.cost} adv.</div>
+      return <div className={warningText}>Costs {score.cost} adv.</div>
     } else {
       return <EmpButton mode="success" onClick={this.handleBuy.bind(this, score)}>-{score.cost} Adv.</EmpButton>
     }
@@ -40,7 +40,7 @@ class CharacterSheetShopAbilityScores extends Component {
   renderSellButton = index => {
     const score = this.props.abilityScores[index]
     return (score.value <= -2) ? (
-      <div className={warning}>At Minimum</div>
+      <div className={warningText}>At Minimum</div>
     ) : (
       <EmpButton mode="warning" onClick={this.handleSell.bind(this, score)}>+{score.worth} Adv.</EmpButton>
     )

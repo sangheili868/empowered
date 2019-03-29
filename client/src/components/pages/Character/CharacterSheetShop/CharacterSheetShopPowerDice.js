@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { warning } from './CharacterSheetShop.module.scss'
+import { warningText } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
 
@@ -36,9 +36,9 @@ class CharacterSheetShopPowerDice extends Component {
   renderBuyButton = index => {
     const die = this.props.powerDice[index]
     if (die.smallerDieCount < 1) {
-      return <div className={warning}>No {die.smallerDie}</div>
+      return <div className={warningText}>No {die.smallerDie}</div>
     } else if (die.cost > this.props.advancements) {
-      return <div className={warning}>Costs {die.cost} adv.</div>
+      return <div className={warningText}>Costs {die.cost} adv.</div>
     } else {
       return <EmpButton mode="success" onClick={this.handleBuy.bind(this, die)}>-{die.cost} Adv.</EmpButton>
     }
@@ -47,7 +47,7 @@ class CharacterSheetShopPowerDice extends Component {
   renderSellButton = index => {
     const die = this.props.powerDice[index]
     return (die.current === 0) ? (
-      <div className={warning}>At Minimum</div>
+      <div className={warningText}>At Minimum</div>
     ) : (
       <EmpButton mode="warning" onClick={this.handleSell.bind(this, die)}> +{die.worth} Adv. </EmpButton>
     )

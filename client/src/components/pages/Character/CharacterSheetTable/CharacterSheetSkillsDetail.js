@@ -18,7 +18,7 @@ class CharacterSheetSkillsDetail extends Component {
   }
 
   get hasConditions () {
-    return this.props.skill.conditions
+    return this.props.skill.conditions && this.props.skill.conditions.length > 0
   }
 
   get features () {

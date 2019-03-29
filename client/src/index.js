@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import './styles/global.scss'
-import './styles/index.scss';
 import CharacterPage from './components/pages/Character/CharacterPage'
 import IndexPage from './components/pages/Index/IndexPage'
 import RulesPage from './components/pages/Rules/RulesPage'
@@ -11,6 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import EmpNavigator from './components/EmpNavigator/EmpNavigator'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import fontAwesomeIcons from './icons/fontAwesomeIcons'
+import EmpTitle from './components/EmpTitle/EmpTitle'
 
 library.add(fontAwesomeIcons)
 
@@ -83,7 +83,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="title">Empowered RPG System</div>
+        <EmpTitle/>
         <EmpNavigator routes={[
           {
             label: 'Home',

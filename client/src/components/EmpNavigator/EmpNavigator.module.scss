@@ -4,16 +4,21 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-around;
   background-color: $orange;
 
   .navLink {
-    margin: 10px;
+    flex: 1;
     color: $lightOrange;
-  }
+    padding: 10px;
 
-  .current .navLink{
-    font-weight: bold;
-    color: $white;
+    &:hover {
+      color: $white;
+      background-color: $darkOrange;
+    }
+
+    &.current {
+      font-weight: bold;
+      color: $white;
+    }
   }
 }

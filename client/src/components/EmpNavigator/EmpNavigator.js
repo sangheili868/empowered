@@ -10,16 +10,17 @@ class EmpNavigator extends Component {
 
   render () {
     return (
-      <div>
+      <>
         <div className={navBar}>
           {this.props.routes.map(({ route, label }) =>
             <NavLink
               key={route}
               to={route}
+              className={navLink}
               activeClassName={current}
               isActive={this.isNotHome}
             >
-              <div className={navLink}>{label}</div>
+              {label}
             </NavLink>
           )}
         </div>
@@ -30,7 +31,7 @@ class EmpNavigator extends Component {
             }/>
           )}
         </div>
-      </div>
+      </>
     )
   }
 }

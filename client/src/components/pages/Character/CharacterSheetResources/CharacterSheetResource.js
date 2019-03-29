@@ -29,7 +29,7 @@ class CharacterSheetResource extends Component {
   }
 
   handleIncrement = () => {
-    this.props.onUpdate(parseInt(this.props.value) + 1)
+    this.props.onUpdate(parseInt(this.props.value) + 1, 1)
   }
 
   get minusClasses () {
@@ -37,7 +37,7 @@ class CharacterSheetResource extends Component {
   }
 
   handleDecrement = () => {
-    this.props.onUpdate(parseInt(this.props.value) - 1)
+    this.props.onUpdate(parseInt(this.props.value) - 1, -1)
   }
 
   get renderPlus () {

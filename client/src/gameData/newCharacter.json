@@ -100,7 +100,7 @@
   },
   "shop": {
     "advancements": 20,
-    "totalEarned": 20,
+    "totalEarned": 0,
     "unlocked": false,
     "features": []
   }

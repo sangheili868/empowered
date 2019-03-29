@@ -30,6 +30,13 @@ class CharacterSheetShop extends Component {
     ])
   }
 
+  handleUpdateAdvancements = (value, delta) => {
+    this.props.updateCharacter([
+      { path: 'shop.advancements', value },
+      { path: 'shop.totalEarned', value: this.props.shop.totalEarned + delta }
+    ])
+  }
+
   render () {
     return (
       <>
@@ -37,10 +44,13 @@ class CharacterSheetShop extends Component {
           <CharacterSheetResource
             title="Advancements"
             value={this.props.shop.advancements}
-            onUpdate={value => this.props.updateCharacter('shop.advancements', value)}
+            onUpdate={this.handleUpdateAdvancements}
             alt="Advancements Icon"
             icon={advancementsIcon}
-          />
+          >
+            Total Earned: {this.props.shop.totalEarned}
+          </CharacterSheetResource>
+
         </div>
         <div className={sheetPage}>
           <CharacterSheetShopAbilityScores
@@ -73,7 +83,7 @@ class CharacterSheetShop extends Component {
               />
               <CharacterSheetTable
                 title="Sell Back"
-                items={this.props.sellBack}
+                items={this.props.shop.sellBack}
                 columnNames={{ name: 'Name', type: 'Type' }}
                 sellButton={this.renderSellBackButton}
               />

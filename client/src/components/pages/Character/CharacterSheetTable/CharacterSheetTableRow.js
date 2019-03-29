@@ -10,8 +10,8 @@ class CharacterSheetTableRow extends Component {
     return mapValues(this.props.fields, (field, key) => ({ ...field, value: this.props.item[key] }))
   }
 
-  handleDelete = () => {
-    this.props.onDelete && this.props.onDelete(this.props.index)
+  get handleDelete () {
+    return this.props.onDelete && this.props.onDelete.bind(this, this.props.index)
   }
 
   renderRowItems = () => {
@@ -49,7 +49,7 @@ class CharacterSheetTableRow extends Component {
           description={this.props.description}
           fields={this.fields}
           onSave={this.props.onEdit.bind(this, this.props.index)}
-          onDelete={this.handleDelete}
+          onDelete={this.props.onDelete && this.handleDelete}
         >
           {this.renderRowItems()}
         </EmpItemEditor>

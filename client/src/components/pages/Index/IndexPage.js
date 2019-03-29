@@ -19,11 +19,12 @@ class IndexPage extends Component {
               <li>Talk to your DM about the setting and any other assumptions and general ideas they have for the game.</li>
               <li>Come up with a concept based on one or more of the suggestions in the table below.</li>
               <li>Go to the Character page and click "New".</li>
+              <li>Give your character a name. This saves the character to the character list.</li>
               <li>Fill out all the bio details. You can click on the name of a field for more information.</li>
               <li>Go to the Shop page and spend 20 advancements on ability scores.</li>
-              <li>Save your character and send it to your DM. They will add features and equipment to your character based on your bio and send the file back.</li>
-              <li>Load the updated character, and go to the shop tab. Spend the rest of your advancements on anything in the shop.</li>
-              <li>Send the completed character back to your DM so they have the final version.</li>
+              <li>Tell your DM your character's name. They will load the character and add features and equipment to your character based on your bio.</li>
+              <li>Once your character has been updated, load it and go to the shop tab. Spend the rest of your advancements on anything in the shop.</li>
+              <li>Let your DM know your character is complete.</li>
             </ol>
             <EmpCard title="Character Concepts" contentClassName={[card, concepts].join(' ')}>
               {characterConcepts.map((characterConcept, index) =>

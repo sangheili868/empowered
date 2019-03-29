@@ -7,9 +7,9 @@ import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 class CharacterSheetBio extends Component {
 
   calcDetails = (details, name) => {
-    const isTruncating = name === 'portrait' && details
+    const isTruncating = name === 'portrait' && details && details.length > 50
     const truncatedDetails = details.slice(0, 50) + '...'
-    const defaultDetails = details || 'CLICK HERE TO EDIT'
+    const defaultDetails = details
     return isTruncating ? truncatedDetails : defaultDetails
   }
 

@@ -26,5 +26,12 @@ export default {
   equipmentTags: {
     default: [],
     options: Object.values(equipmentProficiencies).map(({name, category}) => ({ label: name, value: category}))
-  }
+  },
+  speedModifier: { default: '', options: [
+    { label: 'No Change', value: '' },
+    { label: 'Set to 0ft.', value: 'set0' },
+    { label: 'Set to 5ft.', value: 'set5' },
+    { label: 'Add 5ft.', value: 'add5' },
+    { label: 'Subtract 5ft.', value: 'subtract5' },
+  ]}
 }

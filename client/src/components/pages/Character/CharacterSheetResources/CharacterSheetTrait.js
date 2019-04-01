@@ -10,7 +10,7 @@ class CharacterSheetTrait extends Component {
   }
 
   handleSave = values => {
-    return this.props.onUpdate(['stats', this.props.trait], values)
+    return this.props.onUpdate(`stats.${this.props.trait}`, values)
   }
 
   render () {

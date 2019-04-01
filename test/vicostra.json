@@ -1,0 +1,575 @@
+{
+  "_id": {
+    "$oid": "5ca23df36022d94ac8f473f5"
+  },
+  "bio": {
+    "name": "Vicostra Vramiir",
+    "portrait": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/e99a57e7-879f-4c9f-9e6b-e668ea7cf839/db84b4a-30403627-9237-4c07-8fbe-8e46dff568ed.png/v1/fill/w_833,h_960,q_70,strp/drow_bard____tg__shit_post_generator__by_bog_roll_db84b4a-pre.jpg",
+    "highConcept": "Illusionist Spy who Cannot Stand Dissatisfaction",
+    "flaw": "Pathological Liar",
+    "ancestry": "Void Elf",
+    "homeland": "Ushal",
+    "age": "174",
+    "faith": "Minor devotion to Vuhdea, goddess of Joy and Pleasure",
+    "description": "Dark grey skin, long, beautiful white hair, piercing grey eyes, ornate armor with hi-low dress",
+    "personalityTrait1": "I collect and spread rumors and gossip wherever I go.",
+    "personalityTrait2": "I need to be surrounded by the rich and beautiful.",
+    "ideal": "Illusory Joy. I’ll do whatever it takes to make people think that everything is as they want.",
+    "alignment": "Neutral Social. I find meaning in my interactions with others, and I have little concern for order or freedom, as long as everyone is happy.",
+    "goal": "Rebuild my reputation as a wealthy, benevolent aristocrat.",
+    "fear": "My lies get me into a place full of suffering, such as prison or war, where I have to constantly see people upset.",
+    "friend": "A drug dealer who grew up on the streets with me.",
+    "enemy": "A former lover who killed my mentor",
+    "otherContact": "Mother still works as a servant",
+    "organization": "House Perla is my next shot at success.",
+    "goodMemory": "An upper-class woman adopted me and taught me how to navigate the complex social society of the wealthiest people in Ushal",
+    "badMemory": "A former lover killed my mentor and wants me to suffer after I lied to him.",
+    "profession": "Ushallin Prince cons, then sponsorship by wealthy woman",
+    "hobbies": "Crafting and executing elaborate cons.",
+    "socialStyle": "I try to figure out what people want to hear, then tell them exactly that. I’ll use illusion and enchantment magic to back up my claims if necessary. My deceptions often go very deep, but I make sure to be far away when they get figured out.",
+    "combatStyle": "I use my magic to distract and confuse enemies, and try to convince them that I am not worth fighting. But if that doesn’t work, I am quite skilled with the rapier and hand crossbow. I also utilize a variety of potions.",
+    "equipment": "Fake drow armor, rapier, violin, poison vials, fake letters from a fake drow house, a necklace from my dead mentor"
+  },
+  "stats": {
+    "hitPoints": {
+      "$numberInt": "7"
+    },
+    "wounds": {
+      "$numberInt": "4"
+    },
+    "armor": {
+      "name": "Void Elf Armor",
+      "category": "light"
+    },
+    "shield": {
+      "name": "",
+      "category": "none"
+    },
+    "speed": {
+      "baseValue": {
+        "$numberInt": "20"
+      },
+      "type": "Walking"
+    },
+    "abilityScores": {
+      "strong": {
+        "$numberInt": "-2"
+      },
+      "aware": {
+        "$numberInt": "1"
+      },
+      "smart": {
+        "$numberInt": "1"
+      },
+      "quick": {
+        "$numberInt": "2"
+      },
+      "determined": {
+        "$numberInt": "-1"
+      },
+      "social": {
+        "$numberInt": "3"
+      }
+    },
+    "powerDice": {
+      "d4s": {
+        "current": {
+          "$numberInt": "2"
+        },
+        "max": {
+          "$numberInt": "2"
+        }
+      },
+      "d6s": {
+        "current": {
+          "$numberInt": "1"
+        },
+        "max": {
+          "$numberInt": "1"
+        }
+      },
+      "d8s": {
+        "current": {
+          "$numberInt": "0"
+        },
+        "max": {
+          "$numberInt": "0"
+        }
+      },
+      "d10s": {
+        "current": {
+          "$numberInt": "0"
+        },
+        "max": {
+          "$numberInt": "0"
+        }
+      },
+      "d12s": {
+        "current": {
+          "$numberInt": "0"
+        },
+        "max": {
+          "$numberInt": "0"
+        }
+      }
+    },
+    "conditions": [
+      {
+        "name": "Frightened"
+      },
+      {
+        "name": "Prone"
+      }
+    ],
+    "weapons": [
+      {
+        "name": "Violin",
+        "category": "twoHandedUnityWeapon",
+        "weight": "medium"
+      },
+      {
+        "name": "Smoky Crystal",
+        "category": "oneHandedArcaneWeapon",
+        "weight": "light"
+      },
+      {
+        "name": "Elvish Dagger",
+        "category": "lightMeleeWeapon",
+        "weight": "light"
+      }
+    ],
+    "equipment": {
+      "gold": {
+        "$numberInt": "150"
+      },
+      "heavy": [],
+      "medium": [
+        {
+          "name": "Spy's Tools",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        }
+      ],
+      "light": [
+        {
+          "name": "Mentor's Necklace",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        },
+        {
+          "name": "Poison Vial",
+          "quantity": {
+            "$numberInt": "3"
+          }
+        },
+        {
+          "name": "Rations",
+          "quantity": {
+            "$numberInt": "10"
+          }
+        },
+        {
+          "name": "Perfume",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        },
+        {
+          "name": "Letters from fake royal house",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        },
+        {
+          "name": "Old, poor, man's hat",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        },
+        {
+          "name": "Orc's Loincloth",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        },
+        {
+          "name": "Young girl's ribbon",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        }
+      ]
+    },
+    "proficiencies": {
+      "languages": [
+        {
+          "name": "Volic"
+        },
+        {
+          "name": "Ethactic"
+        },
+        {
+          "name": "Estarian"
+        }
+      ],
+      "equipment": [
+        {
+          "category": "improvisedWeapon"
+        },
+        {
+          "category": "lightArmor"
+        },
+        {
+          "category": "lightMeleeWeapon"
+        },
+        {
+          "category": "arcaneMagicWeapon"
+        },
+        {
+          "category": "unityMagicWeapon"
+        },
+        {
+          "category": "spyTool"
+        },
+        {
+          "category": "chemistTool"
+        }
+      ]
+    },
+    "features": [
+      {
+        "name": "Forked Tongue",
+        "requirements": {
+          "skill": {
+            "name": "persuasion",
+            "level": {
+              "$numberInt": "1"
+            }
+          }
+        },
+        "skillTags": [
+          "persuasion"
+        ],
+        "equipmentTags": [],
+        "actionTags": [
+          "Distract",
+          "Use a Skill"
+        ],
+        "actionType": "",
+        "description": "You can empower persuasion rolls that include a lie.",
+        "cost": {
+          "$numberInt": "1"
+        }
+      },
+      {
+        "name": "Minor Illusion",
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": {
+              "$numberInt": "1"
+            }
+          },
+          "weapon": "arcaneWeapon",
+          "item": "",
+          "other": ""
+        },
+        "skillTags": [
+          "knowledge"
+        ],
+        "equipmentTags": [
+          "arcaneMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "skillAction",
+        "description": "As a skill action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
+        "cost": {
+          "$numberInt": "1"
+        }
+      },
+      {
+        "name": "Magic Disguise",
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          },
+          "weapon": "unityWeapon",
+          "item": "A piece of clothing that has been worn by someone else",
+          "other": ""
+        },
+        "skillTags": [
+          "synergy"
+        ],
+        "equipmentTags": [
+          "unityMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "cardinalAction",
+        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use a basic action to disable or enable the illusion. It must be the same creature for each casting of the spell.",
+        "cost": {
+          "$numberInt": "1"
+        }
+      },
+      {
+        "name": "Memory Theft",
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          },
+          "weapon": "unityWeapon"
+        },
+        "skillTags": [],
+        "equipmentTags": [
+          "unityMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "reaction",
+        "description": "As an empowered reaction when a creature dies within the range of your focus, you can capture some of its memories. You ask the DM one question, and if the creature knew the answer to that question, the DM reveals it to you. Boosted: You may ask up to three questions.",
+        "cost": {
+          "$numberInt": "1"
+        }
+      },
+      {
+        "name": "Pathological Liar",
+        "skillTags": [],
+        "equipmentTags": [],
+        "actionTags": [],
+        "actionType": "",
+        "description": "When a creature correctly claims that you lied to them, or a creature correctly claims that you created an illusion, you have disadvantage on social rolls involving this person for 1 day, unless you convince them otherwise.",
+        "cost": {
+          "$numberInt": "0"
+        }
+      }
+    ]
+  },
+  "shop": {
+    "advancements": {
+      "$numberInt": "5"
+    },
+    "totalEarned": {
+      "$numberInt": "40"
+    },
+    "unlocked": true,
+    "features": [
+      {
+        "name": "Suggestion",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          },
+          "weapon": "unityWeapon"
+        },
+        "skillTags": [
+          "synergy"
+        ],
+        "equipmentTags": [
+          "unityMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "cardinalAction",
+        "description": "As a cardinal action, you make an empowered synergy roll against the willpower of a creature within the range of your focus. If you succeed, the target pursues a course of action of your choice to the best of its ability. The target will not cause harm to itself, physically or otherwise, and the spell ends after 8 hours, when the target completes the action, or when you or any of your companions harms the target. If you fail the roll, the target realizes it was affected by magic."
+      },
+      {
+        "name": "Message",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          }
+        },
+        "skillTags": [],
+        "equipmentTags": [],
+        "actionTags": [],
+        "actionType": "basicAction",
+        "description": "As a basic action, choose a creature within 120 ft. You must see it or know its approximate location. The target mentally receives a simple message from you and can mentally transmit a simple message back to you."
+      },
+      {
+        "name": "Terrifying Whispers",
+        "cost": {
+          "$numberInt": "2"
+        },
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "2"
+            }
+          },
+          "weapon": "unityWeapon"
+        },
+        "skillTags": [],
+        "equipmentTags": [
+          "unityMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "attackModifier",
+        "description": "You can empower an attack with a unity focus. If you hit with that attack, the creature is frightened for 1 minute of you or another creature of your choice that both you and the target can see."
+      },
+      {
+        "name": "Mage Hand",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          }
+        },
+        "skillTags": [
+          "synergy"
+        ],
+        "equipmentTags": [],
+        "actionTags": [
+          "Interact with Object",
+          "Wrestle"
+        ],
+        "actionType": "basicAction",
+        "description": "As a basic action, you create a spectral hand within 30 feet of you. You can spend an action to have it use the Interact with Item, Move, or Wrestle actions. It has a speed of 10 feet and uses your synergy modifier for all of its rolls."
+      },
+      {
+        "name": "Darkness",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": {
+              "$numberInt": "2"
+            }
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "skillTags": [],
+        "equipmentTags": [
+          "arcaneMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "cardinalAction",
+        "description": "As a cardinal empowered action, you create a 20 ft radius shadowy cloud within 120 ft of you for 1 minute. Creatures cannot see other creatures within the cloud, and creatures within the cloud cannot see. Boosted: You can see anything inside the cloud."
+      },
+      {
+        "name": "Invisibility",
+        "cost": {
+          "$numberInt": "2"
+        },
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": {
+              "$numberInt": "4"
+            }
+          },
+          "weapon": "arcaneWeapon"
+        },
+        "skillTags": [],
+        "equipmentTags": [
+          "arcaneMagicWeapon"
+        ],
+        "actionTags": [],
+        "actionType": "cardinalAction",
+        "description": "As an empowered action, you cannot be seen for 1 hour. If you perform any action that interacts with a creature or object other than yourself or an object you are holding, the spell ends. Boosted: The first time the spell would end because of an action you take, it does not end."
+      },
+      {
+        "name": "Jack of All Trades",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "knowledge",
+            "level": {
+              "$numberInt": "-1"
+            }
+          }
+        },
+        "skillTags": [],
+        "equipmentTags": [],
+        "actionTags": [
+          "Use a Skill"
+        ],
+        "actionType": "",
+        "description": "When you roll a skill that you have a negative modifier in, you can expend a power die to treat your modifier as +0. Boosted: Treat the modifier as +1 instead."
+      },
+      {
+        "name": "Deceptive Reasoning",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "skill": {
+            "name": "synergy",
+            "level": {
+              "$numberInt": "1"
+            }
+          }
+        },
+        "skillTags": [
+          "persuasion"
+        ],
+        "equipmentTags": [],
+        "actionTags": [
+          "Distract",
+          "Use a Skill"
+        ],
+        "actionType": "",
+        "description": "If a creature sees an illusion you create and does not realize that it is an illusion, you gain advantage on Persuasion rolls against that creature."
+      },
+      {
+        "name": "Fey Lineage",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "skillTags": [
+          "willpower"
+        ],
+        "equipmentTags": [],
+        "actionTags": [],
+        "actionType": "",
+        "description": "You can empower Willpower rolls to avoid being charmed or put to sleep."
+      },
+      {
+        "name": "Wasteland Survival",
+        "cost": {
+          "$numberInt": "1"
+        },
+        "requirements": {
+          "ancestry": "Void Elf"
+        },
+        "skillTags": [
+          "investigation",
+          "knowledge"
+        ],
+        "equipmentTags": [],
+        "actionTags": [],
+        "actionType": "",
+        "description": "You can empower Investigation checks to find food in arctic, desert, and underground environments, and knowledge checks involving flora and fauna of these environments."
+      }
+    ]
+  }
+}

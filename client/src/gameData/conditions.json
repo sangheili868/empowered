@@ -4,7 +4,8 @@
     "description": "Your speed becomes 0, and you gain the Escape skill action.",
     "skillTags": [],
     "equipmentTags": [],
-    "actionTags": [],
+    "actionTags": ["Move", "Step Away"],
+    "speedModifier": "set0",
     "action": {
       "name": "Escape",
       "description": "As a skill action, roll athletics against the grapple DC to end the grappled condition.",
@@ -25,10 +26,11 @@
   },
   "Prone": {
     "name": "Prone",
-    "description": "Your speed is halved and your attacks have disadvantage. Your agility rolls have advantage against ranged attacks and disadvantage against melee attacks. You gain the Stand Up action.",
+    "description": "Your speed is reduced to 5 feet and your attacks have disadvantage. Your agility rolls have advantage against ranged attacks and disadvantage against melee attacks. You gain the Stand Up action.",
     "skillTags": ["agility"],
     "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon"],
-    "actionTags": [],
+    "actionTags": ["Move"],
+    "speedModifier": "set5",
     "action": {
       "name": "Stand Up",
       "description": "As a basic action, if your speed is greater than 0, you end the prone condition.",
@@ -53,6 +55,7 @@
     "actionTags": ["Attack", "Delay", "Wrestle", "Brace", "Frighten", "Hide", "Search", "Analyze", "Disrupt", "Focus", "Help", "Distract", "Use a Skill", "Off-hand Attack", "Defend", "Draw Items", "Interact with Object", "Move", "Mount", "Prepare", "Reload", "Step Away", "Take Cover", "Target", "Disarm", "Grab", "Seize", "Shove", "Tackle", "Throw", "Trip", "Attack of Opportunity", "Block", "Trigger Prepare", "Identify", "Repair"],
     "skillTags": ["athletics", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "synergy", "knowledge", "agility", "persuasion"],
     "equipmentTags" :["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
+    "speedModifier": "set0",
     "action": {
       "name": "Awaken",
       "description": "As a cardinal action, you wake up an unconscious creature within your reach.",
@@ -61,9 +64,10 @@
   },
   "Slowed": {
     "name": "Slowed",
-    "description": "You have disadvantage on all quick rolls and you can only take one action each turn.",
-    "actionTags": ["Wrestle", "Hide", "Disrupt", "Use a Skill"],
+    "description": "You have disadvantage on all quick rolls, your speed is reduced to 5 feet, and you can only take one action each turn.",
+    "actionTags": ["Move", "Wrestle", "Hide", "Disrupt", "Use a Skill"],
     "skillTags": ["athletics", "stealth", "handiwork", "agility"],
-    "equipmentTags": ["smallShield", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "craftedWeapon", "arcanistTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle", "artisanTool"]
+    "equipmentTags": ["smallShield", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "craftedWeapon", "arcanistTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle", "artisanTool"],
+    "speedModifier": "set5"
   }
 }

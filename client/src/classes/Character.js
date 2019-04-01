@@ -84,12 +84,10 @@ class Character {
     }).value()
   }
 
-  get stats () {
-   if (this.baseStats) {
-
+  get shield () {
     const shieldCategoryData = keyBy(shieldData, 'category')
     const shieldCatStats = shieldCategoryData[this.baseStats.shield.category]
-    const shield = {
+    return {
       ...this.baseStats.shield,
       ...shieldCatStats,
       rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0)),
@@ -104,7 +102,37 @@ class Character {
         equipmentTags.includes(proficiency)
       ))
     }
-    const weapons = this.baseStats.weapons.map(weapon => {
+  }
+
+  get speed () {
+    const modifiers = [
+      ...this.conditions.filter(({ speedModifier }) => speedModifier),
+      ...this.baseStats.features.filter(({ speedModifier }) => speedModifier),
+      ...this.shield.speedModifier ? [this.shield] : []
+    ]
+    const modifierValues = modifiers.map(({ speedModifier }) => speedModifier)
+    const modifierNames = modifiers.map(({ name, displayName }) => name || displayName)
+    let rating
+    if (modifierValues.includes('set0')) {
+      rating = 0
+    } else if (modifierValues.includes('set5')) {
+      rating = 5
+    } else {
+      rating = Math.max(5, 20 +
+        (5 * modifierValues.filter(mod => mod === 'add5').length) +
+        (-5 * modifierValues.filter(mod => mod === 'subtract5').length)
+      )
+    }
+
+    return {
+      ...this.baseStats.speed,
+      rating,
+      modifierNames
+    }
+  }
+
+  get weapons () {
+    return this.baseStats.weapons.map(weapon => {
       const weaponStats = weaponData[weapon.category]
       if (!weaponStats) {
         console.error("Weapon Type not found", weapon)
@@ -129,11 +157,14 @@ class Character {
         }
       }
     })
+  }
+
+  get equipment () {
     const equipment = {
       ...this.baseStats.equipment,
       ...transform(['heavy', 'medium', 'light'], (acc, category) => acc[category] = [
         ...this.baseStats.equipment[category],
-        ...weapons.filter(({weight}) => (weight === category)).map(weapon => ({
+        ...this.weapons.filter(({weight}) => (weight === category)).map(weapon => ({
           name: weapon.name,
           quantity: 1,
           category: 'weapon'
@@ -143,13 +174,27 @@ class Character {
           quantity: 1,
           category: 'armor'
         }] : [],
-        ...shield.weight === category ? [{
-          name: shield.name || shield.displayName,
+        ...this.shield.weight === category ? [{
+          name: this.shield.name || this.shield.displayName,
           quantity: 1,
           category: 'shield'
         }] : []
       ])
     }
+    return {
+      ...equipment,
+      encumberance: {
+        current: (
+          (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
+          (countItems(equipment.light) / 10) + (equipment.gold / 1000)
+        ),
+        limit: this.skills.brawn.passive
+      }
+    }
+  }
+
+  get stats () {
+   if (this.baseStats) {
     return {
       ...this.baseStats,
       base: this.baseStats,
@@ -159,25 +204,12 @@ class Character {
       isDying: this.baseStats.wounds > 4,
       evasion: addPlus(this.skills.agility.value),
       armor: this.armor,
-      shield,
-      speed: {
-        ...this.baseStats.speed,
-        rating: this.baseStats.speed.baseValue + shield.speedPenalty,
-        modifier: (shield.speedPenalty !== 0) ? shield.name + ': ' + addPlus(shield.speedPenalty) : ''
-      },
+      shield: this.shield,
+      speed: this.speed,
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills: this.skills,
-      equipment: {
-        ...equipment,
-        encumberance: {
-          current: (
-            (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
-            (countItems(equipment.light) / 10) + (equipment.gold / 1000)
-          ),
-          limit: this.skills.brawn.passive
-        }
-      },
-      weapons,
+      equipment: this.equipment,
+      weapons: this.weapons,
       availableWeapons: chain(weaponData).pickBy(({proficiency}) =>
         this.baseStats.proficiencies.equipment.map(({category}) => category)
         .includes(proficiency)

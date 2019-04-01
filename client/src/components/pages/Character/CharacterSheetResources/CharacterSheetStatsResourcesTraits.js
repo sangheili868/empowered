@@ -92,13 +92,12 @@ class CharacterSheetStatsResourcesTraits extends Component {
           subtext={this.props.speed.type}
           icon={speedIcon}
           fields={{
-            baseValue: this.props.speed.baseValue,
             type: this.props.speed.type
           }}
-          description={this.props.speed.modifier &&
+          description={this.props.speed.modifierNames.length > 0 &&
             <>
               <div className={detailTitle}>Modifiers:</div>
-              <div>{this.props.speed.modifier}</div>
+              <div>{this.props.speed.modifierNames.join(', ')}</div>
             </>
           }
           onUpdate={this.handleSpeedUpdate}

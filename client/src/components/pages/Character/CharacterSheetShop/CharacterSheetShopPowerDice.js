@@ -7,28 +7,28 @@ class CharacterSheetShopPowerDice extends Component {
 
   handleBuy = die => {
     const smallerDieUpdate = (die.name === 'd4') ? [] : [{
-      path: ['stats', 'powerDice', die.smallerDie], value: {
+      path: `stats.powerDice.${die.smallerDie}`, value: {
         current: die.smallerDieCount - 1,
         max: die.smallerDieCount - 1
       }
     }]
     this.props.updateCharacter([
       { path: 'shop.advancements', value: this.props.advancements - die.cost },
-      { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current + 1, max: die.current + 1 } },
+      { path: `stats.powerDice.${die.name}s`, value: { current: die.current + 1, max: die.current + 1 } },
       ...smallerDieUpdate
     ])
   }
 
   handleSell = die => {
     const smallerDieUpdate = (die.name === 'd4') ? [] : [{
-      path: ['stats', 'powerDice', die.smallerDie], value: {
+      path: `stats.powerDice.${die.smallerDie}`, value: {
         current: die.smallerDieCount + 1,
         max: die.smallerDieCount + 1
       }
     }]
     this.props.updateCharacter([
       { path: 'shop.advancements', value: this.props.advancements + die.worth },
-      { path: ['stats', 'powerDice', die.name + 's'], value: { current: die.current - 1, max: die.current - 1 } },
+      { path: `stats.powerDice.${die.name}s`, value: { current: die.current - 1, max: die.current - 1 } },
       ...smallerDieUpdate
     ])
   }

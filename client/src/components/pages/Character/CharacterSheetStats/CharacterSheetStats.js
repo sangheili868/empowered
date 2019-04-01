@@ -71,7 +71,7 @@ class CharacterSheetStats extends Component {
             items={this.props.stats.features}
             columnNames={{ name: 'Name', description: 'Description' }}
             fields={featureFields}
-            onEdit={(index, values) => this.props.updateCharacter(['stats', 'features', index], values)}
+            onEdit={(index, values) => this.props.updateCharacter(`stats.features.${index}`, values)}
           />
         </div>
       </div>

@@ -6,7 +6,7 @@ import { detailTitle } from '../CharacterPage.module.scss'
 class CharacterSheetStatsProficiencies extends Component {
 
   handleSave = (columnName, index, values) => {
-    this.props.updateCharacter(['stats', 'proficiencies', columnName, index], values)
+    this.props.updateCharacter(`stats.proficiencies.${columnName}.${index}`, values)
   }
 
   renderEdit = (columnName, item, index) => {

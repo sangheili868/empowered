@@ -10,7 +10,7 @@ class CharacterSheetShopAbilityScores extends Component {
     const isIncreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
     this.props.updateCharacter([
       { path: 'shop.advancements', value: this.props.advancements - score.cost },
-      { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value + 1 },
+      { path: `stats.abilityScores.${lowerCase(score.name)}`, value: score.value + 1 },
       { path: 'stats.hitPoints', value: this.props.hitPoints + (isIncreasingHP ? 1 : 0) }
     ])
   }
@@ -19,7 +19,7 @@ class CharacterSheetShopAbilityScores extends Component {
     const isDecreasingHP = ['strong', 'determined'].includes(lowerCase(score.name))
     this.props.updateCharacter([
       { path: 'shop.advancements', value: this.props.advancements + score.worth },
-      { path: ['stats', 'abilityScores', lowerCase(score.name)], value: score.value - 1 },
+      { path: `stats.abilityScores.${lowerCase(score.name)}`, value: score.value - 1 },
       { path: 'stats.hitPoints', value: Math.max(0, this.props.hitPoints + (isDecreasingHP ? -1 : 0)) }
     ])
   }

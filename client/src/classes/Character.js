@@ -297,7 +297,7 @@ class Character {
               category,
               type: startCase(type),
               handleDelete: updateCharacter => updateCharacter([
-                { path: ['stats', 'proficiencies', type ], value: withoutIndex(this.baseStats.proficiencies[type], index) },
+                { path: `stats.proficiencies.${type}`, value: withoutIndex(this.baseStats.proficiencies[type], index) },
                 ...(type === 'languages') ? [] : [
                   { path: 'shop.advancements', value: parseInt(this.baseShop.advancements) + 1 },
                 ]

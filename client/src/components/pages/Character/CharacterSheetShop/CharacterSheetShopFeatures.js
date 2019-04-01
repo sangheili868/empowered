@@ -9,7 +9,7 @@ import { cloneDeep } from 'lodash'
 class CharacterSheetShopFeatures extends Component {
 
   handleEdit = (index, values) => {
-    return this.props.updateCharacter(['shop', 'features', index], {
+    return this.props.updateCharacter(`shop.features.${index}`, {
       ...values,
       cost: parseInt(values.cost)
     })

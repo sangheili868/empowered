@@ -36,10 +36,9 @@ exports.read = (db, { body: { _id } }, responder) => {
   }
 }
 
-exports.update = (db, { body: { _id, character } }, responder) => {
+exports.update = (db, { body: { _id, paths } }, responder) => {
   const characterCollection = db.collection('characters')
-  const characterData = _.omit(character, '_id')
-  characterCollection.replaceOne({ _id: new ObjectID(_id) }, characterData, (err, result) => {
+  characterCollection.updateOne({ _id: new ObjectID(_id) }, { $set: paths }, (err, result) => {
     if(err) throw err
     console.log(`Updated character ${_id}`)
     responder.send()

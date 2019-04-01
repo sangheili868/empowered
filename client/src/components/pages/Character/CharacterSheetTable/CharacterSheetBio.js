@@ -14,7 +14,7 @@ class CharacterSheetBio extends Component {
   }
 
   handleSave = (name, value) => {
-    return this.props.updateCharacter(['bio', name], value.details)
+    return this.props.updateCharacter(`bio.${name}`, value.details)
   }
 
   render () {

@@ -14,7 +14,7 @@ class CharacterSheetStatsEquipment extends Component {
   }
 
   handleEditItem = (columnName, index, values) => {
-    this.props.updateCharacter(['stats', 'equipment', columnName, index], {
+    this.props.updateCharacter(`stats.equipment.${columnName}.${index}`, {
       name: values.name,
       quantity: parseInt(values.quantity)
     })
@@ -22,11 +22,11 @@ class CharacterSheetStatsEquipment extends Component {
 
   handleDeleteItem = (columnName, index) => {
     const newEquipment = withoutIndex(this.props.currentEquipment[columnName], index)
-    this.props.updateCharacter(['stats', 'equipment', columnName], newEquipment)
+    this.props.updateCharacter(`stats.equipment.${columnName}`, newEquipment)
   }
 
   handleAddItem = (columnName, values) => {
-    this.props.updateCharacter(['stats', 'equipment', columnName], [
+    this.props.updateCharacter(`stats.equipment.${columnName}`, [
       ...this.props.currentEquipment[columnName],
       {
         name: values.name,

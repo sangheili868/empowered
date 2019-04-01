@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CharacterSheet from './CharacterSheet'
 import Character from '../../../classes/Character'
 import { Route, Redirect } from 'react-router-dom'
-import { cloneDeep, every, has, set } from 'lodash'
+import { cloneDeep, every, has, set, chain } from 'lodash'
 import EmpModal from '../../EmpModal/EmpModal'
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter } from './CharacterPage.module.scss'
@@ -71,10 +71,12 @@ class CharacterPage extends Component {
   updateCharacter = (paths, newValue) => {
     /*
       Single mode: updateCharacter('stats.hitPoints', 10)
-      Single mode: updateCharacter(['stats','wounds'], 10)
       Multi mode: updateCharacter([
         { path: 'stat.hitPoints', value: 0},
-        { path: ['stats', 'wounds'], value: 0}
+        { path: `stats.weapons.${weaponIndex}`, value: {
+          name: 'Longsword',
+          category: 'twoHandedMeleeWeapon',
+          weight: 'medium'}}
       ])
     */
     const isMultiMode = every(paths, pathValue => has(pathValue, 'path') && has(pathValue, 'value'))
@@ -83,12 +85,14 @@ class CharacterPage extends Component {
 
     if (isMultiMode) {
       paths.map(({ path, value }) => set(baseCharacter, path, value))
+      paths = chain(paths).keyBy('path').mapValues('value').value()
     } else {
       set(baseCharacter, paths, newValue)
+      paths = { [paths]: newValue}
     }
 
     if (_id) {
-      this.updateCharacterInDatabase({ baseCharacter, _id })
+      this.updateCharacterInDatabase({ paths, _id })
     } else if (baseCharacter.bio.name) {
       this.createCharacterInDatabase(baseCharacter)
     }
@@ -99,18 +103,12 @@ class CharacterPage extends Component {
     })
   }
 
-  updateCharacterInDatabase = ({ baseCharacter, _id }) => {
+  updateCharacterInDatabase = ({ paths, _id }) => {
     fetch('/api/character/update', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ character: baseCharacter, _id})
+      body: JSON.stringify({ paths, _id})
     })
-    this.setState(prevState => ({
-      ...prevState,
-      characterData: {
-        ...prevState.characterData
-      }
-    }))
   }
 
   createCharacterInDatabase = character => {

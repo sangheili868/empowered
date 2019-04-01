@@ -42,7 +42,6 @@
   align-items: flex-start;
 }
 
-
 .warningText {
   color: $red;
 }
@@ -66,4 +65,9 @@
   flex-wrap: wrap;
   align-items: baseline;
   user-select: none;
+}
+
+.boosted {
+  color: $orange;
+  font-weight: bold;
 }

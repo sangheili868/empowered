@@ -11,6 +11,7 @@ import CharacterLoader from './CharacterLoader'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 import { Helmet } from 'react-helmet'
+import EmpLoadingDots from '../../EmpLoadingDots/EmpLoadingDots'
 
 class CharacterPage extends Component {
 
@@ -188,7 +189,7 @@ class CharacterPage extends Component {
             />
           </div>
         ) : this.state._id && (
-          <div>Loading Character...</div>
+          <EmpLoadingDots/>
         )}
       </div>
     );

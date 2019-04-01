@@ -18,7 +18,9 @@ class CharacterSheetTableRow extends Component {
     return (
       <>
         {map(this.props.columnNames, (value, key) =>
-          <td key={key} className={cell}>{this.props.item[key]}</td>
+          <td key={key} className={cell}>
+            {this.props.renderFields && this.props.renderFields[key] ? this.props.renderFields[key](this.props.item) : this.props.item[key]}
+          </td>
         )}
         {this.props.buyButton &&
           <td className={cell}>{this.props.buyButton(this.props.index)}</td>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { sheetPage, detailTitle } from '../CharacterPage.module.scss'
+import { sheetPage, detailTitle, boosted } from '../CharacterPage.module.scss'
 import CharacterSheetStatsResources from "../CharacterSheetResources/CharacterSheetStatsResources"
 import CharacterSheetSkills from "../CharacterSheetTable/CharacterSheetSkills"
 import CharacterSheetList from '../CharacterSheetList/CharacterSheetList'
@@ -37,6 +37,17 @@ class CharacterSheetStats extends Component {
     )
   }
 
+  renderFeatureDescription = feature => {
+    return (
+      <>
+        <div>{feature.description}</div>
+        {feature.boosted &&
+          <div><span className={boosted}>BOOSTED:</span> {feature.boosted}</div>
+        }
+      </>
+    )
+  }
+
   render () {
     return (
       <div>
@@ -61,8 +72,8 @@ class CharacterSheetStats extends Component {
             title="Combat"
             items={this.props.stats.actions}
             tooltips={{
-              mode: item => item.mode || '',
-              title: item => item.name,
+              mode: ({ mode }) => mode || '',
+              title: ({ name }) => name,
               body: this.renderTooltipBody
             }}
           />
@@ -70,6 +81,7 @@ class CharacterSheetStats extends Component {
             title="Features"
             items={this.props.stats.features}
             columnNames={{ name: 'Name', description: 'Description' }}
+            renderFields={{ description: this.renderFeatureDescription }}
             fields={featureFields}
             onEdit={(index, values) => this.props.updateCharacter(`stats.features.${index}`, values)}
           />

@@ -6,6 +6,7 @@ import { startCase, chain } from 'lodash'
 export default {
   name: { default: '' },
   description: { default: '' },
+  boosted: { default: '' },
   cost: { default: 1 },
   actionType: { default: '', options: [
     { label: 'No Action', value: '' },

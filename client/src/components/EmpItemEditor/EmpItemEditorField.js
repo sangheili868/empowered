@@ -11,7 +11,7 @@ class EmpItemEditorField extends Component {
   }
 
   optionsWithAddAll = value => {
-    const isAllSelected = value.options.filter(option => !value.value.includes(option.value)).length === 0
+    const isAllSelected = value.value && value.options.filter(option => !value.value.includes(option.value)).length === 0
     const isShowingAddAll = Array.isArray(value.default) && !isAllSelected
     return [
       ...(isShowingAddAll ? [{ label: 'Add all', value: 'addAllItems' }] : []),

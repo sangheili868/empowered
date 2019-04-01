@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
-import { warningText } from '../CharacterPage.module.scss'
+import { warningText, boosted } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
 import featureFields from '../../../../gameData/featureFields'
 import withoutIndex from '../../../../utils/withoutIndex'
@@ -46,6 +46,17 @@ class CharacterSheetShopFeatures extends Component {
     )
   }
 
+  renderDescription = feature => {
+    return (
+      <>
+        <div>{feature.description}</div>
+        {feature.boosted &&
+          <div><span className={boosted}>BOOSTED:</span> {feature.boosted}</div>
+        }
+      </>
+    )
+  }
+
   render () {
     return (
       <CharacterSheetTable
@@ -53,6 +64,7 @@ class CharacterSheetShopFeatures extends Component {
         addText="Add a feature to your shop"
         items={this.props.features}
         columnNames={{ name: 'Name', description: 'Description' }}
+        renderFields={{ description: this.renderDescription }}
         isDeletable
         fields={featureFields}
         onEdit={this.handleEdit}

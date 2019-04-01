@@ -23,11 +23,17 @@ exports.create = (db, { body: { character } }, responder) => {
 
 exports.read = (db, { body: { _id } }, responder) => {
   const characterCollection = db.collection('characters')
-  characterCollection.findOne({ _id: new ObjectID(_id) }, (err, characterDocument) => {
-    if(err) throw err
-    console.log(`Reading character ${_id}`)
-    responder.send(characterDocument)
-  })
+  const notFound = { error: 'character not found'}
+  if (!ObjectID.isValid(_id)) {
+    console.log(`Cannot read character with id = ${_id}`)
+    responder.send(notFound)
+  } else {
+    characterCollection.findOne({ _id: new ObjectID(_id) }, (err, characterDocument) => {
+      if(err) throw err
+      console.log(`Reading character ${_id}`)
+      responder.send(characterDocument ? characterDocument : notFound)
+    })
+  }
 }
 
 exports.update = (db, { body: { _id, character } }, responder) => {

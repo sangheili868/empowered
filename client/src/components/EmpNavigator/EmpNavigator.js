@@ -12,7 +12,7 @@ class EmpNavigator extends Component {
     return (
       <>
         <div className={navBar}>
-          {this.props.routes.map(({ route, label }) =>
+          {this.props.routes.map(({ route, label }) => label &&
             <NavLink
               key={route}
               to={route}

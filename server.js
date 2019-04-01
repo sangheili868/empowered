@@ -8,7 +8,11 @@ const MongoClient = require('mongodb').MongoClient
 const uri = 'mongodb://heroku_156sz8g7:5kg4hras9q3i7jmcv6c242e7v3@ds249035.mlab.com:49035/heroku_156sz8g7'
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
-  if(err) throw err
+  if(err) {
+    if(err.errno === 'ETIMEDOUT') console.log('Are you on the correct wifi?')
+    throw err
+  }
+
   const db = client.db('heroku_156sz8g7')
 
   app.use(bodyParser.json())

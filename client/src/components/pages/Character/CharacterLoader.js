@@ -14,7 +14,13 @@ class CharacterLoader extends Component {
 
   fetchNames = async () => {
     await fetch('/api/character/readAllNames', { method: 'POST' })
-      .then(response => response.json())
+      .then(response => {
+        if(response.ok === false) {
+          throw new Error('Cannot connect to server. Are you sure you are on the correct wifi?')
+        } else {
+          return response.json()
+        }
+      })
       .then(async rawCharacters => {
         const characters = rawCharacters.map(({ _id, bio: { name }}) => ({ label: name, value: _id }))
         this.setState({ characters })
@@ -28,7 +34,7 @@ class CharacterLoader extends Component {
       body: JSON.stringify({ _id })
     })
       .then(response => response.json())
-      .then(character => {
+    .then(character => {
         this.props.onLoad(character)
       })
   }

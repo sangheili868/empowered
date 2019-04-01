@@ -24,7 +24,7 @@ class EmpItemEditorField extends Component {
       ...this.props.value,
       value: rawValue
     } : rawValue
-    const isAddingAll = Array.isArray(newValue) && newValue.includes('addAllItems')
+    const isAddingAll = Array.isArray(newValue.value) && newValue.value.includes('addAllItems')
     const valueToSet = isAddingAll ? {
       ...this.props.value,
       value: this.props.value.options.map(({ value }) => value)

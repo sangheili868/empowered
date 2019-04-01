@@ -91,6 +91,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
           value={this.props.speed.rating + 'ft.'}
           subtext={this.props.speed.type}
           icon={speedIcon}
+          hasFeatures={this.props.speed.modifierNames.length > 0}
           fields={{
             type: this.props.speed.type
           }}

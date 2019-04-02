@@ -13,7 +13,9 @@ class CharacterSheetStatsProficiencies extends Component {
     const hasFeatures = item.features && item.features.length > 0
     const features = hasFeatures && item.features.map(({ name }) => name).join(', ')
     const fields = columnName === 'languages' ? ({
-      name: this.props.proficiencies[columnName][index].name
+      name: {
+        value: this.props.proficiencies[columnName][index].name
+      }
     }) : {}
     return (
       <EmpItemEditor

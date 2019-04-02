@@ -52,7 +52,12 @@ class CharacterLoader extends Component {
     return (
       <EmpItemEditor
         title="Load a Character"
-        fields={{ character: { default: '', value: '', options: this.state.characters}, }}
+        fields={{
+          character: {
+            value: '',
+            options: this.state.characters
+          }
+        }}
         onOpen={this.handleOpen}
         onSave={this.handleLoad}
         saveLabel="LOAD"

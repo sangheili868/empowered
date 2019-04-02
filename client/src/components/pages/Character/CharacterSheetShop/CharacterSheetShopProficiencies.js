@@ -61,7 +61,11 @@ class CharacterSheetShopProficiencies extends Component {
               <div>Learn a new language:</div>
               <EmpItemEditor
                 title="Add a Language"
-                fields={{ name: '' }}
+                fields={{
+                  name: {
+                    value: ''
+                  }
+                }}
                 mode="success"
                 onSave={this.handleSaveNewLanguage}
                 isCustomInline

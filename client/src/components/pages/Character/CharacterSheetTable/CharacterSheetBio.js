@@ -17,6 +17,19 @@ class CharacterSheetBio extends Component {
     return this.props.updateCharacter(`bio.${name}`, value.details)
   }
 
+  getFields = (name, details) => {
+    const validation = name === 'name' ? {} : {
+      validation: 'none'
+    }
+
+    return {
+      details: {
+        value: details || '',
+        ...validation
+      }
+    }
+  }
+
   render () {
     return (
       <table className={[bio, table].join(' ')}>
@@ -27,7 +40,7 @@ class CharacterSheetBio extends Component {
               title={'Edit ' + startCase(name)}
               mode="tr"
               description={bioFields[name]}
-              fields={{ details: details || '' }}
+              fields={this.getFields(name, details)}
               onSave={this.handleSave.bind(this, name)}
             >
               <td className={[cell, field].join(' ')}>{startCase(name)}</td>

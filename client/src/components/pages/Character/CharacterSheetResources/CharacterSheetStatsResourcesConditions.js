@@ -50,11 +50,12 @@ class CharacterSheetStatsResourcesConditions extends Component {
         addToList={() => (this.inactiveConditions.length > 0) &&
           <EmpItemEditor
             title="Add a Condition"
-            fields={{ name: {
-              value: '',
-              default: '',
-              options: this.inactiveConditions
-            }}}
+            fields={{
+              name: {
+                value: '',
+                options: this.inactiveConditions
+              }
+            }}
             description={this.conditionDescription}
             mode="noStyle"
             onSave={this.handleSave}

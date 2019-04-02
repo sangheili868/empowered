@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { table, tableAdd, cell, columnHeader } from './CharacterSheetTable.module.scss'
 import { plus } from '../CharacterPage.module.scss'
-import { mapValues, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../../EmpCard/EmpCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,10 +17,6 @@ class CharacterSheetTable extends Component {
 
   get hasItems () {
     return !isEmpty(this.props.items)
-  }
-
-  get fields () {
-    return mapValues(this.props.fields, field => ({ ...field, value: field.default }))
   }
 
   render () {
@@ -49,9 +45,10 @@ class CharacterSheetTable extends Component {
                     <EmpItemEditor
                       title={this.props.addText}
                       description={this.props.description}
-                      fields={this.fields}
+                      fields={this.props.fields}
                       mode="noStyle"
                       onSave={this.props.onAdd}
+                      onValidate={this.props.onValidate}
                     >
                       <FontAwesomeIcon className={plus} icon={'plus-square'}/>
                     </EmpItemEditor>

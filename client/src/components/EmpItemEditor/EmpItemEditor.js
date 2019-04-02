@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import EmpModal from '../EmpModal/EmpModal'
 import EmpItemEditorField from './EmpItemEditorField'
-import { cloneDeep, mapValues, isObject, isEmpty, isFunction, pick } from 'lodash'
+import { cloneDeep, mapValues, isObject, isEmpty, isFunction, pick, every } from 'lodash'
 
 class EmpItemEditor extends Component {
 
@@ -17,6 +17,18 @@ class EmpItemEditor extends Component {
     return isFunction(this.props.description) ? this.props.description(this.state.workingValues) : this.props.description
   }
 
+  get isValid () {
+    const isStandardValid = every(this.state.workingValues, field => {
+      if (field.validation === 'none') return true
+      const trimmedValue = field.value.trim ? field.value.trim() : field.value
+      if (field.validation === 'number') return !isNaN(Number(trimmedValue)) && trimmedValue !== ''
+      if (field.options) return field.options.map(({ value }) => value).includes(field.value)
+      return trimmedValue
+    })
+    const isCustomValid = !isEmpty(this.state.workingValues) && (!this.props.onValidate || this.props.onValidate(this.state.workingValues))
+    return isStandardValid && isCustomValid
+  }
+
   get modalControls () {
     return [
       {
@@ -29,7 +41,8 @@ class EmpItemEditor extends Component {
         label: this.props.saveLabel || 'SAVE',
         isHidden: isEmpty(this.state.workingValues),
         onClick: this.handleDone,
-        mode: 'secondary'
+        mode: 'secondary',
+        isDisabled: !this.isValid
       }
     ]
   }
@@ -45,8 +58,10 @@ class EmpItemEditor extends Component {
   }
 
   handleClose = () => {
-    this.toggleModal()
-    this.handleDone()
+    if (this.isValid) {
+      this.toggleModal()
+      this.handleDone()
+    }
   }
 
   handleChange = newValues => {

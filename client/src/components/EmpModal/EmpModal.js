@@ -26,7 +26,7 @@ class EmpModal extends Component {
     this.toggleModal()
     callback()
   }
-  
+
   render () {
     return (
       <>
@@ -37,11 +37,12 @@ class EmpModal extends Component {
             <EmpButton className={closer} mode='text' onClick={this.toggleModal}>
               {this.props.closeText || 'CLOSE'}
             </EmpButton>
-            {this.props.controls && this.props.controls.map(({ label, isHidden, mode, onClick }) => !isHidden &&
+            {this.props.controls && this.props.controls.map(({ label, isHidden, mode, onClick, isDisabled }) => !isHidden &&
               <EmpButton
                 key={label}
                 className={closer}
                 mode={mode}
+                isDisabled={isDisabled}
                 onClick={this.handleCloser.bind(this, onClick)}
               >
                 {label}

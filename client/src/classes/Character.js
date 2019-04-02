@@ -57,7 +57,11 @@ class Character {
   }
 
   get conditions () {
-    return this.baseStats.conditions.map(condition => ({ ...condition, ...conditionData[condition.name]}))
+    return this.baseStats.conditions.map(condition => {
+      const categoryData = conditionData[condition.name]
+      if (!categoryData) throw new Error(`Condition not recognized: ${JSON.stringify(condition.name)}`)
+      return { ...condition, ...categoryData}
+    })
   }
 
   get skills () {
@@ -186,7 +190,7 @@ class Character {
       encumberance: {
         current: (
           (countItems(equipment.heavy) * 2) + countItems(equipment.medium) +
-          (countItems(equipment.light) / 10) + (equipment.gold / 1000)
+          (countItems(equipment.light) / 10) + (Math.max(equipment.gold, 0) / 1000)
         ),
         limit: this.skills.brawn.passive
       }

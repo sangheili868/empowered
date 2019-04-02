@@ -2,28 +2,32 @@ import React, { Component } from 'react'
 import { input, field, fieldLabel } from './EmpItemEditor.module.scss'
 import EmpTextInput from '../EmpTextInput/EmpTextInput'
 import EmpDropdown from '../EmpDropdown/EmpDropdown'
-import { startCase, isObject } from 'lodash'
+import { startCase } from 'lodash'
 
 class EmpItemEditorField extends Component {
 
-  selectedValue = ({ value, options }) => {
-    return options.filter(option => Array.isArray(value) ? value.includes(option.value) : value === option.value)
+  get selectedValue () {
+    const isMultipleSelected = Array.isArray(this.props.value.value)
+    return this.props.value.options.filter(({ value }) =>
+      isMultipleSelected ? this.props.value.value.includes(value) : this.props.value.value === value
+    )
   }
 
-  optionsWithAddAll = value => {
-    const isAllSelected = value.value && value.options.filter(option => !value.value.includes(option.value)).length === 0
-    const isShowingAddAll = Array.isArray(value.default) && !isAllSelected
+  get optionsWithAddAll () {
+    const isAllSelected = this.props.value.value &&
+      this.props.value.options.every(option => this.props.value.value.includes(option.value))
+    const isShowingAddAll = this.props.value.isMulti && !isAllSelected
     return [
       ...(isShowingAddAll ? [{ label: 'Add all', value: 'addAllItems' }] : []),
-      ...value.options
+      ...this.props.value.options
     ]
   }
 
   handleChange = rawValue => {
-    const newValue = this.props.value.options ? {
+    const newValue = {
       ...this.props.value,
       value: rawValue
-    } : rawValue
+    }
     const isAddingAll = Array.isArray(newValue.value) && newValue.value.includes('addAllItems')
     const valueToSet = isAddingAll ? {
       ...this.props.value,
@@ -33,8 +37,11 @@ class EmpItemEditorField extends Component {
     this.props.onChange({ [this.props.fieldName]: valueToSet })
   }
 
-  handleKeyPress = ({key}) => {
-    if (key === 'Enter') this.props.onClose()
+  handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.props.onClose()
+    }
   }
 
   render () {
@@ -43,16 +50,16 @@ class EmpItemEditorField extends Component {
         <div className={fieldLabel}>{startCase(this.props.fieldName)}</div>
         {this.props.value && this.props.value.options ? (
           <EmpDropdown
-            isMulti={Array.isArray(this.props.value.default)}
-            value={this.selectedValue(this.props.value)}
-            options={this.optionsWithAddAll(this.props.value)}
+            isMulti={this.props.value.isMulti}
+            value={this.selectedValue}
+            options={this.optionsWithAddAll}
             className={input}
             onSelect={this.handleChange}
           />
         ) : (
           <EmpTextInput
             className={input}
-            value={isObject(this.props.value) ? this.props.value.value : this.props.value}
+            value={this.props.value.value}
             onChange={({target}) => this.handleChange(target.value)}
             onKeyPress={this.handleKeyPress}
           />

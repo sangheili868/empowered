@@ -8,16 +8,18 @@ class CharacterSheetStatsWeapons extends Component {
 
   get fields () {
     return {
-      name: '',
+      name: {
+        value: ''
+      },
       category: {
-        default: '',
+        value: '',
         options: this.props.availableWeapons.map(({ displayName, key}) => ({
           label: displayName,
           value: key
         }))
       },
       weight: {
-        default: 'medium',
+        value: 'none',
         options: [
           { label: 'None', value: 'none' },
           { label: 'Light', value: 'light' },

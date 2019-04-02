@@ -42,7 +42,12 @@ class CharacterSheetStatsEquipment extends Component {
       <EmpItemEditor
         isInline
         title="Edit Gold"
-        fields={{gold: this.props.equipment.gold}}
+        fields={{
+          gold: {
+            value: this.props.equipment.gold,
+            validation: 'number'
+          }
+        }}
         onSave={this.handleSaveGold}
       >
         <div key="gold">Gold: {this.props.equipment.gold}</div>
@@ -54,6 +59,15 @@ class CharacterSheetStatsEquipment extends Component {
   renderEditItem = (columnName, item, index) => {
     const category = { weapon: 'Weapons', armor: 'Armor', shield: 'Shield' }[item.category]
     const label = (item.quantity > 1) ? `${item.name} (${item.quantity})` : item.name
+    const fields = {
+      name: {
+        value: this.props.equipment[columnName][index].name
+      },
+      quantity: {
+        value: this.props.equipment[columnName][index].quantity,
+        validation: 'number'
+      }
+    }
     return item.category ? (
       <EmpModal
         key={index}
@@ -67,7 +81,7 @@ class CharacterSheetStatsEquipment extends Component {
         key={index}
         isInline
         title={'Edit a ' + columnName + ' Item'}
-        fields={this.props.equipment[columnName][index]}
+        fields={fields}
         onSave={this.handleEditItem.bind(this, columnName, index)}
         onDelete={this.handleDeleteItem.bind(this, columnName, index)}
       >
@@ -77,14 +91,24 @@ class CharacterSheetStatsEquipment extends Component {
   }
 
   renderAddItem = columnName => {
-    return <EmpItemEditor
-      title={'Add a ' + columnName + ' Item'}
-      fields={{ name: '', quantity: 1 }}
-      mode="noStyle"
-      onSave={this.handleAddItem.bind(this, columnName)}
-    >
-      <FontAwesomeIcon className={plus} icon={'plus-square'}/>
-    </EmpItemEditor>
+    return (
+      <EmpItemEditor
+        title={'Add a ' + columnName + ' Item'}
+        fields={{
+          name: {
+            value: ''
+          },
+          quantity: {
+            value: 1,
+            validation: 'number'
+          }
+        }}
+        mode="noStyle"
+        onSave={this.handleAddItem.bind(this, columnName)}
+      >
+        <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+      </EmpItemEditor>
+    )
   }
 
   render () {

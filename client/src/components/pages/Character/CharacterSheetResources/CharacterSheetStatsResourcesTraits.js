@@ -56,10 +56,11 @@ class CharacterSheetStatsResourcesTraits extends Component {
             icon={shieldIcon}
             hasFeatures={this.props.shield.hasFeatures}
             fields={{
-              name: this.props.shield.name,
+              name: {
+                value: this.props.shield.name
+              },
               category: {
                 value: this.props.shield.category,
-                default: 'none',
                 options: this.props.shield.options
               }
             }}
@@ -75,10 +76,11 @@ class CharacterSheetStatsResourcesTraits extends Component {
             icon={armorIcon}
             hasFeatures={this.props.armor.hasFeatures}
             fields={{
-              name: this.props.armor.name,
+              name: {
+                value: this.props.armor.name
+              },
               category: {
                 value: this.props.armor.category,
-                default: 'none',
                 options: this.props.armor.options
               }
             }}
@@ -93,7 +95,9 @@ class CharacterSheetStatsResourcesTraits extends Component {
           icon={speedIcon}
           hasFeatures={this.props.speed.modifierNames.length > 0}
           fields={{
-            type: this.props.speed.type
+            type: {
+              value: this.props.speed.type
+            }
           }}
           description={this.props.speed.modifierNames.length > 0 &&
             <>

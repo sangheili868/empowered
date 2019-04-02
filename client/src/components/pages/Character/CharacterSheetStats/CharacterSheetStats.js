@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { sheetPage, detailTitle, boosted } from '../CharacterPage.module.scss'
+import { sheetPage, detailTitle } from '../CharacterPage.module.scss'
 import CharacterSheetStatsResources from "../CharacterSheetResources/CharacterSheetStatsResources"
 import CharacterSheetSkills from "../CharacterSheetTable/CharacterSheetSkills"
 import CharacterSheetList from '../CharacterSheetList/CharacterSheetList'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
 import { pick } from 'lodash'
-import featureFields from '../../../../gameData/featureFields'
 import CharacterSheetStatsWeapons from './CharacterSheetStatsWeapons'
 import CharacterSheetStatsEquipment from './CharacterSheetStatsEquipment'
 import CharacterSheetStatsProficiencies from './CharacterSheetStatsProficiencies'
+import CharacterSheetStatsFeatures from './CharacterSheetStatsFeatures'
 
 class CharacterSheetStats extends Component {
   renderTooltipBody = item =>
@@ -32,17 +31,6 @@ class CharacterSheetStats extends Component {
             <div className={detailTitle}>Conditions Affecting {item.name}</div>
             <div>{conditions}</div>
           </>
-        }
-      </>
-    )
-  }
-
-  renderFeatureDescription = feature => {
-    return (
-      <>
-        <div>{feature.description}</div>
-        {feature.boosted &&
-          <div><span className={boosted}>BOOSTED:</span> {feature.boosted}</div>
         }
       </>
     )
@@ -77,13 +65,9 @@ class CharacterSheetStats extends Component {
               body: this.renderTooltipBody
             }}
           />
-          <CharacterSheetTable
-            title="Features"
-            items={this.props.stats.features}
-            columnNames={{ name: 'Name', description: 'Description' }}
-            renderFields={{ description: this.renderFeatureDescription }}
-            fields={featureFields}
-            onEdit={(index, values) => this.props.updateCharacter(`stats.features.${index}`, values)}
+          <CharacterSheetStatsFeatures
+            features={this.props.stats.features}
+            updateCharacter={this.props.updateCharacter}
           />
         </div>
       </div>

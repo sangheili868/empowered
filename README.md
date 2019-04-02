@@ -1,25 +1,18 @@
 # Empowered RPG System
 
-Website for my homebrew rpg system
-https://drive.google.com/drive/folders/1NSLfgle6cozbaGc-UWQiO6iCd1t7JVw6?usp=sharing
-
 Production link: https://empowered-rpg.herokuapp.com/
 
 Heroku app: https://dashboard.heroku.com/apps/empowered-rpg
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Quick Start
+
+Follow these steps to set up a local database: https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-windows/<br>
+In the project directory, run `yarn seed` to add some test characters to the database.
+Run `yarn dev` to run the app in development mode, and open it at [http://localhost:3000](http://localhost:3000)
+
 ## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
 ### `yarn run build`
 
@@ -30,9 +23,3 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

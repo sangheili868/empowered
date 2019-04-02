@@ -8,7 +8,8 @@
     "start": "node server.js",
     "heroku-postbuild": "cd client && yarn install && yarn install --only=dev --no-shrinkwrap && npm run build",
     "postinstall": "cd client && yarn install",
-    "prod": "yarn && yarn heroku-postbuild && NODE_ENV=\"production\" yarn start"
+    "prod": "yarn && yarn heroku-postbuild && NODE_ENV=\"production\" yarn start",
+    "seed": "node seed.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

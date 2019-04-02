@@ -25,7 +25,8 @@
     "hobbies": "",
     "socialStyle": "",
     "combatStyle": "",
-    "equipment": ""
+    "equipment": "",
+    "custom": []
   },
   "stats": {
     "hitPoints": 6,
@@ -98,6 +99,7 @@
     },
     "features": []
   },
+  "notes": [],
   "shop": {
     "advancements": 20,
     "totalEarned": 0,

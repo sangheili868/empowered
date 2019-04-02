@@ -54,7 +54,7 @@ class EmpItemEditorField extends Component {
   }
 
   handleKeyPress = event => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !this.props.value.isAllowingNewLines) {
       event.preventDefault()
       this.props.onClose()
     }

@@ -14,6 +14,10 @@
       background-color: $blue;
       color: $white;
     }
+
+    .cell {
+      white-space: pre-wrap;
+    }
   }
 
   &.borderless {
@@ -58,4 +62,10 @@
     align-items: center;
     margin: 5px;
   }
+}
+
+.bioAdd {
+  margin: 20px;
+  display: inline-block;
+  padding: 10px 20px;
 }

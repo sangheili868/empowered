@@ -1,0 +1,12 @@
+@import "src/styles/colors.scss";
+
+.noteContent {
+  margin: 10px;
+  white-space: pre-wrap;
+}
+
+.newNote {
+  margin: 20px;
+  display: inline-block;
+  padding: 10px 20px;
+}

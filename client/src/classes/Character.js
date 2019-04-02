@@ -36,6 +36,7 @@ class Character {
     this.bio = baseCharacterData.bio
     this.baseStats = baseCharacterData.stats
     this.baseShop = baseCharacterData.shop
+    this.notes = baseCharacterData.notes
   }
 
   get armor () {

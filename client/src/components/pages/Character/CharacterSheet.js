@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import CharacterSheetStats from "./CharacterSheetStats/CharacterSheetStats"
 import CharacterSheetBio from './CharacterSheetTable/CharacterSheetBio'
 import CharacterSheetShop from './CharacterSheetShop/CharacterSheetShop'
+import CharacterSheetNotes from "./CharacterSheetNotes/CharacterSheetNotes"
 import CharacterSheetDelete from './CharacterSheetDelete'
 import { header, name, portrait } from './CharacterPage.module.scss'
 import EmpNavigator from '../../EmpNavigator/EmpNavigator'
@@ -51,6 +52,15 @@ class CharacterSheet extends Component {
             props: {
               stats: this.props.character.stats,
               shop: this.props.character.shop,
+              updateCharacter: this.props.updateCharacter
+            }
+          },
+          {
+            label: 'Notes',
+            route: '/character/notes',
+            component: CharacterSheetNotes,
+            props: {
+              notes: this.props.character.notes,
               updateCharacter: this.props.updateCharacter
             }
           },

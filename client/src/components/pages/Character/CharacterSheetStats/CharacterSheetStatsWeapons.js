@@ -19,9 +19,9 @@ class CharacterSheetStatsWeapons extends Component {
         }))
       },
       weight: {
-        value: 'none',
+        value: '',
         options: [
-          { label: 'None', value: 'none' },
+          { label: 'Weightless', value: 'none' },
           { label: 'Light', value: 'light' },
           { label: 'Medium', value: 'medium' },
           { label: 'Heavy', value: 'heavy' }

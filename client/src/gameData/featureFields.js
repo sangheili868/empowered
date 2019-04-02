@@ -8,14 +8,17 @@ export default {
   description: { value: '' },
   boosted: { value: '', validation: 'none' },
   cost: { value: 1, validation: 'number' },
-  actionType: { value: '', options: [
-    { label: 'No Action', value: '' },
-    { label: 'Cardinal Action', value: 'cardinalAction' },
-    { label: 'Skill Action', value: 'skillAction' },
-    { label: 'Basic Action', value: 'basicAction' },
-    { label: 'Maneuver', value: 'maneuver' },
-    { label: 'Reaction', value: 'reaction'}
-  ]},
+  actionType: {
+    value: '',
+    validation: 'none',
+    options: [
+      { label: 'Cardinal Action', value: 'cardinalAction' },
+      { label: 'Skill Action', value: 'skillAction' },
+      { label: 'Basic Action', value: 'basicAction' },
+      { label: 'Maneuver', value: 'maneuver' },
+      { label: 'Reaction', value: 'reaction'}
+    ]
+  },
   actionTags: {
     isMulti: true,
     value: [],
@@ -34,11 +37,14 @@ export default {
     validation: 'none',
     options: Object.values(equipmentProficiencies).map(({name, category}) => ({ label: name, value: category}))
   },
-  speedModifier: { value: '', options: [
-    { label: 'No Change', value: '' },
-    { label: 'Set to 0ft.', value: 'set0' },
-    { label: 'Set to 5ft.', value: 'set5' },
-    { label: 'Add 5ft.', value: 'add5' },
-    { label: 'Subtract 5ft.', value: 'subtract5' },
-  ]}
+  speedModifier: {
+    value: '',
+    validation: 'none',
+    options: [
+      { label: 'Set to 0ft.', value: 'set0' },
+      { label: 'Set to 5ft.', value: 'set5' },
+      { label: 'Add 5ft.', value: 'add5' },
+      { label: 'Subtract 5ft.', value: 'subtract5' },
+    ]
+  }
 }

@@ -8,4 +8,18 @@
   overflow: hidden;
   resize: none;
   min-height: 28px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px $blue;
+  }
+
+  &.invalid {
+    border-color: $red;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px $red;
+    }
+  }
 }

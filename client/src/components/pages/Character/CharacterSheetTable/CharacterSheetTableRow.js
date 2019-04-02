@@ -52,7 +52,6 @@ class CharacterSheetTableRow extends Component {
           fields={this.fields}
           onSave={this.props.onEdit.bind(this, this.props.index)}
           onDelete={this.props.onDelete && this.handleDelete}
-          onValidate={this.props.onValidate}
         >
           {this.renderRowItems()}
         </EmpItemEditor>

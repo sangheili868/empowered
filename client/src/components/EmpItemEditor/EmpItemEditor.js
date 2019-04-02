@@ -18,15 +18,7 @@ class EmpItemEditor extends Component {
   }
 
   get isValid () {
-    const isStandardValid = every(this.state.workingValues, field => {
-      if (field.validation === 'none') return true
-      const trimmedValue = field.value.trim ? field.value.trim() : field.value
-      if (field.validation === 'number') return !isNaN(Number(trimmedValue)) && trimmedValue !== ''
-      if (field.options) return field.options.map(({ value }) => value).includes(field.value)
-      return trimmedValue
-    })
-    const isCustomValid = !isEmpty(this.state.workingValues) && (!this.props.onValidate || this.props.onValidate(this.state.workingValues))
-    return isStandardValid && isCustomValid
+    return every(this.state.workingValues, 'isValid')
   }
 
   get modalControls () {

@@ -45,6 +45,7 @@ class CharacterSheetStats extends Component {
           <CharacterSheetStatsWeapons
             {...pick(this.props.stats, ['weapons', 'availableWeapons'])}
             currentWeapons={this.props.stats.base.weapons}
+            loadout={this.props.stats.loadout}
             updateCharacter={this.props.updateCharacter}
           />
           <CharacterSheetStatsEquipment

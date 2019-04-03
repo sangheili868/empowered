@@ -12,31 +12,36 @@ import CharacterSheetTrait from './CharacterSheetTrait'
 
 class CharacterSheetStatsResourcesTraits extends Component {
 
-  renderDescription = (categoryData, featuresByCategory, { category: selectedCategory }) => {
+  renderDescription = (categoryData, featuresByCategory, isNeedingOpenHand, { category: selectedCategory }) => {
     let proficiencyDescription = ''
     let featuresDescription = ''
+    let selectedCategoryData = {}
     const hasSelected = selectedCategory && selectedCategory.value && !Array.isArray(selectedCategory.value)
+    const hasNoOpenHands = isNeedingOpenHand && this.isUnableToAddShield
 
     if (hasSelected) {
-      const selectedCategoryData = categoryData.find(cat => cat.category === selectedCategory.value)
+      selectedCategoryData = categoryData.find(cat => cat.category === selectedCategory.value)
       const selectedProficiencyData = equipmentProficiencyData[selectedCategoryData.proficiency]
       const selectedCategoryFeatures = featuresByCategory[selectedCategory.value]
 
       proficiencyDescription = selectedProficiencyData && selectedProficiencyData.description
       featuresDescription = selectedCategoryFeatures && selectedCategoryFeatures.map(({name}) => name).join(', ')
-
-      return (
-        <>
-          <div>{proficiencyDescription}</div>
-          {featuresDescription &&
-            <>
-              <div className={detailTitle}>Features Related to {selectedCategoryData.displayName}</div>
-              <div>{featuresDescription}</div>
-            </>
-          }
-        </>
-      )
     }
+
+    return (
+      <>
+        {hasNoOpenHands &&
+          <div>Both of your hands are holding items. Unequip a weapon to use a shield.</div>
+        }
+        <div>{proficiencyDescription}</div>
+        {featuresDescription &&
+          <>
+            <div className={detailTitle}>Features Related to {selectedCategoryData.displayName}</div>
+            <div>{featuresDescription}</div>
+          </>
+        }
+      </>
+    )
   }
 
   handleSpeedUpdate = (path, {baseValue, type}) => this.props.updateCharacter(path, {
@@ -44,27 +49,37 @@ class CharacterSheetStatsResourcesTraits extends Component {
     type
   })
 
+  get isUnableToAddShield () {
+    return this.props.loadout.hands.length >= 2 && this.props.shield.category === 'none'
+  }
+
+  get shieldFields () {
+    const { displayName, category} = shieldData.find(({ proficiency }) => proficiency === 'none')
+    const options = this.isUnableToAddShield ? [{ label: displayName, value: category }] : this.props.shield.options
+    return {
+      name: {
+        value: this.props.shield.name
+      },
+      category: {
+        value: this.props.shield.category,
+        options
+      }
+    }
+  }
+
   render () {
     return (
       <>
         <CharacterSheetResource title="Evasion" value={this.props.evasion} icon={agilityIcon}/>
-        {this.props.shield.options.length > 1 &&
+        {this.props.shield.hasShieldProficiency &&
           <CharacterSheetTrait
             trait="shield"
             value={this.props.shield.rating}
             subtext={this.props.shield.name || this.props.shield.displayName}
             icon={shieldIcon}
             hasFeatures={this.props.shield.hasFeatures}
-            fields={{
-              name: {
-                value: this.props.shield.name
-              },
-              category: {
-                value: this.props.shield.category,
-                options: this.props.shield.options
-              }
-            }}
-            description={this.renderDescription.bind(this, shieldData, this.props.shield.features)}
+            fields={this.shieldFields}
+            description={this.renderDescription.bind(this, shieldData, this.props.shield.features, true)}
             onUpdate={this.props.updateCharacter}
           />
         }
@@ -84,7 +99,7 @@ class CharacterSheetStatsResourcesTraits extends Component {
                 options: this.props.armor.options
               }
             }}
-            description={this.renderDescription.bind(this, armorData, this.props.armor.features)}
+            description={this.renderDescription.bind(this, armorData, this.props.armor.features, false)}
             onUpdate={this.props.updateCharacter}
           />
         }

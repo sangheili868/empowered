@@ -22,12 +22,9 @@ class CharacterSheetTableRow extends Component {
             {this.props.renderFields && this.props.renderFields[key] ? this.props.renderFields[key](this.props.item) : this.props.item[key]}
           </td>
         )}
-        {this.props.buyButton &&
-          <td className={cell}>{this.props.buyButton(this.props.index)}</td>
-        }
-        {this.props.sellButton &&
-          <td className={cell}>{this.props.sellButton(this.props.index)}</td>
-        }
+        {map(this.props.customFields, ({ render }, index) => (
+          <td key={index} className={cell}>{render(this.props.index)}</td>
+        ))}
       </>
     )
   }

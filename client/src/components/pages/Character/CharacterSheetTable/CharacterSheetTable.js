@@ -9,11 +9,12 @@ import CharacterSheetTableRow from './CharacterSheetTableRow'
 
 class CharacterSheetTable extends Component {
 
-  columnTitles = [
-    ...Object.values(this.props.columnNames),
-    ...this.props.buyButton ? ['Buy'] : [],
-    ...this.props.sellButton ? ['Sell'] : []
-  ]
+  get columnTitles () {
+    return [
+      ...Object.values(this.props.columnNames),
+      ...((this.props.customFields && this.props.customFields.map(({ title }) => title)) || [])
+    ]
+  }
 
   get hasItems () {
     return !isEmpty(this.props.items)

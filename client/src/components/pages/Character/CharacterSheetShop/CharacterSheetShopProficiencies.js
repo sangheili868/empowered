@@ -52,7 +52,12 @@ class CharacterSheetShopProficiencies extends Component {
             items={proficiencies}
             columnNames={{ name: 'Name', requirementsString: 'Requirements', }}
             tooltip={{ title: item => item.name, body: item => item.description }}
-            buyButton={this.renderBuyEquipmentButton.bind(this, proficiencies)}
+            customFields={[
+              {
+                title: 'Buy',
+                render: this.renderBuyEquipmentButton.bind(this, proficiencies)
+              }
+            ]}
           />
         )}
         <EmpCard isStartingOpen title="Languages">

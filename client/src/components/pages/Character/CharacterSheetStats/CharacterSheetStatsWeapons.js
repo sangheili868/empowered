@@ -3,6 +3,8 @@ import equipmentProficiencyData from '../../../../gameData/equipmentProficiencie
 import weaponData from '../../../../gameData/weapons.json'
 import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
 import withoutIndex from '../../../../utils/withoutIndex'
+import EmpCheckbox from '../../../EmpCheckbox/EmpCheckbox'
+import { some } from 'lodash'
 
 class CharacterSheetStatsWeapons extends Component {
 
@@ -30,7 +32,7 @@ class CharacterSheetStatsWeapons extends Component {
     }
   }
 
-  renderDescription = ({category}) => {
+  renderDescription = ({ category }) => {
     if (category && category.value && !Array.isArray(category.value)) {
       return equipmentProficiencyData[weaponData[category.value].proficiency].description
     }
@@ -51,8 +53,30 @@ class CharacterSheetStatsWeapons extends Component {
     this.props.updateCharacter('stats.weapons', [ ...this.props.currentWeapons, values ])
   }
 
-  render () {
+  handleEquip = (toggledIndex, value) => {
+    this.props.updateCharacter(`stats.weapons.${toggledIndex}.isEquipped`, value)
+  }
+
+  renderEquip = index => {
+    const { isEquipped, hands } = this.props.weapons[index]
+    const hasOpenHand = this.props.loadout.hands.length < 2
+
+    const isUnarmedAndFree = hasOpenHand && (hands === 'unarmed')
+
+    const hasOneHanded = this.props.loadout.hands.includes('one') && hands !== 'any'
+    const hasLight = this.props.loadout.hands.includes('light') && !(['light', 'any'].includes(hands))
+    const hasAny = this.props.loadout.hands.includes('any') && hands === 'two'
+
+    const isChecked = isEquipped || isUnarmedAndFree
+    const isDisabled = !isEquipped && some([!hasOpenHand, hasOneHanded, hasLight, hasAny])
+
     return (
+      <EmpCheckbox isChecked={isChecked} isDisabled={isDisabled} onToggle={this.handleEquip.bind(this, index)}/>
+    )
+  }
+
+  render () {
+    return (<>
       <CharacterSheetTable
         title="Weapons"
         addText="Add a weapon"
@@ -63,7 +87,14 @@ class CharacterSheetStatsWeapons extends Component {
         onEdit={this.handleEdit}
         onDelete={this.handleDelete}
         onAdd={this.handleAdd}
+        customFields={[
+          {
+            title: 'Equip',
+            render: this.renderEquip
+          }
+        ]}
       />
+      </>
     )
   }
 }

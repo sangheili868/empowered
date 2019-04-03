@@ -1,0 +1,28 @@
+@import "src/styles/colors.scss";
+
+.layers {
+  padding: 10px;
+
+  .squareBehind {
+    color: $white;
+    font-size: 24px;
+    margin: 1px;
+  }
+
+  &:hover .squareBehind {
+    color: $lightOrange
+  }
+
+  .check {
+    font-size: 25px;
+    color: $lightGrey;
+
+    &.checked {
+      color: $orange;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}

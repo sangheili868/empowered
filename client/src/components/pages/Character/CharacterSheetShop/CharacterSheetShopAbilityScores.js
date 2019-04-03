@@ -52,8 +52,16 @@ class CharacterSheetShopAbilityScores extends Component {
         title="Ability Scores"
         items={this.props.abilityScores}
         columnNames={{ name: 'Name', displayValue: 'Current' }}
-        buyButton={this.renderBuyButton}
-        sellButton={this.renderSellButton}
+        customFields={[
+          {
+            title: 'Buy',
+            render: this.renderBuyButton
+          },
+          {
+            title: 'Sell',
+            render: this.renderSellButton
+          }
+        ]}
       />
     )
   }

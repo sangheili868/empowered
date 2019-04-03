@@ -85,7 +85,12 @@ class CharacterSheetShop extends Component {
                 title="Sell Back"
                 items={this.props.shop.sellBack}
                 columnNames={{ name: 'Name', type: 'Type' }}
-                sellButton={this.renderSellBackButton}
+                customFields={[
+                  {
+                    title: 'Sell',
+                    render: this.renderSellBackButton
+                  }
+                ]}
               />
             </>
           }

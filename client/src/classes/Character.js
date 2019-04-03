@@ -89,23 +89,46 @@ class Character {
     }).value()
   }
 
+  get loadout () {
+    const equippedWeapons = this.weapons.filter(({ isEquipped, tags }) => isEquipped && !tags.includes('unarmed'))
+    const magics = equippedWeapons.filter(({ magic }) => magic).map(({ magic }) => magic)
+    let hands = equippedWeapons.map(({ hands }) => hands)
+    if (hands[0] === 'two') hands.push('two')
+    if (this.baseStats.shield.category !== 'none') hands.push('any')
+
+    return { hands, magics }
+  }
+
   get shield () {
     const shieldCategoryData = keyBy(shieldData, 'category')
     const shieldCatStats = shieldCategoryData[this.baseStats.shield.category]
+    const rating = addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0))
+
+    const proficientShields = shieldData.filter(({proficiency}) =>
+      this.baseStats.proficiencies.equipment.map(({category}) => category).includes(proficiency)
+    )
+    const noShield = shieldData.find(({ proficiency }) => proficiency === 'none')
+    const options = [
+      ...proficientShields,
+      noShield
+    ].map(({ displayName, category }) => ({ label: displayName, value: category }))
+
+    const hasFeatures =  this.baseStats.features.some(({ equipmentTags }) =>
+      equipmentTags.includes(shieldCategoryData[this.baseStats.shield.category].proficiency)
+    )
+
+    const features = mapValues(shieldCategoryData, ({proficiency}) => this.baseStats.features.filter(({ equipmentTags }) =>
+      equipmentTags.includes(proficiency)
+    ))
+
     return {
       ...this.baseStats.shield,
       ...shieldCatStats,
-      rating: addPlus(shieldCatStats.rating + (shieldCatStats.skill ? this.skills[shieldCatStats.skill].value : 0)),
-      options: chain(shieldData).filter(({proficiency}) =>
-        this.baseStats.proficiencies.equipment.map(({category}) => category)
-        .includes(proficiency) || proficiency === 'none'
-      ).map(({ displayName, category }) => ({ label: displayName, value: category })).value(),
-      hasFeatures: this.baseStats.features.some(({ equipmentTags }) =>
-        equipmentTags.includes(shieldCategoryData[this.baseStats.shield.category].proficiency)
-      ),
-      features: mapValues(shieldCategoryData, ({proficiency}) => this.baseStats.features.filter(({ equipmentTags }) =>
-        equipmentTags.includes(proficiency)
-      ))
+      rating,
+      options,
+      hasShieldProficiency: proficientShields.length > 0,
+      hasFeatures,
+      features
     }
   }
 
@@ -215,6 +238,8 @@ class Character {
       skills: this.skills,
       equipment: this.equipment,
       weapons: this.weapons,
+      loadout: this.loadout,
+      isHoldingOneLightWeapon: this.isHoldingOneLightWeapon,
       availableWeapons: chain(weaponData).pickBy(({proficiency}) =>
         this.baseStats.proficiencies.equipment.map(({category}) => category)
         .includes(proficiency)

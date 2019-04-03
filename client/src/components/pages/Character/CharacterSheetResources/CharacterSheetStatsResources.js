@@ -45,7 +45,7 @@ class CharacterSheetStatsResources extends Component {
             updateCharacter={this.props.updateCharacter}
           />
           <CharacterSheetStatsResourcesTraits
-            {...pick(this.props.stats, ['evasion', 'shield', 'armor', 'speed'])}
+            {...pick(this.props.stats, ['evasion', 'shield', 'armor', 'speed', 'loadout'])}
             updateCharacter={this.props.updateCharacter}
           />
           <EmpCard title="Recovery" isStartingOpen>

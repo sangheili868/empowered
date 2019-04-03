@@ -70,7 +70,12 @@ class CharacterSheetShopFeatures extends Component {
         onEdit={this.handleEdit}
         onDelete={this.handleDelete}
         onAdd={this.handleAdd}
-        buyButton={this.renderBuyButton}
+        customFields={[
+          {
+            title: 'Buy',
+            render: this.renderBuyButton
+          }
+        ]}
       />
     )
   }

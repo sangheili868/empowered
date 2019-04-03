@@ -59,8 +59,16 @@ class CharacterSheetShopPowerDice extends Component {
         title="Power Dice"
         items={this.props.powerDice}
         columnNames={{ name: 'Name', current: 'Current' }}
-        buyButton={this.renderBuyButton}
-        sellButton={this.renderSellButton}
+        customFields={[
+          {
+            title: 'Buy',
+            render: this.renderBuyButton
+          },
+          {
+            title: 'Sell',
+            render: this.renderSellButton
+          }
+        ]}
       />
     )
   }

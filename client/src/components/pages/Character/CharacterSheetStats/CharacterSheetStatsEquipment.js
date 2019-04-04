@@ -15,7 +15,7 @@ class CharacterSheetStatsEquipment extends Component {
 
   handleEditItem = (columnName, index, values) => {
     this.props.updateCharacter(`stats.equipment.${columnName}.${index}`, {
-      name: values.name,
+      ...values,
       quantity: parseInt(values.quantity)
     })
   }
@@ -29,7 +29,7 @@ class CharacterSheetStatsEquipment extends Component {
     this.props.updateCharacter(`stats.equipment.${columnName}`, [
       ...this.props.currentEquipment[columnName],
       {
-        name: values.name,
+        ...values,
         quantity: parseInt(values.quantity)
       }
     ])
@@ -106,6 +106,10 @@ class CharacterSheetStatsEquipment extends Component {
           quantity: {
             value: 1,
             validation: 'number'
+          },
+          description: {
+            value: '',
+            validation: 'none'
           }
         }}
         mode="noStyle"

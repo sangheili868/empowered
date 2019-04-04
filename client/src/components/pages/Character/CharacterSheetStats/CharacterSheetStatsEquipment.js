@@ -59,13 +59,18 @@ class CharacterSheetStatsEquipment extends Component {
   renderEditItem = (columnName, item, index) => {
     const category = { weapon: 'Weapons', armor: 'Armor', shield: 'Shield' }[item.category]
     const label = (item.quantity > 1) ? `${item.name} (${item.quantity})` : item.name
+    const { name, quantity, description } = this.props.equipment[columnName][index]
     const fields = {
       name: {
-        value: this.props.equipment[columnName][index].name
+        value: name
       },
       quantity: {
-        value: this.props.equipment[columnName][index].quantity,
+        value: quantity,
         validation: 'number'
+      },
+      description: {
+        value: description,
+        validation: 'none'
       }
     }
     return item.category ? (

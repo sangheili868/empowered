@@ -12,7 +12,11 @@
   "skillActions": [
     {
       "name": "Wrestle",
-      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers."
+      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers.",
+      "requirements": [{
+        "type": "loadout",
+        "hands": "free"
+      }]
     },
     {
       "name": "Brace",
@@ -56,7 +60,11 @@
     },
     {
       "name": "Off-hand Attack",
-      "description": "As a skill action, you strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn."
+      "description": "As a skill action, you strike with a weapon in your off-hand. If you already made an attack with a light weapon this turn, you can use an action to make another attack with a light weapon in your off-hand. You can make an attack this way only once per turn.",
+      "requirements": [{
+        "type": "loadout",
+        "hands": ["light", "light"]
+      }]
     },
     {
       "name": "Repair",

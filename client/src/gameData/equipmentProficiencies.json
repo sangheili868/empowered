@@ -4,6 +4,7 @@
     "category": "lightArmor",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 0
       }
@@ -15,6 +16,7 @@
     "category": "mediumArmor",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 2
       }
@@ -26,6 +28,7 @@
     "category": "heavyArmor",
     "requirements": [
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -37,6 +40,7 @@
     "category": "smallShield",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 0
       }
@@ -48,6 +52,7 @@
     "category": "mediumShield",
     "requirements": [
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -59,6 +64,7 @@
     "category": "largeShield",
     "requirements": [
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 4
       }
@@ -76,6 +82,7 @@
     "category": "unarmedMeleeWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 2
       }
@@ -87,6 +94,7 @@
     "category": "lightMeleeWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 0
       }
@@ -98,6 +106,7 @@
     "category": "finesseMeleeWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 2
       }
@@ -109,6 +118,7 @@
     "category": "oneHandedMeleeWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 0
       }
@@ -120,6 +130,7 @@
     "category": "twoHandedMeleeWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -131,6 +142,7 @@
     "category": "lightThrownWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 0
       }
@@ -142,6 +154,7 @@
     "category": "heavyThrownWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 2
       }
@@ -153,6 +166,7 @@
     "category": "oneHandedRangedWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 0
       }
@@ -164,6 +178,7 @@
     "category": "twoHandedRangedWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 0
       }
@@ -175,10 +190,12 @@
     "category": "heavyRangedWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 2
       },
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -190,6 +207,7 @@
     "category": "lightLoadingWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 0
       }
@@ -201,6 +219,7 @@
     "category": "twoHandedLoadingWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 0
       }
@@ -212,10 +231,12 @@
     "category": "heavyLoadingWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "perception",
         "level": 2
       },
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -227,6 +248,7 @@
     "category": "craftedWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 2
       }
@@ -238,6 +260,7 @@
     "category": "arcaneMagicWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "knowledge",
         "level": 2
       }
@@ -249,6 +272,7 @@
     "category": "divineMagicWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "wisdom",
         "level": 2
       }
@@ -260,6 +284,7 @@
     "category": "unityMagicWeapon",
     "requirements": [
       {
+        "type": "skill",
         "skill": "synergy",
         "level": 2
       }
@@ -271,6 +296,7 @@
     "category": "arcanistTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "knowledge",
         "level": 4
       }
@@ -282,6 +308,7 @@
     "category": "artisanTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 0
       }
@@ -293,10 +320,12 @@
     "category": "chemistTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 0
       },
       {
+        "type": "skill",
         "skill": "knowledge",
         "level": 2
       }
@@ -308,10 +337,12 @@
     "category": "explorerTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": -2
       },
       {
+        "type": "skill",
         "skill": "perception",
         "level": 2
       }
@@ -323,10 +354,12 @@
     "category": "smithTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": -2
       },
       {
+        "type": "skill",
         "skill": "brawn",
         "level": 2
       }
@@ -338,10 +371,12 @@
     "category": "spyTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": -2
       },
       {
+        "type": "skill",
         "skill": "persuasion",
         "level": 2
       }
@@ -353,10 +388,12 @@
     "category": "thiefTool",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 0
       },
       {
+        "type": "skill",
         "skill": "agility",
         "level": 2
       }
@@ -368,6 +405,7 @@
     "category": "ridingVehicle",
     "requirements": [
       {
+        "type": "skill",
         "skill": "athletics",
         "level": 0
       }
@@ -379,6 +417,7 @@
     "category": "seaVehicle",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 0
       }
@@ -390,6 +429,7 @@
     "category": "airVehicle",
     "requirements": [
       {
+        "type": "skill",
         "skill": "handiwork",
         "level": 2
       }

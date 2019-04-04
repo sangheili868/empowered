@@ -18,7 +18,8 @@ import {
   filter,
   mapValues,
   keyBy,
-  flatMap
+  flatMap,
+  isEqual
 } from 'lodash'
 
 function addPlus (value, isSpaced) {
@@ -221,6 +222,51 @@ class Character {
     }
   }
 
+  isMeetingRequirements = requirements => {
+    return !Array.isArray(requirements) || requirements.every(requirement => {
+      if (requirement.type === 'loadout') {
+        return Array.isArray(requirement.hands) ? isEqual(this.loadout.hands, requirement.hands) : this.loadout.hands.length < 2
+      }
+      return true
+    })
+  }
+
+  get actions () {
+    const maneuvers = this.loadout.hands.length < 2 ? { maneuvers: 'maneuver' } : {}
+    const actionMapping = {
+      cardinalActions: 'cardinalAction',
+      skillActions: 'skillAction',
+      basicActions: 'basicAction',
+      ...maneuvers,
+      reactions: 'reaction'
+    }
+    return transform(actionMapping, (acc, actionType, columnName) => acc[columnName] = [
+      ...actionsData[columnName]
+        .filter(({ requirements }) => this.isMeetingRequirements(requirements))
+        .map(({ name, description }) => {
+          const features = this.baseStats.features.filter(({ actionTags }) => actionTags.includes(name))
+          const conditions = this.conditions.filter(({ actionTags }) => actionTags.includes(name))
+          let mode = ''
+          if (conditions.length > 0) mode = 'warning'
+          else if (features.length > 0) mode = 'primary'
+          return {
+            name,
+            description,
+            features,
+            conditions,
+            mode
+          }
+        }),
+      ...filter(this.baseStats.features, feature => feature.actionType === actionType)
+        .map(feature => ({ ...feature, mode: 'primary' })),
+      ...chain(this.baseStats.conditions)
+        .map(condition => ({ ...condition, ...conditionData[condition.name]}))
+        .filter(({ action }) => action && (action.category === actionType))
+        .map(({ action }) => ({ ...action, mode: 'warning' }))
+        .value()
+    ], {})
+  }
+
   get stats () {
    if (this.baseStats) {
     return {
@@ -261,35 +307,7 @@ class Character {
           }
         }),
       },
-      actions: transform({
-        cardinalActions: 'cardinalAction',
-        skillActions: 'skillAction',
-        basicActions: 'basicAction',
-        maneuvers: 'maneuver',
-        reactions: 'reaction'
-      }, (acc, actionType, columnName) => acc[columnName] = [
-        ...actionsData[columnName].map(({ name, description }) => {
-          const features = this.baseStats.features.filter(({ actionTags }) => actionTags.includes(name))
-          const conditions = this.conditions.filter(({ actionTags }) => actionTags.includes(name))
-          let mode = ''
-          if (conditions.length > 0) mode = 'warning'
-          else if (features.length > 0) mode = 'primary'
-          return {
-            name,
-            description,
-            features,
-            conditions,
-            mode
-          }
-        }),
-        ...filter(this.baseStats.features, feature => feature.actionType === actionType)
-          .map(feature => ({ ...feature, mode: 'primary' })),
-        ...chain(this.baseStats.conditions)
-          .map(condition => ({ ...condition, ...conditionData[condition.name]}))
-          .filter(({ action }) => action && (action.category === actionType))
-          .map(({ action }) => ({ ...action, mode: 'warning' }))
-          .value()
-      ], {}),
+      actions: this.actions,
       conditions: this.conditions
     }
    } else {

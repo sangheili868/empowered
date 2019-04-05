@@ -1,0 +1,33 @@
+{
+  "name": "",
+  "bio": {
+    "portrait": "",
+    "description": ""
+  },
+  "stats": {
+    "woundLimit": 1,
+    "armor": 0,
+    "shield": 0,
+    "speed": {
+      "rating": 20,
+      "type": "Walking"
+    },
+    "abilityScores": {
+      "strong": 0,
+      "aware": 0,
+      "smart": 0,
+      "quick": 0,
+      "determined": 0,
+      "social": 0
+    },
+    "powerPoints": 0,
+    "weapons": [],
+    "equipment": [],
+    "languages": [
+      {
+        "name": "Common"
+      }
+    ],
+    "features": []
+  }
+}

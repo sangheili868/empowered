@@ -7,7 +7,7 @@ import EmpModal from '../../EmpModal/EmpModal'
 import newCharacter from '../../../gameData/newCharacter'
 import { alert, manageCharacter } from './CharacterPage.module.scss'
 import { Alert } from 'react-bootstrap'
-import CharacterLoader from './CharacterLoader'
+import EmpDocLoader from '../../EmpDocLoader/EmpDocLoader'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 import { Helmet } from 'react-helmet'
@@ -30,7 +30,7 @@ class CharacterPage extends Component {
     }
 
     if (_id) {
-      fetch('/api/character/read', {
+      fetch('/api/characters/read', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ _id })
@@ -94,7 +94,7 @@ class CharacterPage extends Component {
 
     if (_id) {
       this.updateCharacterInDatabase({ paths, _id })
-    } else if (baseCharacter.bio.name) {
+    } else if (baseCharacter.name) {
       this.createCharacterInDatabase(baseCharacter)
     }
 
@@ -105,7 +105,7 @@ class CharacterPage extends Component {
   }
 
   updateCharacterInDatabase = ({ paths, _id }) => {
-    fetch('/api/character/update', {
+    fetch('/api/characters/update', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ paths, _id})
@@ -113,10 +113,10 @@ class CharacterPage extends Component {
   }
 
   createCharacterInDatabase = character => {
-    fetch('/api/character/create', {
+    fetch('/api/characters/create', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ character })
+      body: JSON.stringify({ document: character })
     })
     .then(response => response.json())
     .then(_id => {
@@ -136,7 +136,7 @@ class CharacterPage extends Component {
   }
 
   get name () {
-    return this.state.character && this.state.character.bio.name
+    return this.state.character && this.state.character.name
   }
 
   handleDelete = () => {
@@ -171,12 +171,11 @@ class CharacterPage extends Component {
               label: 'CONFIRM',
               onClick: this.createNewCharacter
             }]}
-            onHide={this.handleCloseWarning}
             onBlocked={this.createNewCharacter}
           >
             New
           </EmpModal>
-          <CharacterLoader isUnnamed={this.isUnnamedCharacter} onLoad={this.handleLoad}/>
+          <EmpDocLoader collection="characters" isUnnamed={this.isUnnamedCharacter} onLoad={this.handleLoad}/>
         </div>
         {this.state.character ? (
           <div>

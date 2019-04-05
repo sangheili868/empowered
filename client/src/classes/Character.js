@@ -6,6 +6,7 @@ import equipmentProficiencyData from '../gameData/equipmentProficiencies.json'
 import actionsData from '../gameData/actions.json'
 import conditionData from '../gameData/conditions.json'
 import withoutIndex from '../utils/withoutIndex'
+import addPlus from '../utils/addPlus'
 import {
   upperFirst,
   transform,
@@ -22,9 +23,7 @@ import {
   isEqual
 } from 'lodash'
 
-function addPlus (value, isSpaced) {
-  return (value >= 0 ? '+' : '-') + (isSpaced ? ' ' : '') + Math.abs(value)
-}
+
 
 function countItems (items) {
   return chain(items).reduce((total, { quantity }) => quantity + total, 0).value()

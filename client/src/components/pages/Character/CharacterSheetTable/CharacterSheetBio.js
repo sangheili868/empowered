@@ -13,20 +13,19 @@ class CharacterSheetBio extends Component {
     return isTruncating ? truncatedDetails : details
   }
 
-  handleSave = (name, value) => {
-    return this.props.updateCharacter(`bio.${name}`, value.details)
+  handleSave = (field, value) => {
+    const path = (field === 'name') ? 'name' : `bio.${field}`
+    return this.props.updateCharacter(path, value.details)
   }
 
   getFields = (name, details) => {
-    const validation = name === 'name' ? {} : {
-      validation: 'none'
-    }
-
+    const isName = (name === 'name')
+    const validation = isName ? {} : { validation: 'none' }
     return {
       details: {
         value: details || '',
         ...validation,
-        isAllowingNewLines: true
+        isAllowingNewLines: !isName
       }
     }
   }
@@ -36,7 +35,10 @@ class CharacterSheetBio extends Component {
       <>
         <table className={[bio, table].join(' ')}>
           <tbody>
-            {chain(this.props.bio).omit('customs').map((details, name) =>
+            {chain({
+              name: this.props.name,
+              ...this.props.bio
+            }).omit('customs').map((details, name) =>
               <EmpItemEditor
                 key={name}
                 title={'Edit ' + startCase(name)}

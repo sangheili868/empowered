@@ -4,6 +4,7 @@ import './styles/global.scss'
 import CharacterPage from './components/pages/Character/CharacterPage'
 import IndexPage from './components/pages/Index/IndexPage'
 import RulesPage from './components/pages/Rules/RulesPage'
+import CreaturesPage from './components/pages/Creatures/CreaturesPage'
 import 'whatwg-fetch'
 import 'promise-polyfill/src/polyfill';
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -37,6 +38,11 @@ class App extends Component {
             label: 'Character',
             route: '/character',
             component: CharacterPage
+          },
+          {
+            label: 'Creatures',
+            route: '/creatures',
+            component: CreaturesPage
           }
         ]}/>
       </div>

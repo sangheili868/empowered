@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import { warningText } from './CharacterPage.module.scss'
+import EmpItemEditor from '../EmpItemEditor/EmpItemEditor'
+import { startCase } from 'lodash'
+import { warningText } from './EmpDocLoader.module.scss'
 
-class CharacterLoader extends Component {
+class EmpDocLoader extends Component {
 
   state = {
     characters: []
@@ -13,7 +14,7 @@ class CharacterLoader extends Component {
   }
 
   fetchNames = async () => {
-    await fetch('/api/character/readAllNames', { method: 'POST' })
+    await fetch(`/api/${this.props.collection}/readAllNames`, { method: 'POST' })
       .then(response => {
         if(response.ok === false) {
           throw new Error('Cannot connect to server. Are you sure you are on the correct wifi?')
@@ -22,13 +23,13 @@ class CharacterLoader extends Component {
         }
       })
       .then(async rawCharacters => {
-        const characters = rawCharacters.map(({ _id, bio: { name }}) => ({ label: name, value: _id }))
+        const characters = rawCharacters.map(({ _id, name }) => ({ label: name, value: _id }))
         this.setState({ characters })
       })
   }
 
   handleLoad = ({ character: _id }) => {
-    fetch('/api/character/read', {
+    fetch(`/api/${this.props.collection}/read`, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ _id })
@@ -43,7 +44,7 @@ class CharacterLoader extends Component {
     if (this.props.isUnnamed)
     return (
       <div className={warningText}>
-        Warning! If you load a new character, the existing character data will be lost.
+        Warning! If you load a new {this.props.collection}, the existing {this.props.collection} data will be lost.
       </div>
     )
   }
@@ -51,7 +52,7 @@ class CharacterLoader extends Component {
   render () {
     return (
       <EmpItemEditor
-        title="Load a Character"
+        title={`Load a New ${startCase(this.props.collection)}`}
         fields={{
           character: {
             value: '',
@@ -69,4 +70,4 @@ class CharacterLoader extends Component {
   }
 }
 
-export default CharacterLoader
+export default EmpDocLoader

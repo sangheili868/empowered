@@ -1,0 +1,70 @@
+@import "src/styles/colors.scss";
+
+.alert {
+  position: sticky;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.manageCreature {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  .nameAndBio {
+    flex: 1;
+
+    .name {
+      font-size: 50px;
+      font-family: immortal;
+    }
+
+    .table {
+      font-size: 10px;
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid $lightGrey;
+
+      .tableField {
+        background-color: $blue;
+        color: $white;
+        width: 100px;
+      }
+
+      .cell {
+        white-space: pre-wrap;
+        border-top: solid $lightGrey 1px;
+        padding: 5px 10px;
+      }
+    }
+  }
+
+
+  .portrait {
+    max-height: 240px;
+    max-width: 240px;
+    border-radius: 10px;
+    padding: 20px;
+  }
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+}
+

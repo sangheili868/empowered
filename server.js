@@ -1,4 +1,4 @@
-const character = require('./api/character')
+const crud = require('./api/crud')
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -23,11 +23,15 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.use(bodyParser.urlencoded({ extended: true }))
 
   // API calls
-  app.post('/api/character/create', character.create.bind(this, db))
-  app.post('/api/character/read', character.read.bind(this, db))
-  app.post('/api/character/readAllNames', character.readAllNames.bind(this, db))
-  app.post('/api/character/update', character.update.bind(this, db))
-  app.post('/api/character/delete', character.delete.bind(this, db))
+  ;['characters', 'creatures'].forEach(collectionName => {
+    const collection = db.collection(collectionName)
+
+    app.post(`/api/${collectionName}/create`, crud.create.bind(this, collection))
+    app.post(`/api/${collectionName}/read`, crud.read.bind(this, collection))
+    app.post(`/api/${collectionName}/readAllNames`, crud.readAllNames.bind(this, collection))
+    app.post(`/api/${collectionName}/update`, crud.update.bind(this, collection))
+    app.post(`/api/${collectionName}/delete`, crud.delete.bind(this, collection))
+  })
 
   if (isProduction) {
     // Serve any static files

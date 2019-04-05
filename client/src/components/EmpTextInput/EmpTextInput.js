@@ -14,7 +14,8 @@ class EmpTextInput extends Component {
 
   autoResize = () => {
     const myTextArea = this.myTextArea.current
-    myTextArea.style.height = myTextArea.scrollHeight+'px';
+    myTextArea.style.height = 'auto';
+    myTextArea.style.height = myTextArea.scrollHeight + 'px';
     myTextArea.scrollTop = myTextArea.scrollHeight;
   }
 
@@ -25,7 +26,7 @@ class EmpTextInput extends Component {
       ...this.props.isInvalid ? [invalid] : []
     ].join(' ')
   }
-  
+
   render () {
     return (
       <textarea

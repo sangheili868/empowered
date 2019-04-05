@@ -13,7 +13,7 @@ class CharacterSheet extends Component {
       <div>
         <div className={header}>
           <div>
-            <div className={name}>{this.props.character.bio.name || 'Unnamed Character'}</div>
+            <div className={name}>{this.props.character.name || 'Unnamed Character'}</div>
             <div>{this.props.character.bio.highConcept}</div>
             <div>{this.props.character.bio.flaw}</div>
             <div>
@@ -42,6 +42,7 @@ class CharacterSheet extends Component {
             component: CharacterSheetBio,
             props: {
               bio: this.props.character.bio,
+              name: this.props.character.name,
               updateCharacter: this.props.updateCharacter
             }
           },

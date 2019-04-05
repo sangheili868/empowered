@@ -70,7 +70,8 @@ class CharacterSheetStatsEquipment extends Component {
       },
       description: {
         value: description,
-        validation: 'none'
+        validation: 'none',
+        isAllowingNewLines: true
       }
     }
     return item.category ? (
@@ -109,7 +110,8 @@ class CharacterSheetStatsEquipment extends Component {
           },
           description: {
             value: '',
-            validation: 'none'
+            validation: 'none',
+            isAllowingNewLines: true
           }
         }}
         mode="noStyle"

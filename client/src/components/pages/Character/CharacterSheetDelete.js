@@ -5,7 +5,7 @@ import { warningText } from './CharacterPage.module.scss'
 class CharacterSheetDelete extends Component {
 
   handleDelete = () => {
-    fetch('/api/character/delete', {
+    fetch('/api/characters/delete', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ _id: this.props._id })

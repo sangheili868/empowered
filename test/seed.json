@@ -1,7 +1,7 @@
 [
   {
+    "name": "Niel Silanmiere",
     "bio": {
-      "name": "Niel Silanmiere",
       "portrait": "https://i.pinimg.com/564x/56/8d/e1/568de1eb2809fcb3fd1c72238cb6a090.jpg",
       "highConcept": "Dishonored assassin searching for a gateway to his past.",
       "flaw": "I'm obsessed with an idea and I'll do whatever it takes to see it become a reality, even if it means the well-being of others. ",
@@ -438,8 +438,8 @@
     }
   },
   {
+    "name": "Ido Tomei",
     "bio": {
-      "name": "Ido Tomei",
       "portrait": "",
       "highConcept": "Renegade Assassin. Trained to kill for the state he now refuses to serve any unjust cause.",
       "flaw": "Struggles with remnants of ruthless conditioning.",
@@ -468,7 +468,6 @@
     },
     "stats": {
       "hitPoints": 10,
-      "tempHP": 0,
       "wounds": 0,
       "armor": {
         "name": "",
@@ -842,8 +841,8 @@
     }
   },
   {
+    "name": "Kyra",
     "bio": {
-      "name": "Kyra",
       "portrait": "https://i.pinimg.com/originals/ac/8e/43/ac8e436d96d0368eefee51dd8823e467.jpg",
       "highConcept": "Wild Assassin who wants to fight but not kill",
       "flaw": "No moral compass",
@@ -1214,8 +1213,8 @@
     }
   },
   {
+    "name": "Nibbles T. McGibbles",
     "bio": {
-      "name": "Nibbles T. McGibbles",
       "portrait": "",
       "highConcept": "Pilot",
       "flaw": "He's old and has PTSD",
@@ -1244,7 +1243,6 @@
     },
     "stats": {
       "hitPoints": 8,
-      "tempHP": 0,
       "wounds": 0,
       "armor": {
         "name": "",
@@ -1484,8 +1482,8 @@
     }
   },
   {
+    "name": "Purse Full of Coin",
     "bio": {
-      "name": "Purse Full of Coin",
       "portrait": "https://cdnb.artstation.com/p/assets/images/images/011/074/127/large/victor-alonso-tabaxi-commission-color.jpg?1527713391",
       "highConcept": "Animal lover whose spirits cast spells for him",
       "flaw": "People are annoying. Also trading is bad.",
@@ -1514,7 +1512,6 @@
     },
     "stats": {
       "hitPoints": 13,
-      "tempHP": 0,
       "wounds": 0,
       "armor": {
         "name": "Wooden Armor",
@@ -1757,8 +1754,8 @@
     }
   },
   {
+    "name": "Vicostra Vramiir",
     "bio": {
-      "name": "Vicostra Vramiir",
       "portrait": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/e99a57e7-879f-4c9f-9e6b-e668ea7cf839/db84b4a-30403627-9237-4c07-8fbe-8e46dff568ed.png/v1/fill/w_833,h_960,q_70,strp/drow_bard____tg__shit_post_generator__by_bog_roll_db84b4a-pre.jpg",
       "highConcept": "Illusionist Spy who Cannot Stand Dissatisfaction",
       "flaw": "Pathological Liar",

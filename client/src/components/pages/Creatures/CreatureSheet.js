@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { header, nameAndBio, name, portrait, bio, table, cell, tableField } from './CreaturesPage.module.scss'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import { map, startCase } from 'lodash'
-import CreatureSheetStats from './CreatureSheetStats'
+import CreatureSheetStats from './CreatureSheetStats/CreatureSheetStats'
 import EmpButton from '../../EmpButton/EmpButton';
 
 class CreatureSheet extends Component {

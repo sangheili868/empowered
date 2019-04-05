@@ -21,13 +21,9 @@
       "social": 0
     },
     "powerPoints": 0,
-    "weapons": [],
-    "equipment": [],
-    "languages": [
-      {
-        "name": "Common"
-      }
-    ],
+    "attacks": [],
+    "loot": [],
+    "languages": ["Common"],
     "features": []
   }
 }

@@ -25,7 +25,7 @@ class CharacterSheetTable extends Component {
       <EmpCard isStartingOpen title={this.props.title}>
         <table className={table}>
           <thead>
-            {this.hasItems &&
+            {this.hasItems && !this.props.isHidingColumnNames &&
               <tr>
                 {this.columnTitles.map(title =>
                   <th key={title} className={[columnHeader, cell].join(' ')}>{title}</th>

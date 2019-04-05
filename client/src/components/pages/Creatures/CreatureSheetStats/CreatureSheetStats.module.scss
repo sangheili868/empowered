@@ -1,0 +1,39 @@
+@import "src/styles/colors.scss";
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+
+  .box {
+    border: 1px solid $lightGrey;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+
+    .title {
+      font-weight: bold;
+      margin: 5px;
+    }
+  }
+}
+
+.control {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 30px;
+
+  &.plus {
+    color: $green;
+  }
+
+  &.minus {
+    color: $red
+  }
+
+  &.edit {
+    color: $yellow
+  }
+}
+

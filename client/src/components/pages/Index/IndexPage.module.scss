@@ -18,13 +18,7 @@
     }
   }
 
-  .links {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
-    .link {
-      min-width: 300px;
-    }
+  .link {
+    min-width: 300px;
   }
 }

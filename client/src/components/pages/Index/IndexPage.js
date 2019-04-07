@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EmpCard from '../../EmpCard/EmpCard'
-import { card, concepts, concept, links, link } from './IndexPage.module.scss'
+import { card, concepts, concept, link } from './IndexPage.module.scss'
 import characterConcepts from '../../../gameData/characterConcepts.json'
 import EmpButton from '../../EmpButton/EmpButton'
 
@@ -39,24 +39,15 @@ class IndexPage extends Component {
               The Empowered RPG System is designed to be setting independent. It can be used
               for gritty low fantasy, hard science fiction, or anything in between. However,
               the default setting for Empowered is Eochora. More about Eochora can be found
-              in the links below:
+              in the link below:
             </p>
-            <div className={links}>
-              <a
-                href="https://www.worldanvil.com/w/eochora-tyrzaphir"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <EmpButton mode="secondary" className={link}>People, Places, and Gods of Eochora</EmpButton>
-              </a>
-              <a
-                href="http://imgur.com/a/j1D6NZF"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <EmpButton mode="secondary" className={link}>Map of Eochora</EmpButton>
-              </a>
-            </div>
+            <a
+              href="https://www.worldanvil.com/w/eochora-tyrzaphir"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <EmpButton mode="secondary" className={link}>Eochora on World Anvil</EmpButton>
+            </a>
           </div>
         </EmpCard>
       </div>

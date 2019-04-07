@@ -43,7 +43,7 @@ class IndexPage extends Component {
             </p>
             <div className={links}>
               <a
-                href="http://docs.google.com/presentation/d/1H5h-JR5U3ElDHoe3jb9z_efW2N-Jk2JLePFMJBR0PZw/edit?usp=sharing"
+                href="https://www.worldanvil.com/w/eochora-tyrzaphir"
                 target="_blank"
                 rel="noopener noreferrer"
               >

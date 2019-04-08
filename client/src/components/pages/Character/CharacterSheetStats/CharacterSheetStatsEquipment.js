@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpModal from '../../../EmpModal/EmpModal'
 import CharacterSheetList from '../CharacterSheetList/CharacterSheetList'
-import { plus } from '../CharacterPage.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import withoutIndex from '../../../../utils/withoutIndex'
 import { pick } from 'lodash'
 
@@ -117,7 +116,7 @@ class CharacterSheetStatsEquipment extends Component {
         mode="noStyle"
         onSave={this.handleAddItem.bind(this, columnName)}
       >
-        <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+        <EmpIconButton color="success" icon="plus"/>
       </EmpItemEditor>
     )
   }

@@ -23,22 +23,3 @@
   max-width: 300px;
   margin: 200px auto 0;
 }
-
-.control {
-  padding: 5px;
-  cursor: pointer;
-  font-size: 30px;
-
-  &.plus {
-    color: $green;
-  }
-
-  &.minus {
-    color: $red
-  }
-
-  &.edit {
-    color: $yellow
-  }
-}
-

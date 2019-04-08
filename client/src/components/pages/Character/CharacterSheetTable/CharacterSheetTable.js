@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { table, tableAdd, cell, columnHeader } from './CharacterSheetTable.module.scss'
-import { plus } from '../CharacterPage.module.scss'
 import { isEmpty } from 'lodash'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../../EmpCard/EmpCard'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import CharacterSheetTableRow from './CharacterSheetTableRow'
 
 class CharacterSheetTable extends Component {
@@ -50,7 +49,7 @@ class CharacterSheetTable extends Component {
                       mode="noStyle"
                       onSave={this.props.onAdd}
                     >
-                      <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+                      <EmpIconButton color="success" icon="plus"/>
                     </EmpItemEditor>
                   </div>
                 </td>

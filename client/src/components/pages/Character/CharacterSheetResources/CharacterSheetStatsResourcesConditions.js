@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import conditionData from '../../../../gameData/conditions.json'
 import withoutIndex from '../../../../utils/withoutIndex'
-import { plus } from '../CharacterPage.module.scss'
 import { chain } from 'lodash'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import CharacterSheetStatsList from '../CharacterSheetList/CharacterSheetList'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 
 class CharacterSheetStatsResourcesConditions extends Component {
 
@@ -60,7 +59,7 @@ class CharacterSheetStatsResourcesConditions extends Component {
             mode="noStyle"
             onSave={this.handleSave}
           >
-            <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+            <EmpIconButton color="success" icon="plus"/>
           </EmpItemEditor>
         }
       />

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { control, plus, minus } from './CreatureSheetStats.module.scss'
 import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { map, startCase } from 'lodash'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 
 class CreatureAbilityScores extends Component {
 
@@ -25,22 +24,14 @@ class CreatureAbilityScores extends Component {
   renderIncrease = index => {
     const { abilityScoreName, value } = this.abilityScores[index]
     return (
-      <FontAwesomeIcon
-        className={[control, plus].join(' ')}
-        onClick={this.handleIncrement.bind(this, abilityScoreName, value)}
-        icon="plus-square"
-      />
+      <EmpIconButton color="success" icon="plus" onClick={this.handleIncrement.bind(this, abilityScoreName, value)}/>
     )
   }
 
   renderDecrease = index => {
     const { abilityScoreName, value } = this.abilityScores[index]
     return (
-      <FontAwesomeIcon
-        className={[control, minus].join(' ')}
-        onClick={this.handleDecrement.bind(this, abilityScoreName, value)}
-        icon="minus-square"
-      />
+      <EmpIconButton color="warning" icon="minus" onClick={this.handleDecrement.bind(this, abilityScoreName, value)}/>
     )
   }
   render () {

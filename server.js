@@ -23,12 +23,13 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.use(bodyParser.urlencoded({ extended: true }))
 
   // API calls
-  ;['characters', 'creatures'].forEach(collectionName => {
+  ;['characters', 'creatures', 'encounters'].forEach(collectionName => {
     const collection = db.collection(collectionName)
 
     app.post(`/api/${collectionName}/create`, crud.create.bind(this, collection))
     app.post(`/api/${collectionName}/read`, crud.read.bind(this, collection))
     app.post(`/api/${collectionName}/readAllNames`, crud.readAllNames.bind(this, collection))
+    app.post(`/api/${collectionName}/readMany`, crud.readMany.bind(this, collection))
     app.post(`/api/${collectionName}/update`, crud.update.bind(this, collection))
     app.post(`/api/${collectionName}/delete`, crud.delete.bind(this, collection))
   })

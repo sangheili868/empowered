@@ -1,10 +1,11 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import './styles/global.scss'
-import CharacterPage from './components/pages/Character/CharacterPage'
 import IndexPage from './components/pages/Index/IndexPage'
 import RulesPage from './components/pages/Rules/RulesPage'
+import CharacterPage from './components/pages/Character/CharacterPage'
 import CreaturesPage from './components/pages/Creatures/CreaturesPage'
+import EncountersPage from './components/pages/Encounters/EncountersPage'
 import 'whatwg-fetch'
 import 'promise-polyfill/src/polyfill';
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -43,6 +44,11 @@ class App extends Component {
             label: 'Creatures',
             route: '/creatures',
             component: CreaturesPage
+          },
+          {
+            label: 'Encounters',
+            route: '/encounters',
+            component: EncountersPage
           }
         ]}/>
       </div>

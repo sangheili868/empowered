@@ -9,16 +9,31 @@ class EmpItemEditor extends Component {
     workingValues: {}
   }
 
+  get validatedFields () {
+    return mapValues(this.state.workingValues, field => ({
+      ...field,
+      isValid: this.validate(field)
+    }))
+  }
+
+  validate (field) {
+    if (field.validation === 'none') return true
+    const trimmedValue = field.value && field.value.trim ? field.value.trim() : field.value
+    if (field.validation === 'number') return !isNaN(Number(trimmedValue)) && trimmedValue !== ''
+    if (field.options) return field.options.map(({ value }) => value).includes(field.value)
+    return trimmedValue
+  }
+
   get fieldKeys () {
     return isObject(this.props.fields) ? Object.keys(this.props.fields) : []
   }
 
   get description () {
-    return isFunction(this.props.description) ? this.props.description(this.state.workingValues) : this.props.description
+    return isFunction(this.props.description) ? this.props.description(this.validatedFields) : this.props.description
   }
 
   get isValid () {
-    return every(this.state.workingValues, 'isValid')
+    return every(this.validatedFields, 'isValid')
   }
 
   get modalControls () {
@@ -31,7 +46,7 @@ class EmpItemEditor extends Component {
       },
       {
         label: this.props.saveLabel || 'SAVE',
-        isHidden: isEmpty(this.state.workingValues),
+        isHidden: isEmpty(this.validatedFields),
         onClick: this.handleDone,
         mode: 'secondary',
         isDisabled: !this.isValid
@@ -46,7 +61,7 @@ class EmpItemEditor extends Component {
   }
 
   handleDone = () => {
-    this.props.onSave(mapValues(this.state.workingValues, value => isObject(value) ? value.value : value))
+    this.props.onSave(mapValues(this.validatedFields, value => isObject(value) ? value.value : value))
   }
 
   handleClose = () => {
@@ -75,7 +90,7 @@ class EmpItemEditor extends Component {
           <>
             {this.fieldKeys.map(key =>
               <EmpItemEditorField
-                value={this.state.workingValues[key]}
+                value={this.validatedFields[key]}
                 key={key}
                 fieldName={key}
                 onChange={this.handleChange}

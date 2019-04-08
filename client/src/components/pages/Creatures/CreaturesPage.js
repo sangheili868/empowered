@@ -4,7 +4,7 @@ import Creature from '../../../classes/Creature'
 import { cloneDeep, every, has, set, chain } from 'lodash'
 import EmpModal from '../../EmpModal/EmpModal'
 import newCreature from '../../../gameData/newCreature'
-import { alert, manageCreature } from './CreaturesPage.module.scss'
+import { alert, manage } from './CreaturesPage.module.scss'
 import { Alert } from 'react-bootstrap'
 import EmpDocLoader from '../../EmpDocLoader/EmpDocLoader'
 import { instanceOf } from 'prop-types'
@@ -165,7 +165,7 @@ class CreaturesPage extends Component {
           </Alert>
         }
 
-        <div className={manageCreature}>
+        <div className={manage}>
           <EmpModal
             isBlocked={!this.isUnnamedCreature}
             title="Create New Creature"

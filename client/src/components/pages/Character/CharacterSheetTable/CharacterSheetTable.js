@@ -49,6 +49,7 @@ class CharacterSheetTable extends Component {
                       fields={this.props.fields}
                       mode="noStyle"
                       onSave={this.props.onAdd}
+                      onOpen={this.props.onOpen}
                     >
                       <FontAwesomeIcon className={plus} icon={'plus-square'}/>
                     </EmpItemEditor>

@@ -6,7 +6,7 @@ import { warningText } from './EmpDocLoader.module.scss'
 class EmpDocLoader extends Component {
 
   state = {
-    characters: []
+    documents: []
   }
 
   handleOpen = async () => {
@@ -22,9 +22,9 @@ class EmpDocLoader extends Component {
           return response.json()
         }
       })
-      .then(async rawCharacters => {
-        const characters = rawCharacters.map(({ _id, name }) => ({ label: name, value: _id }))
-        this.setState({ characters })
+      .then(async rawDocuments => {
+        const documents = rawDocuments.map(({ _id, name }) => ({ label: name, value: _id }))
+        this.setState({ documents })
       })
   }
 
@@ -35,8 +35,8 @@ class EmpDocLoader extends Component {
       body: JSON.stringify({ _id })
     })
       .then(response => response.json())
-    .then(character => {
-        this.props.onLoad(character)
+      .then(document => {
+        this.props.onLoad(document)
       })
   }
 
@@ -56,7 +56,7 @@ class EmpDocLoader extends Component {
         fields={{
           character: {
             value: '',
-            options: this.state.characters
+            options: this.state.documents
           }
         }}
         onOpen={this.handleOpen}

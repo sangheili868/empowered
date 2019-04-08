@@ -19,7 +19,9 @@ class CharacterSheetTableRow extends Component {
       <>
         {map(this.props.columnNames, (value, key) =>
           <td key={key} className={cell}>
-            {this.props.renderFields && this.props.renderFields[key] ? this.props.renderFields[key](this.props.item) : this.props.item[key]}
+            {this.props.renderFields && this.props.renderFields[key] ? (
+              this.props.renderFields[key](this.props.item, this.props.index)
+            ) : this.props.item[key]}
           </td>
         )}
         {map(this.props.customFields, ({ render }, index) => (
@@ -47,6 +49,7 @@ class CharacterSheetTableRow extends Component {
           mode="tr"
           description={this.props.description}
           fields={this.fields}
+          onOpen={this.props.onOpen}
           onSave={this.props.onEdit.bind(this, this.props.index)}
           onDelete={this.props.onDelete && this.handleDelete}
         >

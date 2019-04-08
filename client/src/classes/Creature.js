@@ -37,6 +37,7 @@ class Creature {
     return {
       ...this.baseStats,
       maxHitPoints: this.skills.fortitude.passive * this.baseStats.woundLimit,
+      maxPowerPoints: this.baseStats.powerPoints,
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills: this.skills,
       attacks: this.attacks

@@ -6,13 +6,6 @@ import { startCase } from 'lodash'
 
 class EmpItemEditorField extends Component {
 
-  componentDidMount () {
-    this.props.onChange({ [this.props.fieldName]: {
-      ...this.props.value,
-      isValid: this.validate(this.props.value)
-    }})
-  }
-
   get selectedValue () {
     const isMultipleSelected = Array.isArray(this.props.value.value)
     return this.props.value.options.filter(({ value }) =>
@@ -30,14 +23,6 @@ class EmpItemEditorField extends Component {
     ]
   }
 
-  validate (field) {
-    if (field.validation === 'none') return true
-    const trimmedValue = field.value && field.value.trim ? field.value.trim() : field.value
-    if (field.validation === 'number') return !isNaN(Number(trimmedValue)) && trimmedValue !== ''
-    if (field.options) return field.options.map(({ value }) => value).includes(field.value)
-    return trimmedValue
-  }
-
   handleChange = rawValue => {
     const newValue = {
       ...this.props.value,
@@ -48,7 +33,6 @@ class EmpItemEditorField extends Component {
       ...this.props.value,
       value: this.props.value.options.map(({ value }) => value)
     } : newValue
-    valueToSet.isValid = this.validate(valueToSet)
 
     this.props.onChange({ [this.props.fieldName]: valueToSet })
   }

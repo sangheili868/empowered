@@ -3,7 +3,6 @@ import { header, nameAndBio, name, portrait, bio, table, cell, tableField } from
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
 import { map, startCase } from 'lodash'
 import CreatureSheetStats from './CreatureSheetStats/CreatureSheetStats'
-import EmpButton from '../../EmpButton/EmpButton';
 
 class CreatureSheet extends Component {
 
@@ -70,9 +69,10 @@ class CreatureSheet extends Component {
         </div>
         <CreatureSheetStats
           stats={this.props.creature.stats}
+          _id={this.props._id}
           updateCreature={this.props.updateCreature}
+          onDelete={this.props.onDelete}
         />
-        <EmpButton mode="warning" onClick={this.props.onDelete}>Delete Creature</EmpButton>
       </>
     )
   }

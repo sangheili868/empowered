@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import { chain, startCase } from 'lodash'
-import { control, plus, minus, edit } from './CreatureSheetStats.module.scss'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EmpTable from '../../../EmpTable/EmpTable'
 
 class CreatureTraits extends Component {
 
@@ -53,12 +52,8 @@ class CreatureTraits extends Component {
   renderIncrease = index => {
     const { field, value, type } = this.traits[index]
     if (type) return type
-    else if (field) return type || (
-      <FontAwesomeIcon
-        className={[control, plus].join(' ')}
-        onClick={this.handleIncrement.bind(this, field, value)}
-        icon="plus-square"
-      />
+    else if (field) return (
+      <EmpIconButton color="success" icon="plus" onClick={this.handleIncrement.bind(this, field, value)}/>
     )
   }
 
@@ -78,24 +73,17 @@ class CreatureTraits extends Component {
         mode="noStyle"
         onSave={this.props.updateCreature.bind(this, 'stats.speed')}
       >
-        <FontAwesomeIcon
-          className={[control, edit].join(' ')}
-          icon="pen-square"
-        />
+        <EmpIconButton color="edit" icon="pen"/>
       </EmpItemEditor>
     )
-    if (field) return (
-      <FontAwesomeIcon
-        className={[control, minus].join(' ')}
-        onClick={this.handleDecrement.bind(this, field, value)}
-        icon="minus-square"
-      />
+    else if (field) return (
+      <EmpIconButton color="warning" icon="minus" onClick={this.handleDecrement.bind(this, field, value)}/>
     )
   }
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Traits"
         items={this.traits}
         isHidingColumnNames

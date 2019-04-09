@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { table, tableAdd, cell, columnHeader } from './CharacterSheetTable.module.scss'
-import { plus } from '../CharacterPage.module.scss'
+import { table, tableAdd, cell, columnHeader } from './EmpTable.module.scss'
 import { isEmpty } from 'lodash'
-import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
-import EmpCard from '../../../EmpCard/EmpCard'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import CharacterSheetTableRow from './CharacterSheetTableRow'
+import EmpItemEditor from '../EmpItemEditor/EmpItemEditor'
+import EmpCard from '../EmpCard/EmpCard'
+import EmpIconButton from '../EmpIconButton/EmpIconButton'
+import EmpTableRow from './EmpTableRow'
 
-class CharacterSheetTable extends Component {
+class EmpTable extends Component {
 
   get columnTitles () {
     return [
@@ -35,7 +34,7 @@ class CharacterSheetTable extends Component {
           </thead>
           <tbody>
             {this.props.items.map((item, index) =>
-              <CharacterSheetTableRow key={index} item={item} index={index} {...this.props}/>
+              <EmpTableRow key={index} item={item} index={index} {...this.props}/>
             )}
           </tbody>
           {this.props.onAdd &&
@@ -51,7 +50,7 @@ class CharacterSheetTable extends Component {
                       onSave={this.props.onAdd}
                       onOpen={this.props.onOpen}
                     >
-                      <FontAwesomeIcon className={plus} icon={'plus-square'}/>
+                      <EmpIconButton color="success" icon="plus"/>
                     </EmpItemEditor>
                   </div>
                 </td>
@@ -64,4 +63,4 @@ class CharacterSheetTable extends Component {
   }
 }
 
-export default CharacterSheetTable
+export default EmpTable

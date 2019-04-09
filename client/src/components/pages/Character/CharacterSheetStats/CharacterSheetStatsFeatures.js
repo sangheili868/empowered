@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import featureFields from '../../../../gameData/featureFields'
 import { boosted } from '../CharacterPage.module.scss'
 
@@ -18,7 +18,7 @@ class CharacterSheetStatsFeatures extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Features"
         items={this.props.features}
         columnNames={{ name: 'Name', description: 'Description' }}

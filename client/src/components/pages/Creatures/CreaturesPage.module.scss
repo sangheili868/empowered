@@ -31,28 +31,8 @@
       font-size: 50px;
       font-family: immortal;
     }
-
-    .table {
-      font-size: 10px;
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid $lightGrey;
-
-      .tableField {
-        background-color: $blue;
-        color: $white;
-        width: 100px;
-      }
-
-      .cell {
-        white-space: pre-wrap;
-        border-top: solid $lightGrey 1px;
-        padding: 5px 10px;
-      }
-    }
   }
-
-
+  
   .portrait {
     max-height: 240px;
     max-width: 240px;

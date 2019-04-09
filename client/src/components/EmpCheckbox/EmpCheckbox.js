@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { layers, check, checked, disabled, squareBehind } from './EmpCheckbox.module.scss'
+import { check, checked, disabled } from './EmpCheckbox.module.scss'
+import EmpIconButton from '../EmpIconButton/EmpIconButton'
 
 class EmpCheckbox extends Component {
 
@@ -13,8 +13,17 @@ class EmpCheckbox extends Component {
   }
 
   get icon () {
-    const squareStyle = this.props.isDisabled ? 'fas' : 'far'
-    return this.props.isChecked ? [ 'fas', 'check-square'] : [ squareStyle, 'square' ]
+    const squareStyle = this.props.isDisabled ? {
+      color: 'disabled',
+      icon: 'square'
+    } : {
+      color: 'normal',
+      icon: 'open-square'
+    }
+    return this.props.isChecked ? {
+      color: 'primary',
+      icon: 'check'
+    } : squareStyle
   }
 
   handleClick = event => {
@@ -24,10 +33,7 @@ class EmpCheckbox extends Component {
 
   render () {
     return (
-      <div className={['fa-layers', layers].join(' ')} onClick={this.handleClick}>
-        <FontAwesomeIcon className={squareBehind} icon={['fas', 'square']}/>
-        <FontAwesomeIcon className={this.classes} icon={this.icon} />
-      </div>
+      <EmpIconButton color={this.icon.color} icon={this.icon.icon} onClick={this.handleClick}/>
     )
   }
 }

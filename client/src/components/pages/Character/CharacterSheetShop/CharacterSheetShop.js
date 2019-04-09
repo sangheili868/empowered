@@ -5,11 +5,11 @@ import advancementsIcon from "../../../../icons/chevron.png"
 import { pick } from 'lodash'
 import CharacterSheetResource from '../CharacterSheetResources/CharacterSheetResource'
 import CharacterSheetShopAbilityScores from './CharacterSheetShopAbilityScores'
-import CharacterSheetSkills from "../CharacterSheetTable/CharacterSheetSkills"
+import EmpSkillTable from '../../../EmpSkillTable/EmpSkillTable'
 import CharacterSheetShopPowerDice from './CharacterSheetShopPowerDice'
 import CharacterSheetShopFeatures from './CharacterSheetShopFeatures'
 import CharacterSheetShopProficiencies from './CharacterSheetShopProficiencies'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import EmpButton from '../../../EmpButton/EmpButton'
 
 class CharacterSheetShop extends Component {
@@ -58,7 +58,7 @@ class CharacterSheetShop extends Component {
             hitPoints={this.props.stats.hitPoints}
             updateCharacter={this.props.updateCharacter}
           />
-          <CharacterSheetSkills
+          <EmpSkillTable
             abilityScores={this.props.stats.abilityScores}
             skills={this.props.stats.skills}
           />
@@ -81,7 +81,7 @@ class CharacterSheetShop extends Component {
                 synergy={this.props.stats.skills.synergy.value}
                 updateCharacter={this.props.updateCharacter}
               />
-              <CharacterSheetTable
+              <EmpTable
                 title="Sell Back"
                 items={this.props.shop.sellBack}
                 columnNames={{ name: 'Name', type: 'Type' }}

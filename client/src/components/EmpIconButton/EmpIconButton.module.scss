@@ -1,0 +1,71 @@
+@import "src/styles/colors.scss";
+
+.layers {
+  padding: 15px;
+
+  .squareBehind {
+    color: $white;
+    font-size: 24px;
+  }
+
+  .iconButton {
+    margin: 5px;
+    cursor: pointer;
+    font-size: 25px;
+    transition: color 300ms;
+
+    &.primary {
+      color: $orange;
+
+      &:hover {
+        color: $darkOrange;
+      }
+    }
+
+    &.secondary {
+      color: $blue;
+
+      &:hover {
+        color: $darkBlue;
+      }
+    }
+
+    &.success {
+      color: $green;
+
+      &:hover {
+        color: $darkGreen;
+      }
+    }
+
+    &.warning {
+      color: $red;
+
+      &:hover {
+        color: $darkRed;
+      }
+    }
+
+    &.normal {
+      color: $lightGrey;
+
+      &:hover {
+        color: $grey;
+      }
+    }
+
+    &.disabled {
+      color: $lightGrey;
+      cursor: not-allowed;
+    }
+
+
+    &.edit {
+      color: $yellow;
+
+      &:hover {
+        color: $grey;
+      }
+    }
+  }
+}

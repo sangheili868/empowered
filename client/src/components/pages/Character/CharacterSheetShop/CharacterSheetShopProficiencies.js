@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { languages } from './CharacterSheetShop.module.scss'
 import { warningText } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpCard from '../../../EmpCard/EmpCard'
 import { map, startCase } from 'lodash'
@@ -46,7 +46,7 @@ class CharacterSheetShopProficiencies extends Component {
     return (
       <>
         {map(this.props.proficiencies, (proficiencies, grouping) =>
-          <CharacterSheetTable
+          <EmpTable
             key={grouping}
             title={startCase(grouping) + ' Proficiencies'}
             items={proficiencies}

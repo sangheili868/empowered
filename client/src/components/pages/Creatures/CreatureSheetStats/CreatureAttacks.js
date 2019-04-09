@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import withoutIndex from '../../../../utils/withoutIndex'
 import skillData from '../../../../gameData/skills.json'
 import { startCase } from 'lodash'
@@ -30,7 +30,7 @@ class CreatureAttacks extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Attacks"
         columnNames={{
           name: 'Name',

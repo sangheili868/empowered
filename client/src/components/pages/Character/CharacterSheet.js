@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CharacterSheetStats from "./CharacterSheetStats/CharacterSheetStats"
-import CharacterSheetBio from './CharacterSheetTable/CharacterSheetBio'
+import CharacterSheetBio from './CharacterSheetBio/CharacterSheetBio'
 import CharacterSheetShop from './CharacterSheetShop/CharacterSheetShop'
 import CharacterSheetNotes from "./CharacterSheetNotes/CharacterSheetNotes"
 import CharacterSheetDelete from './CharacterSheetDelete'

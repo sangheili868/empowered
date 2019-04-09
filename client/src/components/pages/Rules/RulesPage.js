@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { card, nestedCard, table } from "./RulesPage.module.scss"
 import EmpCard from '../../EmpCard/EmpCard'
-import CharacterSheetSkills from '../Character/CharacterSheetTable/CharacterSheetSkills'
+import EmpSkillTable from '../../EmpSkillTable/EmpSkillTable'
 import RulesActions from './RulesActions'
 import RulesConditions from './RulesConditions'
 import RulesCriticals from './RulesCriticals'
@@ -10,7 +10,7 @@ class RulesPage extends Component {
   render() {
     return (
       <>
-        <CharacterSheetSkills noSpacing/>
+        <EmpSkillTable noSpacing/>
         <EmpCard title="Using Skills" noSpacing>
           <div className={card}>
             <p>

@@ -1,9 +1,7 @@
 {
   "name": "",
-  "bio": {
-    "portrait": "",
-    "description": ""
-  },
+  "portrait": "",
+  "description": "",
   "stats": {
     "woundLimit": 1,
     "armor": 0,

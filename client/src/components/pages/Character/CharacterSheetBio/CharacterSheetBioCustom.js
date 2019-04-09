@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
-import { bio, table, cell, field, bioAdd } from './CharacterSheetTable.module.scss'
 import withoutIndex from '../../../../utils/withoutIndex'
+import EmpTableStrings from '../../../EmpTable/EmpTableStrings'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 
 class CharacterSheetBioCustom extends Component {
+
+  get customBios () {
+    return this.props.bios.map(bio => ({
+      ...bio,
+      isTitleEditable: true
+    }))
+  }
 
   handleEdit = (index, newBio) => {
     this.props.updateCharacter(`bio.customs.${index}`, newBio)
@@ -23,31 +31,7 @@ class CharacterSheetBioCustom extends Component {
   render () {
     return (
       <>
-      <table className={[bio, table].join(' ')}>
-        <tbody>
-          {this.props.bios.map(({ title, content }, index) =>
-            <EmpItemEditor
-              key={index}
-              title="Edit Custom Bio Field"
-              mode="tr"
-              fields={{
-                title: {
-                  value: title
-                },
-                content: {
-                  value: content,
-                  isAllowingNewLines: true
-                }
-              }}
-              onSave={this.handleEdit.bind(this, index)}
-              onDelete={this.handleDelete.bind(this, index)}
-            >
-              <td className={[cell, field].join(' ')}>{title}</td>
-              <td className={cell}>{content}</td>
-            </EmpItemEditor>
-          )}
-          </tbody>
-        </table>
+        <EmpTableStrings items={this.customBios} onSave={this.handleEdit} onDelete={this.handleDelete}/>
         <EmpItemEditor
           title="Add Custom Bio FIeld"
           fields={{
@@ -59,11 +43,10 @@ class CharacterSheetBioCustom extends Component {
               isAllowingNewLines: true
             }
           }}
-          mode="success"
-          className={bioAdd}
+          mode="noStyle"
           onSave={this.handleSave}
         >
-          Add a New Bio Field
+          <EmpIconButton color="success" icon="plus"/>
         </EmpItemEditor>
       </>
     )

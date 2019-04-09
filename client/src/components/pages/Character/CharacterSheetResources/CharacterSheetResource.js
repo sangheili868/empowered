@@ -4,36 +4,16 @@ import {
   resource,
   valueRow,
   counter,
-  minus,
   hidden,
-  inverted,
   subtext
 } from "./CharacterSheetResources.module.scss"
-import { plus } from '../CharacterPage.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import EmpCard from '../../../EmpCard/EmpCard'
+import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 
 class CharacterSheetResource extends Component {
 
-  counterClasses = (type, isShowing) => {
-    return [
-      counter,
-      type,
-      ...(isShowing ? [] : [hidden]),
-      ...(this.props.isInvertingControls ? [inverted] : [])
-    ].join (' ')
-  }
-
-  get plusClasses () {
-    return this.counterClasses(plus, !this.props.max || (this.props.value < this.props.max))
-  }
-
   handleIncrement = () => {
     this.props.onUpdate(parseInt(this.props.value) + 1, 1)
-  }
-
-  get minusClasses () {
-    return this.counterClasses(minus, this.props.value > 0 || this.props.isAlwaysShowingMinus)
   }
 
   handleDecrement = () => {
@@ -41,13 +21,19 @@ class CharacterSheetResource extends Component {
   }
 
   get renderPlus () {
+    const isHidden = this.props.max && (this.props.value >= this.props.max)
+    const classes = isHidden ? [counter, hidden].join(' ') : counter
+    const color = this.props.isInvertingControls ? 'warning' : 'success'
     return this.props.onUpdate &&
-      <FontAwesomeIcon className={this.plusClasses} onClick={this.handleIncrement} icon="plus-square"/>
+      <EmpIconButton className={classes} color={color} icon="plus" onClick={this.handleIncrement}/>
   }
 
   get renderMinus () {
+    const isHidden = (this.props.value <= 0) && !this.props.isAlwaysShowingMinus
+    const classes = isHidden ? [counter, hidden].join(' ') : counter
+    const color = this.props.isInvertingControls ? 'success' : 'warning'
     return this.props.onUpdate &&
-      <FontAwesomeIcon className={this.minusClasses} onClick={this.handleDecrement} icon="minus-square"/>
+      <EmpIconButton className={classes} color={color} icon="minus" onClick={this.handleDecrement}/>
   }
 
   render () {

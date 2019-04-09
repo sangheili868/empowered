@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { warningText } from '../CharacterPage.module.scss'
 import { lowerCase } from 'lodash'
 import EmpButton from '../../../EmpButton/EmpButton'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 
 class CharacterSheetShopAbilityScores extends Component {
 
@@ -48,7 +48,7 @@ class CharacterSheetShopAbilityScores extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Ability Scores"
         items={this.props.abilityScores}
         columnNames={{ name: 'Name', displayValue: 'Current' }}

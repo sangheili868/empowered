@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { table, borderless, columnHeader } from "./CharacterSheetTable.module.scss"
 import { startCase, keyBy, isEmpty } from 'lodash'
-import EmpCard from '../../../EmpCard/EmpCard'
-import skills from '../../../../gameData/skills.json'
-import CharacterSheetSkillsDetail from './CharacterSheetSkillsDetail'
+import EmpCard from '../EmpCard/EmpCard'
+import skills from '../../gameData/skills.json'
+import EmpSkillTableSkill from './EmpSkillTableSkill'
+import { table, columnHeader } from './EmpSkillTable.module.scss'
 
-class CharacterSheetSkills extends Component {
+class EmpSkillTable extends Component {
 
   get hasValues () {
     return !isEmpty(this.props.abilityScores)
@@ -45,7 +45,7 @@ class CharacterSheetSkills extends Component {
   render () {
     return (
       <EmpCard isStartingOpen title="Skills" noSpacing={this.props.noSpacing}>
-        <table className={[table, borderless].join(' ')}>
+        <table className={table}>
           <tbody>
             <tr>
               <td></td>
@@ -67,15 +67,15 @@ class CharacterSheetSkills extends Component {
                   }
                 </td>
                 {this.topScores.map(topScore =>
-                  <td key={topScore}><CharacterSheetSkillsDetail skill={this.getSkill(topScore, leftScore)}/></td>
+                  <td key={topScore}><EmpSkillTableSkill skill={this.getSkill(topScore, leftScore)}/></td>
                 )}
-                <td><CharacterSheetSkillsDetail skill={this.getSkill(leftScore, leftScore)}/></td>
+                <td><EmpSkillTableSkill skill={this.getSkill(leftScore, leftScore)}/></td>
               </tr>
             )}
             <tr>
               <td></td>
               {this.topScores.map(topScore =>
-                <td key={topScore}><CharacterSheetSkillsDetail skill={this.getSkill(topScore, topScore)}/></td>
+                <td key={topScore}><EmpSkillTableSkill skill={this.getSkill(topScore, topScore)}/></td>
               )}
             </tr>
           </tbody>
@@ -85,4 +85,4 @@ class CharacterSheetSkills extends Component {
   }
 }
 
-export default CharacterSheetSkills
+export default EmpSkillTable

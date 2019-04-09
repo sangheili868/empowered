@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import { chain, startCase } from 'lodash'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 
 class CreatureTraits extends Component {
 
@@ -83,7 +83,7 @@ class CreatureTraits extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Traits"
         items={this.traits}
         isHidingColumnNames

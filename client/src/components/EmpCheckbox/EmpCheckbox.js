@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { layers, check, checked, disabled, squareBehind } from './EmpCheckbox.module.scss'
+import { check, checked, disabled } from './EmpCheckbox.module.scss'
 import EmpIconButton from '../EmpIconButton/EmpIconButton'
 
 class EmpCheckbox extends Component {

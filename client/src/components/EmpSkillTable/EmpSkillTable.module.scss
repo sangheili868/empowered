@@ -1,0 +1,32 @@
+@import "src/styles/colors.scss";
+
+.table {
+  font-size: 12px;
+  width: 100%;
+  width: auto;
+  margin: 5px auto;
+
+  @media screen and (max-width: 400px) {
+    margin: 0 5px 5px;
+    font-size: 12px;
+  }
+
+  .cell {
+    padding: 5px 10px;
+
+    @media screen and (max-width: 400px) {
+      padding: 4px;
+      margin: 0;
+      min-width: 0;
+    }
+
+    &.columnHeader {
+      font-weight: bold;
+    }
+
+    .detailTitle {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor';
-import { cell } from './CharacterSheetTable.module.scss'
+import EmpItemEditor from '../EmpItemEditor/EmpItemEditor';
+import { cell } from './EmpTable.module.scss'
 import { map, mapValues } from 'lodash'
-import EmpModal from '../../../EmpModal/EmpModal';
+import EmpModal from '../EmpModal/EmpModal';
 
-class CharacterSheetTableRow extends Component {
+class EmpTableRow extends Component {
 
   get fields () {
     return mapValues(this.props.fields, (field, key) => ({ ...field, value: this.props.item[key] }))
@@ -63,4 +63,4 @@ class CharacterSheetTableRow extends Component {
   }
 }
 
-export default CharacterSheetTableRow
+export default EmpTableRow

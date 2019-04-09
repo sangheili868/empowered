@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import withoutIndex from '../../../../utils/withoutIndex'
 
 class CreatureFeatures extends Component {
@@ -30,7 +30,7 @@ class CreatureFeatures extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Features"
         columnNames={{ name: 'Name', description: 'Description', powerPoints: 'Power Points' }}
         items={this.props.features}

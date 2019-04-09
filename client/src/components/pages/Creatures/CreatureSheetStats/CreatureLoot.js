@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import withoutIndex from '../../../../utils/withoutIndex'
 
 class CreatureLoot extends Component {
@@ -21,7 +21,7 @@ class CreatureLoot extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Loot"
         columnNames={{
           name: 'Name',

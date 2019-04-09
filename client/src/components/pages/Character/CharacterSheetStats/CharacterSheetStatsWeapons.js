@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import equipmentProficiencyData from '../../../../gameData/equipmentProficiencies.json'
 import weaponData from '../../../../gameData/weapons.json'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import withoutIndex from '../../../../utils/withoutIndex'
 import EmpCheckbox from '../../../EmpCheckbox/EmpCheckbox'
 import { some } from 'lodash'
@@ -77,7 +77,7 @@ class CharacterSheetStatsWeapons extends Component {
 
   render () {
     return (<>
-      <CharacterSheetTable
+      <EmpTable
         title="Weapons"
         addText="Add a weapon"
         items={this.props.weapons}

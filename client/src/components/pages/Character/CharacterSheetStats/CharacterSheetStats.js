@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { sheetPage, detailTitle } from '../CharacterPage.module.scss'
 import CharacterSheetStatsResources from "../CharacterSheetResources/CharacterSheetStatsResources"
-import CharacterSheetSkills from "../CharacterSheetTable/CharacterSheetSkills"
+import EmpSkillTable from '../../../EmpSkillTable/EmpSkillTable'
 import CharacterSheetList from '../CharacterSheetList/CharacterSheetList'
 import { pick } from 'lodash'
 import CharacterSheetStatsWeapons from './CharacterSheetStatsWeapons'
@@ -41,7 +41,7 @@ class CharacterSheetStats extends Component {
       <div>
         <CharacterSheetStatsResources stats={this.props.stats} updateCharacter={this.props.updateCharacter}/>
         <div className={sheetPage}>
-          <CharacterSheetSkills {...pick(this.props.stats, ['abilityScores', 'skills'])}/>
+          <EmpSkillTable {...pick(this.props.stats, ['abilityScores', 'skills'])}/>
           <CharacterSheetStatsWeapons
             {...pick(this.props.stats, ['weapons', 'availableWeapons'])}
             currentWeapons={this.props.stats.base.weapons}

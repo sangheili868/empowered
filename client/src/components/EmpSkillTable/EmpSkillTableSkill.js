@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { startCase } from 'lodash'
-import EmpModal from '../../../EmpModal/EmpModal'
-import { borderlessCell } from './CharacterSheetTable.module.scss'
-import { detailTitle } from '../CharacterPage.module.scss'
+import EmpModal from '../EmpModal/EmpModal'
+import { detailTitle, cell } from './EmpSkillTable.module.scss'
 
-class CharacterSheetSkillsDetail extends Component {
+class EmpSkillTableSkill extends Component {
   get skillName () {
     return startCase(this.props.skill.name)
   }
@@ -57,7 +56,7 @@ class CharacterSheetSkillsDetail extends Component {
             </>
           }
         </>
-      } className={borderlessCell}>
+      } className={cell}>
         <div>{this.skillName}</div>
         <div>{this.props.skill.displayValue}</div>
       </EmpModal>
@@ -65,4 +64,4 @@ class CharacterSheetSkillsDetail extends Component {
   }
 }
 
-export default CharacterSheetSkillsDetail
+export default EmpSkillTableSkill

@@ -6,8 +6,7 @@
   border-collapse: collapse;
 
   &.bio {
-    font-size: 16px;
-    border-bottom: 1px solid $lightGrey;
+    border: 1px solid $lightGrey;
 
     .field {
       width: 150px;
@@ -17,24 +16,6 @@
 
     .cell {
       white-space: pre-wrap;
-    }
-  }
-
-  &.borderless {
-    width: auto;
-    margin: 5px auto;
-
-    @media screen and (max-width: 400px) {
-      margin: 0 5px 5px;
-      font-size: 12px;
-    }
-
-    .borderlessCell {
-      @media screen and (max-width: 400px) {
-        padding: 4px;
-        margin: 0;
-        min-width: 0;
-      }
     }
   }
 

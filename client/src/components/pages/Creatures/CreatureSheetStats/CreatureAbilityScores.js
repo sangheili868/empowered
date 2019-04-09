@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CharacterSheetTable from '../../Character/CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 import { map, startCase } from 'lodash'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 
@@ -36,7 +36,7 @@ class CreatureAbilityScores extends Component {
   }
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Ability Scores"
         items={this.abilityScores}
         isHidingColumnNames

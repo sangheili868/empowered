@@ -6,7 +6,8 @@ class Creature {
 
   constructor(basedCreatureData) {
     this.name = basedCreatureData.name
-    this.bio = basedCreatureData.bio
+    this.portrait = basedCreatureData.portrait
+    this.description = basedCreatureData.description
     this.baseStats = basedCreatureData.stats
   }
 

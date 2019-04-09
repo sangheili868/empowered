@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { warningText } from '../CharacterPage.module.scss'
 import EmpButton from '../../../EmpButton/EmpButton'
-import CharacterSheetTable from '../CharacterSheetTable/CharacterSheetTable'
+import EmpTable from '../../../EmpTable/EmpTable'
 
 class CharacterSheetShopPowerDice extends Component {
 
@@ -55,7 +55,7 @@ class CharacterSheetShopPowerDice extends Component {
 
   render () {
     return (
-      <CharacterSheetTable
+      <EmpTable
         title="Power Dice"
         items={this.props.powerDice}
         columnNames={{ name: 'Name', current: 'Current' }}

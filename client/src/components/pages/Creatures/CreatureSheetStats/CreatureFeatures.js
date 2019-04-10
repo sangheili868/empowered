@@ -23,8 +23,7 @@ class CreatureFeatures extends Component {
     return {
       name: { value: '' },
       description: { value: '' },
-      powerPoints: { value: 1, validation: 'number' },
-
+      powerPoints: { value: 0, validation: 'number' }
     }
   }
 

@@ -7,7 +7,6 @@ import EmpTableStrings from '../../EmpTable/EmpTableStrings'
 class CreatureSheet extends Component {
 
   get bioItems () {
-    console.log(this.props.creature)
     return chain(this.props.creature).pick(['name', 'portrait', 'description']).map((content, title) => ({
       title,
       content,

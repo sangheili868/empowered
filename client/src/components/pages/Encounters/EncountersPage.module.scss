@@ -1,0 +1,42 @@
+@import "src/styles/colors.scss";
+
+.alert {
+  position: sticky;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+}
+
+.manage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  .nameAndBio {
+    flex: 1;
+
+    .name {
+      font-size: 50px;
+      font-family: immortal;
+    }
+  }
+}
+
+.combatants {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+}

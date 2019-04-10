@@ -26,14 +26,21 @@ class Encounter {
   get combatants () {
     return this.baseCombatants.map(combatant => {
       const combatantData = new Creature(keyBy(this.creatureData, '_id')[combatant.creature])
+      const attack = combatantData.attacks[combatant.attack]
+      const attackOptions = combatantData.attacks.map(({ name }, index) => ({ label: name, value: index }))
+      const displayName = combatant.customName ? `${combatant.customName} (${combatantData.name})` : combatantData.name
+      const speed = `${combatantData.stats.speed.rating}ft. ${combatantData.stats.speed.type}`
+
       return {
         ...combatantData,
         ...combatant,
-        name: combatant.customName ? `${combatant.customName} (${combatantData.name})` : combatantData.name,
-        ...pick(combatantData.stats, ['maxHitPoints', 'armor', 'shield', 'maxPowerPoints']),
+        displayName,
+        ...pick(combatantData.stats, ['maxHitPoints', 'armor', 'shield', 'maxPowerPoints', 'attacks']),
         evasion: combatantData.stats.skills.agility.value,
-        speed: `${combatantData.stats.speed.rating}ft. ${combatantData.stats.speed.type}`
-
+        speed,
+        attackOptions,
+        toHit: attack && attack.hit,
+        damage: attack && attack.damage
       }
     })
   }

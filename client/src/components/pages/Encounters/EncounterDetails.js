@@ -1,33 +1,79 @@
 import React, { Component } from 'react'
-import { header, nameAndBio, name, bio, table, cell, tableField } from '../Creatures/CreaturesPage.module.scss'
+import { header, nameAndBio, name, combatants } from './EncountersPage.module.scss'
+import EmpTableStrings from '../../EmpTable/EmpTableStrings'
+import { chain } from 'lodash'
+import Creature from '../../../classes/Creature'
+import EncounterCombatant from './EncounterCombatant/EncounterCombatant'
 import EmpItemEditor from '../../EmpItemEditor/EmpItemEditor'
-import { chain, startCase } from 'lodash'
-import EncounterList from './EncounterList/EncounterList'
+import EmpIconButton from '../../EmpIconButton/EmpIconButton'
+import withoutIndex from '../../../utils/withoutIndex'
 
-class CreatureSheet extends Component {
+class EncounterDetails extends Component {
 
-  getFields = (name, details) => {
-    const validation = name === 'name' ? {} : {
-      validation: 'none'
-    }
-
-    return {
-      details: {
-        value: details || '',
-        ...validation,
-        isAllowingNewLines: true
-      }
-    }
+  state = {
+    creatureOptions: []
   }
 
-  handleSave = (field, value) => {
-    return this.props.updateEncounter(field, value.details)
+  handleUpdateBio = (index, { content }) => {
+    return this.props.updateEncounter(this.bioItems[index].title, content)
   }
 
-  calcDetails = (details, name) => {
-    const isTruncating = name === 'portrait' && details && details.length > 50
-    const truncatedDetails = details.slice(0, 50) + '...'
-    return isTruncating ? truncatedDetails : details
+  get bioItems () {
+    return chain(this.props.encounter).pick(['name', 'description']).map((content, title) => ({
+      title,
+      content,
+      isAllowingNewLines: title !== 'name',
+      ...((title !== 'name') && { validation: 'none' }),
+      isTruncating: title === 'portrait'
+    })).value()
+  }
+
+  handleOpenAddDialog = async () => {
+    await fetch(`/api/creatures/readAllNames`, { method: 'POST' })
+      .then(response => {
+        if(response.ok === false) {
+          throw new Error('Cannot connect to server. Are you sure you are on the correct wifi?')
+        } else {
+          return response.json()
+        }
+      })
+      .then(async rawCreatures => {
+        const creatureOptions = rawCreatures.map(({ _id, name }) => ({ label: name, value: _id }))
+        this.setState({ creatureOptions })
+      })
+  }
+
+  handleAdd = async newCombatant => {
+    await fetch(`/api/creatures/read`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ _id: newCombatant.creature })
+    })
+      .then(response => response.json())
+      .then(creatureData => {
+        const creature = new Creature(creatureData)
+        this.props.updateEncounter('combatants', [
+          ...this.props.encounter.combatants,
+          {
+            ...newCombatant,
+            hitPoints: creature.stats.maxHitPoints,
+            powerPoints: creature.stats.maxPowerPoints,
+            attack: 0,
+            notes: ''
+          }
+        ])
+      })
+  }
+
+  handleUpdateCombatant = (index, field, newValue) => {
+    this.props.updateEncounter(`combatants.${index}.${field}`, newValue)
+  }
+
+  handleDeleteCombatant = index => {
+    return this.props.updateEncounter('combatants', withoutIndex(
+      this.props.encounter.combatants,
+      index
+    ))
   }
 
   render () {
@@ -36,31 +82,40 @@ class CreatureSheet extends Component {
         <div className={header}>
           <div className={nameAndBio}>
             <div className={name}>{this.props.encounter.name || 'Unnamed Encounter'}</div>
-            <table className={[bio, table].join(' ')}>
-              <tbody>
-                {chain(this.props.encounter).pick(['name', 'description']).map((details, field) =>
-                  <EmpItemEditor
-                    key={field}
-                    title={'Edit ' + startCase(field)}
-                    mode="tr"
-                    fields={this.getFields(field, details)}
-                    onSave={this.handleSave.bind(this, field)}
-                  >
-                    <td className={[cell, tableField].join(' ')}>{startCase(field)}</td>
-                    <td className={cell}>{this.calcDetails(details, field)}</td>
-                  </EmpItemEditor>
-                ).value()}
-              </tbody>
-            </table>
+            <EmpTableStrings items={this.bioItems} onSave={this.handleUpdateBio}/>
           </div>
         </div>
-        <EncounterList
-          combatants={this.props.encounter.combatants}
-          updateEncounter={this.props.updateEncounter}
-        />
+        <div className={combatants}>
+          {this.props.encounter.combatants.map((combatant, index) =>
+            <EncounterCombatant
+              key={index}
+              combatant={combatant}
+              onUpdate={this.handleUpdateCombatant.bind(this, index)}
+              onDelete={this.handleDeleteCombatant.bind(this, index)}
+            />
+          )}
+        </div>
+        <EmpItemEditor
+          title="Add a Combatant"
+          fields={{
+            creature: {
+              value: '',
+              options: this.state.creatureOptions
+            },
+            customName: {
+              value: '',
+              validation: 'none'
+            }
+          }}
+          mode="noStyle"
+          onOpen={this.handleOpenAddDialog}
+          onSave={this.handleAdd}
+        >
+          <EmpIconButton color="success" icon="plus"/>
+        </EmpItemEditor>
       </>
     )
   }
 }
 
-export default CreatureSheet
+export default EncounterDetails

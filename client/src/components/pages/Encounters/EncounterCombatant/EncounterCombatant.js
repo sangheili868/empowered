@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import EmpCard from '../../../EmpCard/EmpCard'
-import { stats, block, title, dropdown, controlsBlock, controls } from './EncounterCombatant.module.scss'
+import { stats, block, title, dropdown, controlsBlock, controls, note } from './EncounterCombatant.module.scss'
 import EmpDropdown from '../../../EmpDropdown/EmpDropdown'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import EncounterCombatantCounter from './EncounterCombatantCounter'
-import { chain, startCase } from 'lodash'
+import { chain, startCase, debounce } from 'lodash'
 import { Link } from 'react-router-dom'
 import EmpLoadingDots from '../../../EmpLoadingDots/EmpLoadingDots'
+import EmpTextInput from '../../../EmpTextInput/EmpTextInput'
 
 class EncounterCombatant extends Component {
 
   state = {
-    creatureOptions: []
+    creatureOptions: [],
+    note: this.props.combatant.note
   }
 
   handleEdit = ({ customName }) => {
@@ -32,6 +34,16 @@ class EncounterCombatant extends Component {
 
   handleOpenCombatant = () => {
     window.sessionStorage.setItem('creatureId', this.props.combatant._id)
+  }
+
+  debounceNoteUpdate = debounce(target => {
+    this.props.onUpdate('note', target.value)
+  }, 500)
+
+  handleNoteChange = ({ target }) => {
+    console.log(target)
+    this.setState({ note: target.value })
+    this.debounceNoteUpdate(target)
   }
 
   render () {
@@ -104,6 +116,11 @@ class EncounterCombatant extends Component {
                     <EmpIconButton color="normal" icon="open"/>
                   </Link>
                 </div>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="3" className={block}>
+                <EmpTextInput className={note} value={this.state.note} onChange={this.handleNoteChange}/>
               </td>
             </tr>
           </tbody>

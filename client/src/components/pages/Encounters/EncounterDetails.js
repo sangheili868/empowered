@@ -61,7 +61,9 @@ class EncounterDetails extends Component {
             attack: 0,
             notes: ''
           }
-        ])
+        ],
+        creature)
+        this.props.onAddCreature(creatureData)
       })
   }
 
@@ -86,7 +88,7 @@ class EncounterDetails extends Component {
           </div>
         </div>
         <div className={combatants}>
-          {this.props.encounter.combatants.map((combatant, index) =>
+          {this.props.combatants.map((combatant, index) =>
             <EncounterCombatant
               key={index}
               combatant={combatant}

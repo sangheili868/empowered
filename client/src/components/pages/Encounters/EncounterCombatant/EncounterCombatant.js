@@ -7,6 +7,7 @@ import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import EncounterCombatantCounter from './EncounterCombatantCounter'
 import { chain, startCase } from 'lodash'
 import { Link } from 'react-router-dom'
+import EmpLoadingDots from '../../../EmpLoadingDots/EmpLoadingDots'
 
 class EncounterCombatant extends Component {
 
@@ -29,15 +30,15 @@ class EncounterCombatant extends Component {
     return this.props.combatant.attacks[this.props.combatant.attack]
   }
 
+  handleOpenCombatant = () => {
+    window.sessionStorage.setItem('creatureId', this.props.combatant._id)
+  }
+
   render () {
-    return (
-      <EmpCard
-        title={this.props.combatant.displayName}
-        isStartingOpen
-        items={[this.props.combatant]}
-        renderFields={this.renderFields}
-        onDelete={this.handleDelete}
-      >
+    return this.props.combatant.isNotLoaded ? (
+      <EmpLoadingDots/>
+    ) : (
+      <EmpCard title={this.props.combatant.displayName} isStartingOpen>
         <table className={stats}>
           <tbody>
             <tr>
@@ -99,7 +100,7 @@ class EncounterCombatant extends Component {
                   >
                     <EmpIconButton color="edit" icon="pen"/>
                   </EmpItemEditor>
-                  <Link to="/creatures" >
+                  <Link to="/creatures" onClick={this.handleOpenCombatant}>
                     <EmpIconButton color="normal" icon="open"/>
                   </Link>
                 </div>

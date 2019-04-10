@@ -1,197 +1,116 @@
 import React, { Component } from 'react'
-import Encounter from '../../../classes/Encounter'
-import { cloneDeep, every, has, set, chain } from 'lodash'
-import EmpModal from '../../EmpModal/EmpModal'
-import newEncounter from '../../../gameData/newEncounter'
-import { alert, manage } from './EncountersPage.module.scss'
-import { Alert } from 'react-bootstrap'
-import EmpDocLoader from '../../EmpDocLoader/EmpDocLoader'
-import { instanceOf } from 'prop-types'
-import { withCookies, Cookies } from 'react-cookie'
-import { Helmet } from 'react-helmet'
-import EmpLoadingDots from '../../EmpLoadingDots/EmpLoadingDots'
 import EncounterDetails from './EncounterDetails'
+import newEncounter from '../../../gameData/newEncounter'
+import EmpDocManager from '../../EmpDocManager/EmpDocManager'
+import EmpLoadingDots from '../../EmpLoadingDots/EmpLoadingDots'
+import updateDocument from '../../../utils/updateDocument'
+import { keyBy, pick } from 'lodash'
+import Creature from '../../../classes/Creature'
 
 class EncountersPage extends Component {
 
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
+  state = {
+    _id: '',
+    encounter: null,
+    creatureData: {}
   }
 
-  constructor(props) {
-    super(props)
-    const _id = props.cookies.get('encounterId')
+  async fetchCreatures (_ids) {
+   await fetch(`/api/creatures/readMany`, {
+     method: 'POST',
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ _ids })
+   })
+     .then(response => response.json())
+     .then(creatures => {
+       this.setState({ creatureData: keyBy(creatures, '_id') })
+     })
+ }
 
-    this.state = {
-      _id,
-      baseEncounter: null,
-      encounter: null
-    }
-
-    if (_id) {
-      fetch('/api/encounters/read', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ _id })
-      })
-        .then(response => response.json())
-        .then(results => {
-          if (results.error) {
-            this.setIdCookie('')
-          } else {
-            this.handleLoad(results)
-          }
-        })
-    }
+  handleNewEncounter = async (encounter) => {
+    encounter.combatants && await this.fetchCreatures(encounter.combatants.map(({ creature }) => creature))
+    this.setState({ encounter })
   }
 
-  handleLoad = async baseEncounter => {
-    const encounter = new Encounter(baseEncounter)
-    await encounter.fetchCreatures()
-    this.setState({ baseEncounter, encounter })
-    this.setIdCookie(baseEncounter._id)
-  }
-
-  setIdCookie = _id => {
-    this.props.cookies.set('encounterId', _id, { path: '/' })
+  handleUpdateId = _id => {
     this.setState({ _id })
   }
 
-  get name () {
-    return this.state.encounter && this.state.encounter.name
+  handleUpdateEncounter = async (paths, newValue, newCreature) => {
+    const { baseDocument, _id } = await updateDocument('encounters', this.state.encounter, paths, newValue)
+    this.setState({ encounter: { ...baseDocument, _id } })
+    this.handleUpdateId(_id)
   }
 
-  get isUnnamedEncounter () {
-    return !this.state._id && this.state.encounter
-  }
-
-  createNewEncounter = async () => {
-    const baseEncounter = cloneDeep(newEncounter)
-    const encounter = new Encounter(baseEncounter)
-    await encounter.fetchCreatures()
-    this.setState({ baseEncounter, encounter })
-    this.setIdCookie('')
-  }
-
-  updateEncounter = async (paths, newValue) => {
-    /*
-      Single mode: updateEncounter('stats.hitPoints', 10)
-      Multi mode: updateEncounter([
-        { path: 'stat.hitPoints', value: 0},
-        { path: `stats.weapons.${weaponIndex}`, value: {
-          name: 'Longsword',
-          category: 'twoHandedMeleeWeapon',
-          weight: 'medium'}}
-      ])
-    */
-    const isMultiMode = every(paths, pathValue => has(pathValue, 'path') && has(pathValue, 'value'))
-    let baseEncounter = cloneDeep(this.state.baseEncounter)
-    let _id = baseEncounter._id
-
-    if (isMultiMode) {
-      paths.map(({ path, value }) => set(baseEncounter, path, value))
-      paths = chain(paths).keyBy('path').mapValues('value').value()
-    } else {
-      set(baseEncounter, paths, newValue)
-      paths = { [paths]: newValue}
-    }
-
-    if (_id) {
-      this.updateEncounterInDatabase({ paths, _id })
-    } else if (baseEncounter.name) {
-      this.createEncounterInDatabase(baseEncounter)
-    }
-
-    const encounter = new Encounter(baseEncounter)
-    await encounter.fetchCreatures()
-    this.setState({ baseEncounter, encounter })
-  }
-
-  updateEncounterInDatabase = ({ paths, _id }) => {
-    fetch('/api/encounters/update', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ paths, _id})
-    })
-  }
-
-  createEncounterInDatabase = encounter => {
-    fetch('/api/encounters/create', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ document: encounter })
-    })
-    .then(response => response.json())
-    .then(_id => {
-      this.setState(prevState => ({
-        ...prevState,
-        baseEncounter: {
-          ...prevState.baseEncounter,
-          _id
-        }
-      }))
-      this.setIdCookie(_id)
-    })
+  handleAddCreature = creature => {
+    this.setState(prevState => ({
+      ...prevState,
+      creatureData: {
+        ...prevState.creatureData,
+        [creature._id]: creature
+      }
+    }))
   }
 
   handleDelete = () => {
-    fetch('/api/encounters/delete', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ _id: this.state._id })
-    })
-
     this.setState({
       _id: '',
-      baseEncounter: null,
       encounter: null
     })
   }
 
-  render () {
+  get combatants () {
+    return this.state.encounter.combatants.map(combatant => {
+      const creature = this.state.creatureData[combatant.creature]
+      if (!creature) return { ...combatant, isNotLoaded: true }
+
+      const combatantData = new Creature(creature)
+      const attack = combatantData.attacks[combatant.attack]
+      const attackOptions = combatantData.attacks.map(({ name }, index) => ({ label: name, value: index }))
+      const displayName = combatant.customName ? `${combatant.customName} (${combatantData.name})` : combatantData.name
+      const speed = `${combatantData.stats.speed.rating}ft. ${combatantData.stats.speed.type}`
+
+      return {
+        isNotLoaded: false,
+        ...combatantData,
+        ...combatant,
+        displayName,
+        ...pick(combatantData.stats, ['maxHitPoints', 'armor', 'shield', 'maxPowerPoints', 'attacks']),
+        evasion: combatantData.stats.skills.agility.value,
+        speed,
+        attackOptions,
+        toHit: attack && attack.hit,
+        damage: attack && attack.damage
+      }
+    })
+  }
+
+  render() {
     return (
       <div>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>{this.name}</title>
-        </Helmet>
-
-        {this.isUnnamedEncounter &&
-          <Alert className={alert} variant="danger">
-            Warning: Your encounter will not be saved until it is given a name!
-          </Alert>
-        }
-
-        <div className={manage}>
-          <EmpModal
-            isBlocked={!this.isUnnamedEncounter}
-            title="Create New Encounter"
-            body="Are you sure you want to clear the encounter data and load a new encounter?"
-            closeText="CANCEL"
-            controls={[{
-              label: 'CONFIRM',
-              onClick: this.createNewEncounter
-            }]}
-            onHide={this.handleCloseWarning}
-            onBlocked={this.createNewEncounter}
-          >
-            New
-          </EmpModal>
-          <EmpDocLoader collection="encounters" isUnnamed={this.isUnnamedEncounter} onLoad={this.handleLoad}/>
-        </div>
+        <EmpDocManager
+          collection="encounter"
+          _id={this.state._id}
+          document={this.state.encounter}
+          newDocument={newEncounter}
+          onUpdateDocument={this.handleNewEncounter}
+          onUpdateId={this.handleUpdateId}
+        />
         {this.state.encounter ? (
           <EncounterDetails
             _id={this.state._id}
             encounter={this.state.encounter}
-            updateEncounter={this.updateEncounter}
+            combatants={this.combatants}
+            updateEncounter={this.handleUpdateEncounter}
+            onAddCreature={this.handleAddCreature}
             onDelete={this.handleDelete}
           />
         ) : this.state._id && (
           <EmpLoadingDots/>
         )}
       </div>
-    )
+    );
   }
 }
 
-export default withCookies(EncountersPage)
+export default EncountersPage

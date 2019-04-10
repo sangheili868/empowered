@@ -4,11 +4,12 @@ import addPlus from '../utils/addPlus'
 
 class Creature {
 
-  constructor(basedCreatureData) {
-    this.name = basedCreatureData.name
-    this.portrait = basedCreatureData.portrait
-    this.description = basedCreatureData.description
-    this.baseStats = basedCreatureData.stats
+  constructor(baseCreatureData) {
+    this._id = baseCreatureData._id
+    this.name = baseCreatureData.name
+    this.portrait = baseCreatureData.portrait
+    this.description = baseCreatureData.description
+    this.baseStats = baseCreatureData.stats
   }
 
   get skills () {

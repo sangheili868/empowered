@@ -112,7 +112,7 @@ class EncounterCombatant extends Component {
                   >
                     <EmpIconButton color="edit" icon="pen"/>
                   </EmpItemEditor>
-                  <Link to="/creatures" onClick={this.handleOpenCombatant}>
+                  <Link to="/creatures" target="_blank" rel="noopener noreferrer" onClick={this.handleOpenCombatant}>
                     <EmpIconButton color="normal" icon="open"/>
                   </Link>
                 </div>

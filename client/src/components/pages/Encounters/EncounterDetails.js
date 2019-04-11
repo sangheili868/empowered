@@ -19,7 +19,7 @@ class EncounterDetails extends Component {
   }
 
   get bioItems () {
-    return chain(this.props.encounter).pick(['name', 'description']).map((content, title) => ({
+    return chain(this.props.encounter).pick(['name', 'description', 'loot']).map((content, title) => ({
       title,
       content,
       isAllowingNewLines: title !== 'name',

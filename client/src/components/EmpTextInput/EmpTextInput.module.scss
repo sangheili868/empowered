@@ -8,6 +8,7 @@
   overflow: hidden;
   resize: none;
   min-height: 28px;
+  max-height: 300px;
 
   &:focus {
     outline: none;

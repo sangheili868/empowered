@@ -16,6 +16,7 @@ class EmpTextInput extends Component {
     const myTextArea = this.myTextArea.current
     myTextArea.style.height = 'auto';
     myTextArea.style.height = myTextArea.scrollHeight + 'px';
+    myTextArea.style.overflowY = myTextArea.scrollHeight > 300 ? 'auto' : 'hidden';
     myTextArea.scrollTop = myTextArea.scrollHeight;
   }
 

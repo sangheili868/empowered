@@ -34,7 +34,7 @@ class CreatureAttacks extends Component {
         title="Attacks"
         columnNames={{
           name: 'Name',
-          hit: 'To Hit',
+          hit: 'Hit Value',
           damage: 'Damage',
           notes: 'Notes'
         }}

@@ -76,7 +76,7 @@ class EncountersPage extends Component {
         ...combatant,
         displayName,
         ...pick(combatantData.stats, ['maxHitPoints', 'armor', 'shield', 'maxPowerPoints', 'attacks']),
-        evasion: combatantData.stats.skills.agility.value,
+        evasion: combatantData.stats.evasion,
         speed,
         attackOptions,
         toHit: attack && attack.hit,

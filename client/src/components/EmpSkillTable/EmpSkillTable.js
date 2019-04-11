@@ -67,15 +67,21 @@ class EmpSkillTable extends Component {
                   }
                 </td>
                 {this.topScores.map(topScore =>
-                  <td key={topScore}><EmpSkillTableSkill skill={this.getSkill(topScore, leftScore)}/></td>
+                  <td key={topScore}>
+                    <EmpSkillTableSkill skill={this.getSkill(topScore, leftScore)} isPassive={this.props.isPassive}/>
+                  </td>
                 )}
-                <td><EmpSkillTableSkill skill={this.getSkill(leftScore, leftScore)}/></td>
+                <td>
+                  <EmpSkillTableSkill skill={this.getSkill(leftScore, leftScore)} isPassive={this.props.isPassive}/>
+                </td>
               </tr>
             )}
             <tr>
               <td></td>
               {this.topScores.map(topScore =>
-                <td key={topScore}><EmpSkillTableSkill skill={this.getSkill(topScore, topScore)}/></td>
+                <td key={topScore}>
+                  <EmpSkillTableSkill skill={this.getSkill(topScore, topScore)} isPassive={this.props.isPassive}/>
+                </td>
               )}
             </tr>
           </tbody>

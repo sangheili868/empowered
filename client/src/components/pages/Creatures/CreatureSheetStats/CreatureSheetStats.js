@@ -16,7 +16,7 @@ class CreatureSheetStats extends Component {
         <div className={stats}>
           <CreatureTraits stats={this.props.stats} updateCreature={this.props.updateCreature}/>
           <CreatureAbilityScores abilityScores={this.props.stats.abilityScores} updateCreature={this.props.updateCreature}/>
-          <EmpSkillTable abilityScores={this.props.stats.abilityScores} skills={this.props.stats.skills}/>
+          <EmpSkillTable abilityScores={this.props.stats.abilityScores} skills={this.props.stats.skills} isPassive/>
           <CreatureAttacks attacks={this.props.stats.attacks} updateCreature={this.props.updateCreature}/>
           <CreatureFeatures features={this.props.stats.features} updateCreature={this.props.updateCreature}/>
           <CreatureLoot loot={this.props.stats.loot} updateCreature={this.props.updateCreature}/>

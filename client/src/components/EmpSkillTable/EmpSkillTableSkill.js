@@ -32,6 +32,10 @@ class EmpSkillTableSkill extends Component {
     return this.props.skill.displayValue ? this.skillName+': '+this.props.skill.displayValue : this.skillName
   }
 
+  get skillValue () {
+    return this.props.isPassive ? this.props.skill.passive : this.props.skill.displayValue
+  }
+
   render () {
     return (
       <EmpModal title={this.title} mode={this.props.skill.mode} body={
@@ -58,7 +62,7 @@ class EmpSkillTableSkill extends Component {
         </>
       } className={cell}>
         <div>{this.skillName}</div>
-        <div>{this.props.skill.displayValue}</div>
+        <div>{this.skillValue}</div>
       </EmpModal>
     )
   }

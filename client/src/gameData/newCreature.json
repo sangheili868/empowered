@@ -5,7 +5,7 @@
   "stats": {
     "woundLimit": 1,
     "armor": 0,
-    "shield": 0,
+    "shield": 10,
     "speed": {
       "rating": 20,
       "type": "Walking"

@@ -18,7 +18,7 @@ class CreatureTraits extends Component {
       },
       {
         displayName: 'Evasion',
-        value: this.props.stats.skills.agility.value
+        value: this.props.stats.evasion
       },
       ...chain(this.props.stats)
         .pick([

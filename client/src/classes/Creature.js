@@ -29,7 +29,7 @@ class Creature {
       const skillMod = this.skills[attack.skill].value
       return {
         ...attack,
-        hit: addPlus(skillMod),
+        hit: skillMod + 10,
         damage: attack.damageDice + ' ' + addPlus(skillMod, true)
       }
     })
@@ -42,7 +42,8 @@ class Creature {
       maxPowerPoints: this.baseStats.powerPoints,
       abilityScores: mapValues(this.baseStats.abilityScores, value => ({ value, displayValue: addPlus(value)})),
       skills: this.skills,
-      attacks: this.attacks
+      attacks: this.attacks,
+      evasion: this.skills.agility.passive
     }
   }
 }

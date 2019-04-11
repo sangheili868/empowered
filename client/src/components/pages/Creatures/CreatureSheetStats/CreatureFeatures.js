@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import EmpTable from '../../../EmpTable/EmpTable'
 import withoutIndex from '../../../../utils/withoutIndex'
+import { startCase } from 'lodash'
 
 class CreatureFeatures extends Component {
 
@@ -23,7 +24,24 @@ class CreatureFeatures extends Component {
     return {
       name: { value: '' },
       description: { value: '' },
-      powerPoints: { value: 0, validation: 'number' }
+      powerPoints: { value: 0, validation: 'number' },
+      actionType: {
+        value: '',
+        validation: 'none',
+        options: [
+          { label: 'Cardinal Action', value: 'cardinalAction' },
+          { label: 'Skill Action', value: 'skillAction' },
+          { label: 'Basic Action', value: 'basicAction' },
+          { label: 'Maneuver', value: 'maneuver' },
+          { label: 'Reaction', value: 'reaction'}
+        ]
+      }
+    }
+  }
+
+  get renderFields () {
+    return {
+      actionType: ({ actionType }) => startCase(actionType)
     }
   }
 
@@ -31,9 +49,10 @@ class CreatureFeatures extends Component {
     return (
       <EmpTable
         title="Features"
-        columnNames={{ name: 'Name', description: 'Description', powerPoints: 'Power Points' }}
+        addText="Add a Feature"
+        columnNames={{ name: 'Name', description: 'Description', actionType: 'Action', powerPoints: 'Power Points' }}
         items={this.props.features}
-        renderFields={{ description: this.renderFeatureDescription }}
+        renderFields={this.renderFields}
         fields={this.fields}
         onAdd={this.handleAdd}
         onEdit={this.handleEdit}

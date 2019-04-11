@@ -1,0 +1,44 @@
+
+@import "src/styles/colors.scss";
+
+.stats {
+  border-collapse: collapse;
+
+  .block {
+    border: 1px solid $lightGrey;
+    padding: 5px;
+    vertical-align: top;
+
+    .title {
+      font-weight: bold;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .dropdown {
+      min-width: 150px;
+      font-weight: bold;
+    }
+
+    &.controlsBlock {
+      vertical-align: inherit;
+
+      .controls {
+        display: flex;
+        justify-content: space-around;
+        align-items: baseline;
+        margin: auto;
+      }
+    }
+
+    .note {
+      width: 100%;
+    }
+  }
+}

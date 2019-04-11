@@ -15,11 +15,11 @@
       font-family: immortal;
     }
   }
+}
 
-  .portrait {
-    max-height: 240px;
-    max-width: 240px;
-    border-radius: 10px;
-    padding: 20px;
-  }
+.combatants {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
 }

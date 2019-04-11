@@ -52,7 +52,6 @@ class CreatureAttacks extends Component {
         onEdit={this.handleEdit}
         onDelete={this.handleDelete}
       />
-
     )
   }
 }

@@ -39,7 +39,6 @@ class CharacterSheetStatsEquipment extends Component {
     const weightLimit = this.props.equipment.encumberance.limit.toFixed(1)
     return [
       <EmpItemEditor
-        isInline
         title="Edit Gold"
         fields={{
           gold: {

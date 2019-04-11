@@ -18,7 +18,7 @@ exports.create = (collection, { body: { document } }, responder) => {
 }
 
 exports.read = (collection, { body: { _id } }, responder) => {
-  const notFound = { error: '${collection.s.name} not found'}
+  const notFound = { error: `${_id} not found in ${collection.s.name}`}
   if (!ObjectID.isValid(_id)) {
     console.log(`Cannot read ${collection.s.name} with id = ${_id}`)
     responder.send(notFound)
@@ -29,6 +29,14 @@ exports.read = (collection, { body: { _id } }, responder) => {
       responder.send(document ? document : notFound)
     })
   }
+}
+
+exports.readMany = (collection, { body: { _ids } }, responder) => {
+  collection.find({ _id: { $in: _ids.map(_id => new ObjectID(_id)) } }).toArray((err, documents) => {
+    if(err) throw err
+    console.log(`Reading ${_ids.length} documents from ${collection.s.name}`)
+    responder.send(documents)
+  })
 }
 
 exports.update = (collection, { body: { _id, paths } }, responder) => {

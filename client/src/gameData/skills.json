@@ -2,7 +2,7 @@
   {
     "name": "athletics",
     "abilityScores": [ "strong", "quick" ],
-    "description": "Athletics describes your ability to precisely control your body when performing feats of strength. This includes wrestling, climbing, swimming, jumping across a gap, balancing on a tightrope, grabbing a handhold while falling, or running across ice. Athletics should only be used if precision or speed as well as brute strength. When only one of these qualities is present, the roll should be agility or brawn instead. Some melee weapons and all thrown weapons use athletics rolls when attacking and deal more damage with higher athletics. The Wrestle action in combat relies on athletics."
+    "description": "Athletics describes your ability to precisely control your body when performing feats of strength. This includes wrestling, climbing, swimming, jumping across a gap, balancing on a tightrope, grabbing a handhold while falling, or running across ice. Athletics should only be used if precision or speed is needed as well as brute strength. When only one of these qualities is present, the roll should be agility or brawn instead. Some melee weapons and all thrown weapons use athletics rolls when attacking and deal more damage with higher athletics. The Wrestle action in combat relies on athletics."
   },
   {
     "name": "fortitude",

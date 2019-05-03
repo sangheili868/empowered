@@ -67,7 +67,7 @@
   {
     "name": "willpower",
     "abilityScores": [ "determined", "determined" ],
-    "description": "Willpower lets you resist the effects of many spells that are more mental in nature, such as Charm, Fear, and Banish. Also, you must make a willpower roll to resist death once you take five wounds, and the DM may ask for a willpower roll in order to handle particularly disturbing situations. Finally willpower is used to resist the effects of actions such as distract and frighten."
+    "description": "Willpower lets you resist the effects of many spells that are more mental in nature, such as Charm, Fear, and Banish. Also, you must make a willpower roll to resist death once you take five wounds, and the DM may ask for a willpower roll in order to handle particularly disturbing situations. Finally, willpower is used to resist the effects of actions such as distract and frighten."
   },
   {
     "name": "persuasion",

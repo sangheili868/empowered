@@ -45,10 +45,6 @@
       "description": "As a basic action, you focus your efforts towards avoiding attacks from a specific creature that you can see. You gain +1 to your next defense roll to avoid an attack or feature from that creature, until the start of your side's next turn."
     },
     {
-      "name": "Draw Items",
-      "description": "As a basic action, you can stow up to two items from your hands or body into your inventory, and then draw up to two items from your inventory into your hands or onto your body. In addition, you can switch which items are in which hands."
-    },
-    {
       "name": "Use Objects",
       "description": "As a basic action, you stow, draw, drop, pick up, kick away, pull, open, move, or interact in some other way with any reasonable number of objects. A skill roll of the DM's choice may be required, in which case this becomes a skill action."
     },

@@ -231,12 +231,10 @@ class Character {
   }
 
   get actions () {
-    const maneuvers = this.loadout.hands.length < 2 ? { maneuvers: 'maneuver' } : {}
     const actionMapping = {
       cardinalActions: 'cardinalAction',
       skillActions: 'skillAction',
       basicActions: 'basicAction',
-      ...maneuvers,
       reactions: 'reaction'
     }
     return transform(actionMapping, (acc, actionType, columnName) => acc[columnName] = [

@@ -3,56 +3,28 @@
     {
       "name": "Attack",
       "description": "As a cardinal action, choose a target that you can see. If your weapon does not have a range, the target must be within 5ft of you. If it has a max range, the target must be within the max range. If it has a short and long range, then the target must be within one of them. Then, roll the skill listed under attack skill. You roll with disadvantage if the target is within the long range of your weapon. If the damage type is physical or does multiple types of damage, the target rolls agility, otherwise, the target rolls willpower. If you succeed, the attack hits. Roll the damage die listed for that weapon, add the modifier for the attack skill, and the target takes that much damage. If you roll a natural 20 on an attack roll, any damage you deal as a result of that attack is doubled, and you roll on the critical success table. If you roll a natural 1 on the attack roll, the attack automatically misses, and you roll a d24 on the critical fail table. If you attack a creature that cannot sense you, you gain advantage on the attack roll. You can also attack a location if you believe there to be a target there. The attack has disadvantage, and if there is nothing there to hit, it is an automatic miss."
-    },
-    {
-      "name": "Delay",
-      "description": "As a cardinal action, you gain an additional action on your side's next turn."
     }
   ],
   "skillActions": [
     {
-      "name": "Wrestle",
-      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, choose a wrestling maneuver to perform. If you roll a natural 20, you can choose two maneuvers.",
+      "name": "Shove",
+      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, move them up to 5 feet.",
       "requirements": [{
         "type": "loadout",
         "hands": "free"
       }]
     },
     {
-      "name": "Brace",
-      "description": "As a skill action, roll Fortitude. You gain one point of armor until the start of your side’s next turn for every 5 points on your roll. For example, if you roll 22, you get four points of armor."
-    },
-    {
-      "name": "Frighten",
-      "description": "As a skill action, you attempt to scare off an enemy. Roll intimidation against the willpower of a creature within 20 feet. If you succeed, the creature becomes frightened of you until the start of your side's next turn."
-    },
-    {
-      "name": "Hide",
-      "description": "As a skill action, roll stealth while behind cover. You are considered unseen to all creatures on the other side of the cover until you reveal yourself, you enter their line of sight, or they take the Search skill action."
-    },
-    {
-      "name": "Search",
-      "description": "As a skill action, roll investigation against the stealth of a creature. If you succeed, that creature cannot be unseen to you until it hides again."
-    },
-    {
-      "name": "Analyze",
-      "description": "As a skill action, you attempt to predict a creature’s next move by reading its body language. Roll insight against its stealth. If you succeed, that creature must choose now and reveal to you the first action it will take on its next turn."
-    },
-    {
-      "name": "Disrupt",
-      "description": "As a skill action, roll handiwork and choose a creature adjacent to you. The next time that creature makes a d20 roll on its turn, it takes a -1 penalty to the roll for every 5 points on your roll. For example, if you rolled a 22, the creature takes a -4 penalty."
-    },
-    {
-      "name": "Focus",
-      "description": "As a skill action, roll Wisdom. Until the start of your side’s next turn, you gain a +1 to willpower rolls for every 5 points on your roll. For example, if you roll 22, you get a +4 bonus."
+      "name": "Grab",
+      "description": "As a skill action, if you have a free hand, roll athletics against the athletics of a creature within 5 feet that is your size or smaller. If you succeed, you grapple them until they escape.",
+      "requirements": [{
+        "type": "loadout",
+        "hands": "free"
+      }]
     },
     {
       "name": "Help",
       "description": "As a skill action, when a creature on your side makes a skill roll as part of an action, but not a feature action, you can spend an action at the same time to help. Roll synergy. The creature gains a +1 bonus to the roll for every 5 points on your roll. For example, if you rolled a 22, the creature gains a +4 bonus."
-    },
-    {
-      "name": "Distract",
-      "description": "As a skill action, you attempt to draw an opponent's attention. Roll persuasion against the willpower of a creature within 20 feet. If you succeed, the next attack by someone other than you against the creature has advantage."
     },
     {
       "name": "Use a Skill",
@@ -65,10 +37,6 @@
         "type": "loadout",
         "hands": ["light", "light"]
       }]
-    },
-    {
-      "name": "Repair",
-      "description": "As a skill action, roll handiwork to fix one jammed, malfunctioning, damaged, or otherwise broken item that you are holding. The DC is 10 for a weapon that is jammed or malfunctioning as a result of a natural 1 on an attack roll."
     }
   ],
   "basicActions": [
@@ -81,66 +49,24 @@
       "description": "As a basic action, you can stow up to two items from your hands or body into your inventory, and then draw up to two items from your inventory into your hands or onto your body. In addition, you can switch which items are in which hands."
     },
     {
-      "name": "Interact with Object",
-      "description": "As a basic action, you pick up, kick away, pull, open, move, or interact in some other way with any one object that no one is holding or wearing. A skill roll of the DM's choice may be required, in which case this becomes a skill action."
+      "name": "Use Objects",
+      "description": "As a basic action, you stow, draw, drop, pick up, kick away, pull, open, move, or interact in some other way with any reasonable number of objects. A skill roll of the DM's choice may be required, in which case this becomes a skill action."
     },
     {
       "name": "Move",
       "description": "As a basic action, you begin moving a distance up to your speed. You can take other actions at any point of this movement. If you are riding a creature or vehicle, you use its speed instead of your own."
     },
     {
-      "name": "Mount",
-      "description": "As a basic action, you begin riding a creature adjacent to you. It must be at least one size larger than you and have the proper anatomy. While mounted, any actions the mount takes count as your own actions. You may need to roll persuasion when you command the mount to take an action."
-    },
-    {
       "name": "Prepare",
       "description": "As a basic action, you prepare to take an action outside of your turn. Choose an action and a trigger. If the chosen action is cardinal, so is this action. If the trigger occurs before the start of your side's next turn, you can use your reaction to perform that action. "
-    },
-    {
-      "name": "Reload",
-      "description": "As a basic action, you reload one weapon that you are holding that has the loading property."
     },
     {
       "name": "Step Away",
       "description": "As a basic action, you carefully step away from enemies. You move five feet, and enemies cannot take opportunity attacks against you during this movement."
     },
     {
-      "name": "Take Cover",
-      "description": "As a basic action, if there is someone or something your size or larger, you can take cover behind it as an action. You have advantage on agility rolls to avoid anything that originates from the other side of the cover."
-    },
-    {
       "name": "Target",
       "description": "As a basic action, you focus your efforts towards attacking a specific creature that you can see. You gain +1 to your next attack roll against that creature with a weapon you currently have equipped, until the start of your side's next turn."
-    }
-  ],
-  "maneuvers": [
-    {
-      "name": "Disarm",
-      "description": "After successfully wrestling, the target drops one item of your choice in their space."
-    },
-    {
-      "name": "Grab",
-      "description": "After successfully wrestling, the target becomes grappled by you until they escape."
-    },
-    {
-      "name": "Seize",
-      "description": "After successfully wrestling, you forcibly lift the target up into the air. The target becomes grappled by you until they escape. While grappled this way, the target has advantage on attacks against you, and ranged weapon attacks have advantage against the target."
-    },
-    {
-      "name": "Shove",
-      "description": "After successfully wrestling, you move the target up to 5 feet in a direction of your choice. This movement does not provoke attacks of opportunity."
-    },
-    {
-      "name": "Tackle",
-      "description": "After successfully wrestling, you and the target become prone. The target becomes grappled by you until they escape or you stand up."
-    },
-    {
-      "name": "Throw",
-      "description": "After successfully wrestling, you can choose this maneuver only if you are already grappling the target. You throw them and they land prone up to 20 feet away from you."
-    },
-    {
-      "name": "Trip",
-      "description": "After successfully wrestling, the target becomes prone until they stand up."
     }
   ],
   "reactions": [
@@ -155,10 +81,6 @@
     {
       "name": "Trigger Prepare",
       "description": "As a reaction, when an event occurs that you choose as a trigger when you took the Prepare action, you perform the action you chose as part of the Prepare action."
-    },
-    {
-      "name": "Identify",
-      "description": "As a reaction, when a creature you can see uses a feature or item, or the effect of a passive feature is applied, you can roll knowledge against the creature's stealth. If you succeed, the DM describes the feature or item to you."
     }
   ]
 }

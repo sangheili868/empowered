@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
-import { check, checked, disabled } from './EmpCheckbox.module.scss'
+import { checkbox } from './EmpCheckbox.module.scss'
 import EmpIconButton from '../EmpIconButton/EmpIconButton'
 
 class EmpCheckbox extends Component {
-
-  get classes () {
-    return [
-      check,
-      ...(this.props.isChecked ? [checked] : []),
-      ...(this.props.isDisabled ? [disabled] : [])
-    ].join(' ')
-  }
 
   get icon () {
     const squareStyle = this.props.isDisabled ? {
@@ -33,7 +25,10 @@ class EmpCheckbox extends Component {
 
   render () {
     return (
-      <EmpIconButton color={this.icon.color} icon={this.icon.icon} onClick={this.handleClick}/>
+      <div className={checkbox}>
+        { this.props.children }
+        <EmpIconButton color={this.icon.color} icon={this.icon.icon} onClick={this.handleClick}/>
+      </div>
     )
   }
 }

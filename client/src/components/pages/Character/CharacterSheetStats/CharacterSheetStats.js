@@ -1,41 +1,15 @@
 import React, { Component } from 'react'
-import { sheetPage, detailTitle } from '../CharacterPage.module.scss'
+import { sheetPage } from '../CharacterPage.module.scss'
 import CharacterSheetStatsResources from "../CharacterSheetResources/CharacterSheetStatsResources"
 import EmpSkillTable from '../../../EmpSkillTable/EmpSkillTable'
-import CharacterSheetList from '../CharacterSheetList/CharacterSheetList'
 import { pick } from 'lodash'
 import CharacterSheetStatsWeapons from './CharacterSheetStatsWeapons'
 import CharacterSheetStatsEquipment from './CharacterSheetStatsEquipment'
 import CharacterSheetStatsProficiencies from './CharacterSheetStatsProficiencies'
 import CharacterSheetStatsFeatures from './CharacterSheetStatsFeatures'
+import CharacterSheetStatsCombat from './CharacterSheetStatsCombat'
 
 class CharacterSheetStats extends Component {
-  renderTooltipBody = item =>
-  {
-    const hasFeatures = item.features && item.features.length > 0
-    const features = hasFeatures && item.features.map(({ name }) => name).join(', ')
-    const hasConditions = item.conditions && item.conditions.length > 0
-    const conditions = hasConditions && item.conditions.map(({ name }) => name).join(', ')
-    return (
-      <>
-        <div>{item.description}</div>
-        {hasFeatures &&
-          <>
-            <div className={detailTitle}>Features Related to {item.name}</div>
-            <div>{features}</div>
-          </>
-        }
-
-        {hasConditions &&
-          <>
-            <div className={detailTitle}>Conditions Affecting {item.name}</div>
-            <div>{conditions}</div>
-          </>
-        }
-      </>
-    )
-  }
-
   render () {
     return (
       <div>
@@ -57,14 +31,9 @@ class CharacterSheetStats extends Component {
             proficiencies={this.props.stats.proficiencies}
             updateCharacter={this.props.updateCharacter}
           />
-          <CharacterSheetList
-            title="Combat"
-            items={this.props.stats.actions}
-            tooltips={{
-              mode: ({ mode }) => mode || '',
-              title: ({ name }) => name,
-              body: this.renderTooltipBody
-            }}
+          <CharacterSheetStatsCombat
+            actions={this.props.stats.actions}
+            updateCharacter={this.props.updateCharacter}
           />
           <CharacterSheetStatsFeatures
             features={this.props.stats.features}

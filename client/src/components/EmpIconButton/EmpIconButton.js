@@ -23,7 +23,8 @@ class EmpIconButton extends Component {
       square: 'square',
       'open-square': ['far', 'square'],
       pen: 'pen-square',
-      open: 'external-link-alt'
+      open: 'external-link-alt',
+      sync: 'sync-alt'
     }[this.props.icon]
   }
 

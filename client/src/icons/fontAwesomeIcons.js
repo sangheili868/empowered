@@ -6,7 +6,8 @@ import {
   faCaretDown,
   faCaretUp,
   faCheckSquare,
-  faExternalLinkAlt
+  faExternalLinkAlt,
+  faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faSquare as farSquare,
@@ -21,5 +22,6 @@ export default [
   faPenSquare,
   faCaretDown,
   faCaretUp,
-  faExternalLinkAlt
+  faExternalLinkAlt,
+  faSyncAlt
 ]

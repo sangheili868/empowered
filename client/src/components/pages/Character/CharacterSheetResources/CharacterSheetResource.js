@@ -9,31 +9,56 @@ import {
 } from "./CharacterSheetResources.module.scss"
 import EmpCard from '../../../EmpCard/EmpCard'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor';
 
 class CharacterSheetResource extends Component {
 
-  handleIncrement = () => {
-    this.props.onUpdate(parseInt(this.props.value) + 1, 1)
+  handleIncrement = amount => {
+    const increase = parseInt(amount.increaseBy) || 1
+    this.props.onUpdate(parseInt(this.props.value) + increase, increase)
   }
 
-  handleDecrement = () => {
-    this.props.onUpdate(parseInt(this.props.value) - 1, -1)
+  handleDecrement = amount => {
+    const reduction = parseInt(amount.decreaseBy) * -1 || -1
+    this.props.onUpdate(parseInt(this.props.value) + reduction, reduction)
   }
 
   get renderPlus () {
     const isHidden = this.props.max && (this.props.value >= this.props.max)
     const classes = isHidden ? [counter, hidden].join(' ') : counter
     const color = this.props.isInvertingControls ? 'warning' : 'success'
-    return this.props.onUpdate &&
+    return this.props.onUpdate && (this.props.isInputModal ? (
+      <EmpItemEditor
+        title={'Increase ' + this.props.title}
+        mode="noStyle"
+        fields={{ increaseBy: { validation: 'positive' } }}
+        onSave={this.handleIncrement}
+        saveLabel="CONFIRM"
+      >
+        <EmpIconButton className={classes} color={color} icon="plus"/>
+      </EmpItemEditor>
+    ) : (
       <EmpIconButton className={classes} color={color} icon="plus" onClick={this.handleIncrement}/>
+    ))
   }
 
   get renderMinus () {
     const isHidden = (this.props.value <= 0) && !this.props.isAlwaysShowingMinus
     const classes = isHidden ? [counter, hidden].join(' ') : counter
     const color = this.props.isInvertingControls ? 'success' : 'warning'
-    return this.props.onUpdate &&
+    return this.props.onUpdate && (this.props.isInputModal ? (
+      <EmpItemEditor
+        title={'Decrease ' + this.props.title}
+        mode="noStyle"
+        fields={{ decreaseBy: { validation: 'positive' } }}
+        onSave={this.handleDecrement}
+        saveLabel="CONFIRM"
+      >
+        <EmpIconButton className={classes} color={color} icon="minus"/>
+      </EmpItemEditor>
+    ) : (
       <EmpIconButton className={classes} color={color} icon="minus" onClick={this.handleDecrement}/>
+    ))
   }
 
   render () {

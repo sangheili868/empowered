@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import EmpCard from '../../../EmpCard/EmpCard'
-import { stats, block, title, dropdown, controlsBlock, controls, note } from './EncounterCombatant.module.scss'
+import { stats, dead, block, title, dropdown, controlsBlock, controls, note } from './EncounterCombatant.module.scss'
 import EmpDropdown from '../../../EmpDropdown/EmpDropdown'
 import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
@@ -9,6 +9,7 @@ import { chain, startCase, debounce } from 'lodash'
 import { Link } from 'react-router-dom'
 import EmpLoadingDots from '../../../EmpLoadingDots/EmpLoadingDots'
 import EmpTextInput from '../../../EmpTextInput/EmpTextInput'
+import EmpActionTracker from '../../../EmpActionTracker/EmpActionTracker'
 
 class EncounterCombatant extends Component {
 
@@ -32,6 +33,13 @@ class EncounterCombatant extends Component {
     return this.props.combatant.attacks[this.props.combatant.attack]
   }
 
+  get classes () {
+    return [
+      stats,
+      ...(this.props.combatant.isDead ? [dead] : [])
+    ].join(' ')
+  }
+
   handleOpenCombatant = () => {
     window.sessionStorage.setItem('creatureId', this.props.combatant._id)
   }
@@ -41,7 +49,6 @@ class EncounterCombatant extends Component {
   }, 500)
 
   handleNoteChange = ({ target }) => {
-    console.log(target)
     this.setState({ note: target.value })
     this.debounceNoteUpdate(target)
   }
@@ -51,12 +58,13 @@ class EncounterCombatant extends Component {
       <EmpLoadingDots/>
     ) : (
       <EmpCard title={this.props.combatant.displayName} isStartingOpen>
-        <table className={stats}>
+        <table className={this.classes}>
           <tbody>
             <tr>
               <EncounterCombatantCounter
                 title="Hit Points"
                 field="hitPoints"
+                isInputModal
                 value={this.props.combatant.hitPoints}
                 max={this.props.combatant.maxHitPoints}
                 onUpdate={this.props.onUpdate}
@@ -118,6 +126,7 @@ class EncounterCombatant extends Component {
                 </div>
               </td>
             </tr>
+            <tr><td colSpan="3" className={block}><EmpActionTracker/></td></tr>
             <tr>
               <td colSpan="3" className={block}>
                 <EmpTextInput className={note} value={this.state.note} onChange={this.handleNoteChange}/>

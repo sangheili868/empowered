@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import EmpIconButton from '../../../EmpIconButton/EmpIconButton'
 import { block, title, counter } from './EncounterCombatant.module.scss'
-
+import EmpItemEditor from '../../../EmpItemEditor/EmpItemEditor'
 class EncounterCombatantCounter extends Component {
 
-  handleIncrement = () => {
-    this.props.onUpdate(`${this.props.field}`, this.props.value + 1)
+  handleIncrement = amount => {
+    const increase = parseInt(amount.increaseBy) || 1
+    this.props.onUpdate(`${this.props.field}`, this.props.value + increase)
   }
 
-  handleDecrement = () => {
-    this.props.onUpdate(`${this.props.field}`, this.props.value - 1)
+  handleDecrement = amount => {
+    const reduction = parseInt(amount.decreaseBy) * -1 || -1
+    this.props.onUpdate(`${this.props.field}`, this.props.value + reduction)
   }
 
   render () {
@@ -19,17 +21,34 @@ class EncounterCombatantCounter extends Component {
         <div className={counter}>
           {this.props.max > 0 ? (
             <>
-              <EmpIconButton
-                icon="minus"
-                color="warning"
-                onClick={this.handleDecrement}
-              />
+              {this.props.isInputModal ? (
+                <EmpItemEditor
+                  title={'Decrease ' + this.props.title}
+                  mode="noStyle"
+                  fields={{ decreaseBy: { validation: 'positive' } }}
+                  onSave={this.handleDecrement}
+                  saveLabel="CONFIRM"
+                >
+                  <EmpIconButton icon="minus" color="warning" />
+                </EmpItemEditor>
+              ) : (
+                <EmpIconButton icon="minus" color="warning" onClick={this.handleDecrement}/>
+              )}
               {this.props.value} / {this.props.max}
-              <EmpIconButton
-                icon="plus"
-                color="success"
-                onClick={this.handleIncrement}
-              />
+
+              {this.props.isInputModal ? (
+                <EmpItemEditor
+                  title={'Increase ' + this.props.title}
+                  mode="noStyle"
+                  fields={{ increaseBy: { validation: 'positive' } }}
+                  onSave={this.handleIncrement}
+                  saveLabel="CONFIRM"
+                >
+                  <EmpIconButton icon="plus" color="success" />
+                </EmpItemEditor>
+              ) : (
+                <EmpIconButton icon="plus" color="success" onClick={this.handleIncrement}/>
+              )}
             </>
           ) : (
             'None'

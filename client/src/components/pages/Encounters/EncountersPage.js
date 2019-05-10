@@ -80,7 +80,8 @@ class EncountersPage extends Component {
         speed,
         attackOptions,
         toHit: attack && attack.hit,
-        damage: attack && attack.damage
+        damage: attack && attack.damage,
+        isDead: combatant.hitPoints <= 0
       }
     })
   }

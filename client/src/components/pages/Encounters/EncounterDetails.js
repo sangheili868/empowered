@@ -78,6 +78,17 @@ class EncounterDetails extends Component {
     ))
   }
 
+  get sortedCombatants () {
+    const indexedCombatants = this.props.combatants.map((combatant, index) => ({
+      ...combatant,
+      index
+    }))
+    return [
+      ...indexedCombatants.filter(({ isDead }) => !isDead),
+      ...indexedCombatants.filter(({ isDead }) => isDead)
+    ]
+  }
+
   render () {
     return (
       <>
@@ -88,12 +99,12 @@ class EncounterDetails extends Component {
           </div>
         </div>
         <div className={combatants}>
-          {this.props.combatants.map((combatant, index) =>
+          {this.sortedCombatants.map(combatant =>
             <EncounterCombatant
-              key={index}
+              key={combatant.index}
               combatant={combatant}
-              onUpdate={this.handleUpdateCombatant.bind(this, index)}
-              onDelete={this.handleDeleteCombatant.bind(this, index)}
+              onUpdate={this.handleUpdateCombatant.bind(this, combatant.index)}
+              onDelete={this.handleDeleteCombatant.bind(this, combatant.index)}
             />
           )}
         </div>

@@ -19,7 +19,9 @@ class EmpItemEditor extends Component {
   validate (field) {
     if (field.validation === 'none') return true
     const trimmedValue = field.value && field.value.trim ? field.value.trim() : field.value
-    if (field.validation === 'number') return !isNaN(Number(trimmedValue)) && trimmedValue !== ''
+    const isValidNumber = !isNaN(Number(trimmedValue)) && trimmedValue !== '' && trimmedValue < 9e15
+    if (field.validation === 'number') return isValidNumber
+    if (field.validation === 'positive') return isValidNumber && trimmedValue > 0
     if (field.options) return field.options.map(({ value }) => value).includes(field.value)
     return trimmedValue
   }

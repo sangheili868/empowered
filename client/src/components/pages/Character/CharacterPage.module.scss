@@ -47,14 +47,3 @@
   color: $orange;
   font-weight: bold;
 }
-
-.checkboxes {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .reset {
-    margin-left: 30px;
-    min-width: 30px;
-  }
-}

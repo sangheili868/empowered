@@ -55,7 +55,7 @@
       "strong": {
         "$numberInt": "-2"
       },
-      "aware": {
+      "careful": {
         "$numberInt": "1"
       },
       "smart": {
@@ -284,7 +284,7 @@
         ],
         "actionTags": [],
         "actionType": "skillAction",
-        "description": "As a skill action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
+        "description": "As a skill action, you make an empowered knowledge roll and record the result. You create an illusory object no bigger than a 10ft cube, within the range of your focus for one minute. A creature can use its action to make an investigation roll against your result to determine that the illusion is false. You can end the illusion at any time, but it cannot move or produce any sound.",
         "cost": {
           "$numberInt": "1"
         }
@@ -310,7 +310,7 @@
         ],
         "actionTags": [],
         "actionType": "cardinalAction",
-        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make a perception or knowledge roll against your result to determine that the illusion is false. For the duration, you can use a basic action to disable or enable the illusion. It must be the same creature for each casting of the spell.",
+        "description": "As a cardinal action, you make an empowered synergy roll and record the result. For one hour, you appear to be the last creature that has worn the reagent besides yourself. A creature can use its action to make an investigation roll against your result to determine that the illusion is false. For the duration, you can use a basic action to disable or enable the illusion. It must be the same creature for each casting of the spell.",
         "cost": {
           "$numberInt": "1"
         }

@@ -89,7 +89,7 @@
   },
   "oneHandedRangedWeapon": {
     "displayName": "One-handed Ranged Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d4",
     "tags": [ "Short Range 6-40", "Long Range 41-80" ],
     "hands": "one",
@@ -97,7 +97,7 @@
   },
   "twoHandedRangedWeapon": {
     "displayName": "Two-handed Ranged Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d6",
     "tags": [ "Short Range 6-60", "Long Range 61-120", "two-handed" ],
     "hands": "two",
@@ -105,7 +105,7 @@
   },
   "heavyRangedWeapon": {
     "displayName": "Heavy Ranged Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d8",
     "tags": [ "Short Range 6-100", "Long Range 101-200", "two-handed", "heavy" ],
     "hands": "two",
@@ -113,7 +113,7 @@
   },
   "lightLoadingWeapon": {
     "displayName": "Light Loading Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d8",
     "tags": [ "Short Range 6-40", "Long Range 41-80", "light", "loading" ],
     "hands": "light",
@@ -121,7 +121,7 @@
   },
   "twoHandedLoadingWeapon": {
     "displayName": "Two-handed Loading Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d10",
     "tags": [ "Short Range 6-60", "Long Range 61-120", "two-handed", "loading" ],
     "hands": "two",
@@ -129,7 +129,7 @@
   },
   "heavyLoadingWeapon": {
     "displayName": "Heavy Loading Weapon",
-    "skill": "perception",
+    "skill": "accuracy",
     "damageDie": "d12",
     "tags": [ "Short Range 6-100", "Long Range 100-200", "two-handed", "loading", "heavy" ],
     "hands": "two",

@@ -15,7 +15,7 @@
   "Frightened": {
     "name": "Frightened",
     "description": "You must use your first action each turn to move away from the source of fear. You cannot willingly move closer to the source of fear, and you have disadvantage on all rolls. You gain the Calm Down skill action.",
-    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
+    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "accuracy", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
     "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
     "actionTags":["Move"],
     "action": {
@@ -40,7 +40,7 @@
   "Poisoned": {
     "name": "Poisoned",
     "description": "You have disadvantage on all rolls, except rolls as part of the Resist action, and you gain the Resist skill action.",
-    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
+    "skillTags":["athletics", "fortitude", "intimidation", "brawn", "stealth", "investigation", "insight", "accuracy", "handiwork", "wisdom", "synergy", "knowledge", "agility", "willpower", "persuasion"],
     "equipmentTags": ["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
     "actionTags": [],
     "action": {
@@ -51,9 +51,9 @@
   },
   "Unconscious": {
     "name": "Unconscious",
-    "description": "You fall prone and drop what you are holding. You cannot move, speak, take actions, or take reactions. You roll normally for fortitude, wisdom, and willpower. You have disadvantage on perception rolls and agility rolls against ranged attacks. You automatically critically fail all other rolls. Creatures that can reach you gain the Awaken cardinal action.",
+    "description": "You fall prone and drop what you are holding. You cannot move, speak, take actions, or take reactions. You roll normally for fortitude, wisdom, and willpower. You have disadvantage on agility rolls against ranged attacks. You automatically critically fail all other rolls. Creatures that can reach you gain the Awaken cardinal action.",
     "actionTags": ["Attack", "Delay", "Wrestle", "Brace", "Frighten", "Hide", "Search", "Analyze", "Disrupt", "Focus", "Help", "Distract", "Use a Skill", "Off-hand Attack", "Defend", "Draw Items", "Interact with Object", "Move", "Mount", "Prepare", "Reload", "Step Away", "Take Cover", "Target", "Disarm", "Grab", "Seize", "Shove", "Tackle", "Throw", "Trip", "Attack of Opportunity", "Block", "Trigger Prepare", "Identify", "Repair"],
-    "skillTags": ["athletics", "intimidation", "brawn", "stealth", "investigation", "insight", "perception", "handiwork", "synergy", "knowledge", "agility", "persuasion"],
+    "skillTags": ["athletics", "intimidation", "brawn", "stealth", "investigation", "insight", "accuracy", "handiwork", "synergy", "knowledge", "agility", "persuasion"],
     "equipmentTags" :["smallShield", "mediumShield", "largeShield", "improvisedWeapon", "unarmedMeleeWeapon", "lightMeleeWeapon", "finesseMeleeWeapon", "oneHandedMeleeWeapon", "twoHandedMeleeWeapon", "lightThrownWeapon", "heavyThrownWeapon", "oneHandedRangedWeapon", "twoHandedRangedWeapon", "heavyRangedWeapon", "lightLoadingWeapon", "twoHandedLoadingWeapon", "heavyLoadingWeapon", "craftedWeapon", "arcaneMagicWeapon", "divineMagicWeapon", "unityMagicWeapon", "arcanistTool", "artisanTool", "chemistTool", "explorerTool", "smithTool", "spyTool", "thiefTool", "ridingVehicle", "seaVehicle", "airVehicle"],
     "speedModifier": "set0",
     "action": {

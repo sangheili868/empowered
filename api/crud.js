@@ -26,7 +26,12 @@ exports.read = (collection, { body: { _id } }, responder) => {
     collection.findOne({ _id: new ObjectID(_id) }, (err, document) => {
       if(err) throw err
       console.log(`Reading ${collection.s.name} ${_id}`)
-      responder.send(document ? document : notFound)
+      if (document) {
+        responder.send(document)
+      } else {
+        console.log(`Cannot read ${collection.s.name} with id = ${_id}`)
+        responder.send(notFound)
+      }
     })
   }
 }

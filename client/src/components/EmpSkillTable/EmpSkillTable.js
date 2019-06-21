@@ -14,7 +14,7 @@ class EmpSkillTable extends Component {
   get scoreNames () {
     return this.hasValues ? Object.keys(this.props.abilityScores) : [
       'strong',
-      'aware',
+      'careful',
       'smart',
       'quick',
       'determined',

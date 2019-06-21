@@ -167,11 +167,11 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 0
       }
     ],
-    "description": "One-handed ranged weapons, including slings and blowguns, attack with a Perception roll and deal d4 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
+    "description": "One-handed ranged weapons, including slings and blowguns, attack with an accuracy roll and deal d4 + accuracy damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage."
   },
   "twoHandedRangedWeapon": {
     "name": "Two-handed Ranged Weapons",
@@ -179,11 +179,11 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 0
       }
     ],
-    "description": "Two-handed ranged weapons, including shortbows, attack with a Perception roll and deal d6 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
+    "description": "Two-handed ranged weapons, including shortbows, attack with an accuracy roll and deal d6 + accuracy damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
   },
   "heavyRangedWeapon": {
     "name": "Heavy Ranged Weapons",
@@ -191,7 +191,7 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 2
       },
       {
@@ -200,7 +200,7 @@
         "level": 2
       }
     ],
-    "description": "Heavy ranged weapons, including longbows, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
+    "description": "Heavy ranged weapons, including longbows, attack with an accuracy roll and deal d8 + accuracy damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
   },
   "lightLoadingWeapon": {
     "name": "Light Loading Weapons",
@@ -208,11 +208,11 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 0
       }
     ],
-    "description": "Light loading weapons, including hand crossbows and pistols, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage. These weapons can also be used for two-weapon fighting."
+    "description": "Light loading weapons, including hand crossbows and pistols, attack with an accuracy roll and deal d8 + accuracy damage on a hit. They can attack targets up to 40ft away or up to 80ft away with disadvantage. These weapons can also be used for two-weapon fighting."
   },
   "twoHandedLoadingWeapon": {
     "name": "Two-handed Loading Weapons",
@@ -220,11 +220,11 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 0
       }
     ],
-    "description": "Two-handed loading weapons, including light crossbows and rifles, attack with a Perception roll and deal d8 + Perception damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
+    "description": "Two-handed loading weapons, including light crossbows and rifles, attack with an accuracy roll and deal d8 + accuracy damage on a hit. They can attack targets up to 60ft away or up to 120ft away with disadvantage."
   },
   "heavyLoadingWeapon": {
     "name": "Heavy Loading Weapons",
@@ -232,7 +232,7 @@
     "requirements": [
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "accuracy",
         "level": 2
       },
       {
@@ -241,7 +241,7 @@
         "level": 2
       }
     ],
-    "description": "Heavy Loading weapons, including heavy crossbows and sniper rifles, attack with a Perception roll and deal d12 + Perception damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
+    "description": "Heavy Loading weapons, including heavy crossbows and sniper rifles, attack with an accuracy roll and deal d12 + accuracy damage on a hit. They can attack targets up to 100ft away or up to 200ft away with disadvantage."
   },
   "craftedWeapon": {
     "name": "Crafted Weapons",
@@ -343,7 +343,7 @@
       },
       {
         "type": "skill",
-        "skill": "perception",
+        "skill": "investigation",
         "level": 2
       }
     ],

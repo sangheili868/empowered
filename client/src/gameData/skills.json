@@ -21,23 +21,23 @@
   },
   {
     "name": "stealth",
-    "abilityScores": [ "aware", "quick" ],
-    "description": "Stealth allows you to perform actions without being noticed. Pickpocketing, theft, covering tracks, sneaking around, and trailing someone all require stealth rolls, usually contested by perception rolls. Some types of armor give a penalty to stealth."
+    "abilityScores": [ "careful", "quick" ],
+    "description": "Stealth allows you to perform actions without being noticed. Pickpocketing, theft, covering tracks, sneaking around, and trailing someone all require stealth rolls, usually contested by investigation rolls. Some types of armor give a penalty to stealth."
   },
   {
     "name": "investigation",
-    "abilityScores": [ "aware", "determined" ],
-    "description": "You roll Investigation when searching for clues, tracking creatures, identifying footprints, looking for something in a city, determining if something is an illusion, sensing direction, and navigating the wilderness. When deciding whether to use investigation or perception, ask who would be better: Sherlock Holmes or an eagle. Investigation is most relevant when having stronger senses would not help you accomplish the task, because you can already sense all the important aspects or it is more important to decide where to look rather than be able to see better."
+    "abilityScores": [ "careful", "determined" ],
+    "description": "You roll Investigation when searching for clues, tracking creatures, identifying footprints, looking for something in a city, determining if something is an illusion, sensing direction, and navigating the wilderness. It governs your sensory abilities as well as deductive reasoning. Your Passive Investigation can help you notice creatures trying to sneak up on your or noxious gasses."
   },
   {
     "name": "insight",
-    "abilityScores": [ "aware", "social" ],
+    "abilityScores": [ "careful", "social" ],
     "description": "Insight measures your ability to read the intent and disposition of others. This skill is a combination of detecting facial expressions and subtle movements, as well as figuring out how those tells can describe a person’s mental state. Primarily, this skill is used for figuring out if someone is lying, but also can be used to predict people’s actions and reading their general mood."
   },
   {
-    "name": "perception",
-    "abilityScores": [ "aware", "aware" ],
-    "description": "Perception is used only when the capability of your eyes, ears, and other senses determine whether you succeed or fail on the task at hand. This includes seeing in darkness, hearing a creature trying to sneak up on you, and noticing a noxious gas. Most of the time, the DM will use your Passive Perception rather than ask you to roll perception. Also, perception rolls are used when attacking with all ranged weapons other than thrown weapons."
+    "name": "accuracy",
+    "abilityScores": [ "careful", "careful" ],
+    "description": "Accuracy represents your hand-eye coordination and ability to make precise actions. All ranged weapons attack using accuracy, and it can also come into play when you attempt to throw a grappling hook, catch a falling object, or juggling."
   },
   {
     "name": "handiwork",

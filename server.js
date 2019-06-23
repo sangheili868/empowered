@@ -23,7 +23,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.use(bodyParser.urlencoded({ extended: true }))
 
   // API calls
-  ;['characters', 'creatures', 'encounters'].forEach(collectionName => {
+  ;['characters', 'creatures', 'encounters', 'features'].forEach(collectionName => {
     const collection = db.collection(collectionName)
 
     app.post(`/api/${collectionName}/create`, crud.create.bind(this, collection))

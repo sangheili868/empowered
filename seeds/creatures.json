@@ -1,0 +1,210 @@
+[
+  {
+    "name": "Hobgoblin Captain",
+    "portrait": "https://i.pinimg.com/236x/c5/ac/ca/c5acca405302011e097c105ac6905b1c--hobgoblin-cool-art.jpg",
+    "description": "War is the lifeblood of hobgoblins. They revel in its glories and its horrors do not feature in their nightmares.",
+    "stats": {
+      "woundLimit": 3,
+      "armor": 3,
+      "shield": 0,
+      "speed": {
+        "rating": 20,
+        "type": "Walking"
+      },
+      "abilityScores": {
+        "strong": 2,
+        "careful": 1,
+        "smart": 1,
+        "quick": 0,
+        "determined": 2,
+        "social": 2
+      },
+      "powerPoints": 3,
+      "attacks": [
+        {
+          "name": "Greatsword",
+          "skill": "brawn",
+          "damageDice": "1d12",
+          "notes": "",
+          "hit": "+4",
+          "damage": "1d12 + 4"
+        },
+        {
+          "name": "Javelin",
+          "skill": "athletics",
+          "damageDice": "1d8",
+          "notes": ""
+        }
+      ],
+      "loot": [
+        {
+          "name": "Greatsword",
+          "quantity": "1",
+          "description": ""
+        },
+        {
+          "name": "Javelin",
+          "quantity": "1",
+          "description": ""
+        }
+      ],
+      "features": [
+        {
+          "name": "Leadership",
+          "description": "As an empowered reaction when a creature within 30 feet of the captain rolls attack or defense, the captain can shout a command, adding the captain's synergy modifier to the result of the roll.",
+          "powerPoints": 1,
+          "actionType": "reaction"
+        },
+        {
+          "name": "Martial Advantage",
+          "description": "When the captain hits with an attack, it deals +1 damage for each ally adjacent to the captain.",
+          "powerPoints": "0",
+          "actionType": null
+        },
+        {
+          "name": "Multiattack",
+          "description": "The captain makes two attacks with its greatsword.",
+          "powerPoints": "0",
+          "actionType": "cardinalAction"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Hobgoblin",
+    "portrait": "",
+    "description": "",
+    "stats": {
+      "woundLimit": 1,
+      "armor": 5,
+      "shield": 3,
+      "speed": {
+        "rating": 20,
+        "type": "Walking"
+      },
+      "abilityScores": {
+        "strong": 2,
+        "careful": 0,
+        "smart": 0,
+        "quick": -1,
+        "determined": 0,
+        "social": 1
+      },
+      "powerPoints": 0,
+      "attacks": [
+        {
+          "name": "Longsword (1h)",
+          "skill": "brawn",
+          "damageDice": "1d8",
+          "notes": "",
+          "hit": "+4",
+          "damage": "1d8 + 4"
+        },
+        {
+          "name": "Longsword (2h)",
+          "skill": "brawn",
+          "damageDice": "1d12",
+          "notes": "Can't use shield",
+          "hit": "+4",
+          "damage": "1d12 + 4"
+        },
+        {
+          "name": "Longbow",
+          "skill": "accuracy",
+          "damageDice": "1d8",
+          "notes": "Can't use shield"
+        }
+      ],
+      "loot": [
+        {
+          "name": "Gold",
+          "quantity": "10",
+          "description": ""
+        }
+      ],
+      "features": [
+        {
+          "name": "Martial Advantage",
+          "description": "+1 damage for ally adjacent to hobgoblin",
+          "powerPoints": "0"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bugbear",
+    "portrait": "",
+    "description": "",
+    "stats": {
+      "woundLimit": 2,
+      "armor": 1,
+      "shield": 3,
+      "speed": {
+        "rating": 20,
+        "type": "Walking"
+      },
+      "abilityScores": {
+        "strong": 3,
+        "careful": 0,
+        "smart": 0,
+        "quick": 2,
+        "determined": -1,
+        "social": 0
+      },
+      "powerPoints": 0,
+      "attacks": [
+        {
+          "name": "Morningstar",
+          "skill": "brawn",
+          "damageDice": "2d8",
+          "notes": ""
+        }
+      ],
+      "loot": [
+        {
+          "name": "Gold",
+          "quantity": "5",
+          "description": ""
+        },
+        {
+          "name": "Food",
+          "quantity": "3",
+          "description": ""
+        }
+      ],
+      "features": [
+        {
+          "name": "Surprise Strike",
+          "description": "The bugbear rolls an additional damage die when hitting a creature that has not acted in combat yet.",
+          "powerPoints": 0
+        }
+      ]
+    }
+  },
+  {
+    "name": "Armless Goblin",
+    "portrait": "",
+    "description": "",
+    "stats": {
+      "woundLimit": 1,
+      "armor": 0,
+      "shield": 0,
+      "speed": {
+        "rating": 20,
+        "type": "Walking"
+      },
+      "abilityScores": {
+        "strong": -2,
+        "careful": 0,
+        "smart": -1,
+        "quick": 2,
+        "determined": -2,
+        "social": -1
+      },
+      "powerPoints": 0,
+      "attacks": [],
+      "loot": [],
+      "features": []
+    }
+  }
+]

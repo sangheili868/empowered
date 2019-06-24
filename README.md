@@ -8,11 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Quick Start
 
-Follow these steps to set up a local database: https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-windows/<br>
-Run `npm install -g node-mongo-seeds` to install https://www.npmjs.com/package/node-mongo-seeds
-In the project directory, run `seed` to add some test data to the database.
-Run `yarn` to install dependencies.
-Run `yarn dev` in the root directory to run the app in development mode, and open it at [http://localhost:3000](http://localhost:3000)
+- Follow these steps to set up a local database: https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-windows/<br>
+- Run `npm install -g node-mongo-seeds` to install https://www.npmjs.com/package/node-mongo-seeds
+- In the project directory, run `seed` to add some test data to the database.
+- Run `yarn` to install dependencies.
+- Run `yarn dev` in the root directory to run the app in development mode, and open it at [http://localhost:3000](http://localhost:3000)
 
 ## Available Scripts
 

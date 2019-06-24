@@ -1,13 +1,14 @@
-import ReactDOM from 'react-dom';
-import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
 import './styles/global.scss'
 import IndexPage from './components/pages/Index/IndexPage'
 import RulesPage from './components/pages/Rules/RulesPage'
 import CharacterPage from './components/pages/Character/CharacterPage'
 import CreaturesPage from './components/pages/Creatures/CreaturesPage'
 import EncountersPage from './components/pages/Encounters/EncountersPage'
+import FeaturesPage from './components/pages/Features/FeaturesPage'
 import 'whatwg-fetch'
-import 'promise-polyfill/src/polyfill';
+import 'promise-polyfill/src/polyfill'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
 import EmpNavigator from './components/EmpNavigator/EmpNavigator'
@@ -49,13 +50,18 @@ class App extends Component {
             label: 'Encounters',
             route: '/encounters',
             component: EncountersPage
+          },
+          {
+            label: 'Features',
+            route: '/features/',
+            component: FeaturesPage
           }
         ]}/>
       </div>
-    );
+    )
   }
 }
 
 ReactDOM.render((
   <Router><CookiesProvider><App/></CookiesProvider></Router>
-), document.getElementById('root'));
+), document.getElementById('root'))

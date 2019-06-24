@@ -110,7 +110,7 @@ class EncountersPage extends Component {
           <EmpLoadingDots/>
         )}
       </div>
-    );
+    )
   }
 }
 
